@@ -1,8 +1,12 @@
 ---
-title: "Avoid the Wrath of Killer Accountants!!!"
+title: "Avoid the Wrath of Killer Accountants!"
+author: Dan Marshall
 date: "2025-02-23"
 tags: ["finance", "rounding", "bankers rounding", "accounting", "C#"]
+template: article.pug
 ---
+
+![Death by Accountant](death-by-accountant.jpg)
 
 If you work with financial data, you will run into the situation where you need to round calculated values to the nearest cent.
 
@@ -11,7 +15,7 @@ If you round up in every case, then that may work internally, but if your accoun
 So it's important to have these rounding algorithms in sync, or you'll run into an **angry accountant**. Given the number of transactions that occur daily in most systems, this will pop up often if it doesn't get done right.
 
 ## **Different Rounding Methods**
-There are many possible ways to calculate rounding when you have a difference of exactly **$0.005**. [See this resource](https://lnkd.in/ghNmuGSc). 
+There are many possible ways to calculate rounding when you have a difference of exactly **$0.005**. [See wikipedia](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). 
 
 Do you round up to **1c**, or down to **0c**? Note that this isn't an issue for **$0.0051**, which is closer to **1c**. It's only for **exact amounts ending in 5** as the third significant digit.
 
