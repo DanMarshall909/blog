@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Avoid the Wrath of Killer Accountants! - Technical Scratches
+    </title>
+    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body class="article-detail">
+    <header class="header">
+      <div class="content-wrap">
+        <h1>Avoid the Wrath of Killer Accountants!</h1>
+        <p class="author">Written by <span class="author">Dan Marshall</span>
+        </p>
+      </div>
+    </header>
+    <div id="content">
+      <div class="content-wrap">
+        <article class="article">
+          <section class="content"><p><img src="/articles/bankers-rounding/death-by-accountant.jpg" alt="Death by Accountant"></p>
+<p>If you work with financial data, you will run into the situation where you need to round calculated values to the nearest<span class="widont">&nbsp;</span>cent.</p>
+<p>If you round up in every case, then that may work internally, but if your accounting package works otherwise (<strong>it will</strong>), and the other side of the ledger comes from somewhere other than your code, you may well have values that don’t balance exactly—which is critical for accounting<span class="widont">&nbsp;</span>purposes. </p>
+<p>So it’s important to have these rounding algorithms in sync, or you’ll run into an <strong>angry accountant</strong>. Given the number of transactions that occur daily in most systems, this will pop up often if it doesn’t get done<span class="widont">&nbsp;</span>right.</p>
+<h2 id="different-rounding-methods"><strong>Different Rounding Methods</strong></h2>
+<p>There are many possible ways to calculate rounding when you have a difference of exactly <strong>$0.005</strong>. <a href="https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even">See wikipedia</a>. </p>
+<p>Do you round up to <strong>1c</strong>, or down to <strong>0c</strong>? Note that this isn’t an issue for <strong>$0.0051</strong>, which is closer to <strong>1c</strong>. It’s only for <strong>exact amounts ending in 5</strong> as the third significant<span class="widont">&nbsp;</span>digit.</p>
+<h2 id="bankers-rounding-the-standard-in-finance"><strong>Bankers Rounding - The Standard in<span class="widont">&nbsp;</span>Finance</strong></h2>
+<p>Thankfully, a convention has arisen in the financial world called <strong>Bankers Rounding</strong>. This is the <strong>default rounding mode in C#</strong> for <code>decimal</code>, but it <strong>can be overridden</strong> by choosing a different midpoint rounding<span class="widont">&nbsp;</span>mode. </p>
+<p>I’ve seen this done a lot, <strong>often for no good reason.</strong><span class="widont">&nbsp;</span>😬</p>
+<h3 id="how-bankers-rounding-works"><strong>How Bankers Rounding<span class="widont">&nbsp;</span>Works</strong></h3>
+<p>Bankers Rounding rounds every amount <strong>up or down to the nearest <span class="caps">EVEN</span><span class="widont">&nbsp;</span>cent</strong>.</p>
+<h3 id="example-1-rounding-up"><strong>Example 1 - Rounding<span class="widont">&nbsp;</span>Up</strong></h3>
+<p>Consider <strong>$0.555</strong>, which has two <span class="caps">EVEN</span> cents on either<span class="widont">&nbsp;</span>side:</p>
+<p>$0.54 (difference of 1.5c) → rounding down. $0.555 $0.56 (difference of 0.5c) → rounding<span class="widont">&nbsp;</span>up.</p>
+<p>Since <strong>0.5 &lt; 1.5</strong>, we round<span class="widont">&nbsp;</span>up.</p>
+<p><strong>$0.555 → $0.56</strong></p>
+<h3 id="example-2-rounding-down"><strong>Example 2 - Rounding<span class="widont">&nbsp;</span>Down</strong></h3>
+<p>Consider <strong>$0.565</strong>, which also has two <span class="caps">EVEN</span> cents on either<span class="widont">&nbsp;</span>side:</p>
+<p>$0.56 (difference of 0.5c) → rounding down. $0.565 $0.58 (difference of 1.5c) → rounding<span class="widont">&nbsp;</span>up.</p>
+<p>Since <strong>0.5 &lt; 1.5</strong>, we round<span class="widont">&nbsp;</span>up.</p>
+<p><strong>$0.565 → $0.56</strong></p>
+<hr>
+<h2 id="best-practice-use-a-financial-math-library"><strong>Best Practice: Use a Financial Math<span class="widont">&nbsp;</span>Library</strong></h2>
+<p>To prevent issues, <strong>create an organization-wide Financial Math library</strong> that includes a rounding method like<span class="widont">&nbsp;</span>this:</p>
+<p><span class="dquo">&#8220;</span>`csharp
+public static decimal UsingBankersRoundingToNearestCent(this decimal amount) 
+    =&gt; Math.Round(amount, 2, MidpointRounding.ToEven);
+And enforce its usage across your<span class="widont">&nbsp;</span>codebase.</p>
+<p>Even better:</p>
+<ul>
+<li>Add a linting rule to detect any usage of Math.Round() and flag it as an<span class="widont">&nbsp;</span>error.</li>
+<li>Require explicit overrides when necessary, ensuring no unexpected rounding bugs creep<span class="widont">&nbsp;</span>in.</li>
+</ul>
+</section>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="content-wrap">
+        <div class="nav"><a href="/">&laquo; Full blog</a></div>
+        <section class="about"><p>Dan Marshall’s blog</p>
+
+        </section>
+        <section class="copy">
+          <p>&copy; 2025 Dan Marshall &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>
