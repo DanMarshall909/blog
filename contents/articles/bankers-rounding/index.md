@@ -1,5 +1,5 @@
 ---
-title: "Avoid the Wrath of Killer Accountants!"
+title: "Avoid death by accountant - Get bankers rounding right!"
 author: Dan Marshall
 date: "2025-02-23"
 tags: ["finance", "rounding", "bankers rounding", "accounting", "C#"]
@@ -53,6 +53,8 @@ To prevent issues, **create an organization-wide Financial Math library** that i
 ```csharp
 public static decimal UsingBankersRoundingToNearestCent(this decimal amount) 
     => Math.Round(amount, 2, MidpointRounding.ToEven);
+```
+
 And enforce its usage across your codebase.
 
 Even better:

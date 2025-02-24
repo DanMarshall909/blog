@@ -5,6 +5,7 @@
     "owner": "Dan Marshall",
     "description": "Thoughts on software engineering and life as a developer"
   },
+  "output": "docs",
   "plugins": [
     "./plugins/paginator.coffee"
   ],
