@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Technical Scratches
+    </title>
+    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="content-wrap">
+        <div class="logo">
+          <h1><a href="http://localhost:8080">Technical Scratches</a></h1>
+          <p class="description">Thoughts on software engineering and life as a developer</p>
+        </div>
+      </div>
+    </header>
+    <div id="content">
+      <div class="content-wrap">
+        <article class="article intro">
+          <header>
+            <p class="date"><span>23. February 2025</span></p>
+            <h2><a href="/articles/bankers-rounding/">Avoid the Wrath of Killer Accountants!</a></h2>
+          </header>
+          <section class="content"><p><img src="/articles/bankers-rounding/death-by-accountant.jpg" alt="Death by Accountant"></p>
+<p>If you work with financial data, you will run into the situation where you need to round calculated values to the nearest<span class="widont">&nbsp;</span>cent.</p>
+<p>If you round up in every case, then that may work internally, but if your accounting package works otherwise (<strong>it will</strong>), and the other side of the ledger comes from somewhere other than your code, you may well have values that don’t balance exactly—which is critical for accounting<span class="widont">&nbsp;</span>purposes. </p>
+<p>So it’s important to have these rounding algorithms in sync, or you’ll run into an <strong>angry accountant</strong>. Given the number of transactions that occur daily in most systems, this will pop up often if it doesn’t get done<span class="widont">&nbsp;</span>right.</p>
+
+            <p class="more"><a href="/articles/bankers-rounding/">more</a></p>
+          </section>
+        </article>
+        <article class="article intro">
+          <header>
+            <p class="date"><span>02. February 2012</span></p>
+            <h2><a href="/articles/markdown-syntax/">Markdown syntax</a></h2>
+          </header>
+          <section class="content"><p>Full markdown syntax taken from John Gruber’s <a href="http://daringfireball.net/projects/markdown/syntax">Daring Fireball</a>.
+Did you know that 9 out of 10 bloggers prefer to write in<span class="widont">&nbsp;</span>markdown?</p>
+
+            <p class="more"><a href="/articles/markdown-syntax/">more</a></p>
+          </section>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="content-wrap">
+        <div class="nav"><a href="/archive.html">&laquo; Archives</a>
+        </div>
+        <section class="about"><p>Dan Marshall’s blog</p>
+
+        </section>
+        <section class="copy">
+          <p>&copy; 2025 Dan Marshall &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>
