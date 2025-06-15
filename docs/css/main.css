@@ -7,7 +7,7 @@ body {
   font-family: 'Lora', serif;
   font-size: 21px;
   line-height: 1.52;
-  background-color: #f8f8f8;
+  background-color: #f8f8f87e;
   text-rendering: optimizeLegibility;
 }
 
@@ -41,7 +41,7 @@ pre {
 
 h1 {
   font-size: 2em;
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
 }
 
 h2 {
@@ -92,6 +92,7 @@ hr {
   text-align: center;
   font-weight: 700;
   margin: 0;
+  padding-bottom: 1em;
 }
 
 .header a, .header a:hover {
@@ -418,7 +419,7 @@ code.lang-markdown .bullet {
     line-height: 1.6 !important;
     width: 100% !important;
     height: auto !important;
-    text-align: left !important;
+    text-align: full !important;
     border: 0 !important;
     margin: 0 !important;
   }
@@ -436,5 +437,8 @@ code.lang-markdown .bullet {
   }
   footer .about p {
     margin-bottom: 1em;
+  }
+  P {
+	text-align: justify;
   }
 }

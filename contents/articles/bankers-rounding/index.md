@@ -1,5 +1,6 @@
 ---
-title: "Avoid death by accountant - Get bankers rounding right!"
+title: "Avoiding death by accountant"
+subtitle: "Get bankers rounding right!"
 author: Dan Marshall
 date: "2025-02-23"
 tags: ["finance", "rounding", "bankers rounding", "accounting", "C#"]

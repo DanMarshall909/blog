@@ -1,10 +1,24 @@
-
-h1, h2, h3, h4, h5, h6, p, body, a, img, ul, ol, blockquote, pre {
-  margin: 0; padding: 0; border: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+body,
+a,
+img,
+ul,
+ol,
+blockquote,
+pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 body {
-  font-family: 'Lora', serif;
+  font-family: "Lora", serif;
   font-size: 21px;
   line-height: 1.52;
   background-color: #f8f8f8;
@@ -16,7 +30,8 @@ body {
   margin: 0 auto;
 }
 
-body, a {
+body,
+a {
   color: #171717;
 }
 
@@ -41,7 +56,7 @@ pre {
 
 h1 {
   font-size: 2em;
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
 }
 
 h2 {
@@ -60,7 +75,8 @@ h3 {
   margin-bottom: 0.8em;
 }
 
-ol, ul {
+ol,
+ul {
   margin: 0 1.4em 1.4em 4em;
 }
 
@@ -92,15 +108,17 @@ hr {
   text-align: center;
   font-weight: 700;
   margin: 0;
+  padding-bottom: 1em;
 }
 
-.header a, .header a:hover {
+.header a,
+.header a:hover {
   text-decoration: none;
   color: #171717;
 }
 
 .header .author {
-  font-family: 'Merriweather', serif;
+  font-family: "Merriweather", serif;
   font-variant: small-caps;
   text-transform: lowercase;
   text-rendering: auto;
@@ -166,7 +184,8 @@ footer .copy {
   margin-top: 1em;
 }
 
-footer .copy, footer .copy a {
+footer .copy,
+footer .copy a {
   color: #8e8e8e;
 }
 
@@ -218,8 +237,9 @@ footer .copy, footer .copy a {
   width: 100%;
 }
 
-.more, .date {
-  font-family: 'Merriweather', serif;
+.more,
+.date {
+  font-family: "Merriweather", serif;
   font-variant: small-caps;
   text-transform: lowercase;
   font-weight: 400;
@@ -243,7 +263,8 @@ footer .copy, footer .copy a {
   font-style: italic;
 }
 
-.archive a, .archive span{
+.archive a,
+.archive span {
   display: block;
   float: left;
   margin-bottom: -1px;
@@ -255,7 +276,8 @@ footer .copy, footer .copy a {
   margin-bottom: -1px;
 }
 
-.archive a.last, .archive span.last {
+.archive a.last,
+.archive span.last {
   border: 0;
   margin-bottom: 0;
 }
@@ -270,9 +292,9 @@ footer .copy, footer .copy a {
 }
 
 .archive .year-label,
-.archive .month-label{
+.archive .month-label {
   width: 4em;
-  font-family: 'Merriweather', serif;
+  font-family: "Merriweather", serif;
   font-variant: small-caps;
   text-transform: lowercase;
   font-weight: 400;
@@ -298,7 +320,7 @@ footer .copy, footer .copy a {
 /* code styling */
 
 code {
-  font-family: 'Anonymous Pro', monospace;
+  font-family: "Anonymous Pro", monospace;
   font-size: 0.85em;
   color: #000;
 }
@@ -349,46 +371,90 @@ code.lang-markdown .bullet {
 /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
 /* Original theme - https://github.com/chriskempson/tomorrow-theme */
 /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
-.tomorrow-comment, pre .comment, pre .title {
+.tomorrow-comment,
+pre .comment,
+pre .title {
   color: #8e908c;
 }
 
-.tomorrow-red, pre .variable, pre .attribute, pre .tag, pre .regexp, pre .ruby .constant, pre .xml .tag .title, pre .xml .pi, pre .xml .doctype, pre .html .doctype, pre .css .id, pre .css .class, pre .css .pseudo {
+.tomorrow-red,
+pre .variable,
+pre .attribute,
+pre .tag,
+pre .regexp,
+pre .ruby .constant,
+pre .xml .tag .title,
+pre .xml .pi,
+pre .xml .doctype,
+pre .html .doctype,
+pre .css .id,
+pre .css .class,
+pre .css .pseudo {
   color: #c82829;
 }
 
-.tomorrow-orange, pre .number, pre .preprocessor, pre .built_in, pre .literal, pre .params, pre .constant {
+.tomorrow-orange,
+pre .number,
+pre .preprocessor,
+pre .built_in,
+pre .literal,
+pre .params,
+pre .constant {
   color: #f5871f;
 }
 
-.tomorrow-yellow, pre .class, pre .ruby .class .title, pre .css .rules .attribute {
+.tomorrow-yellow,
+pre .class,
+pre .ruby .class .title,
+pre .css .rules .attribute {
   color: #eab700;
 }
 
-.tomorrow-green, pre .string, pre .value, pre .inheritance, pre .header, pre .ruby .symbol, pre .xml .cdata {
+.tomorrow-green,
+pre .string,
+pre .value,
+pre .inheritance,
+pre .header,
+pre .ruby .symbol,
+pre .xml .cdata {
   color: #718c00;
 }
 
-.tomorrow-aqua, pre .css .hexcolor {
+.tomorrow-aqua,
+pre .css .hexcolor {
   color: #3e999f;
 }
 
-.tomorrow-blue, pre .function, pre .python .decorator, pre .python .title, pre .ruby .function .title, pre .ruby .title .keyword, pre .perl .sub, pre .javascript .title, pre .coffeescript .title {
+.tomorrow-blue,
+pre .function,
+pre .python .decorator,
+pre .python .title,
+pre .ruby .function .title,
+pre .ruby .title .keyword,
+pre .perl .sub,
+pre .javascript .title,
+pre .coffeescript .title {
   color: #4271ae;
 }
 
-.tomorrow-purple, pre .keyword, pre .javascript .function {
+.tomorrow-purple,
+pre .keyword,
+pre .javascript .function {
   color: #8959a8;
 }
 
 /* media queries */
 
 @media (min-width: 1600px) {
-  body { font-size: 26px; }
+  body {
+    font-size: 26px;
+  }
 }
 
 @media (max-width: 900px) {
-  body { font-size: 18px; }
+  body {
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 690px) {
@@ -418,7 +484,7 @@ code.lang-markdown .bullet {
     line-height: 1.6 !important;
     width: 100% !important;
     height: auto !important;
-    text-align: left !important;
+    text-align: full !important;
     border: 0 !important;
     margin: 0 !important;
   }
@@ -436,5 +502,8 @@ code.lang-markdown .bullet {
   }
   footer .about p {
     margin-bottom: 1em;
+  }
+  P {
+    text-align: justify;
   }
 }

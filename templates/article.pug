@@ -10,6 +10,7 @@ block prepend title
 block header
   include author
   h1= page.title
+  h2= page.subtitle
   p.author
     | #{ 'Written by ' }
     +author(page.metadata.author)

@@ -9,7 +9,7 @@
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
     <item>
-      <title>Avoid death by accountant and get bankers rounding right!</title>
+      <title>Avoiding death by accountant</title>
       <link>http://localhost:8080/articles/bankers-rounding/</link>
       <pubDate>Sun, 23 Feb 2025 10:00:00 +1000</pubDate>
       <guid isPermaLink="true">http://localhost:8080/articles/bankers-rounding/</guid>
@@ -39,10 +39,9 @@
 &lt;hr&gt;
 &lt;h2 id=&quot;best-practice-use-a-financial-math-library&quot;&gt;&lt;strong&gt;Best Practice: Use a Financial Math Library&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;To prevent issues, &lt;strong&gt;create an organization-wide Financial Math library&lt;/strong&gt; that includes a rounding method like this:&lt;/p&gt;
-&lt;p&gt;```csharp
-public static decimal UsingBankersRoundingToNearestCent(this decimal amount) 
-    =&amp;gt; Math.Round(amount, 2, MidpointRounding.ToEven);
-And enforce its usage across your codebase.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-csharp&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;decimal&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;UsingBankersRoundingToNearestCent&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;decimal&lt;/span&gt; amount&lt;/span&gt;)&lt;/span&gt; 
+    =&amp;gt; Math.Round(amount, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, MidpointRounding.ToEven);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And enforce its usage across your codebase.&lt;/p&gt;
 &lt;p&gt;Even better:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Add a linting rule to detect any usage of Math.Round() and flag it as an error.&lt;/li&gt;
