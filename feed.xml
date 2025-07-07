@@ -5,11 +5,160 @@
     <atom:link href="http://localhost:8080/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://localhost:8080</link>
     <description>Thoughts on software engineering and life as a developer</description>
-    <pubDate>Sun, 23 Feb 2025 10:00:00 +1000</pubDate>
+    <pubDate>Sun, 15 Jun 2025 10:00:00 +1000</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
     <item>
-      <title>Avoid death by accountant and get bankers rounding right!</title>
+      <title>Dan Marshall – Developer Profile</title>
+      <link>http://localhost:8080/articles/dan-profile/</link>
+      <pubDate>Sun, 15 Jun 2025 10:00:00 +1000</pubDate>
+      <guid isPermaLink="true">http://localhost:8080/articles/dan-profile/</guid>
+      <author></author>
+      <description>&lt;h1 id=&quot;dan-marshall-developer-profile&quot;&gt;Dan Marshall – Developer Profile&lt;/h1&gt;
+&lt;p&gt;With over a decade of experience in software engineering across diverse domains, I am a passionate and confident developer committed to building clean, self-documenting, rigorously tested, and sustainable software. I take &lt;em&gt;The Clean Coder&lt;/em&gt; by Robert C. Martin as my professional code of conduct and deeply value the principles of the Agile Manifesto.&lt;/p&gt;
+&lt;p&gt;Known for my approachable nature and positive energy, I genuinely enjoy listening, sharing insights, and helping others grow. Mentorship comes naturally to me—I take pride in creating an environment where others can thrive, and I celebrate when a mentee surpasses me. This industry has given me so much, and I’m driven by a strong desire to give back.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-qualifications&quot;&gt;🎓 Qualifications&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Bachelor of Science (Mathematics and Computer Science)&lt;/strong&gt; – University of South Africa (UNISA)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diploma of Printing and Graphic Arts (Graphic Prepress)&lt;/strong&gt; – Queensland School of Printing and Graphic Arts (Southbank T.A.F.E.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-skills&quot;&gt;🧠 Skills&lt;/h2&gt;
+&lt;h3 id=&quot;-back-end-development&quot;&gt;🛠️ Back-End Development&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;C# / .NET Core&lt;/strong&gt; – 10+ years, well-tested, modular, and scalable applications using CQRS, DDD, microservices&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI Integration&lt;/strong&gt; – 3 years, including prompt engineering, RAG-based agents, OpenAI, Azure Cognitive Services&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Databases&lt;/strong&gt; – SQL Server (9+ years), PostgreSQL (1+ year)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API Development&lt;/strong&gt; – REST (ASP.NET WebAPI), FastEndpoints, GraphQL, and SOAP&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DevOps&lt;/strong&gt; – 4 years, CI/CD with Azure DevOps, TeamCity, Octopus Deploy, PowerShell scripting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;-front-end-development&quot;&gt;🖥️ Front-End Development&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Languages/Frameworks&lt;/strong&gt; – TypeScript/JavaScript (6 years), React (1 year), Angular (1 year)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Design &amp;amp; Layout&lt;/strong&gt; – CSS, Tailwind CSS, Google Material UI for responsive and accessible interfaces&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UI Testing&lt;/strong&gt; – Selenium, Storybook (1 year)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;-general&quot;&gt;🧩 General&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Agile Practices&lt;/strong&gt; – 7 years, including TDD, mentorship, and peer programming&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Problem Solving&lt;/strong&gt; – Strong skills, especially in mathematical contexts&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Version Control&lt;/strong&gt; – Git, Bitbucket, GitHub, Azure Repos (10+ years)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Productivity Tools&lt;/strong&gt; – Jira, Confluence, Trello, Azure DevOps Boards&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Documentation &amp;amp; Design&lt;/strong&gt; – 14+ years in technical documentation, graphic design, and typesetting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-employment-summary&quot;&gt;💼 Employment Summary&lt;/h2&gt;
+&lt;h3 id=&quot;ract-royal-automobile-club-of-tasmania-ract-com-au&quot;&gt;&lt;strong&gt;RACT (Royal Automobile Club of Tasmania)&lt;/strong&gt; – &lt;a href=&quot;https://www.ract.com.au&quot;&gt;ract.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Software Engineer – Backend&lt;/strong&gt;&lt;br&gt;&lt;em&gt;June 2024 – Present&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applied Clean Architecture and DDD for testability and scalability&lt;/li&gt;
+&lt;li&gt;Part of AI pilot program to develop LLM coding guardrails&lt;/li&gt;
+&lt;li&gt;Migrated systems from .NET Framework 4.7.2 to .NET 9&lt;/li&gt;
+&lt;li&gt;Built resilient microservices (MassTransit, GraphQL, SQL Server)&lt;/li&gt;
+&lt;li&gt;Delivered business-aligned, tested features collaboratively&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;national-grower-register-ngr-com-au&quot;&gt;&lt;strong&gt;National Grower Register&lt;/strong&gt; – &lt;a href=&quot;https://www.ngr.com.au&quot;&gt;ngr.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Full-stack Engineer&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Nov 2023 – May 2024&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Co-developed Flexidocs form system with Clean Architecture&lt;/li&gt;
+&lt;li&gt;Built React 18 components using TypeScript and Tailwind CSS&lt;/li&gt;
+&lt;li&gt;Guided teammates on C#, OOP, AI tool use, and testing&lt;/li&gt;
+&lt;li&gt;Refactored and tested legacy code for long-term sustainability&lt;/li&gt;
+&lt;li&gt;Contributed to documentation, Agile practices, and team mentoring&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;cloudmonitor-cloudmonitor-ai&quot;&gt;&lt;strong&gt;CloudMonitor&lt;/strong&gt; – &lt;a href=&quot;https://cloudmonitor.ai&quot;&gt;cloudmonitor.ai&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Lead Azure / Backend Engineer&lt;/strong&gt;&lt;br&gt;&lt;em&gt;June 2023 – Nov 2023&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Designed and built serverless platform features&lt;/li&gt;
+&lt;li&gt;Led adoption of TDD, Clean Architecture, SOLID, peer programming&lt;/li&gt;
+&lt;li&gt;Ran Agile ceremonies, mentored juniors, and maintained pipelines&lt;/li&gt;
+&lt;li&gt;Introduced EF Core, OpenAPI, XUnit, and Rider IDE&lt;/li&gt;
+&lt;li&gt;Delivered internal tech talks and worked with stakeholders&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;vald-vald-com&quot;&gt;&lt;strong&gt;VALD&lt;/strong&gt; – &lt;a href=&quot;https://vald.com&quot;&gt;vald.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Software Engineer – Backend&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Jan 2023 – May 2023&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Maintained and refactored REST APIs and microservices&lt;/li&gt;
+&lt;li&gt;Enhanced integration testing framework&lt;/li&gt;
+&lt;li&gt;Promoted TDD and collaborative programming&lt;/li&gt;
+&lt;li&gt;Led Agile ceremonies&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;situ-systems-situsystems-com&quot;&gt;&lt;strong&gt;Situ Systems&lt;/strong&gt; – &lt;a href=&quot;https://situsystems.com&quot;&gt;situsystems.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Software Engineer – Full Stack&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Nov 2021 – Oct 2022&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Delivered both frontend and backend features&lt;/li&gt;
+&lt;li&gt;Improved test coverage and SQL performance&lt;/li&gt;
+&lt;li&gt;Automated infrastructure with Pulumi&lt;/li&gt;
+&lt;li&gt;CI/CD with Azure DevOps&lt;/li&gt;
+&lt;li&gt;Created internal developer tooling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;hub24-limited-hub24-com-au&quot;&gt;&lt;strong&gt;HUB24 Limited&lt;/strong&gt; – &lt;a href=&quot;https://hub24.com.au&quot;&gt;hub24.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Data and Full Stack Engineer&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Dec 2019 – Nov 2021&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Built fund transfer and validation platform&lt;/li&gt;
+&lt;li&gt;Worked across &amp;gt;100 schemas with stored procs and SQL clusters&lt;/li&gt;
+&lt;li&gt;On-call support for client infrastructure&lt;/li&gt;
+&lt;li&gt;Modernized legacy apps using Azure Pipelines&lt;/li&gt;
+&lt;li&gt;Champion for TDD and integration testing&lt;/li&gt;
+&lt;li&gt;Authored APIs and ETL processes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;chandler-personalised-communications-chandler-com-au&quot;&gt;&lt;strong&gt;Chandler Personalised Communications&lt;/strong&gt; – &lt;a href=&quot;https://chandler.com.au&quot;&gt;chandler.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Data and Full Stack Engineer&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Mar 2016 – Dec 2019&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Built web apps for government and financial clients&lt;/li&gt;
+&lt;li&gt;Used ASP.NET, Bootstrap, CSS, jQuery, and JS&lt;/li&gt;
+&lt;li&gt;Azure SQL DB design&lt;/li&gt;
+&lt;li&gt;ETL with SSIS for print/email/web campaigns&lt;/li&gt;
+&lt;li&gt;Collaborated closely with both tech and non-tech stakeholders&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;worldsmart-pos-solutions-worldsmart-com-au&quot;&gt;&lt;strong&gt;WorldSmart POS Solutions&lt;/strong&gt; – &lt;a href=&quot;https://worldsmart.com.au&quot;&gt;worldsmart.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Software Engineer / QA / Support&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Feb 2011 – Feb 2016&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Developed enterprise retail systems&lt;/li&gt;
+&lt;li&gt;Integrated POS modules with MYOB&lt;/li&gt;
+&lt;li&gt;Wrote internal documentation, trained staff&lt;/li&gt;
+&lt;li&gt;Provided QA, scripting, and hardware/software support&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;quickeasy-software-quickeasysoftware-com&quot;&gt;&lt;strong&gt;QuickEasy Software&lt;/strong&gt; – &lt;a href=&quot;https://quickeasysoftware.com&quot;&gt;quickeasysoftware.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Software Consultant&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Nov 2008 – Nov 2009&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implemented and supported QuickEasy ERP&lt;/li&gt;
+&lt;li&gt;Delivered SQL-based reports&lt;/li&gt;
+&lt;li&gt;Authored technical documentation&lt;/li&gt;
+&lt;li&gt;Maintained CMS and Ubuntu-based systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-testimonial&quot;&gt;💬 Testimonial&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“Dan is an absolute pleasure to work with and I would highly recommend him for any full stack web development position.&lt;br&gt;We worked together for just under a year and during that time Dan was always friendly, professional and went above and beyond when implementing code and designing systems.&lt;br&gt;He has a keen eye for where things can be improved and is always looking to find the optimal solution to any problem he faces.&lt;br&gt;He writes clean, well-structured code that is easy to maintain.&lt;br&gt;He takes advice and constructive criticism well and brings a positive attitude to every meeting.&lt;br&gt;Dan would be an invaluable addition to any software team.”&lt;/p&gt;
+&lt;p&gt;— &lt;em&gt;Alistair Doulin, CTO – Situ Systems Pty Ltd&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-contact&quot;&gt;📞 Contact&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;📱 Mobile:&lt;/strong&gt; 0432 583 063&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;📧 Email:&lt;/strong&gt; &lt;a href=&quot;mailto:danmarshall909@gmail.com&quot;&gt;danmarshall909@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;🔗 GitHub:&lt;/strong&gt; &lt;a href=&quot;https://github.com/DanMarshall909&quot;&gt;github.com/DanMarshall909&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;🔗 LinkedIn:&lt;/strong&gt; &lt;a href=&quot;https://linkedin.com/in/developerdan&quot;&gt;linkedin.com/in/developerdan&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;📝 Blog:&lt;/strong&gt; &lt;a href=&quot;https://blog.danmarshall.dev&quot;&gt;blog.danmarshall.dev&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-final-words&quot;&gt;🙏 Final Words&lt;/h2&gt;
+&lt;p&gt;Thank you for taking the time to consider my profile.&lt;br&gt;Please feel free to keep this on file and reach out when an opportunity arises.&lt;/p&gt;
+&lt;p&gt;Warm regards,&lt;br&gt;&lt;strong&gt;Dan&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Avoid death by accountant - Get bankers rounding right!</title>
       <link>http://localhost:8080/articles/bankers-rounding/</link>
       <pubDate>Sun, 23 Feb 2025 10:00:00 +1000</pubDate>
       <guid isPermaLink="true">http://localhost:8080/articles/bankers-rounding/</guid>
@@ -39,10 +188,9 @@
 &lt;hr&gt;
 &lt;h2 id=&quot;best-practice-use-a-financial-math-library&quot;&gt;&lt;strong&gt;Best Practice: Use a Financial Math Library&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;To prevent issues, &lt;strong&gt;create an organization-wide Financial Math library&lt;/strong&gt; that includes a rounding method like this:&lt;/p&gt;
-&lt;p&gt;```csharp
-public static decimal UsingBankersRoundingToNearestCent(this decimal amount) 
-    =&amp;gt; Math.Round(amount, 2, MidpointRounding.ToEven);
-And enforce its usage across your codebase.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-csharp&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;decimal&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;UsingBankersRoundingToNearestCent&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;decimal&lt;/span&gt; amount&lt;/span&gt;)&lt;/span&gt; 
+    =&amp;gt; Math.Round(amount, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, MidpointRounding.ToEven);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And enforce its usage across your codebase.&lt;/p&gt;
 &lt;p&gt;Even better:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Add a linting rule to detect any usage of Math.Round() and flag it as an error.&lt;/li&gt;
