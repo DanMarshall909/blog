@@ -4,6 +4,7 @@ author: Dan Marshall
 date: "2025-02-23"
 tags: ["finance", "rounding", "bankers rounding", "accounting", "C#"]
 template: article.pug
+heroImage: "/articles/bankers-rounding/death-by-accountant.jpg"
 ---
 
 ![Death by Accountant](death-by-accountant.jpg)

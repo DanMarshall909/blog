@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(*)"
+      "Bash(*)",
+      "Bash(npm run build:*)",
+      "Bash(npx:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }

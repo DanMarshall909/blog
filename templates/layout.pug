@@ -11,9 +11,35 @@ html(lang='en')
         block title
           = locals.name
       link(rel='alternate', href=locals.url+'/feed.xml', type='application/rss+xml', title=locals.description)
-      link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300')
+      link(rel='stylesheet', href='//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap')
       link(rel='stylesheet', href=contents.css['main.css'].url)
+      script.
+        // Dark mode toggle functionality
+        (function() {
+          const getTheme = () => localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          const setTheme = (theme) => {
+            localStorage.setItem('theme', theme);
+            document.documentElement.setAttribute('data-theme', theme);
+          };
+          // Initialize theme
+          setTheme(getTheme());
+        })();
   body(class=bodyclass)
+    // Dark mode toggle button
+    button.theme-toggle(onclick="toggleTheme()" aria-label="Toggle dark mode")
+      svg.sun-icon(viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2")
+        circle(cx="12" cy="12" r="5")
+        line(x1="12" y1="1" x2="12" y2="3")
+        line(x1="12" y1="21" x2="12" y2="23")
+        line(x1="4.22" y1="4.22" x2="5.64" y2="5.64")
+        line(x1="18.36" y1="18.36" x2="19.78" y2="19.78")
+        line(x1="1" y1="12" x2="3" y2="12")
+        line(x1="21" y1="12" x2="23" y2="12")
+        line(x1="4.22" y1="19.78" x2="5.64" y2="18.36")
+        line(x1="18.36" y1="5.64" x2="19.78" y2="4.22")
+      svg.moon-icon(viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;")
+        path(d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z")
+    
     header.header
       div.content-wrap
         block header
@@ -34,3 +60,31 @@ html(lang='en')
             p &copy; #{ new Date().getFullYear() } #{ locals.owner } &mdash; powered by&nbsp;
               a(href='https://github.com/jnordberg/wintersmith') Wintersmith
               //- please leave the "powered by" if you use the design
+    
+    script.
+      // Dark mode toggle function
+      function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+        updateThemeIcon(newTheme);
+      }
+      
+      function updateThemeIcon(theme) {
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        if (theme === 'dark') {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+        } else {
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+        }
+      }
+      
+      // Initialize icon on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        updateThemeIcon(currentTheme);
+      });

@@ -9,13 +9,21 @@ block prepend title
 
 block header
   include author
-  h1= page.title
-  p.author
-    | #{ 'Written by ' }
-    +author(page.metadata.author)
+  .title-with-image
+    h1= page.title
+  .article-meta
+    p.author
+      | Written by&nbsp;
+      +author(page.metadata.author)
+    if page.date
+      p.publish-date= moment.utc(page.date).format('MMMM DD, YYYY')
+    if page.metadata.tags && page.metadata.tags.length > 0
+      .tags
+        each tag in page.metadata.tags
+          span.tag= tag
 
 block content
-  article.article
+  article.article(data-has-hero=page.metadata.heroImage ? 'true' : false style=page.metadata.heroImage ? `background-image: url(${page.metadata.heroImage})` : '')
     section.content!= typogr(page.html).typogrify()
 
 block prepend footer
