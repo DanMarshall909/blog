@@ -1,13 +1,13 @@
 {
 	"scripts": {
-	  "build": "wintersmith build"
+		"build": "wintersmith build"
 	},
 	"dependencies": {
-	  "moment": "^2.22.2",
-	  "typogr": "0.6.x",
-	  "underscore": "^1.9.1",
-	  "wintersmith": "^2.5.0"
+		"highlight.js": "^11.11.1",
+		"moment": "^2.22.2",
+		"typogr": "0.6.x",
+		"underscore": "^1.9.1",
+		"wintersmith": "^2.5.0"
 	},
 	"private": true
-  }
-  
+}
