@@ -25,22 +25,7 @@
   </head>
   <body class="article-detail">
     <!-- Dark mode toggle button-->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-      <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-      </svg>
-      <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-      </svg>
-    </button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
     <header class="header">
       <div class="content-wrap">
         <div class="title-with-image">
@@ -65,40 +50,133 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
 <hr>
 <h2 id="skills">Skills</h2>
 <h3 id="back-end-development">Back-end Development</h3>
-<ul>
-<li><strong>C# / .<span class="caps">NET</span></strong>: Expert knowledge, .<span class="caps">NET</span> Framework 3.5 through .<span class="caps">NET</span> Core<span class="widont">&nbsp;</span>9</li>
-<li><strong><span class="caps">JVM</span> Stack</strong>: Spring Boot, Kotlin,<span class="widont">&nbsp;</span>Java</li>
-<li><strong>Architecture</strong>: Microservices, event-driven architecture, <span class="caps">DI</span>, <span class="caps">CQRS</span>, <span class="caps">DDD</span>, Clean<span class="widont">&nbsp;</span>Architecture</li>
-<li><strong>Azure</strong>: App Services, Functions, Service Bus, Azure <span class="caps">SQL</span>, Blob Storage, App Insights,<span class="widont">&nbsp;</span>Entra</li>
-<li><strong><span class="caps">AWS</span></strong>: Bedrock, <span class="caps">ECS</span>, <span class="caps">SQS</span>,<span class="widont">&nbsp;</span>S3</li>
-<li><strong>Testing</strong>: NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, <span class="caps">TDD</span>, mutation and integration<span class="widont">&nbsp;</span>testing</li>
-<li><strong><span class="caps">API</span> Development</strong>: <span class="caps">ASP</span>.<span class="caps">NET</span> WebAPI, FastEndpoints, GraphQL, Spring<span class="widont">&nbsp;</span>Boot</li>
-<li><strong>Messaging</strong>: MassTransit with Azure Service Bus and event<span class="widont">&nbsp;</span>streaming</li>
-<li><strong>Data Access</strong>: Entity Framework Core, Dapper, raw<span class="widont">&nbsp;</span><span class="caps">SQL</span></li>
-<li><strong>Databases</strong>: <span class="caps">SQL</span> Server, PostgreSQL,<span class="widont">&nbsp;</span>MySQL</li>
-<li><strong>Security</strong>: <span class="caps">ASP</span>.<span class="caps">NET</span> Identity, OAuth2, <span class="caps">JWT</span>, Microsoft.Identity, Azure <span class="caps">AD</span> / Entra<span class="widont">&nbsp;</span><span class="caps">ID</span></li>
-<li><strong>Libraries</strong>: MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.<span class="caps">NET</span>,<span class="widont">&nbsp;</span>OpenAPI</li>
-<li><strong>DevOps</strong>: <span class="caps">CI</span>/<span class="caps">CD</span> with Azure DevOps, TeamCity, Octopus Deploy, PowerShell,<span class="widont">&nbsp;</span>Docker</li>
-<li><strong>Observability</strong>: OpenTelemetry, Seq, OpenSearch, Application Insights <span class="caps">SDK</span>, Serilog<span class="widont">&nbsp;</span>Sinks</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Area</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>C# / .<span class="caps">NET</span></strong></td>
+<td align="left">Expert knowledge, .<span class="caps">NET</span> Framework 3.5 through .<span class="caps">NET</span> Core 9</td>
+</tr>
+<tr>
+<td align="left"><strong><span class="caps">JVM</span> Stack</strong></td>
+<td align="left">Spring Boot, Kotlin, Java</td>
+</tr>
+<tr>
+<td align="left"><strong>Architecture</strong></td>
+<td align="left">Microservices, event-driven architecture, <span class="caps">DI</span>, <span class="caps">CQRS</span>, <span class="caps">DDD</span>, Clean Architecture</td>
+</tr>
+<tr>
+<td align="left"><strong>Azure</strong></td>
+<td align="left">App Services, Functions, Service Bus, Azure <span class="caps">SQL</span>, Blob Storage, App Insights, Entra</td>
+</tr>
+<tr>
+<td align="left"><strong><span class="caps">AWS</span></strong></td>
+<td align="left">Bedrock, <span class="caps">ECS</span>, <span class="caps">SQS</span>, S3</td>
+</tr>
+<tr>
+<td align="left"><strong>Testing</strong></td>
+<td align="left">NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, <span class="caps">TDD</span>, mutation and integration testing</td>
+</tr>
+<tr>
+<td align="left"><strong><span class="caps">API</span> Development</strong></td>
+<td align="left"><span class="caps">ASP</span>.<span class="caps">NET</span> WebAPI, FastEndpoints, GraphQL, Spring Boot</td>
+</tr>
+<tr>
+<td align="left"><strong>Messaging</strong></td>
+<td align="left">MassTransit with Azure Service Bus and event streaming</td>
+</tr>
+<tr>
+<td align="left"><strong>Data Access</strong></td>
+<td align="left">Entity Framework Core, Dapper, raw <span class="caps">SQL</span></td>
+</tr>
+<tr>
+<td align="left"><strong>Databases</strong></td>
+<td align="left"><span class="caps">SQL</span> Server, PostgreSQL, MySQL</td>
+</tr>
+<tr>
+<td align="left"><strong>Security</strong></td>
+<td align="left"><span class="caps">ASP</span>.<span class="caps">NET</span> Identity, OAuth2, <span class="caps">JWT</span>, Microsoft.Identity, Azure <span class="caps">AD</span> / Entra <span class="caps">ID</span></td>
+</tr>
+<tr>
+<td align="left"><strong>Libraries</strong></td>
+<td align="left">MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.<span class="caps">NET</span>, OpenAPI</td>
+</tr>
+<tr>
+<td align="left"><strong>DevOps</strong></td>
+<td align="left"><span class="caps">CI</span>/<span class="caps">CD</span> with Azure DevOps, TeamCity, Octopus Deploy, PowerShell, Docker</td>
+</tr>
+<tr>
+<td align="left"><strong>Observability</strong></td>
+<td align="left">OpenTelemetry, Seq, OpenSearch, Application Insights <span class="caps">SDK</span>, Serilog Sinks</td>
+</tr>
+</tbody></table>
 <h3 id="ai-ml-integration"><span class="caps">AI</span>/<span class="caps">ML</span> Integration</h3>
-<ul>
-<li><strong>Production <span class="caps">AI</span> Systems</strong>: OpenAI Platform, Claude <span class="caps">API</span>, LangChain4j, prompt<span class="widont">&nbsp;</span>engineering</li>
-<li><strong>Applications</strong>: Automation, multimodal analysis,<span class="widont">&nbsp;</span>guardrails</li>
-<li><strong>Platforms</strong>: <span class="caps">AWS</span> Bedrock, OpenAI, local LLMs, Hugging Face<span class="widont">&nbsp;</span>Transformers</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Area</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Production <span class="caps">AI</span> Systems</strong></td>
+<td align="left">OpenAI Platform, Claude <span class="caps">API</span>, LangChain4j, prompt engineering</td>
+</tr>
+<tr>
+<td align="left"><strong>Applications</strong></td>
+<td align="left">Automation, multimodal analysis, guardrails</td>
+</tr>
+<tr>
+<td align="left"><strong>Platforms</strong></td>
+<td align="left"><span class="caps">AWS</span> Bedrock, OpenAI, local LLMs, Hugging Face Transformers</td>
+</tr>
+</tbody></table>
 <h3 id="front-end-development">Front-end Development</h3>
-<ul>
-<li><strong>Frameworks</strong>: TypeScript/JavaScript with React, Angular, Vite, Vitest, and <span class="caps">ASP</span>.<span class="caps">NET</span><span class="widont">&nbsp;</span><span class="caps">MVC</span></li>
-<li><strong><span class="caps">UI</span> Design</strong>: <span class="caps">CSS</span>, Tailwind <span class="caps">CSS</span>, Material<span class="widont">&nbsp;</span><span class="caps">UI</span></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Area</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Frameworks</strong></td>
+<td align="left">TypeScript/JavaScript with React, Angular, Vite, Vitest, and <span class="caps">ASP</span>.<span class="caps">NET</span> <span class="caps">MVC</span></td>
+</tr>
+<tr>
+<td align="left"><strong><span class="caps">UI</span> Design</strong></td>
+<td align="left"><span class="caps">CSS</span>, Tailwind <span class="caps">CSS</span>, Material <span class="caps">UI</span></td>
+</tr>
+</tbody></table>
 <h3 id="general">General</h3>
-<ul>
-<li><strong>Version Control</strong>: Git, GitHub, Bitbucket, Azure<span class="widont">&nbsp;</span>Repos</li>
-<li><strong>Agile Tools</strong>: Jira, Confluence, Azure DevOps Boards, Teams,<span class="widont">&nbsp;</span>Slack</li>
-<li><strong>Practices</strong>: <span class="caps">TDD</span>, pair/mob programming, code review,<span class="widont">&nbsp;</span>mentorship</li>
-<li><strong>Operating Systems</strong>: macOS, Windows, Linux, iOS,<span class="widont">&nbsp;</span>Android</li>
-</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Area</th>
+<th align="left">Details</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Version Control</strong></td>
+<td align="left">Git, GitHub, Bitbucket, Azure Repos</td>
+</tr>
+<tr>
+<td align="left"><strong>Agile Tools</strong></td>
+<td align="left">Jira, Confluence, Azure DevOps Boards, Teams, Slack</td>
+</tr>
+<tr>
+<td align="left"><strong>Practices</strong></td>
+<td align="left"><span class="caps">TDD</span>, pair/mob programming, code review, mentorship</td>
+</tr>
+<tr>
+<td align="left"><strong>Operating Systems</strong></td>
+<td align="left">macOS, Windows, Linux, iOS, Android</td>
+</tr>
+</tbody></table>
 <hr>
 <h2 id="employment">Employment</h2>
 <h3 id="reapit-reapit-com">Reapit — <a href="https://www.reapit.com">reapit.com</a></h3>
@@ -251,26 +329,11 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         localStorage.setItem('theme', newTheme);
         document.documentElement.setAttribute('data-theme', newTheme);
-        updateThemeIcon(newTheme);
         updateHljsTheme();
-      }
-      
-      function updateThemeIcon(theme) {
-        const sunIcon = document.querySelector('.sun-icon');
-        const moonIcon = document.querySelector('.moon-icon');
-        if (theme === 'dark') {
-          sunIcon.style.display = 'none';
-          moonIcon.style.display = 'block';
-        } else {
-          sunIcon.style.display = 'block';
-          moonIcon.style.display = 'none';
-        }
       }
       
       // Initialize on page load
       document.addEventListener('DOMContentLoaded', function() {
-        const currentTheme = getTheme();
-        updateThemeIcon(currentTheme);
         updateHljsTheme();
         // Highlight code blocks
         if (typeof hljs !== 'undefined') {
