@@ -8,6 +8,7 @@
     </title>
     <link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-dark.min.css">
     <link rel="stylesheet" href="/css/main.css">
     <script>
       // Dark mode toggle functionality
@@ -642,6 +643,7 @@ _   underscore
         </section>
       </div>
     </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
     <script>
       // Dark mode toggle function
       function toggleTheme() {
@@ -668,6 +670,10 @@ _   underscore
       document.addEventListener('DOMContentLoaded', function() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         updateThemeIcon(currentTheme);
+        // Highlight code blocks
+        if (typeof hljs !== 'undefined') {
+          hljs.highlightAll();
+        }
       });
     </script>
   </body>
