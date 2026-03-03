@@ -363,42 +363,16 @@ td {
     margin-bottom: 0;
 }
 
-/* Apply hero background to entire article */
-.article[data-has-hero="true"] {
-    position: relative;
-    overflow: hidden;
-}
-
-.article[data-has-hero="true"]::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: inherit;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    opacity: 0.9;
-    filter: sepia(100%) saturate(150%) brightness(95%) hue-rotate(-5deg);
-    z-index: 1;
-}
-
-.article[data-has-hero="true"]>* {
-    position: relative;
-    z-index: 2;
-}
-
-[data-theme="dark"] .article[data-has-hero="true"]::before {
-    opacity: 0.85;
-    filter: sepia(100%) saturate(180%) brightness(85%) hue-rotate(-10deg);
-}
-
-/* Hide hero images from content when used as background */
-.article[data-has-hero="true"] .content img:first-of-type {
-    display: none;
+/* Hero image displayed at top of article tile */
+.article .hero-image {
+    display: block;
+    width: calc(100% + var(--space-3xl) * 2);
+    margin-top: calc(var(--space-3xl) * -1);
+    margin-left: calc(var(--space-3xl) * -1);
+    margin-right: calc(var(--space-3xl) * -1);
+    margin-bottom: var(--space-lg);
+    height: 220px;
+    object-fit: cover;
 }
 
 .article .date {

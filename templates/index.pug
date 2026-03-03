@@ -4,7 +4,9 @@ extends layout
 block content
   include author
   each article in articles
-    article.article.intro(data-has-hero=article.metadata.heroImage ? 'true' : false style=article.metadata.heroImage ? `background-image: url(${article.metadata.heroImage})` : '')
+    article.article.intro
+      if article.metadata.heroImage
+        img.hero-image(src=article.metadata.heroImage alt=article.title)
       header
         p.date
           span= moment.utc(article.date).format('DD. MMMM YYYY')
