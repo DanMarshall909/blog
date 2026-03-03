@@ -4,8 +4,8 @@
     /* Base colors — only these need changing to retheme */
     --color-primary: #7e6435;
     --color-secondary: #43582b;
-    --color-primary-dark: #758077;
-    --color-secondary-dark: #ad8a56;
+    --color-primary-dark: #9bb39d;
+    --color-secondary-dark: #b79c73;
     --color-background-dark: #1c1814;
 
     /* Base overlay colors */
@@ -30,7 +30,7 @@
     --color-surface: oklch(from var(--color-primary) 1 0 h);
     --color-border: oklch(from var(--color-primary) 0.885 0.015 h);
     --color-code-bg: oklch(from var(--color-primary) 0.953 0.010 h);
-    --color-gradient-start: oklch(from var(--color-secondary) calc(l + 0.37) calc(c + 0.05) h);
+    --color-gradient-start: oklch(from var(--color-secondary) calc(l - 0.237) calc(c - 0.5) h);
     --color-gradient-end: var(--color-accent);
 
     /* Typography */
@@ -82,7 +82,7 @@
     --color-surface: oklch(from var(--color-background) calc(l + 0.05) c h);
     --color-border: oklch(from var(--color-background) calc(l + 0.12) c h);
     --color-code-bg: oklch(from var(--color-background) calc(l + 0.02) c h);
-    --color-gradient-start: oklch(from var(--color-background) calc(l + 0.25) calc(c + 0.07) h);
+    --color-gradient-start: oklch(from var(--color-background) calc(l + 0.45) calc(c + 0.07) h);
     --color-gradient-end: oklch(from var(--color-background) calc(l + 0.15) calc(c + 0.05) h);
     --toggle-bg: var(--toggle-bg-dark);
     --toggle-border-color: var(--toggle-border-color-dark);
@@ -561,8 +561,8 @@ footer .nav a {
     display: inline-block;
     padding: var(--space-sm) var(--space-md);
     margin: 0 var(--space-sm);
-    background: var(--color-accent);
-    color: var(--color-background);
+    background: var(--color-background);
+    color: var(--color-accent);
     border-radius: var(--border-radius);
     text-decoration: none;
     font-weight: 500;
@@ -643,8 +643,8 @@ body.article-detail .article::before {
 }
 
 .tag {
-    background: var(--color-accent);
-    color: var(--color-background);
+    background: var(--color-background);
+    color: var(--color-accent);
     padding: var(--space-xs) var(--space-sm);
     border-radius: 9999px;
     font-size: var(--text-xs);
