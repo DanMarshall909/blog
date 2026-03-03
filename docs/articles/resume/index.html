@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Resume – Dan Marshall - Technical Scratches
+    </title>
+    <link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+    <link rel="stylesheet" href="/css/main.css">
+    <script>
+      // Dark mode toggle functionality
+      (function() {
+        const getTheme = () => localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const setTheme = (theme) => {
+          localStorage.setItem('theme', theme);
+          document.documentElement.setAttribute('data-theme', theme);
+        };
+        // Initialize theme
+        setTheme(getTheme());
+      })();
+    </script>
+  </head>
+  <body class="article-detail">
+    <!-- Dark mode toggle button-->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+    <header class="header">
+      <div class="content-wrap">
+        <div class="title-with-image">
+          <h1>Resume – Dan Marshall</h1>
+        </div>
+        <div class="article-meta">
+          <p class="author">Written by&nbsp;<span class="author">Dan Marshall</span>
+          </p>
+          <p class="publish-date">March 02, 2026</p>
+        </div>
+      </div>
+    </header>
+    <div id="content">
+      <div class="content-wrap">
+        <article class="article">
+          <section class="content"><h1 id="dan-marshall">Dan Marshall</h1>
+<p>Senior full-stack engineer with 11+ years of delivering enterprise .<span class="caps">NET</span> and <span class="caps">JVM</span> systems. Deep expertise in microservices, event-driven architecture, and production <span class="caps">AI</span> integration. Strong advocate for <span class="caps">TDD</span>, pair programming, and collaborative engineering practices that improve code quality and team<span class="widont">&nbsp;</span>velocity.</p>
+<hr>
+<h2 id="qualifications">Qualifications</h2>
+<p><strong>Bachelor of Science</strong> (Mathematics and Computer Science)
+University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">UNISA</span>)</p>
+<hr>
+<h2 id="skills">Skills</h2>
+<h3 id="back-end-development">Back-end Development</h3>
+<ul>
+<li><strong>C# / .<span class="caps">NET</span></strong>: Expert knowledge, .<span class="caps">NET</span> Framework 3.5 through .<span class="caps">NET</span> Core<span class="widont">&nbsp;</span>9</li>
+<li><strong><span class="caps">JVM</span> Stack</strong>: Spring Boot, Kotlin,<span class="widont">&nbsp;</span>Java</li>
+<li><strong>Architecture</strong>: Microservices, event-driven architecture, <span class="caps">DI</span>, <span class="caps">CQRS</span>, <span class="caps">DDD</span>, Clean<span class="widont">&nbsp;</span>Architecture</li>
+<li><strong>Azure</strong>: App Services, Functions, Service Bus, Azure <span class="caps">SQL</span>, Blob Storage, App Insights,<span class="widont">&nbsp;</span>Entra</li>
+<li><strong><span class="caps">AWS</span></strong>: Bedrock, <span class="caps">ECS</span>, <span class="caps">SQS</span>,<span class="widont">&nbsp;</span>S3</li>
+<li><strong>Testing</strong>: NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, <span class="caps">TDD</span>, mutation and integration<span class="widont">&nbsp;</span>testing</li>
+<li><strong><span class="caps">API</span> Development</strong>: <span class="caps">ASP</span>.<span class="caps">NET</span> WebAPI, FastEndpoints, GraphQL, Spring<span class="widont">&nbsp;</span>Boot</li>
+<li><strong>Messaging</strong>: MassTransit with Azure Service Bus and event<span class="widont">&nbsp;</span>streaming</li>
+<li><strong>Data Access</strong>: Entity Framework Core, Dapper, raw<span class="widont">&nbsp;</span><span class="caps">SQL</span></li>
+<li><strong>Databases</strong>: <span class="caps">SQL</span> Server, PostgreSQL,<span class="widont">&nbsp;</span>MySQL</li>
+<li><strong>Security</strong>: <span class="caps">ASP</span>.<span class="caps">NET</span> Identity, OAuth2, <span class="caps">JWT</span>, Microsoft.Identity, Azure <span class="caps">AD</span> / Entra<span class="widont">&nbsp;</span><span class="caps">ID</span></li>
+<li><strong>Libraries</strong>: MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.<span class="caps">NET</span>,<span class="widont">&nbsp;</span>OpenAPI</li>
+<li><strong>DevOps</strong>: <span class="caps">CI</span>/<span class="caps">CD</span> with Azure DevOps, TeamCity, Octopus Deploy, PowerShell,<span class="widont">&nbsp;</span>Docker</li>
+<li><strong>Observability</strong>: OpenTelemetry, Seq, OpenSearch, Application Insights <span class="caps">SDK</span>, Serilog<span class="widont">&nbsp;</span>Sinks</li>
+</ul>
+<h3 id="ai-ml-integration"><span class="caps">AI</span>/<span class="caps">ML</span> Integration</h3>
+<ul>
+<li><strong>Production <span class="caps">AI</span> Systems</strong>: OpenAI Platform, Claude <span class="caps">API</span>, LangChain4j, prompt<span class="widont">&nbsp;</span>engineering</li>
+<li><strong>Applications</strong>: Automation, multimodal analysis,<span class="widont">&nbsp;</span>guardrails</li>
+<li><strong>Platforms</strong>: <span class="caps">AWS</span> Bedrock, OpenAI, local LLMs, Hugging Face<span class="widont">&nbsp;</span>Transformers</li>
+</ul>
+<h3 id="front-end-development">Front-end Development</h3>
+<ul>
+<li><strong>Frameworks</strong>: TypeScript/JavaScript with React, Angular, Vite, Vitest, and <span class="caps">ASP</span>.<span class="caps">NET</span><span class="widont">&nbsp;</span><span class="caps">MVC</span></li>
+<li><strong><span class="caps">UI</span> Design</strong>: <span class="caps">CSS</span>, Tailwind <span class="caps">CSS</span>, Material<span class="widont">&nbsp;</span><span class="caps">UI</span></li>
+</ul>
+<h3 id="general">General</h3>
+<ul>
+<li><strong>Version Control</strong>: Git, GitHub, Bitbucket, Azure<span class="widont">&nbsp;</span>Repos</li>
+<li><strong>Agile Tools</strong>: Jira, Confluence, Azure DevOps Boards, Teams,<span class="widont">&nbsp;</span>Slack</li>
+<li><strong>Practices</strong>: <span class="caps">TDD</span>, pair/mob programming, code review,<span class="widont">&nbsp;</span>mentorship</li>
+<li><strong>Operating Systems</strong>: macOS, Windows, Linux, iOS,<span class="widont">&nbsp;</span>Android</li>
+</ul>
+<hr>
+<h2 id="employment">Employment</h2>
+<h3 id="reapit-reapit-com">Reapit — <a href="https://www.reapit.com">reapit.com</a></h3>
+<p><strong>Senior <span class="caps">AI</span> Engineer</strong> | September 2025 – February<span class="widont">&nbsp;</span>2026</p>
+<ul>
+<li>Workshopped, built, and deployed an <span class="caps">AI</span>-driven property inspection system using <span class="caps">AWS</span> Bedrock, generating structured assessment reports constrained by business<span class="widont">&nbsp;</span>rules.</li>
+<li>Forked the LangChain4j framework to add Bedrock guardrail support when unavailable upstream. Modular architecture enabled a seamless swap to the official implementation within one day when<span class="widont">&nbsp;</span>released.</li>
+<li>Optimised <span class="caps">LLM</span> costs through strategic model selection balancing accuracy, features, performance, and token<span class="widont">&nbsp;</span>usage.</li>
+<li>Advised cross-functional teams on practical <span class="caps">AI</span> use<span class="widont">&nbsp;</span>cases.</li>
+<li>Self-directed adoption of the Kotlin/Spring Boot/<span class="caps">AWS</span> ecosystem, delivering production features while supporting the team with <span class="caps">JVM</span> implementation<span class="widont">&nbsp;</span>patterns.</li>
+</ul>
+<hr>
+<h3 id="ract-royal-automobile-club-of-tasmania-ract-com-au"><span class="caps">RACT</span> (Royal Automobile Club of Tasmania) — <a href="https://www.ract.com.au">ract.com.au</a></h3>
+<p><strong>Senior Software Engineer – Back-end</strong> | June 2024 – July<span class="widont">&nbsp;</span>2025</p>
+<ul>
+<li>Applied Clean Architecture and <span class="caps">DDD</span> to enhance testability, scalability, and code<span class="widont">&nbsp;</span>clarity.</li>
+<li>Involved in pilot program to develop <span class="caps">AI</span> coding rulesets and best<span class="widont">&nbsp;</span>practices.</li>
+<li>Migrated and modernised core components from .<span class="caps">NET</span> Framework 4.7.2 to .<span class="caps">NET</span><span class="widont">&nbsp;</span>9.</li>
+<li>Built resilient microservices using MassTransit, WebAPI, GraphQL, and <span class="caps">SQL</span><span class="widont">&nbsp;</span>Server.</li>
+<li>Collaborated with cross-functional teams to deliver scalable, well-tested features aligned with business<span class="widont">&nbsp;</span>requirements.</li>
+</ul>
+<hr>
+<h3 id="national-grower-register-ngr-com-au">National Grower Register — <a href="https://www.ngr.com.au">ngr.com.au</a></h3>
+<p><strong>Senior Full-Stack Engineer</strong> | November 2023 – May<span class="widont">&nbsp;</span>2024</p>
+<ul>
+<li>Co-developed a modular online form solution (Flexidocs) using Clean Architecture and <span class="caps">DDD</span>, replacing an outdated<span class="widont">&nbsp;</span>system.</li>
+<li>Designed modern functional React 18 components with TypeScript and Tailwind<span class="widont">&nbsp;</span><span class="caps">CSS</span>.</li>
+<li>Provided guidance on C# programming, <span class="caps">OOP</span>, <span class="caps">AI</span> tools, and testing best<span class="widont">&nbsp;</span>practices.</li>
+<li>Researched and selected sustainable technologies to support long-term<span class="widont">&nbsp;</span>goals.</li>
+<li>Improved legacy code with unit test coverage, enabling safe<span class="widont">&nbsp;</span>refactoring.</li>
+<li>Contributed to technical documentation and Agile<span class="widont">&nbsp;</span>processes.</li>
+<li>Mentored junior staff.</li>
+</ul>
+<hr>
+<h3 id="cloudmonitor-cloudmonitor-ai">CloudMonitor — <a href="https://www.cloudmonitor.ai">cloudmonitor.ai</a></h3>
+<p><strong>Lead Azure / Back-end Engineer</strong> | June 2023 – November<span class="widont">&nbsp;</span>2023</p>
+<ul>
+<li>Conceptualised, developed, and maintained features running on a serverless<span class="widont">&nbsp;</span>platform.</li>
+<li>Promoted <span class="caps">TDD</span>, <span class="caps">SOLID</span> principles, Clean Architecture, and peer<span class="widont">&nbsp;</span>programming.</li>
+<li>Introduced Agile processes, leading morning standups and mentoring junior<span class="widont">&nbsp;</span>developers.</li>
+<li>Azure DevOps pipeline maintenance and<span class="widont">&nbsp;</span>troubleshooting.</li>
+<li>Introduced Entity Framework, OpenAPI, xUnit, and JetBrains<span class="widont">&nbsp;</span>Rider.</li>
+<li>Presented company-wide tech talks and engaged with external<span class="widont">&nbsp;</span>stakeholders.</li>
+</ul>
+<hr>
+<h3 id="vald-vald-com"><span class="caps">VALD</span> — <a href="https://www.vald.com">vald.com</a></h3>
+<p><strong>Software Engineer – Back-end</strong> | January 2023 – May<span class="widont">&nbsp;</span>2023</p>
+<ul>
+<li>Maintained, refactored, and contributed to various legacy <span class="caps">REST</span> APIs and<span class="widont">&nbsp;</span>microservices.</li>
+<li>Contributed to the integration testing<span class="widont">&nbsp;</span>framework.</li>
+<li>Promoted <span class="caps">TDD</span> and peer<span class="widont">&nbsp;</span>programming.</li>
+<li>Chaired and contributed to various Agile<span class="widont">&nbsp;</span>ceremonies.</li>
+</ul>
+<hr>
+<h3 id="situ-systems-situsystems-com">Situ Systems — <a href="https://www.situsystems.com">situsystems.com</a></h3>
+<p><strong>Senior Software Engineer – Full-Stack</strong> | November 2021 – October<span class="widont">&nbsp;</span>2022</p>
+<ul>
+<li>Authored numerous front-end and back-end<span class="widont">&nbsp;</span>features.</li>
+<li>Substantially increased test coverage and improved testing<span class="widont">&nbsp;</span>methodologies.</li>
+<li>Tuned <span class="caps">SQL</span> queries, dramatically improving performance in critical<span class="widont">&nbsp;</span>reports.</li>
+<li>Used Pulumi to automate deployment of<span class="widont">&nbsp;</span>infrastructure.</li>
+<li>Implemented <span class="caps">CI</span> workflows in Azure<span class="widont">&nbsp;</span>DevOps.</li>
+<li>Contributed to internal development<span class="widont">&nbsp;</span>tools.</li>
+</ul>
+<hr>
+<h3 id="hub24-limited-hub24-com-au"><span class="caps">HUB24</span> Limited — <a href="https://www.hub24.com.au">hub24.com.au</a></h3>
+<p><strong>Data and Full-Stack Engineer</strong> | December 2019 – November<span class="widont">&nbsp;</span>2021</p>
+<ul>
+<li>Authored a sophisticated and successful system for cleaning, transforming, and validating fund transfers between superannuation<span class="widont">&nbsp;</span>funds.</li>
+<li>Maintained strong working relationships with DBAs, architects, BAs, clients (e.g. Bank of New York), and senior<span class="widont">&nbsp;</span>management.</li>
+<li>Provided emergency on-call support across the organisation and managed client infrastructure, triaging and fixing or escalating issues to meet strict<span class="widont">&nbsp;</span>SLAs.</li>
+<li>Updated legacy web applications to deploy using Azure<span class="widont">&nbsp;</span>Pipelines.</li>
+<li>Championed <span class="caps">TDD</span> and automated integration<span class="widont">&nbsp;</span>testing.</li>
+<li>Authored, maintained, and supported numerous APIs and <span class="caps">ETL</span><span class="widont">&nbsp;</span>projects.</li>
+</ul>
+<hr>
+<h3 id="chandler-personalised-communications-chandler-com-au">Chandler Personalised Communications — <a href="https://www.chandler.com.au">chandler.com.au</a></h3>
+<p><strong>Data and Full-Stack Engineer</strong> | March 2016 – December<span class="widont">&nbsp;</span>2019</p>
+<ul>
+<li>Worked within an <span class="caps">ISO</span> 27001 certified organisation meeting strict security<span class="widont">&nbsp;</span>standards.</li>
+<li>Built and maintained web applications servicing government, public utility, and financial<span class="widont">&nbsp;</span>sectors.</li>
+<li>Web design using <span class="caps">ASP</span>.<span class="caps">NET</span>, Bootstrap, <span class="caps">CSS</span>, jQuery, and<span class="widont">&nbsp;</span>JavaScript.</li>
+<li>Database design in Azure <span class="caps">SQL</span><span class="widont">&nbsp;</span>Server.</li>
+<li>Authored <span class="caps">SSIS</span> <span class="caps">ETL</span> packages to cleanse and process superannuation member data for web, print, and email<span class="widont">&nbsp;</span>campaigns.</li>
+<li>Liaised with technical and non-technical stakeholders to develop bespoke<span class="widont">&nbsp;</span>solutions.</li>
+</ul>
+<hr>
+<h3 id="worldsmart-pos-solutions-worldsmart-com-au">WorldSmart <span class="caps">POS</span> Solutions — <a href="https://www.worldsmart.com.au">worldsmart.com.au</a></h3>
+<p><strong>Software Engineer, <span class="caps">QA</span> and Support</strong> | February 2011 – February<span class="widont">&nbsp;</span>2016</p>
+<ul>
+<li>Developed and maintained enterprise software for retail<span class="widont">&nbsp;</span>groups.</li>
+<li>Integrated financial, <span class="caps">CRM</span>, and stock modules with<span class="widont">&nbsp;</span><span class="caps">MYOB</span>.</li>
+<li>Provided <span class="caps">QA</span> via automated scripting and manual<span class="widont">&nbsp;</span>testing.</li>
+<li>Authored technical and end-user documentation and provided internal<span class="widont">&nbsp;</span>training.</li>
+<li>Maintained internal support utilities and automated<span class="widont">&nbsp;</span>scripts.</li>
+<li>Installed and supported Point of Sale hardware and<span class="widont">&nbsp;</span>software.</li>
+</ul>
+<hr>
+<h2 id="contact">Contact</h2>
+<ul>
+<li><strong>Email</strong>: <a href="mailto:danmarshall909@gmail.com">danmarshall909@gmail.com</a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/DanMarshall909">github.com/DanMarshall909</a></li>
+<li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/developerdan">linkedin.com/in/developerdan</a></li>
+</ul>
+<hr>
+<h2 id="references">References</h2>
+<p>Available on request.</p>
+<blockquote>
+<p>*”Dan is an absolute pleasure to work with and I would highly recommend him for any full-stack web development position. We worked together for just under a year and during that time Dan was always friendly, professional and went above and beyond when implementing code and designing systems. He has a keen eye for where things can be improved and is always looking to find the optimal solution to any problem he faces. He writes clean, well-structured code that is easy to maintain. He takes advice and constructive criticism well and brings a positive attitude to every meeting. Dan would be an invaluable addition to any software<span class="widont">&nbsp;</span>team.”*</p>
+<p>— <strong>Alistair Doulin</strong>, <span class="caps">CTO</span>, Situ Systems Pty<span class="widont">&nbsp;</span>Ltd</p>
+</blockquote>
+</section>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="content-wrap">
+        <div class="nav"><a href="/">&laquo; Full blog</a></div>
+        <section class="about"><p>Dan Marshall’s blog</p>
+
+        </section>
+        <section class="copy">
+          <p>&copy; 2026 Dan Marshall &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
+        </section>
+      </div>
+    </footer>
+    <script>
+      // Dark mode toggle function
+      function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+        updateThemeIcon(newTheme);
+      }
+      
+      function updateThemeIcon(theme) {
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        if (theme === 'dark') {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+        } else {
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+        }
+      }
+      
+      // Initialize icon on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        updateThemeIcon(currentTheme);
+      });
+    </script>
+  </body>
+</html>

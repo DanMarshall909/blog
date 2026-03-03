@@ -4,24 +4,59 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
-    <title>Avoiding death by accountant - Technical Scratches
+    <title>Avoid death by accountant - Get bankers rounding right! - Technical Scratches
     </title>
-    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
     <link rel="stylesheet" href="/css/main.css">
+    <script>
+      // Dark mode toggle functionality
+      (function() {
+        const getTheme = () => localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const setTheme = (theme) => {
+          localStorage.setItem('theme', theme);
+          document.documentElement.setAttribute('data-theme', theme);
+        };
+        // Initialize theme
+        setTheme(getTheme());
+      })();
+    </script>
   </head>
   <body class="article-detail">
+    <!-- Dark mode toggle button-->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
     <header class="header">
       <div class="content-wrap">
-        <h1>Avoiding death by accountant</h1>
-        <h2></h2>
-        <p class="author">Written by <span class="author">Dan Marshall</span>
-        </p>
+        <div class="title-with-image">
+          <h1>Avoid death by accountant - Get bankers rounding right!</h1>
+        </div>
+        <div class="article-meta">
+          <p class="author">Written by&nbsp;<span class="author">Dan Marshall</span>
+          </p>
+          <p class="publish-date">February 23, 2025</p>
+          <div class="tags"><span class="tag">finance</span><span class="tag">rounding</span><span class="tag">bankers rounding</span><span class="tag">accounting</span><span class="tag">C#</span>
+          </div>
+        </div>
       </div>
     </header>
     <div id="content">
       <div class="content-wrap">
-        <article class="article">
+        <article class="article" data-has-hero="true" style="background-image: url(/articles/bankers-rounding/death-by-accountant.jpg)">
           <section class="content"><p><img src="/articles/bankers-rounding/death-by-accountant.jpg" alt="Death by Accountant"></p>
 <p>If you work with financial data, you will run into the situation where you need to round calculated values to the nearest<span class="widont">&nbsp;</span>cent.</p>
 <p>If you round up in every case, then that may work internally, but if your accounting package works otherwise (<strong>it will</strong>), and the other side of the ledger comes from somewhere other than your code, you may well have values that don’t balance exactly—which is critical for accounting<span class="widont">&nbsp;</span>purposes. </p>
@@ -66,9 +101,37 @@
 
         </section>
         <section class="copy">
-          <p>&copy; 2025 Dan Marshall &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
+          <p>&copy; 2026 Dan Marshall &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
         </section>
       </div>
     </footer>
+    <script>
+      // Dark mode toggle function
+      function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+        updateThemeIcon(newTheme);
+      }
+      
+      function updateThemeIcon(theme) {
+        const sunIcon = document.querySelector('.sun-icon');
+        const moonIcon = document.querySelector('.moon-icon');
+        if (theme === 'dark') {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+        } else {
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+        }
+      }
+      
+      // Initialize icon on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        updateThemeIcon(currentTheme);
+      });
+    </script>
   </body>
 </html>

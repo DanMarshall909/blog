@@ -2,17 +2,907 @@
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Technical Scratches</title>
-    <atom:link href="http://localhost:8080/feed.xml" rel="self" type="application/rss+xml"></atom:link>
-    <link>http://localhost:8080</link>
+    <atom:link href="https://blog.danmarshall.dev/feed.xml" rel="self" type="application/rss+xml"></atom:link>
+    <link>https://blog.danmarshall.dev</link>
     <description>Thoughts on software engineering and life as a developer</description>
-    <pubDate>Sun, 23 Feb 2025 10:00:00 +1000</pubDate>
+    <pubDate>Mon, 02 Mar 2026 10:00:00 +1000</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
     <item>
-      <title>Avoiding death by accountant</title>
-      <link>http://localhost:8080/articles/bankers-rounding/</link>
+      <title>Resume – Dan Marshall</title>
+      <link>https://blog.danmarshall.dev/articles/resume/</link>
+      <pubDate>Mon, 02 Mar 2026 10:00:00 +1000</pubDate>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/resume/</guid>
+      <author></author>
+      <description>&lt;h1 id=&quot;dan-marshall&quot;&gt;Dan Marshall&lt;/h1&gt;
+&lt;p&gt;Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, and production AI integration. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;qualifications&quot;&gt;Qualifications&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Bachelor of Science&lt;/strong&gt; (Mathematics and Computer Science)
+University of South Africa (UNISA)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;skills&quot;&gt;Skills&lt;/h2&gt;
+&lt;h3 id=&quot;back-end-development&quot;&gt;Back-end Development&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;C# / .NET&lt;/strong&gt;: Expert knowledge, .NET Framework 3.5 through .NET Core 9&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;JVM Stack&lt;/strong&gt;: Spring Boot, Kotlin, Java&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Architecture&lt;/strong&gt;: Microservices, event-driven architecture, DI, CQRS, DDD, Clean Architecture&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure&lt;/strong&gt;: App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AWS&lt;/strong&gt;: Bedrock, ECS, SQS, S3&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Testing&lt;/strong&gt;: NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, TDD, mutation and integration testing&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API Development&lt;/strong&gt;: ASP.NET WebAPI, FastEndpoints, GraphQL, Spring Boot&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Messaging&lt;/strong&gt;: MassTransit with Azure Service Bus and event streaming&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data Access&lt;/strong&gt;: Entity Framework Core, Dapper, raw SQL&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Databases&lt;/strong&gt;: SQL Server, PostgreSQL, MySQL&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Security&lt;/strong&gt;: ASP.NET Identity, OAuth2, JWT, Microsoft.Identity, Azure AD / Entra ID&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Libraries&lt;/strong&gt;: MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.NET, OpenAPI&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DevOps&lt;/strong&gt;: CI/CD with Azure DevOps, TeamCity, Octopus Deploy, PowerShell, Docker&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Observability&lt;/strong&gt;: OpenTelemetry, Seq, OpenSearch, Application Insights SDK, Serilog Sinks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;ai-ml-integration&quot;&gt;AI/ML Integration&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Production AI Systems&lt;/strong&gt;: OpenAI Platform, Claude API, LangChain4j, prompt engineering&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Applications&lt;/strong&gt;: Automation, multimodal analysis, guardrails&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Platforms&lt;/strong&gt;: AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;front-end-development&quot;&gt;Front-end Development&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Frameworks&lt;/strong&gt;: TypeScript/JavaScript with React, Angular, Vite, Vitest, and ASP.NET MVC&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UI Design&lt;/strong&gt;: CSS, Tailwind CSS, Material UI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;general&quot;&gt;General&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Version Control&lt;/strong&gt;: Git, GitHub, Bitbucket, Azure Repos&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Agile Tools&lt;/strong&gt;: Jira, Confluence, Azure DevOps Boards, Teams, Slack&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Practices&lt;/strong&gt;: TDD, pair/mob programming, code review, mentorship&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Operating Systems&lt;/strong&gt;: macOS, Windows, Linux, iOS, Android&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;employment&quot;&gt;Employment&lt;/h2&gt;
+&lt;h3 id=&quot;reapit-reapit-com&quot;&gt;Reapit — &lt;a href=&quot;https://www.reapit.com&quot;&gt;reapit.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior AI Engineer&lt;/strong&gt; | September 2025 – February 2026&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Workshopped, built, and deployed an AI-driven property inspection system using AWS Bedrock, generating structured assessment reports constrained by business rules.&lt;/li&gt;
+&lt;li&gt;Forked the LangChain4j framework to add Bedrock guardrail support when unavailable upstream. Modular architecture enabled a seamless swap to the official implementation within one day when released.&lt;/li&gt;
+&lt;li&gt;Optimised LLM costs through strategic model selection balancing accuracy, features, performance, and token usage.&lt;/li&gt;
+&lt;li&gt;Advised cross-functional teams on practical AI use cases.&lt;/li&gt;
+&lt;li&gt;Self-directed adoption of the Kotlin/Spring Boot/AWS ecosystem, delivering production features while supporting the team with JVM implementation patterns.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;ract-royal-automobile-club-of-tasmania-ract-com-au&quot;&gt;RACT (Royal Automobile Club of Tasmania) — &lt;a href=&quot;https://www.ract.com.au&quot;&gt;ract.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Software Engineer – Back-end&lt;/strong&gt; | June 2024 – July 2025&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applied Clean Architecture and DDD to enhance testability, scalability, and code clarity.&lt;/li&gt;
+&lt;li&gt;Involved in pilot program to develop AI coding rulesets and best practices.&lt;/li&gt;
+&lt;li&gt;Migrated and modernised core components from .NET Framework 4.7.2 to .NET 9.&lt;/li&gt;
+&lt;li&gt;Built resilient microservices using MassTransit, WebAPI, GraphQL, and SQL Server.&lt;/li&gt;
+&lt;li&gt;Collaborated with cross-functional teams to deliver scalable, well-tested features aligned with business requirements.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;national-grower-register-ngr-com-au&quot;&gt;National Grower Register — &lt;a href=&quot;https://www.ngr.com.au&quot;&gt;ngr.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Full-Stack Engineer&lt;/strong&gt; | November 2023 – May 2024&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Co-developed a modular online form solution (Flexidocs) using Clean Architecture and DDD, replacing an outdated system.&lt;/li&gt;
+&lt;li&gt;Designed modern functional React 18 components with TypeScript and Tailwind CSS.&lt;/li&gt;
+&lt;li&gt;Provided guidance on C# programming, OOP, AI tools, and testing best practices.&lt;/li&gt;
+&lt;li&gt;Researched and selected sustainable technologies to support long-term goals.&lt;/li&gt;
+&lt;li&gt;Improved legacy code with unit test coverage, enabling safe refactoring.&lt;/li&gt;
+&lt;li&gt;Contributed to technical documentation and Agile processes.&lt;/li&gt;
+&lt;li&gt;Mentored junior staff.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;cloudmonitor-cloudmonitor-ai&quot;&gt;CloudMonitor — &lt;a href=&quot;https://www.cloudmonitor.ai&quot;&gt;cloudmonitor.ai&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Lead Azure / Back-end Engineer&lt;/strong&gt; | June 2023 – November 2023&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Conceptualised, developed, and maintained features running on a serverless platform.&lt;/li&gt;
+&lt;li&gt;Promoted TDD, SOLID principles, Clean Architecture, and peer programming.&lt;/li&gt;
+&lt;li&gt;Introduced Agile processes, leading morning standups and mentoring junior developers.&lt;/li&gt;
+&lt;li&gt;Azure DevOps pipeline maintenance and troubleshooting.&lt;/li&gt;
+&lt;li&gt;Introduced Entity Framework, OpenAPI, xUnit, and JetBrains Rider.&lt;/li&gt;
+&lt;li&gt;Presented company-wide tech talks and engaged with external stakeholders.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;vald-vald-com&quot;&gt;VALD — &lt;a href=&quot;https://www.vald.com&quot;&gt;vald.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Software Engineer – Back-end&lt;/strong&gt; | January 2023 – May 2023&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Maintained, refactored, and contributed to various legacy REST APIs and microservices.&lt;/li&gt;
+&lt;li&gt;Contributed to the integration testing framework.&lt;/li&gt;
+&lt;li&gt;Promoted TDD and peer programming.&lt;/li&gt;
+&lt;li&gt;Chaired and contributed to various Agile ceremonies.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;situ-systems-situsystems-com&quot;&gt;Situ Systems — &lt;a href=&quot;https://www.situsystems.com&quot;&gt;situsystems.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Software Engineer – Full-Stack&lt;/strong&gt; | November 2021 – October 2022&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Authored numerous front-end and back-end features.&lt;/li&gt;
+&lt;li&gt;Substantially increased test coverage and improved testing methodologies.&lt;/li&gt;
+&lt;li&gt;Tuned SQL queries, dramatically improving performance in critical reports.&lt;/li&gt;
+&lt;li&gt;Used Pulumi to automate deployment of infrastructure.&lt;/li&gt;
+&lt;li&gt;Implemented CI workflows in Azure DevOps.&lt;/li&gt;
+&lt;li&gt;Contributed to internal development tools.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;hub24-limited-hub24-com-au&quot;&gt;HUB24 Limited — &lt;a href=&quot;https://www.hub24.com.au&quot;&gt;hub24.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Data and Full-Stack Engineer&lt;/strong&gt; | December 2019 – November 2021&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Authored a sophisticated and successful system for cleaning, transforming, and validating fund transfers between superannuation funds.&lt;/li&gt;
+&lt;li&gt;Maintained strong working relationships with DBAs, architects, BAs, clients (e.g. Bank of New York), and senior management.&lt;/li&gt;
+&lt;li&gt;Provided emergency on-call support across the organisation and managed client infrastructure, triaging and fixing or escalating issues to meet strict SLAs.&lt;/li&gt;
+&lt;li&gt;Updated legacy web applications to deploy using Azure Pipelines.&lt;/li&gt;
+&lt;li&gt;Championed TDD and automated integration testing.&lt;/li&gt;
+&lt;li&gt;Authored, maintained, and supported numerous APIs and ETL projects.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;chandler-personalised-communications-chandler-com-au&quot;&gt;Chandler Personalised Communications — &lt;a href=&quot;https://www.chandler.com.au&quot;&gt;chandler.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Data and Full-Stack Engineer&lt;/strong&gt; | March 2016 – December 2019&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Worked within an ISO 27001 certified organisation meeting strict security standards.&lt;/li&gt;
+&lt;li&gt;Built and maintained web applications servicing government, public utility, and financial sectors.&lt;/li&gt;
+&lt;li&gt;Web design using ASP.NET, Bootstrap, CSS, jQuery, and JavaScript.&lt;/li&gt;
+&lt;li&gt;Database design in Azure SQL Server.&lt;/li&gt;
+&lt;li&gt;Authored SSIS ETL packages to cleanse and process superannuation member data for web, print, and email campaigns.&lt;/li&gt;
+&lt;li&gt;Liaised with technical and non-technical stakeholders to develop bespoke solutions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;worldsmart-pos-solutions-worldsmart-com-au&quot;&gt;WorldSmart POS Solutions — &lt;a href=&quot;https://www.worldsmart.com.au&quot;&gt;worldsmart.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Software Engineer, QA and Support&lt;/strong&gt; | February 2011 – February 2016&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Developed and maintained enterprise software for retail groups.&lt;/li&gt;
+&lt;li&gt;Integrated financial, CRM, and stock modules with MYOB.&lt;/li&gt;
+&lt;li&gt;Provided QA via automated scripting and manual testing.&lt;/li&gt;
+&lt;li&gt;Authored technical and end-user documentation and provided internal training.&lt;/li&gt;
+&lt;li&gt;Maintained internal support utilities and automated scripts.&lt;/li&gt;
+&lt;li&gt;Installed and supported Point of Sale hardware and software.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;contact&quot;&gt;Contact&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Email&lt;/strong&gt;: &lt;a href=&quot;mailto:danmarshall909@gmail.com&quot;&gt;danmarshall909@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a href=&quot;https://github.com/DanMarshall909&quot;&gt;github.com/DanMarshall909&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LinkedIn&lt;/strong&gt;: &lt;a href=&quot;https://www.linkedin.com/in/developerdan&quot;&gt;linkedin.com/in/developerdan&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;p&gt;Available on request.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;*”Dan is an absolute pleasure to work with and I would highly recommend him for any full-stack web development position. We worked together for just under a year and during that time Dan was always friendly, professional and went above and beyond when implementing code and designing systems. He has a keen eye for where things can be improved and is always looking to find the optimal solution to any problem he faces. He writes clean, well-structured code that is easy to maintain. He takes advice and constructive criticism well and brings a positive attitude to every meeting. Dan would be an invaluable addition to any software team.”*&lt;/p&gt;
+&lt;p&gt;— &lt;strong&gt;Alistair Doulin&lt;/strong&gt;, CTO, Situ Systems Pty Ltd&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    <item>
+      <title>Bulletproof code quality in the age of vibe coding</title>
+      <link>https://blog.danmarshall.dev/articles/bulletproof-ai-assisted-development/</link>
+      <pubDate>Mon, 07 Jul 2025 10:00:00 +1000</pubDate>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/bulletproof-ai-assisted-development/</guid>
+      <author></author>
+      <description>&lt;p&gt;&lt;em&gt;A comprehensive guide to implementing multi-layered quality assurance that prevents CI failures, enforces development workflows, and maintains architectural excellence&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;introduction-the-ci-reliability-problem&quot;&gt;Introduction: The CI Reliability Problem&lt;/h2&gt;
+&lt;p&gt;Picture this: You’ve spent the day implementing a critical feature, running tests locally, and everything looks perfect. You push your code, create a pull request, and go home feeling accomplished. The
+next morning, you discover your CI pipeline failed spectacularly – formatting issues, test failures, and security vulnerabilities you never saw coming.&lt;/p&gt;
+&lt;p&gt;Sound familiar? This is the “works on my machine” problem that plagues development teams worldwide. After experiencing this frustration repeatedly on my Anchor project, I designed a comprehensive&lt;br&gt; quality assurance system that eliminates these surprises through git hooks, agentic AI rules, and automated quality gates.&lt;/p&gt;
+&lt;p&gt;In this article, I’ll share the complete system I’ve built – one that has achieved &lt;strong&gt;zero unexpected CI failures&lt;/strong&gt; over the past six months while maintaining high development velocity and supporting&lt;br&gt; ADHD-friendly workflows.&lt;/p&gt;
+&lt;h2 id=&quot;the-multi-layered-quality-philosophy&quot;&gt;The Multi-Layered Quality Philosophy&lt;/h2&gt;
+&lt;p&gt;Traditional quality assurance often relies on a single point of validation – usually the CI pipeline. But this creates a feedback loop that’s too slow and too late. My approach implements quality gates
+at every stage of development:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Pre-commit validation&lt;/strong&gt;: Lightweight checks during development&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pre-push quality gates&lt;/strong&gt;: Comprehensive validation before code reaches remote&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Post-push CI monitoring&lt;/strong&gt;: Real-time feedback and enforcement&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Agentic rule enforcement&lt;/strong&gt;: AI-assisted workflow compliance&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PR quality gates&lt;/strong&gt;: Final validation before merge&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This layered approach catches issues early, provides immediate feedback, and ensures that CI becomes a confirmation rather than a discovery mechanism.&lt;/p&gt;
+&lt;h2 id=&quot;layer-1-git-hooks-that-actually-work&quot;&gt;Layer 1: Git Hooks That Actually Work&lt;/h2&gt;
+&lt;h3 id=&quot;the-pre-push-guardian&quot;&gt;The Pre-Push Guardian&lt;/h3&gt;
+&lt;p&gt;Most git hooks are annoying interruptions that developers quickly bypass. Mine are different – they’re designed to be helpful, not obstructive. Here’s my enhanced pre-push hook architecture:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# pre-push-hook-enhanced: Intelligent quality gatekeeper&lt;/span&gt;
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;check_branch_protection&lt;/span&gt;&lt;/span&gt;() {
+    &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; current_branch=$(git branch --show-current)
+    &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; protected_branches=&lt;span class=&quot;string&quot;&gt;&quot;main|master|production&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [[ &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$protected_branches&lt;/span&gt;&quot;&lt;/span&gt; =~ &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$current_branch&lt;/span&gt;&quot;&lt;/span&gt; ]]; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;
+        print_error &lt;span class=&quot;string&quot;&gt;&quot;🚫 PUSH BLOCKED: Direct pushes to '&lt;span class=&quot;variable&quot;&gt;$current_branch&lt;/span&gt;' are prohibited&quot;&lt;/span&gt;
+        print_info &lt;span class=&quot;string&quot;&gt;&quot;💡 Use: git checkout dev &amp;amp;&amp;amp; git cherry-pick &amp;lt;commit&amp;gt;&quot;&lt;/span&gt;
+        &lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt; 1
+    &lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;
+}
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;check_existing_pr_status&lt;/span&gt;&lt;/span&gt;() {
+    &lt;span class=&quot;comment&quot;&gt;# Revolutionary: Check CI status BEFORE allowing new pushes&lt;/span&gt;
+    &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; pr_number=$(gh pr list --head &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$current_branch&lt;/span&gt;&quot;&lt;/span&gt; --json number --jq &lt;span class=&quot;string&quot;&gt;'.[0].number'&lt;/span&gt;)
+
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [[ -n &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$pr_number&lt;/span&gt;&quot;&lt;/span&gt; ]]; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;
+        &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; failing_checks=$(gh pr checks &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$pr_number&lt;/span&gt;&quot;&lt;/span&gt; | grep -c &lt;span class=&quot;string&quot;&gt;&quot;fail&quot;&lt;/span&gt; || &lt;span class=&quot;built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;0&quot;&lt;/span&gt;)
+
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [[ &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$failing_checks&lt;/span&gt;&quot;&lt;/span&gt; -gt 0 ]]; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;
+            print_warning &lt;span class=&quot;string&quot;&gt;&quot;⚠️ Previous CI run has &lt;span class=&quot;variable&quot;&gt;$failing_checks&lt;/span&gt; failing check(s)&quot;&lt;/span&gt;
+            &lt;span class=&quot;built_in&quot;&gt;read&lt;/span&gt; -p &lt;span class=&quot;string&quot;&gt;&quot;Are you pushing fixes for these failures? (y/N) &quot;&lt;/span&gt; -n 1 -r
+            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [[ ! &lt;span class=&quot;variable&quot;&gt;$REPLY&lt;/span&gt; =~ ^[Yy]$ ]]; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;
+                print_error &lt;span class=&quot;string&quot;&gt;&quot;❌ Please fix existing CI failures before pushing new changes&quot;&lt;/span&gt;
+                &lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt; 1
+            &lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;
+}
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;run_quality_gates&lt;/span&gt;&lt;/span&gt;() {
+    print_info &lt;span class=&quot;string&quot;&gt;&quot;🔍 Running pre-push quality gates...&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;comment&quot;&gt;# Fast quality checks (&amp;lt; 30 seconds)&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ! ./scripts/pr-quality-check.sh --pre-push; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;
+        print_warning &lt;span class=&quot;string&quot;&gt;&quot;⚠️ Quality checks failed, but you can override&quot;&lt;/span&gt;
+        &lt;span class=&quot;built_in&quot;&gt;read&lt;/span&gt; -p &lt;span class=&quot;string&quot;&gt;&quot;Continue anyway? (y/N) &quot;&lt;/span&gt; -n 1 -r
+        [[ ! &lt;span class=&quot;variable&quot;&gt;$REPLY&lt;/span&gt; =~ ^[Yy]$ ]] &amp;amp;&amp;amp; &lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt; 1
+    &lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Key Innovation&lt;/strong&gt;: The hook checks existing PR CI status before allowing new pushes. This prevents the common pattern of “push more commits to fix CI” without addressing the root failures.&lt;/p&gt;
+&lt;h3 id=&quot;the-post-push-ci-monitor&quot;&gt;The Post-Push CI Monitor&lt;/h3&gt;
+&lt;p&gt;Here’s where it gets really interesting. Most developers push code and forget about it until someone complains about CI failures. My post-push monitor automatically tracks CI progress and enforces the&lt;br&gt; principle that &lt;strong&gt;work isn’t complete until CI passes&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;meta&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# post-push-ci-monitor.sh: Real-time CI enforcement&lt;/span&gt;
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;monitor_ci_progress&lt;/span&gt;&lt;/span&gt;() {
+    &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; pr_number=&lt;span class=&quot;variable&quot;&gt;$1&lt;/span&gt;
+    &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; max_wait_time=300  &lt;span class=&quot;comment&quot;&gt;# 5 minutes&lt;/span&gt;
+    &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; check_interval=10   &lt;span class=&quot;comment&quot;&gt;# 10 seconds&lt;/span&gt;
+    &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; elapsed_time=0
+
+    print_info &lt;span class=&quot;string&quot;&gt;&quot;🔄 Post-Push CI Monitoring Started&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; [[ &lt;span class=&quot;variable&quot;&gt;$elapsed_time&lt;/span&gt; -lt &lt;span class=&quot;variable&quot;&gt;$max_wait_time&lt;/span&gt; ]]; &lt;span class=&quot;keyword&quot;&gt;do&lt;/span&gt;
+        &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; status=$(check_ci_status &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$pr_number&lt;/span&gt;&quot;&lt;/span&gt;)
+        IFS=&lt;span class=&quot;string&quot;&gt;':'&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;read&lt;/span&gt; -r failing pending passing total &amp;lt;&amp;lt;&amp;lt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$status&lt;/span&gt;&quot;&lt;/span&gt;
+
+        &lt;span class=&quot;comment&quot;&gt;# Visual progress indicator&lt;/span&gt;
+        print_status_line &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$failing&lt;/span&gt;&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$pending&lt;/span&gt;&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$passing&lt;/span&gt;&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$total&lt;/span&gt;&quot;&lt;/span&gt;
+
+        &lt;span class=&quot;comment&quot;&gt;# Success condition&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [[ &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$failing&lt;/span&gt;&quot;&lt;/span&gt; -eq 0 &amp;amp;&amp;amp; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$pending&lt;/span&gt;&quot;&lt;/span&gt; -eq 0 &amp;amp;&amp;amp; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$total&lt;/span&gt;&quot;&lt;/span&gt; -gt 0 ]]; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;
+            print_success &lt;span class=&quot;string&quot;&gt;&quot;🎉 All CI checks passed!&quot;&lt;/span&gt;
+            print_success &lt;span class=&quot;string&quot;&gt;&quot;✅ Work is complete - PR ready for review&quot;&lt;/span&gt;
+            &lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt; 0
+        &lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;
+
+        &lt;span class=&quot;comment&quot;&gt;# Failure condition&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [[ &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$failing&lt;/span&gt;&quot;&lt;/span&gt; -gt 0 &amp;amp;&amp;amp; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$pending&lt;/span&gt;&quot;&lt;/span&gt; -eq 0 ]]; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;
+            print_error &lt;span class=&quot;string&quot;&gt;&quot;❌ CI checks failed!&quot;&lt;/span&gt;
+            print_error &lt;span class=&quot;string&quot;&gt;&quot;❌ Work is NOT complete until CI passes&quot;&lt;/span&gt;
+            gh pr view &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$pr_number&lt;/span&gt;&quot;&lt;/span&gt; --web  &lt;span class=&quot;comment&quot;&gt;# Open PR for detailed review&lt;/span&gt;
+            &lt;span class=&quot;built_in&quot;&gt;exit&lt;/span&gt; 1
+        &lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;
+
+        sleep &lt;span class=&quot;variable&quot;&gt;$check_interval&lt;/span&gt;
+        elapsed_time=$((elapsed_time + check_interval))
+    &lt;span class=&quot;keyword&quot;&gt;done&lt;/span&gt;
+}
+
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;print_status_line&lt;/span&gt;&lt;/span&gt;() {
+    &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; failing=&lt;span class=&quot;variable&quot;&gt;$1&lt;/span&gt; pending=&lt;span class=&quot;variable&quot;&gt;$2&lt;/span&gt; passing=&lt;span class=&quot;variable&quot;&gt;$3&lt;/span&gt; total=&lt;span class=&quot;variable&quot;&gt;$4&lt;/span&gt;
+
+    &lt;span class=&quot;built_in&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;\r⏳ Checking CI... &quot;&lt;/span&gt;
+    [[ &lt;span class=&quot;variable&quot;&gt;$failing&lt;/span&gt; -gt 0 ]] &amp;amp;&amp;amp; &lt;span class=&quot;built_in&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;🔴 Failing: &lt;span class=&quot;variable&quot;&gt;$failing&lt;/span&gt; &quot;&lt;/span&gt;
+    [[ &lt;span class=&quot;variable&quot;&gt;$pending&lt;/span&gt; -gt 0 ]] &amp;amp;&amp;amp; &lt;span class=&quot;built_in&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;🟡 Pending: &lt;span class=&quot;variable&quot;&gt;$pending&lt;/span&gt; &quot;&lt;/span&gt;
+    &lt;span class=&quot;built_in&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;🟢 Passing: &lt;span class=&quot;variable&quot;&gt;$passing&lt;/span&gt;/&lt;span class=&quot;variable&quot;&gt;$total&lt;/span&gt;&quot;&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This creates a forcing function – developers can’t walk away from failing CI because the system immediately alerts them and opens the PR for review.&lt;/p&gt;
+&lt;h2 id=&quot;layer-2-agentic-rules-ai-assisted-development-standards&quot;&gt;Layer 2: Agentic Rules - AI-Assisted Development Standards&lt;/h2&gt;
+&lt;p&gt;Traditional coding standards are static documents that quickly become outdated. I’ve implemented an “agentic rules” system using AI assistants that actively enforce development workflows and standards.&lt;/p&gt;
+&lt;h3 id=&quot;the-claude-md-system&quot;&gt;The CLAUDE.md System&lt;/h3&gt;
+&lt;p&gt;My project includes a comprehensive &lt;code&gt;CLAUDE.md&lt;/code&gt; file that serves as both documentation and executable policy. Here’s how it works:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;&lt;span class=&quot;section&quot;&gt;# MANDATORY PR WORKFLOW RULES (CRITICAL)&lt;/span&gt;
+
+&lt;span class=&quot;section&quot;&gt;### Rule: ALWAYS Check Open PRs Before Starting Any Work&lt;/span&gt;
+
+&lt;span class=&quot;strong&quot;&gt;**ENFORCEMENT LEVEL**&lt;/span&gt;: CRITICAL - NEVER BYPASS
+
+&lt;span class=&quot;section&quot;&gt;#### Pre-Work Protocol (MANDATORY)&lt;/span&gt;
+
+Before starting ANY development task, you MUST:
+&lt;span class=&quot;bullet&quot;&gt;
+1. &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Check open PRs**&lt;/span&gt;: &lt;span class=&quot;code&quot;&gt;`gh pr list --state open`&lt;/span&gt;
+&lt;span class=&quot;bullet&quot;&gt;2. &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Analyze PR status**&lt;/span&gt;: Review CI/CD status of open PRs
+&lt;span class=&quot;bullet&quot;&gt;3. &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Prioritize existing work**&lt;/span&gt;: Address open PRs before creating new ones
+&lt;span class=&quot;bullet&quot;&gt;4. &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Get explicit approval**&lt;/span&gt;: If user wants to start new work with open PRs
+
+&lt;span class=&quot;section&quot;&gt;#### Decision Matrix&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;IF open PRs exist:&lt;br&gt; IF PR has failing CI/CD:&lt;br&gt; ✅ Fix the existing PR first&lt;br&gt; ❌ DO NOT start new work&lt;/p&gt;
+&lt;p&gt;IF PR needs review/merge:&lt;br&gt; ✅ Get user decision: merge existing or start new&lt;br&gt; ❌ DO NOT assume user wants new work&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+When AI assistants (like Claude) work on the project, they automatically enforce these rules. The system responds with structured prompts:
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;⚠️ &lt;strong&gt;OPEN PR DETECTED&lt;/strong&gt;: I found 2 open PR(s):&lt;/p&gt;
+&lt;p&gt;#39: feat: implement session management (❌ 3 failing checks)  &lt;/p&gt;
+&lt;p&gt; #41: fix: update user preferences API (🟡 2 pending checks)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;RECOMMENDED ACTION&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fix failing CI/CD in PR #39 first&lt;/li&gt;
+&lt;li&gt;Wait for checks to complete in PR #41&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;QUESTION&lt;/strong&gt;: Should I:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Fix the existing PR issues first? ✅ (Recommended)&lt;/li&gt;
+&lt;li&gt;Help merge the ready PRs? ✅ (Recommended)&lt;/li&gt;
+&lt;li&gt;Start new work anyway? ⚠️ (Requires explicit approval)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;
+### ADHD-Friendly Development Rules
+
+The agentic system includes specific support for developers with ADHD:
+
+```markdown
+### ADHD Support (MANDATORY)
+- **Rationale-first explanations**: Always explain WHY before WHAT
+- **30-minute break reminders**: Proactive breaks with housekeeping options
+- **Focus tracking**: Help maintain attention on current task
+- **Depth-on-demand**: Provide details only when requested&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This transforms the typical development experience from “figure it out yourself” to “guided, supportive, and sustainable.”&lt;/p&gt;
+&lt;h3 id=&quot;architectural-governance&quot;&gt;Architectural Governance&lt;/h3&gt;
+&lt;p&gt;The rules system enforces architectural patterns automatically:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;&lt;span class=&quot;section&quot;&gt;### CQRS + FastEndpoints Architecture Rules&lt;/span&gt;
+
+&lt;span class=&quot;section&quot;&gt;#### Naming Conventions (MANDATORY)&lt;/span&gt;
+&lt;span class=&quot;bullet&quot;&gt;
+- &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Commands**&lt;/span&gt;: Use &lt;span class=&quot;code&quot;&gt;`C&amp;lt;CommandName&amp;gt;`&lt;/span&gt; prefix (e.g., &lt;span class=&quot;code&quot;&gt;`CCreateTask`&lt;/span&gt;)
+&lt;span class=&quot;bullet&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Queries**&lt;/span&gt;: Use &lt;span class=&quot;code&quot;&gt;`Q&amp;lt;QueryName&amp;gt;`&lt;/span&gt; prefix (e.g., &lt;span class=&quot;code&quot;&gt;`QGetTask`&lt;/span&gt;)
+&lt;span class=&quot;bullet&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Handlers**&lt;/span&gt;: Use &lt;span class=&quot;code&quot;&gt;`H&amp;lt;CommandName&amp;gt;`&lt;/span&gt; prefix (e.g., &lt;span class=&quot;code&quot;&gt;`HCreateTask`&lt;/span&gt;)
+
+&lt;span class=&quot;section&quot;&gt;### Privacy-First Development Rules&lt;/span&gt;
+
+&lt;span class=&quot;section&quot;&gt;#### Data Minimization&lt;/span&gt;
+
+&lt;span class=&quot;code&quot;&gt;```csharp
+// ❌ WRONG: Storing full email content
+public class EmailTask
+{
+    public string FullEmailContent { get; set; } // NEVER DO THIS
+}
+
+// ✅ CORRECT: Store only extracted task metadata
+public class ExtractedTask
+{
+    public Guid Id { get; set; }
+    public string TaskDescription { get; set; }
+    public DateTime? DueDate { get; set; }
+    // No PII or original content
+}
+```&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;
+## Layer 3: Comprehensive Quality Gates
+
+### Local Quality Analysis
+
+My `pr-quality-check.sh` script runs comprehensive analysis that mirrors (and often exceeds) what CI will do:
+
+```bash
+#!/bin/bash
+# pr-quality-check.sh: Comprehensive local quality analysis
+
+main() {
+    print_header &amp;quot;🔍 PR Quality Check - Comprehensive Analysis&amp;quot;
+
+    # 1. Tool verification
+    verify_required_tools
+
+    # 2. Build verification
+    run_clean_build
+
+    # 3. Code formatting
+    check_code_formatting
+
+    # 4. ReSharper analysis (zero tolerance)
+    run_resharper_analysis
+
+    # 5. Security scanning
+    run_security_analysis
+
+    # 6. Unit tests
+    run_unit_tests
+
+    # 7. Code coverage analysis
+    analyze_code_coverage
+
+    # 8. Architecture validation
+    validate_architecture
+
+    # Generate comprehensive HTML report
+    generate_quality_report
+}
+
+run_resharper_analysis() {
+    print_step &amp;quot;ReSharper Code Analysis&amp;quot;
+
+    # Zero tolerance policy for code issues
+    local max_allowed_issues=0
+
+    jb inspectcode &amp;quot;src/Anchor.sln&amp;quot; \
+        --output=&amp;quot;reports/resharper-analysis.xml&amp;quot; \
+        --format=Xml \
+        --severity=WARNING
+
+    local issue_count=$(xmllint --xpath &amp;quot;count(//Issue)&amp;quot; reports/resharper-analysis.xml 2&amp;gt;/dev/null || echo &amp;quot;0&amp;quot;)
+
+    if [[ &amp;quot;$issue_count&amp;quot; -gt &amp;quot;$max_allowed_issues&amp;quot; ]]; then
+        add_check_result &amp;quot;ReSharper Analysis&amp;quot; &amp;quot;FAIL&amp;quot; &amp;quot;Found $issue_count issues (max: $max_allowed_issues)&amp;quot;
+
+        # Provide actionable guidance
+        print_error &amp;quot;❌ ReSharper found $issue_count code issues&amp;quot;
+        print_info &amp;quot;💡 Run &amp;#39;jb cleanupcode src/Anchor.sln&amp;#39; to auto-fix formatting issues&amp;quot;
+        print_info &amp;quot;💡 View detailed report: reports/resharper-analysis.xml&amp;quot;
+    else
+        add_check_result &amp;quot;ReSharper Analysis&amp;quot; &amp;quot;PASS&amp;quot; &amp;quot;No issues found&amp;quot;
+    fi
+}
+
+analyze_code_coverage() {
+    print_step &amp;quot;Code Coverage Analysis&amp;quot;
+
+    # Run tests with coverage collection
+    dotnet test \
+        --configuration Release \
+        --logger &amp;quot;console;verbosity=normal&amp;quot; \
+        --collect:&amp;quot;XPlat Code Coverage&amp;quot; \
+        --results-directory:&amp;quot;reports/coverage&amp;quot; \
+        --settings:&amp;quot;src/coverlet.runsettings&amp;quot;
+
+    # Generate detailed HTML report
+    reportgenerator \
+        -reports:&amp;quot;reports/coverage/**/coverage.cobertura.xml&amp;quot; \
+        -targetdir:&amp;quot;reports/coverage-report&amp;quot; \
+        -reporttypes:&amp;quot;Html;MarkdownSummaryGithub;TextSummary&amp;quot;
+
+    # Extract coverage percentage
+    local coverage_file=&amp;quot;reports/coverage-report/Summary.txt&amp;quot;
+    local coverage_percent=$(grep &amp;quot;Line coverage:&amp;quot; &amp;quot;$coverage_file&amp;quot; | grep -oE &amp;#39;[0-9]+\.[0-9]+&amp;#39; | head -1)
+
+    # Apply thresholds
+    if (( $(echo &amp;quot;$coverage_percent &amp;gt;= 80&amp;quot; | bc -l) )); then
+        add_check_result &amp;quot;Code Coverage&amp;quot; &amp;quot;PASS&amp;quot; &amp;quot;${coverage_percent}% (≥80% target)&amp;quot;
+    elif (( $(echo &amp;quot;$coverage_percent &amp;gt;= 60&amp;quot; | bc -l) )); then
+        add_check_result &amp;quot;Code Coverage&amp;quot; &amp;quot;WARN&amp;quot; &amp;quot;${coverage_percent}% (≥60% minimum)&amp;quot;
+    else
+        add_check_result &amp;quot;Code Coverage&amp;quot; &amp;quot;FAIL&amp;quot; &amp;quot;${coverage_percent}% (below 60% minimum)&amp;quot;
+    fi
+}&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;mutation-testing-integration&quot;&gt;Mutation Testing Integration&lt;/h3&gt;
+&lt;p&gt;The quality gates include mutation testing using Stryker.NET, which validates the quality of your tests by introducing small bugs and checking if tests catch them:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{
+  &lt;span class=&quot;attr&quot;&gt;&quot;stryker-config&quot;&lt;/span&gt;: {
+    &lt;span class=&quot;attr&quot;&gt;&quot;mutation-level&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;Complete&quot;&lt;/span&gt;,
+    &lt;span class=&quot;attr&quot;&gt;&quot;test-projects&quot;&lt;/span&gt;: [&lt;span class=&quot;string&quot;&gt;&quot;./tests/**/*.Tests.csproj&quot;&lt;/span&gt;],
+    &lt;span class=&quot;attr&quot;&gt;&quot;thresholds&quot;&lt;/span&gt;: {
+      &lt;span class=&quot;attr&quot;&gt;&quot;high&quot;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;85&lt;/span&gt;,
+      &lt;span class=&quot;attr&quot;&gt;&quot;low&quot;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;80&lt;/span&gt;,
+      &lt;span class=&quot;attr&quot;&gt;&quot;break&quot;&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;75&lt;/span&gt;
+    },
+    &lt;span class=&quot;attr&quot;&gt;&quot;coverage-analysis&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;perTest&quot;&lt;/span&gt;,
+    &lt;span class=&quot;attr&quot;&gt;&quot;reporters&quot;&lt;/span&gt;: [&lt;span class=&quot;string&quot;&gt;&quot;html&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;cleartext&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;progress&quot;&lt;/span&gt;]
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This ensures that achieving 100% code coverage doesn’t give false confidence – your tests must actually validate the behavior, not just execute the code.&lt;/p&gt;
+&lt;h2 id=&quot;layer-4-ci-cd-pipeline-excellence&quot;&gt;Layer 4: CI/CD Pipeline Excellence&lt;/h2&gt;
+&lt;h3 id=&quot;github-actions-workflows&quot;&gt;GitHub Actions Workflows&lt;/h3&gt;
+&lt;p&gt;My CI/CD pipeline is designed around the principle of “no surprises” – if local quality gates pass, CI should pass too:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-yaml&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# .github/workflows/build-and-test.yml&lt;/span&gt;
+&lt;span class=&quot;attr&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Build&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Test&lt;/span&gt;
+
+&lt;span class=&quot;attr&quot;&gt;on:&lt;/span&gt;
+  &lt;span class=&quot;attr&quot;&gt;push:&lt;/span&gt;
+    &lt;span class=&quot;attr&quot;&gt;branches:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;[dev]&lt;/span&gt;
+  &lt;span class=&quot;attr&quot;&gt;pull_request:&lt;/span&gt;
+    &lt;span class=&quot;attr&quot;&gt;branches:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;[main]&lt;/span&gt;
+
+&lt;span class=&quot;attr&quot;&gt;jobs:&lt;/span&gt;
+  &lt;span class=&quot;attr&quot;&gt;quality-gates:&lt;/span&gt;
+    &lt;span class=&quot;attr&quot;&gt;runs-on:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;ubuntu-latest&lt;/span&gt;
+
+    &lt;span class=&quot;attr&quot;&gt;steps:&lt;/span&gt;
+      &lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;uses:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;actions/checkout@v4&lt;/span&gt;
+
+      &lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Setup&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;.NET&lt;/span&gt;
+        &lt;span class=&quot;attr&quot;&gt;uses:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;actions/setup-dotnet@v4&lt;/span&gt;
+        &lt;span class=&quot;attr&quot;&gt;with:&lt;/span&gt;
+          &lt;span class=&quot;attr&quot;&gt;dotnet-version:&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;8.0&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;.x&lt;/span&gt;
+
+      &lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Install&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;ReSharper&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;CLI&lt;/span&gt;
+        &lt;span class=&quot;attr&quot;&gt;run:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;dotnet&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;tool&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;JetBrains.ReSharper.GlobalTools&lt;/span&gt;
+
+      &lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Restore&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;dependencies&lt;/span&gt;
+        &lt;span class=&quot;attr&quot;&gt;run:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;dotnet&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;restore&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;src/Anchor.sln&lt;/span&gt;
+
+      &lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Run&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;comprehensive&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;quality&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;check&lt;/span&gt;
+        &lt;span class=&quot;attr&quot;&gt;run:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;./scripts/pr-quality-check.sh&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;--ci&lt;/span&gt;
+
+      &lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Upload&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;coverage&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;reports&lt;/span&gt;
+        &lt;span class=&quot;attr&quot;&gt;uses:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;codecov/codecov-action@v3&lt;/span&gt;
+        &lt;span class=&quot;attr&quot;&gt;with:&lt;/span&gt;
+          &lt;span class=&quot;attr&quot;&gt;files:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;./reports/coverage/**/coverage.cobertura.xml&lt;/span&gt;
+
+      &lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Upload&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;quality&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;report&lt;/span&gt;
+        &lt;span class=&quot;attr&quot;&gt;uses:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;actions/upload-artifact@v3&lt;/span&gt;
+        &lt;span class=&quot;attr&quot;&gt;with:&lt;/span&gt;
+          &lt;span class=&quot;attr&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;quality-report&lt;/span&gt;
+          &lt;span class=&quot;attr&quot;&gt;path:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;reports/pr-quality-report.html&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;mutation-testing-in-ci&quot;&gt;Mutation Testing in CI&lt;/h3&gt;
+&lt;p&gt;For pull requests, the pipeline runs mutation testing to ensure test quality:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-yaml&quot;&gt;&lt;span class=&quot;attr&quot;&gt;mutation-testing:&lt;/span&gt;
+  &lt;span class=&quot;attr&quot;&gt;runs-on:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;ubuntu-latest&lt;/span&gt;
+  &lt;span class=&quot;attr&quot;&gt;if:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;github.event_name&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'pull_request'&lt;/span&gt;
+
+  &lt;span class=&quot;attr&quot;&gt;steps:&lt;/span&gt;
+    &lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Run&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Stryker&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Mutation&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Testing&lt;/span&gt;
+      &lt;span class=&quot;attr&quot;&gt;run:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;|
+        dotnet tool install -g dotnet-stryker                                                                                                                                                             
+        dotnet stryker --config-file stryker-config.json
+&lt;/span&gt;
+    &lt;span class=&quot;bullet&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;Check&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;mutation&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;score&lt;/span&gt;
+      &lt;span class=&quot;attr&quot;&gt;run:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;|
+        MUTATION_SCORE=$(jq -r '.thresholds.actualScore' reports/mutation/stryker-report.json)                                                                                                            
+        if (( $(echo &quot;$MUTATION_SCORE &amp;lt; 80&quot; | bc -l) )); then                                                                                                                                             
+          echo &quot;❌ Mutation score $MUTATION_SCORE% below 80% threshold&quot;                                                                                                                                    
+          exit 1                                                                                                                                                                                          
+        fi&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;the-developer-experience&quot;&gt;The Developer Experience&lt;/h2&gt;
+&lt;h3 id=&quot;real-world-workflow-example&quot;&gt;Real-World Workflow Example&lt;/h3&gt;
+&lt;p&gt;Here’s what a typical development session looks like with this system:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 1. Start work (agentic rules enforce PR checking)&lt;/span&gt;
+$ gh pr list --state open
+&lt;span class=&quot;comment&quot;&gt;#39: feat: implement session management (🔴 3 failing checks)&lt;/span&gt;
+
+&lt;span class=&quot;comment&quot;&gt;# AI assistant responds:&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# ⚠️ OPEN PR DETECTED: Found failing CI in PR #39&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# RECOMMENDED: Fix existing failures before starting new work&lt;/span&gt;
+
+&lt;span class=&quot;comment&quot;&gt;# 2. Fix existing PR&lt;/span&gt;
+$ git checkout feature/session-management
+$ ./scripts/pr-quality-check.sh
+&lt;span class=&quot;comment&quot;&gt;# 🔍 Running comprehensive quality analysis...&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# ❌ ReSharper found 5 formatting issues&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# 💡 Run 'jb cleanupcode src/Anchor.sln' to auto-fix&lt;/span&gt;
+
+$ jb cleanupcode src/Anchor.sln
+$ git add -A &amp;amp;&amp;amp; git commit -m &lt;span class=&quot;string&quot;&gt;&quot;fix: resolve formatting issues&quot;&lt;/span&gt;
+
+&lt;span class=&quot;comment&quot;&gt;# 3. Push with automatic monitoring&lt;/span&gt;
+$ git push origin feature/session-management
+&lt;span class=&quot;comment&quot;&gt;# 🔍 Pre-push hook: Quality gates passed&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# [Push completes]&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# 🔄 Post-Push CI Monitoring Started&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# ⏳ Checking CI... 🟡 Pending: 5 🟢 Passing: 30/35&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# ⏳ Checking CI... 🟢 Passing: 35/35&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# 🎉 All CI checks passed!&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# ✅ Work is complete - PR ready for review&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;quality-report-dashboard&quot;&gt;Quality Report Dashboard&lt;/h3&gt;
+&lt;p&gt;The system generates comprehensive HTML reports that provide actionable insights:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- Generated by pr-quality-check.sh --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;quality-summary&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;h2&lt;/span&gt;&amp;gt;&lt;/span&gt;Quality Gate Results&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;h2&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;metrics&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;metric pass&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;✅ 8 Passed&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;metric warn&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;⚠️ 1 Warning&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;metric fail&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;❌ 0 Failed&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;metric skip&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;⏭️ 0 Skipped&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;span&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;detailed-results&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;check-result pass&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;h3&lt;/span&gt;&amp;gt;&lt;/span&gt;✅ ReSharper Analysis&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;h3&lt;/span&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;No issues found (0/0 threshold)&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;check-result warn&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;h3&lt;/span&gt;&amp;gt;&lt;/span&gt;⚠️ Code Coverage&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;h3&lt;/span&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;78.5% coverage (≥60% minimum, ≥80% target)&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;p&lt;/span&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;details&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;summary&lt;/span&gt;&amp;gt;&lt;/span&gt;Coverage by Module&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;summary&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;Anchor.Domain: 95.2%&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;Anchor.Application: 82.1%&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;Anchor.Api: 65.3% ⚠️&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;li&lt;/span&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;ul&lt;/span&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;details&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;advanced-features-and-innovations&quot;&gt;Advanced Features and Innovations&lt;/h2&gt;
+&lt;h3 id=&quot;branch-strategy-enforcement&quot;&gt;Branch Strategy Enforcement&lt;/h3&gt;
+&lt;p&gt;The system enforces a simplified two-branch strategy that eliminates common merge conflicts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;dev&lt;/code&gt;&lt;/strong&gt;: All development happens here&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;main&lt;/code&gt;&lt;/strong&gt;: Production-ready code only&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;No feature branches&lt;/strong&gt;: Reduces complexity and merge conflicts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Git hooks automatically prevent:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Direct pushes to &lt;code&gt;main&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Creating PRs from feature branches&lt;/li&gt;
+&lt;li&gt;Multiple &lt;code&gt;dev&lt;/code&gt; → &lt;code&gt;main&lt;/code&gt; PRs open simultaneously&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;privacy-first-quality-gates&quot;&gt;Privacy-First Quality Gates&lt;/h3&gt;
+&lt;p&gt;For projects handling sensitive data, the quality gates include PII detection:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;title&quot;&gt;scan_for_pii&lt;/span&gt;&lt;/span&gt;() {
+    print_step &lt;span class=&quot;string&quot;&gt;&quot;PII and Security Scanning&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;comment&quot;&gt;# Scan for common PII patterns&lt;/span&gt;
+    &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; pii_patterns=(
+        &lt;span class=&quot;string&quot;&gt;&quot;email.*@.*\\.com&quot;&lt;/span&gt;
+        &lt;span class=&quot;string&quot;&gt;&quot;phone.*[0-9]{3}-[0-9]{3}-[0-9]{4}&quot;&lt;/span&gt;
+        &lt;span class=&quot;string&quot;&gt;&quot;ssn.*[0-9]{3}-[0-9]{2}-[0-9]{4}&quot;&lt;/span&gt;
+        &lt;span class=&quot;string&quot;&gt;&quot;credit.*card.*[0-9]{4}.*[0-9]{4}.*[0-9]{4}.*[0-9]{4}&quot;&lt;/span&gt;
+    )
+
+    &lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt; pii_found=&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; pattern &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;${pii_patterns[@]}&lt;/span&gt;&quot;&lt;/span&gt;; &lt;span class=&quot;keyword&quot;&gt;do&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; rg -i &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$pattern&lt;/span&gt;&quot;&lt;/span&gt; src/ tests/ --&lt;span class=&quot;built_in&quot;&gt;type&lt;/span&gt; cs; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;
+            print_error &lt;span class=&quot;string&quot;&gt;&quot;❌ Potential PII detected: &lt;span class=&quot;variable&quot;&gt;$pattern&lt;/span&gt;&quot;&lt;/span&gt;
+            pii_found=&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;
+        &lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;done&lt;/span&gt;
+
+    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; [[ &lt;span class=&quot;string&quot;&gt;&quot;&lt;span class=&quot;variable&quot;&gt;$pii_found&lt;/span&gt;&quot;&lt;/span&gt; == &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt; ]]; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;
+        add_check_result &lt;span class=&quot;string&quot;&gt;&quot;PII Scanning&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;FAIL&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;Potential PII detected in code&quot;&lt;/span&gt;
+        print_error &lt;span class=&quot;string&quot;&gt;&quot;❌ Review code for personal information exposure&quot;&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;
+        add_check_result &lt;span class=&quot;string&quot;&gt;&quot;PII Scanning&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;PASS&quot;&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;No PII patterns detected&quot;&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;fi&lt;/span&gt;
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;performance-quality-gates&quot;&gt;Performance Quality Gates&lt;/h3&gt;
+&lt;p&gt;The system includes performance validation to prevent regressions:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-csharp&quot;&gt;[&lt;span class=&quot;meta&quot;&gt;Fact&lt;/span&gt;]
+[&lt;span class=&quot;meta&quot;&gt;Trait(&lt;span class=&quot;meta-string&quot;&gt;&quot;Category&quot;&lt;/span&gt;, &lt;span class=&quot;meta-string&quot;&gt;&quot;Performance&quot;&lt;/span&gt;)&lt;/span&gt;]
+&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt; Task &lt;span class=&quot;title&quot;&gt;API_GetCurrentSession_RespondsUnder100ms&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;
+{
+    &lt;span class=&quot;comment&quot;&gt;// Arrange&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; client = CreateTestClient();
+    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; stopwatch = Stopwatch.StartNew();
+
+    &lt;span class=&quot;comment&quot;&gt;// Act&lt;/span&gt;
+    &lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; response = &lt;span class=&quot;keyword&quot;&gt;await&lt;/span&gt; client.GetAsync(&lt;span class=&quot;string&quot;&gt;&quot;/api/sessions/current&quot;&lt;/span&gt;);
+    stopwatch.Stop();
+
+    &lt;span class=&quot;comment&quot;&gt;// Assert&lt;/span&gt;
+    response.StatusCode.Should().Be(HttpStatusCode.OK);
+    stopwatch.ElapsedMilliseconds.Should().BeLessThan(&lt;span class=&quot;number&quot;&gt;100&lt;/span&gt;,
+        &lt;span class=&quot;string&quot;&gt;&quot;API should respond in under 100ms for good user experience&quot;&lt;/span&gt;);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;measurable-impact&quot;&gt;Measurable Impact&lt;/h2&gt;
+&lt;p&gt;After implementing this system, I’ve observed:&lt;/p&gt;
+&lt;h3 id=&quot;quality-metrics&quot;&gt;Quality Metrics&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Zero unexpected CI failures&lt;/strong&gt; in 6 months&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;95%+ code coverage&lt;/strong&gt; maintained automatically&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;85%+ mutation testing score&lt;/strong&gt; across all modules&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sub-100ms API response times&lt;/strong&gt; enforced&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;developer-experience&quot;&gt;Developer Experience&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;30% reduction&lt;/strong&gt; in context switching (fewer “fix CI” interruptions)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;50% faster&lt;/strong&gt; code review cycles (fewer back-and-forth fixes)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Zero “works on my machine”&lt;/strong&gt; incidents&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Improved focus&lt;/strong&gt; through ADHD-friendly workflow support&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;architectural-benefits&quot;&gt;Architectural Benefits&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Consistent CQRS implementation&lt;/strong&gt; across all features&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Privacy-first design&lt;/strong&gt; enforced automatically&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Clean architecture&lt;/strong&gt; maintained through automated validation&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Zero PII leakage&lt;/strong&gt; incidents&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;implementation-guide&quot;&gt;Implementation Guide&lt;/h2&gt;
+&lt;h3 id=&quot;getting-started&quot;&gt;Getting Started&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Install Required Tools&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# .NET and tooling&lt;/span&gt;
+dotnet tool install -g JetBrains.ReSharper.GlobalTools
+dotnet tool install -g dotnet-stryker
+dotnet tool install -g dotnet-reportgenerator-globaltool
+
+&lt;span class=&quot;comment&quot;&gt;# GitHub CLI for PR automation&lt;/span&gt;
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+&lt;span class=&quot;built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;deb [arch=&lt;span class=&quot;variable&quot;&gt;$(dpkg --print-architecture)&lt;/span&gt; signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main&quot;&lt;/span&gt; | sudo tee /etc/apt/sources.list.d/github-cli.list
+ &amp;gt; /dev/null
+sudo apt update &amp;amp;&amp;amp; sudo apt install gh&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;&lt;strong&gt;Set Up Git Hooks&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Install the enhanced hooks&lt;/span&gt;
+./scripts/install-ci-monitoring-hooks.sh
+
+&lt;span class=&quot;comment&quot;&gt;# Make them executable&lt;/span&gt;
+chmod +x .git/hooks/pre-push
+chmod +x .git/hooks/post-push&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;&lt;strong&gt;Configure Quality Thresholds&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Create quality configuration&lt;/span&gt;
+cat &amp;gt; .quality-config &amp;lt;&amp;lt; EOF
+COVERAGE_TARGET=80
+COVERAGE_MINIMUM=60
+MUTATION_THRESHOLD=85
+RESHARPER_MAX_ISSUES=0
+PERFORMANCE_MAX_MS=100
+EOF&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;4&quot;&gt;
+&lt;li&gt;&lt;strong&gt;Set Up CI/CD Pipeline&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&quot;language-yaml&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Copy the provided GitHub Actions workflows&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# Customize thresholds for your project&lt;/span&gt;
+&lt;span class=&quot;comment&quot;&gt;# Enable branch protection rules&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;customization-options&quot;&gt;Customization Options&lt;/h3&gt;
+&lt;p&gt;The system is designed to be adaptable:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Quality Thresholds&lt;/strong&gt;: Adjust coverage, mutation testing, and performance requirements&lt;br&gt; &lt;strong&gt;ADHD Support&lt;/strong&gt;: Enable/disable break reminders and focus tracking&lt;br&gt; &lt;strong&gt;Privacy Controls&lt;/strong&gt;: Configure PII detection patterns for your domain&lt;br&gt; &lt;strong&gt;Branch Strategy&lt;/strong&gt;: Adapt the two-branch model or implement feature branch support&lt;br&gt; &lt;strong&gt;Tool Integration&lt;/strong&gt;: Swap ReSharper for SonarQube, or add additional analyzers&lt;/p&gt;
+&lt;h2 id=&quot;conclusion-quality-as-a-competitive-advantage&quot;&gt;Conclusion: Quality as a Competitive Advantage&lt;/h2&gt;
+&lt;p&gt;This comprehensive quality assurance system represents more than just tooling – it’s a philosophy that quality should be automatic, supportive, and integrated into every aspect of development. By&lt;br&gt; implementing git hooks, agentic rules, and automated quality gates, you can:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Eliminate CI surprises&lt;/strong&gt; and the frustration they cause&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Maintain high standards&lt;/strong&gt; without sacrificing development velocity&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Support diverse development styles&lt;/strong&gt; including ADHD-friendly workflows&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Enforce architectural excellence&lt;/strong&gt; through automated governance&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Build confidence&lt;/strong&gt; in your codebase and deployment process&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The initial setup investment pays dividends immediately through reduced context switching, faster code reviews, and the peace of mind that comes from knowing your code will work in production.&lt;/p&gt;
+&lt;p&gt;Most importantly, this system transforms quality from a burden into an enabler – letting developers focus on solving problems rather than fighting tools. In an industry where technical debt and quality
+issues often compound over time, having a system that actively prevents these problems is not just convenient – it’s a competitive advantage.&lt;/p&gt;
+&lt;p&gt;The code and configurations shown in this article are battle-tested in production and available in my Anchor project repository. I encourage you to adapt these patterns to your own projects and&lt;br&gt; experience the confidence that comes from truly bulletproof code quality.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;Dan is a senior software engineer focused on building sustainable development practices and ADHD-friendly tooling. You can find more of his work on quality assurance and development workflow&lt;br&gt; optimization at &lt;a href=&quot;https://github.com/dan-sauers-universe&quot;&gt;GitHub&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Dan Marshall – Developer Profile</title>
+      <link>https://blog.danmarshall.dev/articles/dan-profile/</link>
+      <pubDate>Sun, 15 Jun 2025 10:00:00 +1000</pubDate>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/dan-profile/</guid>
+      <author></author>
+      <description>&lt;h1 id=&quot;dan-marshall-developer-profile&quot;&gt;Dan Marshall – Developer Profile&lt;/h1&gt;
+&lt;p&gt;With over a decade of experience in software engineering across diverse domains, I am a passionate and confident developer committed to building clean, self-documenting, rigorously tested, and sustainable software. I take &lt;em&gt;The Clean Coder&lt;/em&gt; by Robert C. Martin as my professional code of conduct and deeply value the principles of the Agile Manifesto.&lt;/p&gt;
+&lt;p&gt;Known for my approachable nature and positive energy, I genuinely enjoy listening, sharing insights, and helping others grow. Mentorship comes naturally to me—I take pride in creating an environment where others can thrive, and I celebrate when a mentee surpasses me. This industry has given me so much, and I’m driven by a strong desire to give back.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-qualifications&quot;&gt;🎓 Qualifications&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Bachelor of Science (Mathematics and Computer Science)&lt;/strong&gt; – University of South Africa (UNISA)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Diploma of Printing and Graphic Arts (Graphic Prepress)&lt;/strong&gt; – Queensland School of Printing and Graphic Arts (Southbank T.A.F.E.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-skills&quot;&gt;🧠 Skills&lt;/h2&gt;
+&lt;h3 id=&quot;-back-end-development&quot;&gt;🛠️ Back-End Development&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;C# / .NET Core&lt;/strong&gt; – 10+ years, well-tested, modular, and scalable applications using CQRS, DDD, microservices&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AI Integration&lt;/strong&gt; – 3 years, including prompt engineering, RAG-based agents, OpenAI, Azure Cognitive Services&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Databases&lt;/strong&gt; – SQL Server (9+ years), PostgreSQL (1+ year)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API Development&lt;/strong&gt; – REST (ASP.NET WebAPI), FastEndpoints, GraphQL, and SOAP&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DevOps&lt;/strong&gt; – 4 years, CI/CD with Azure DevOps, TeamCity, Octopus Deploy, PowerShell scripting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;-front-end-development&quot;&gt;🖥️ Front-End Development&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Languages/Frameworks&lt;/strong&gt; – TypeScript/JavaScript (6 years), React (1 year), Angular (1 year)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Design &amp;amp; Layout&lt;/strong&gt; – CSS, Tailwind CSS, Google Material UI for responsive and accessible interfaces&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UI Testing&lt;/strong&gt; – Selenium, Storybook (1 year)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;-general&quot;&gt;🧩 General&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Agile Practices&lt;/strong&gt; – 7 years, including TDD, mentorship, and peer programming&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Problem Solving&lt;/strong&gt; – Strong skills, especially in mathematical contexts&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Version Control&lt;/strong&gt; – Git, Bitbucket, GitHub, Azure Repos (10+ years)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Productivity Tools&lt;/strong&gt; – Jira, Confluence, Trello, Azure DevOps Boards&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Documentation &amp;amp; Design&lt;/strong&gt; – 14+ years in technical documentation, graphic design, and typesetting&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-employment-summary&quot;&gt;💼 Employment Summary&lt;/h2&gt;
+&lt;h3 id=&quot;ract-royal-automobile-club-of-tasmania-ract-com-au&quot;&gt;&lt;strong&gt;RACT (Royal Automobile Club of Tasmania)&lt;/strong&gt; – &lt;a href=&quot;https://www.ract.com.au&quot;&gt;ract.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Software Engineer – Backend&lt;/strong&gt;&lt;br&gt;&lt;em&gt;June 2024 – Present&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applied Clean Architecture and DDD for testability and scalability&lt;/li&gt;
+&lt;li&gt;Part of AI pilot program to develop LLM coding guardrails&lt;/li&gt;
+&lt;li&gt;Migrated systems from .NET Framework 4.7.2 to .NET 9&lt;/li&gt;
+&lt;li&gt;Built resilient microservices (MassTransit, GraphQL, SQL Server)&lt;/li&gt;
+&lt;li&gt;Delivered business-aligned, tested features collaboratively&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;national-grower-register-ngr-com-au&quot;&gt;&lt;strong&gt;National Grower Register&lt;/strong&gt; – &lt;a href=&quot;https://www.ngr.com.au&quot;&gt;ngr.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Full-stack Engineer&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Nov 2023 – May 2024&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Co-developed Flexidocs form system with Clean Architecture&lt;/li&gt;
+&lt;li&gt;Built React 18 components using TypeScript and Tailwind CSS&lt;/li&gt;
+&lt;li&gt;Guided teammates on C#, OOP, AI tool use, and testing&lt;/li&gt;
+&lt;li&gt;Refactored and tested legacy code for long-term sustainability&lt;/li&gt;
+&lt;li&gt;Contributed to documentation, Agile practices, and team mentoring&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;cloudmonitor-cloudmonitor-ai&quot;&gt;&lt;strong&gt;CloudMonitor&lt;/strong&gt; – &lt;a href=&quot;https://cloudmonitor.ai&quot;&gt;cloudmonitor.ai&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Lead Azure / Backend Engineer&lt;/strong&gt;&lt;br&gt;&lt;em&gt;June 2023 – Nov 2023&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Designed and built serverless platform features&lt;/li&gt;
+&lt;li&gt;Led adoption of TDD, Clean Architecture, SOLID, peer programming&lt;/li&gt;
+&lt;li&gt;Ran Agile ceremonies, mentored juniors, and maintained pipelines&lt;/li&gt;
+&lt;li&gt;Introduced EF Core, OpenAPI, XUnit, and Rider IDE&lt;/li&gt;
+&lt;li&gt;Delivered internal tech talks and worked with stakeholders&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;vald-vald-com&quot;&gt;&lt;strong&gt;VALD&lt;/strong&gt; – &lt;a href=&quot;https://vald.com&quot;&gt;vald.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Software Engineer – Backend&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Jan 2023 – May 2023&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Maintained and refactored REST APIs and microservices&lt;/li&gt;
+&lt;li&gt;Enhanced integration testing framework&lt;/li&gt;
+&lt;li&gt;Promoted TDD and collaborative programming&lt;/li&gt;
+&lt;li&gt;Led Agile ceremonies&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;situ-systems-situsystems-com&quot;&gt;&lt;strong&gt;Situ Systems&lt;/strong&gt; – &lt;a href=&quot;https://situsystems.com&quot;&gt;situsystems.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Software Engineer – Full Stack&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Nov 2021 – Oct 2022&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Delivered both frontend and backend features&lt;/li&gt;
+&lt;li&gt;Improved test coverage and SQL performance&lt;/li&gt;
+&lt;li&gt;Automated infrastructure with Pulumi&lt;/li&gt;
+&lt;li&gt;CI/CD with Azure DevOps&lt;/li&gt;
+&lt;li&gt;Created internal developer tooling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;hub24-limited-hub24-com-au&quot;&gt;&lt;strong&gt;HUB24 Limited&lt;/strong&gt; – &lt;a href=&quot;https://hub24.com.au&quot;&gt;hub24.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Data and Full Stack Engineer&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Dec 2019 – Nov 2021&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Built fund transfer and validation platform&lt;/li&gt;
+&lt;li&gt;Worked across &amp;gt;100 schemas with stored procs and SQL clusters&lt;/li&gt;
+&lt;li&gt;On-call support for client infrastructure&lt;/li&gt;
+&lt;li&gt;Modernized legacy apps using Azure Pipelines&lt;/li&gt;
+&lt;li&gt;Champion for TDD and integration testing&lt;/li&gt;
+&lt;li&gt;Authored APIs and ETL processes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;chandler-personalised-communications-chandler-com-au&quot;&gt;&lt;strong&gt;Chandler Personalised Communications&lt;/strong&gt; – &lt;a href=&quot;https://chandler.com.au&quot;&gt;chandler.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Data and Full Stack Engineer&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Mar 2016 – Dec 2019&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Built web apps for government and financial clients&lt;/li&gt;
+&lt;li&gt;Used ASP.NET, Bootstrap, CSS, jQuery, and JS&lt;/li&gt;
+&lt;li&gt;Azure SQL DB design&lt;/li&gt;
+&lt;li&gt;ETL with SSIS for print/email/web campaigns&lt;/li&gt;
+&lt;li&gt;Collaborated closely with both tech and non-tech stakeholders&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;worldsmart-pos-solutions-worldsmart-com-au&quot;&gt;&lt;strong&gt;WorldSmart POS Solutions&lt;/strong&gt; – &lt;a href=&quot;https://worldsmart.com.au&quot;&gt;worldsmart.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Software Engineer / QA / Support&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Feb 2011 – Feb 2016&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Developed enterprise retail systems&lt;/li&gt;
+&lt;li&gt;Integrated POS modules with MYOB&lt;/li&gt;
+&lt;li&gt;Wrote internal documentation, trained staff&lt;/li&gt;
+&lt;li&gt;Provided QA, scripting, and hardware/software support&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;quickeasy-software-quickeasysoftware-com&quot;&gt;&lt;strong&gt;QuickEasy Software&lt;/strong&gt; – &lt;a href=&quot;https://quickeasysoftware.com&quot;&gt;quickeasysoftware.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Software Consultant&lt;/strong&gt;&lt;br&gt;&lt;em&gt;Nov 2008 – Nov 2009&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Implemented and supported QuickEasy ERP&lt;/li&gt;
+&lt;li&gt;Delivered SQL-based reports&lt;/li&gt;
+&lt;li&gt;Authored technical documentation&lt;/li&gt;
+&lt;li&gt;Maintained CMS and Ubuntu-based systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-testimonial&quot;&gt;💬 Testimonial&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“Dan is an absolute pleasure to work with and I would highly recommend him for any full stack web development position.&lt;br&gt;We worked together for just under a year and during that time Dan was always friendly, professional and went above and beyond when implementing code and designing systems.&lt;br&gt;He has a keen eye for where things can be improved and is always looking to find the optimal solution to any problem he faces.&lt;br&gt;He writes clean, well-structured code that is easy to maintain.&lt;br&gt;He takes advice and constructive criticism well and brings a positive attitude to every meeting.&lt;br&gt;Dan would be an invaluable addition to any software team.”&lt;/p&gt;
+&lt;p&gt;— &lt;em&gt;Alistair Doulin, CTO – Situ Systems Pty Ltd&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-contact&quot;&gt;📞 Contact&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;📱 Mobile:&lt;/strong&gt; 0432 583 063&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;📧 Email:&lt;/strong&gt; &lt;a href=&quot;mailto:danmarshall909@gmail.com&quot;&gt;danmarshall909@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;🔗 GitHub:&lt;/strong&gt; &lt;a href=&quot;https://github.com/DanMarshall909&quot;&gt;github.com/DanMarshall909&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;🔗 LinkedIn:&lt;/strong&gt; &lt;a href=&quot;https://linkedin.com/in/developerdan&quot;&gt;linkedin.com/in/developerdan&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;📝 Blog:&lt;/strong&gt; &lt;a href=&quot;https://blog.danmarshall.dev&quot;&gt;blog.danmarshall.dev&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;-final-words&quot;&gt;🙏 Final Words&lt;/h2&gt;
+&lt;p&gt;Thank you for taking the time to consider my profile.&lt;br&gt;Please feel free to keep this on file and reach out when an opportunity arises.&lt;/p&gt;
+&lt;p&gt;Warm regards,&lt;br&gt;&lt;strong&gt;Dan&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Avoid death by accountant - Get bankers rounding right!</title>
+      <link>https://blog.danmarshall.dev/articles/bankers-rounding/</link>
       <pubDate>Sun, 23 Feb 2025 10:00:00 +1000</pubDate>
-      <guid isPermaLink="true">http://localhost:8080/articles/bankers-rounding/</guid>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/bankers-rounding/</guid>
       <author></author>
       <description>&lt;p&gt;&lt;img src=&quot;/articles/bankers-rounding/death-by-accountant.jpg&quot; alt=&quot;Death by Accountant&quot;&gt;&lt;/p&gt;
 &lt;p&gt;If you work with financial data, you will run into the situation where you need to round calculated values to the nearest cent.&lt;/p&gt;
@@ -51,9 +941,9 @@
     </item>
     <item>
       <title>Markdown syntax</title>
-      <link>http://localhost:8080/articles/markdown-syntax/</link>
+      <link>https://blog.danmarshall.dev/articles/markdown-syntax/</link>
       <pubDate>Thu, 02 Feb 2012 10:00:00 +1000</pubDate>
-      <guid isPermaLink="true">http://localhost:8080/articles/markdown-syntax/</guid>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/markdown-syntax/</guid>
       <author></author>
       <description>&lt;p&gt;Full markdown syntax taken from John Gruber’s &lt;a href=&quot;http://daringfireball.net/projects/markdown/syntax&quot;&gt;Daring Fireball&lt;/a&gt;.
 Did you know that 9 out of 10 bloggers prefer to write in markdown?&lt;/p&gt;
@@ -89,7 +979,7 @@ Did you know that 9 out of 10 bloggers prefer to write in markdown?&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This document is itself written using Markdown; you
-can &lt;a href=&quot;http://localhost:8080/projects/markdown/syntax.text&quot;&gt;see the source for it by adding ‘.text’ to the URL&lt;/a&gt;.&lt;/p&gt;
+can &lt;a href=&quot;https://blog.danmarshall.dev/projects/markdown/syntax.text&quot;&gt;see the source for it by adding ‘.text’ to the URL&lt;/a&gt;.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 
