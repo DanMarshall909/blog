@@ -8,8 +8,8 @@
     </title>
     <link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-dark.min.css">
     <link rel="stylesheet" href="/css/main.css">
+    <link id="hljs-theme" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-light.min.css">
     <script>
       // Dark mode toggle functionality
       (function() {
@@ -108,13 +108,32 @@
     </footer>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
     <script>
+      // Theme management
+      function getTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
+      }
+      
+      function updateHljsTheme() {
+        const theme = getTheme();
+        const hljsLink = document.getElementById('hljs-theme');
+        const themeName = theme === 'dark' ? 'atom-one-dark' : 'atom-one-light';
+        hljsLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/${themeName}.min.css`;
+        // Re-highlight code blocks after theme change
+        if (typeof hljs !== 'undefined') {
+          document.querySelectorAll('pre code').forEach(block => {
+            hljs.highlightElement(block);
+          });
+        }
+      }
+      
       // Dark mode toggle function
       function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const currentTheme = getTheme();
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         localStorage.setItem('theme', newTheme);
         document.documentElement.setAttribute('data-theme', newTheme);
         updateThemeIcon(newTheme);
+        updateHljsTheme();
       }
       
       function updateThemeIcon(theme) {
@@ -129,10 +148,11 @@
         }
       }
       
-      // Initialize icon on page load
+      // Initialize on page load
       document.addEventListener('DOMContentLoaded', function() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const currentTheme = getTheme();
         updateThemeIcon(currentTheme);
+        updateHljsTheme();
         // Highlight code blocks
         if (typeof hljs !== 'undefined') {
           hljs.highlightAll();
