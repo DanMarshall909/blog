@@ -14,18 +14,12 @@
 
     /* Derived overlay colors */
     --color-on-gradient: var(--color-light);
-    --color-on-gradient-soft: rgba(223, 222, 222, 0.95);
-    --color-on-gradient-soft-mix: color-mix(in srgb, var(--color-light) 95%, transparent);
-    --color-on-gradient-muted: rgba(223, 222, 222, 0.75);
-    --color-on-gradient-muted-mix: color-mix(in srgb, var(--color-light) 75%, transparent);
-    --toggle-bg: rgba(223, 222, 222, 0.9);
-    --toggle-bg-mix: color-mix(in srgb, var(--color-light) 90%, transparent);
-    --toggle-border-color: rgba(0, 0, 0, 0.1);
-    --toggle-border-color-mix: color-mix(in srgb, var(--color-dark) 10%, transparent);
-    --toggle-bg-dark: rgba(0, 0, 0, 0.7);
-    --toggle-bg-dark-mix: color-mix(in srgb, var(--color-dark) 70%, transparent);
-    --toggle-border-color-dark: rgba(223, 222, 222, 0.2);
-    --toggle-border-color-dark-mix: color-mix(in srgb, var(--color-light) 20%, transparent);
+    --color-on-gradient-soft: rgb(from var(--color-light) r g b / 0.95);
+    --color-on-gradient-muted: rgb(from var(--color-light) r g b / 0.75);
+    --toggle-bg: rgb(from var(--color-light) r g b / 0.9);
+    --toggle-border-color: rgb(from var(--color-dark) r g b / 0.1);
+    --toggle-bg-dark: rgb(from var(--color-dark) r g b / 0.7);
+    --toggle-border-color-dark: rgb(from var(--color-light) r g b / 0.2);
     --color-print: var(--color-dark);
 
     /* Derived palette */
@@ -335,8 +329,7 @@ td {
 
 .article:hover {
     transform: translateY(-2px);
-    background: rgba(67, 88, 43, 0.05);
-    background: color-mix(in srgb, var(--color-accent) 5%, var(--color-surface));
+    background: rgb(from var(--color-accent) r g b / 0.05);
 }
 
 .article header {
@@ -577,8 +570,7 @@ footer .nav a {
 }
 
 footer .nav a:hover {
-    background: rgba(67, 88, 43, 0.1);
-    background: color-mix(in srgb, var(--color-accent-hover) 10%, var(--color-gradient-start));
+    background: rgb(from var(--color-accent-hover) r g b / 0.1);
     transform: translateY(-1px);
 }
 
