@@ -24,38 +24,46 @@ University of South Africa (UNISA)
 
 ### Back-end Development
 
-- **C# / .NET**: Expert knowledge, .NET Framework 3.5 through .NET Core 9
-- **JVM Stack**: Spring Boot, Kotlin, Java
-- **Architecture**: Microservices, event-driven architecture, DI, CQRS, DDD, Clean Architecture
-- **Azure**: App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra
-- **AWS**: Bedrock, ECS, SQS, S3
-- **Testing**: NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, TDD, mutation and integration testing
-- **API Development**: ASP.NET WebAPI, FastEndpoints, GraphQL, Spring Boot
-- **Messaging**: MassTransit with Azure Service Bus and event streaming
-- **Data Access**: Entity Framework Core, Dapper, raw SQL
-- **Databases**: SQL Server, PostgreSQL, MySQL
-- **Security**: ASP.NET Identity, OAuth2, JWT, Microsoft.Identity, Azure AD / Entra ID
-- **Libraries**: MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.NET, OpenAPI
-- **DevOps**: CI/CD with Azure DevOps, TeamCity, Octopus Deploy, PowerShell, Docker
-- **Observability**: OpenTelemetry, Seq, OpenSearch, Application Insights SDK, Serilog Sinks
+| Area | Details |
+| ------ | ------- |
+| **C# / .NET** | Expert knowledge, .NET Framework 3.5 through .NET Core 9 |
+| **JVM Stack** | Spring Boot, Kotlin, Java |
+| **Architecture** | Microservices, event-driven architecture, DI, CQRS, DDD, Clean Architecture |
+| **Azure** | App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra |
+| **AWS** | Bedrock, ECS, SQS, S3 |
+| **Testing** | NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, TDD, mutation and integration testing |
+| **API Development** | ASP.NET WebAPI, FastEndpoints, GraphQL, Spring Boot |
+| **Messaging** | MassTransit with Azure Service Bus and event streaming |
+| **Data Access** | Entity Framework Core, Dapper, raw SQL |
+| **Databases** | SQL Server, PostgreSQL, MySQL |
+| **Security** | ASP.NET Identity, OAuth2, JWT, Microsoft.Identity, Azure AD / Entra ID |
+| **Libraries** | MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.NET, OpenAPI |
+| **DevOps** | CI/CD with Azure DevOps, TeamCity, Octopus Deploy, PowerShell, Docker |
+| **Observability** | OpenTelemetry, Seq, OpenSearch, Application Insights SDK, Serilog Sinks |
 
 ### AI/ML Integration
 
-- **Production AI Systems**: OpenAI Platform, Claude API, LangChain4j, prompt engineering
-- **Applications**: Automation, multimodal analysis, guardrails
-- **Platforms**: AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers
+| Area | Details |
+| ------ | ------- |
+| **Production AI Systems** | OpenAI Platform, Claude API, LangChain4j, prompt engineering |
+| **Applications** | Automation, multimodal analysis, guardrails |
+| **Platforms** | AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers |
 
 ### Front-end Development
 
-- **Frameworks**: TypeScript/JavaScript with React, Angular, Vite, Vitest, and ASP.NET MVC
-- **UI Design**: CSS, Tailwind CSS, Material UI
+| Area | Details |
+| ------ | ------- |
+| **Frameworks** | TypeScript/JavaScript with React, Angular, Vite, Vitest, and ASP.NET MVC |
+| **UI Design** | CSS, Tailwind CSS, Material UI |
 
 ### General
 
-- **Version Control**: Git, GitHub, Bitbucket, Azure Repos
-- **Agile Tools**: Jira, Confluence, Azure DevOps Boards, Teams, Slack
-- **Practices**: TDD, pair/mob programming, code review, mentorship
-- **Operating Systems**: macOS, Windows, Linux, iOS, Android
+| Area | Details |
+| ------ | ------- |
+| **Version Control** | Git, GitHub, Bitbucket, Azure Repos |
+| **Agile Tools** | Jira, Confluence, Azure DevOps Boards, Teams, Slack |
+| **Practices** | TDD, pair/mob programming, code review, mentorship |
+| **Operating Systems** | macOS, Windows, Linux, iOS, Android |
 
 ---
 

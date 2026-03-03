@@ -52,20 +52,6 @@
   --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark mode variables - Earth Tones */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: #f5f1ea;
-    --color-secondary: #d4c4a8;
-    --color-muted: #a89b82;
-    --color-background: #1c1814;
-    --color-surface: #2a251f;
-    --color-border: #3d342a;
-    --color-code-bg: #252017;
-    --color-gradient-start: #8b5a3c;
-    --color-gradient-end: #5d3e29;
-  }
-}
 
 [data-theme="dark"] {
   --color-primary: #f5f1ea;
@@ -264,10 +250,6 @@ a:focus {
 [data-theme="dark"] .theme-toggle {
   background: rgba(0, 0, 0, 0.7);
   border-color: rgba(255, 255, 255, 0.2);
-}
-
-.theme-toggle svg {
-  display: none;
 }
 
 /* Main content */
