@@ -14,6 +14,6 @@ Write-Host "Committing changes..."
 git commit -m "Publish updated site $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 
 Write-Host "Pushing to GitHub..."
-git push origin main
+git push origin gh-pages
 
 Write-Host "Done! Your site should be published via GitHub Pages."
