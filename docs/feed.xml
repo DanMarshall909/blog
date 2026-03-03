@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Technical Scratches</title>
-    <atom:link href="http://localhost:8080/feed.xml" rel="self" type="application/rss+xml"></atom:link>
-    <link>http://localhost:8080</link>
+    <atom:link href="https://blog.danmarshall.dev/feed.xml" rel="self" type="application/rss+xml"></atom:link>
+    <link>https://blog.danmarshall.dev</link>
     <description>Thoughts on software engineering and life as a developer</description>
     <pubDate>Mon, 02 Mar 2026 10:00:00 +1000</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
     <item>
       <title>Resume – Dan Marshall</title>
-      <link>http://localhost:8080/articles/resume/</link>
+      <link>https://blog.danmarshall.dev/articles/resume/</link>
       <pubDate>Mon, 02 Mar 2026 10:00:00 +1000</pubDate>
-      <guid isPermaLink="true">http://localhost:8080/articles/resume/</guid>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/resume/</guid>
       <author></author>
       <description>&lt;h1 id=&quot;dan-marshall&quot;&gt;Dan Marshall&lt;/h1&gt;
 &lt;p&gt;Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, and production AI integration. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.&lt;/p&gt;
@@ -172,9 +172,9 @@ University of South Africa (UNISA)&lt;/p&gt;
     </item>
     <item>
       <title>Bulletproof code quality in the age of vibe coding</title>
-      <link>http://localhost:8080/articles/bulletproof-ai-assisted-development/</link>
+      <link>https://blog.danmarshall.dev/articles/bulletproof-ai-assisted-development/</link>
       <pubDate>Mon, 07 Jul 2025 10:00:00 +1000</pubDate>
-      <guid isPermaLink="true">http://localhost:8080/articles/bulletproof-ai-assisted-development/</guid>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/bulletproof-ai-assisted-development/</guid>
       <author></author>
       <description>&lt;p&gt;&lt;em&gt;A comprehensive guide to implementing multi-layered quality assurance that prevents CI failures, enforces development workflows, and maintains architectural excellence&lt;/em&gt;&lt;/p&gt;
 &lt;hr&gt;
@@ -751,9 +751,9 @@ issues often compound over time, having a system that actively prevents these pr
     </item>
     <item>
       <title>Dan Marshall – Developer Profile</title>
-      <link>http://localhost:8080/articles/dan-profile/</link>
+      <link>https://blog.danmarshall.dev/articles/dan-profile/</link>
       <pubDate>Sun, 15 Jun 2025 10:00:00 +1000</pubDate>
-      <guid isPermaLink="true">http://localhost:8080/articles/dan-profile/</guid>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/dan-profile/</guid>
       <author></author>
       <description>&lt;h1 id=&quot;dan-marshall-developer-profile&quot;&gt;Dan Marshall – Developer Profile&lt;/h1&gt;
 &lt;p&gt;With over a decade of experience in software engineering across diverse domains, I am a passionate and confident developer committed to building clean, self-documenting, rigorously tested, and sustainable software. I take &lt;em&gt;The Clean Coder&lt;/em&gt; by Robert C. Martin as my professional code of conduct and deeply value the principles of the Agile Manifesto.&lt;/p&gt;
@@ -900,9 +900,9 @@ issues often compound over time, having a system that actively prevents these pr
     </item>
     <item>
       <title>Avoid death by accountant - Get bankers rounding right!</title>
-      <link>http://localhost:8080/articles/bankers-rounding/</link>
+      <link>https://blog.danmarshall.dev/articles/bankers-rounding/</link>
       <pubDate>Sun, 23 Feb 2025 10:00:00 +1000</pubDate>
-      <guid isPermaLink="true">http://localhost:8080/articles/bankers-rounding/</guid>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/bankers-rounding/</guid>
       <author></author>
       <description>&lt;p&gt;&lt;img src=&quot;/articles/bankers-rounding/death-by-accountant.jpg&quot; alt=&quot;Death by Accountant&quot;&gt;&lt;/p&gt;
 &lt;p&gt;If you work with financial data, you will run into the situation where you need to round calculated values to the nearest cent.&lt;/p&gt;
@@ -941,9 +941,9 @@ issues often compound over time, having a system that actively prevents these pr
     </item>
     <item>
       <title>Markdown syntax</title>
-      <link>http://localhost:8080/articles/markdown-syntax/</link>
+      <link>https://blog.danmarshall.dev/articles/markdown-syntax/</link>
       <pubDate>Thu, 02 Feb 2012 10:00:00 +1000</pubDate>
-      <guid isPermaLink="true">http://localhost:8080/articles/markdown-syntax/</guid>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/markdown-syntax/</guid>
       <author></author>
       <description>&lt;p&gt;Full markdown syntax taken from John Gruber’s &lt;a href=&quot;http://daringfireball.net/projects/markdown/syntax&quot;&gt;Daring Fireball&lt;/a&gt;.
 Did you know that 9 out of 10 bloggers prefer to write in markdown?&lt;/p&gt;
@@ -979,7 +979,7 @@ Did you know that 9 out of 10 bloggers prefer to write in markdown?&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This document is itself written using Markdown; you
-can &lt;a href=&quot;http://localhost:8080/projects/markdown/syntax.text&quot;&gt;see the source for it by adding ‘.text’ to the URL&lt;/a&gt;.&lt;/p&gt;
+can &lt;a href=&quot;https://blog.danmarshall.dev/projects/markdown/syntax.text&quot;&gt;see the source for it by adding ‘.text’ to the URL&lt;/a&gt;.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
 

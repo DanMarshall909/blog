@@ -1,6 +1,6 @@
 {
   "locals": {
-    "url": "http://localhost:8080",
+    "url": "https://blog.danmarshall.dev",
     "name": "Technical Scratches",
     "owner": "Dan Marshall",
     "description": "Thoughts on software engineering and life as a developer"
