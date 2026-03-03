@@ -4,6 +4,7 @@ description: "A detailed overview of Dan Marshall's experience, philosophy, and 
 date: 2025-06-15
 author: "Dan Marshall"
 template: article.pug
+heroImage: "articles/dan-profile/death-by-accountant.jpg"
 tags:
   ["profile", "software engineering", "developer", "C#", ".NET", "AI", "Agile"]
 ---
