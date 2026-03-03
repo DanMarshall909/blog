@@ -5,9 +5,171 @@
     <atom:link href="http://localhost:8080/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>http://localhost:8080</link>
     <description>Thoughts on software engineering and life as a developer</description>
-    <pubDate>Mon, 07 Jul 2025 10:00:00 +1000</pubDate>
+    <pubDate>Mon, 02 Mar 2026 10:00:00 +1000</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Resume – Dan Marshall</title>
+      <link>http://localhost:8080/articles/resume/</link>
+      <pubDate>Mon, 02 Mar 2026 10:00:00 +1000</pubDate>
+      <guid isPermaLink="true">http://localhost:8080/articles/resume/</guid>
+      <author></author>
+      <description>&lt;h1 id=&quot;dan-marshall&quot;&gt;Dan Marshall&lt;/h1&gt;
+&lt;p&gt;Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, and production AI integration. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;qualifications&quot;&gt;Qualifications&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Bachelor of Science&lt;/strong&gt; (Mathematics and Computer Science)
+University of South Africa (UNISA)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;skills&quot;&gt;Skills&lt;/h2&gt;
+&lt;h3 id=&quot;back-end-development&quot;&gt;Back-end Development&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;C# / .NET&lt;/strong&gt;: Expert knowledge, .NET Framework 3.5 through .NET Core 9&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;JVM Stack&lt;/strong&gt;: Spring Boot, Kotlin, Java&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Architecture&lt;/strong&gt;: Microservices, event-driven architecture, DI, CQRS, DDD, Clean Architecture&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure&lt;/strong&gt;: App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AWS&lt;/strong&gt;: Bedrock, ECS, SQS, S3&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Testing&lt;/strong&gt;: NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, TDD, mutation and integration testing&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;API Development&lt;/strong&gt;: ASP.NET WebAPI, FastEndpoints, GraphQL, Spring Boot&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Messaging&lt;/strong&gt;: MassTransit with Azure Service Bus and event streaming&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data Access&lt;/strong&gt;: Entity Framework Core, Dapper, raw SQL&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Databases&lt;/strong&gt;: SQL Server, PostgreSQL, MySQL&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Security&lt;/strong&gt;: ASP.NET Identity, OAuth2, JWT, Microsoft.Identity, Azure AD / Entra ID&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Libraries&lt;/strong&gt;: MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.NET, OpenAPI&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DevOps&lt;/strong&gt;: CI/CD with Azure DevOps, TeamCity, Octopus Deploy, PowerShell, Docker&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Observability&lt;/strong&gt;: OpenTelemetry, Seq, OpenSearch, Application Insights SDK, Serilog Sinks&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;ai-ml-integration&quot;&gt;AI/ML Integration&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Production AI Systems&lt;/strong&gt;: OpenAI Platform, Claude API, LangChain4j, prompt engineering&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Applications&lt;/strong&gt;: Automation, multimodal analysis, guardrails&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Platforms&lt;/strong&gt;: AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;front-end-development&quot;&gt;Front-end Development&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Frameworks&lt;/strong&gt;: TypeScript/JavaScript with React, Angular, Vite, Vitest, and ASP.NET MVC&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UI Design&lt;/strong&gt;: CSS, Tailwind CSS, Material UI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;general&quot;&gt;General&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Version Control&lt;/strong&gt;: Git, GitHub, Bitbucket, Azure Repos&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Agile Tools&lt;/strong&gt;: Jira, Confluence, Azure DevOps Boards, Teams, Slack&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Practices&lt;/strong&gt;: TDD, pair/mob programming, code review, mentorship&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Operating Systems&lt;/strong&gt;: macOS, Windows, Linux, iOS, Android&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;employment&quot;&gt;Employment&lt;/h2&gt;
+&lt;h3 id=&quot;reapit-reapit-com&quot;&gt;Reapit — &lt;a href=&quot;https://www.reapit.com&quot;&gt;reapit.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior AI Engineer&lt;/strong&gt; | September 2025 – February 2026&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Workshopped, built, and deployed an AI-driven property inspection system using AWS Bedrock, generating structured assessment reports constrained by business rules.&lt;/li&gt;
+&lt;li&gt;Forked the LangChain4j framework to add Bedrock guardrail support when unavailable upstream. Modular architecture enabled a seamless swap to the official implementation within one day when released.&lt;/li&gt;
+&lt;li&gt;Optimised LLM costs through strategic model selection balancing accuracy, features, performance, and token usage.&lt;/li&gt;
+&lt;li&gt;Advised cross-functional teams on practical AI use cases.&lt;/li&gt;
+&lt;li&gt;Self-directed adoption of the Kotlin/Spring Boot/AWS ecosystem, delivering production features while supporting the team with JVM implementation patterns.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;ract-royal-automobile-club-of-tasmania-ract-com-au&quot;&gt;RACT (Royal Automobile Club of Tasmania) — &lt;a href=&quot;https://www.ract.com.au&quot;&gt;ract.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Software Engineer – Back-end&lt;/strong&gt; | June 2024 – July 2025&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applied Clean Architecture and DDD to enhance testability, scalability, and code clarity.&lt;/li&gt;
+&lt;li&gt;Involved in pilot program to develop AI coding rulesets and best practices.&lt;/li&gt;
+&lt;li&gt;Migrated and modernised core components from .NET Framework 4.7.2 to .NET 9.&lt;/li&gt;
+&lt;li&gt;Built resilient microservices using MassTransit, WebAPI, GraphQL, and SQL Server.&lt;/li&gt;
+&lt;li&gt;Collaborated with cross-functional teams to deliver scalable, well-tested features aligned with business requirements.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;national-grower-register-ngr-com-au&quot;&gt;National Grower Register — &lt;a href=&quot;https://www.ngr.com.au&quot;&gt;ngr.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Full-Stack Engineer&lt;/strong&gt; | November 2023 – May 2024&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Co-developed a modular online form solution (Flexidocs) using Clean Architecture and DDD, replacing an outdated system.&lt;/li&gt;
+&lt;li&gt;Designed modern functional React 18 components with TypeScript and Tailwind CSS.&lt;/li&gt;
+&lt;li&gt;Provided guidance on C# programming, OOP, AI tools, and testing best practices.&lt;/li&gt;
+&lt;li&gt;Researched and selected sustainable technologies to support long-term goals.&lt;/li&gt;
+&lt;li&gt;Improved legacy code with unit test coverage, enabling safe refactoring.&lt;/li&gt;
+&lt;li&gt;Contributed to technical documentation and Agile processes.&lt;/li&gt;
+&lt;li&gt;Mentored junior staff.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;cloudmonitor-cloudmonitor-ai&quot;&gt;CloudMonitor — &lt;a href=&quot;https://www.cloudmonitor.ai&quot;&gt;cloudmonitor.ai&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Lead Azure / Back-end Engineer&lt;/strong&gt; | June 2023 – November 2023&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Conceptualised, developed, and maintained features running on a serverless platform.&lt;/li&gt;
+&lt;li&gt;Promoted TDD, SOLID principles, Clean Architecture, and peer programming.&lt;/li&gt;
+&lt;li&gt;Introduced Agile processes, leading morning standups and mentoring junior developers.&lt;/li&gt;
+&lt;li&gt;Azure DevOps pipeline maintenance and troubleshooting.&lt;/li&gt;
+&lt;li&gt;Introduced Entity Framework, OpenAPI, xUnit, and JetBrains Rider.&lt;/li&gt;
+&lt;li&gt;Presented company-wide tech talks and engaged with external stakeholders.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;vald-vald-com&quot;&gt;VALD — &lt;a href=&quot;https://www.vald.com&quot;&gt;vald.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Software Engineer – Back-end&lt;/strong&gt; | January 2023 – May 2023&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Maintained, refactored, and contributed to various legacy REST APIs and microservices.&lt;/li&gt;
+&lt;li&gt;Contributed to the integration testing framework.&lt;/li&gt;
+&lt;li&gt;Promoted TDD and peer programming.&lt;/li&gt;
+&lt;li&gt;Chaired and contributed to various Agile ceremonies.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;situ-systems-situsystems-com&quot;&gt;Situ Systems — &lt;a href=&quot;https://www.situsystems.com&quot;&gt;situsystems.com&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Senior Software Engineer – Full-Stack&lt;/strong&gt; | November 2021 – October 2022&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Authored numerous front-end and back-end features.&lt;/li&gt;
+&lt;li&gt;Substantially increased test coverage and improved testing methodologies.&lt;/li&gt;
+&lt;li&gt;Tuned SQL queries, dramatically improving performance in critical reports.&lt;/li&gt;
+&lt;li&gt;Used Pulumi to automate deployment of infrastructure.&lt;/li&gt;
+&lt;li&gt;Implemented CI workflows in Azure DevOps.&lt;/li&gt;
+&lt;li&gt;Contributed to internal development tools.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;hub24-limited-hub24-com-au&quot;&gt;HUB24 Limited — &lt;a href=&quot;https://www.hub24.com.au&quot;&gt;hub24.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Data and Full-Stack Engineer&lt;/strong&gt; | December 2019 – November 2021&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Authored a sophisticated and successful system for cleaning, transforming, and validating fund transfers between superannuation funds.&lt;/li&gt;
+&lt;li&gt;Maintained strong working relationships with DBAs, architects, BAs, clients (e.g. Bank of New York), and senior management.&lt;/li&gt;
+&lt;li&gt;Provided emergency on-call support across the organisation and managed client infrastructure, triaging and fixing or escalating issues to meet strict SLAs.&lt;/li&gt;
+&lt;li&gt;Updated legacy web applications to deploy using Azure Pipelines.&lt;/li&gt;
+&lt;li&gt;Championed TDD and automated integration testing.&lt;/li&gt;
+&lt;li&gt;Authored, maintained, and supported numerous APIs and ETL projects.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;chandler-personalised-communications-chandler-com-au&quot;&gt;Chandler Personalised Communications — &lt;a href=&quot;https://www.chandler.com.au&quot;&gt;chandler.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Data and Full-Stack Engineer&lt;/strong&gt; | March 2016 – December 2019&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Worked within an ISO 27001 certified organisation meeting strict security standards.&lt;/li&gt;
+&lt;li&gt;Built and maintained web applications servicing government, public utility, and financial sectors.&lt;/li&gt;
+&lt;li&gt;Web design using ASP.NET, Bootstrap, CSS, jQuery, and JavaScript.&lt;/li&gt;
+&lt;li&gt;Database design in Azure SQL Server.&lt;/li&gt;
+&lt;li&gt;Authored SSIS ETL packages to cleanse and process superannuation member data for web, print, and email campaigns.&lt;/li&gt;
+&lt;li&gt;Liaised with technical and non-technical stakeholders to develop bespoke solutions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;worldsmart-pos-solutions-worldsmart-com-au&quot;&gt;WorldSmart POS Solutions — &lt;a href=&quot;https://www.worldsmart.com.au&quot;&gt;worldsmart.com.au&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Software Engineer, QA and Support&lt;/strong&gt; | February 2011 – February 2016&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Developed and maintained enterprise software for retail groups.&lt;/li&gt;
+&lt;li&gt;Integrated financial, CRM, and stock modules with MYOB.&lt;/li&gt;
+&lt;li&gt;Provided QA via automated scripting and manual testing.&lt;/li&gt;
+&lt;li&gt;Authored technical and end-user documentation and provided internal training.&lt;/li&gt;
+&lt;li&gt;Maintained internal support utilities and automated scripts.&lt;/li&gt;
+&lt;li&gt;Installed and supported Point of Sale hardware and software.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;contact&quot;&gt;Contact&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Email&lt;/strong&gt;: &lt;a href=&quot;mailto:danmarshall909@gmail.com&quot;&gt;danmarshall909@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a href=&quot;https://github.com/DanMarshall909&quot;&gt;github.com/DanMarshall909&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;LinkedIn&lt;/strong&gt;: &lt;a href=&quot;https://www.linkedin.com/in/developerdan&quot;&gt;linkedin.com/in/developerdan&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;p&gt;Available on request.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;*”Dan is an absolute pleasure to work with and I would highly recommend him for any full-stack web development position. We worked together for just under a year and during that time Dan was always friendly, professional and went above and beyond when implementing code and designing systems. He has a keen eye for where things can be improved and is always looking to find the optimal solution to any problem he faces. He writes clean, well-structured code that is easy to maintain. He takes advice and constructive criticism well and brings a positive attitude to every meeting. Dan would be an invaluable addition to any software team.”*&lt;/p&gt;
+&lt;p&gt;— &lt;strong&gt;Alistair Doulin&lt;/strong&gt;, CTO, Situ Systems Pty Ltd&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
     <item>
       <title>Bulletproof code quality in the age of vibe coding</title>
       <link>http://localhost:8080/articles/bulletproof-ai-assisted-development/</link>

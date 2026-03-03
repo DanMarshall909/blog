@@ -4,7 +4,9 @@
       "Bash(*)",
       "Bash(npm run build:*)",
       "Bash(npx:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "mcp__serena__find_file",
+      "mcp__serena__search_for_pattern"
     ],
     "deny": []
   }
