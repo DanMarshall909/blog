@@ -1,10 +1,10 @@
 ---
-title: "Resume – Dan Marshall"
+title: "Resume"
 description: "Senior full-stack engineer with 11+ years of experience in .NET, JVM, microservices, and production AI systems."
 date: 2026-03-02
 author: "Dan Marshall"
 template: article.pug
-tags: []
+tags: [resume, career, fullstack, dotnet, csharp, azure, ai, testing, microservices]
 ---
 
 # Dan Marshall
