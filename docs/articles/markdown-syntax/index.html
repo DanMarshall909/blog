@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width">
     <title>Markdown syntax - Technical Scratches
     </title>
-    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
+    <link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
     <link rel="stylesheet" href="/css/main.css">
+    <link id="hljs-theme" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-light.min.css">
     <script>
       // Dark mode toggle functionality
       (function() {
@@ -24,30 +25,13 @@
   </head>
   <body class="article-detail">
     <!-- Dark mode toggle button-->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-      <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-      </svg>
-      <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-      </svg>
-    </button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
     <header class="header">
       <div class="content-wrap">
         <div class="title-with-image">
           <h1>Markdown syntax</h1>
         </div>
-        <div class="article-meta">
-          <p class="author">Written by&nbsp;<span class="author">John Gruber</span>
-          </p>
+        <div class="article-meta">   
           <p class="publish-date">February 02, 2012</p>
         </div>
       </div>
@@ -638,36 +622,46 @@ _   underscore
 
         </section>
         <section class="copy">
-          <p>&copy; 2025 Dan Marshall &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
+          <p>&copy; 2026 Dan Marshall &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
         </section>
       </div>
     </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
     <script>
-      // Dark mode toggle function
-      function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('theme', newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
-        updateThemeIcon(newTheme);
+      // Theme management
+      function getTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
       }
       
-      function updateThemeIcon(theme) {
-        const sunIcon = document.querySelector('.sun-icon');
-        const moonIcon = document.querySelector('.moon-icon');
-        if (theme === 'dark') {
-          sunIcon.style.display = 'none';
-          moonIcon.style.display = 'block';
-        } else {
-          sunIcon.style.display = 'block';
-          moonIcon.style.display = 'none';
+      function updateHljsTheme() {
+        const theme = getTheme();
+        const hljsLink = document.getElementById('hljs-theme');
+        const themeName = theme === 'dark' ? 'atom-one-dark' : 'atom-one-light';
+        hljsLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/${themeName}.min.css`;
+        // Re-highlight code blocks after theme change
+        if (typeof hljs !== 'undefined') {
+          document.querySelectorAll('pre code').forEach(block => {
+            hljs.highlightElement(block);
+          });
         }
       }
       
-      // Initialize icon on page load
+      // Dark mode toggle function
+      function toggleTheme() {
+        const currentTheme = getTheme();
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+        updateHljsTheme();
+      }
+      
+      // Initialize on page load
       document.addEventListener('DOMContentLoaded', function() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        updateThemeIcon(currentTheme);
+        updateHljsTheme();
+        // Highlight code blocks
+        if (typeof hljs !== 'undefined') {
+          hljs.highlightAll();
+        }
       });
     </script>
   </body>

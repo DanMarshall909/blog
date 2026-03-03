@@ -11,10 +11,7 @@ block header
   include author
   .title-with-image
     h1= page.title
-  .article-meta
-    p.author
-      | Written by&nbsp;
-      +author(page.metadata.author)
+  .article-meta    
     if page.date
       p.publish-date= moment.utc(page.date).format('MMMM DD, YYYY')
     if page.metadata.tags && page.metadata.tags.length > 0

@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width">
     <title>Bulletproof code quality in the age of vibe coding - Technical Scratches
     </title>
-    <link rel="alternate" href="http://localhost:8080/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
+    <link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
     <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
     <link rel="stylesheet" href="/css/main.css">
+    <link id="hljs-theme" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-light.min.css">
     <script>
       // Dark mode toggle functionality
       (function() {
@@ -24,30 +25,13 @@
   </head>
   <body class="article-detail">
     <!-- Dark mode toggle button-->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-      <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-      </svg>
-      <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-      </svg>
-    </button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
     <header class="header">
       <div class="content-wrap">
         <div class="title-with-image">
           <h1>Bulletproof code quality in the age of vibe coding</h1>
         </div>
-        <div class="article-meta">
-          <p class="author">Written by&nbsp;<span class="author">Dan Marshall</span>
-          </p>
+        <div class="article-meta">   
           <p class="publish-date">July 07, 2025</p>
         </div>
       </div>
@@ -188,12 +172,17 @@ Before starting <span class="caps">ANY</span> development task, you <span class=
 <span class="bullet">4. </span><span class="strong">**Get explicit approval**</span>: If user wants to start new work with open PRs
 
 <span class="section">#### Decision Matrix</span></code></pre>
-<p><span class="caps">IF</span> open PRs exist:<br> <span class="caps">IF</span> <span class="caps">PR</span> has failing <span class="caps">CI</span>/<span class="caps">CD</span>:<br> ✅ Fix the existing <span class="caps">PR</span> first<br> ❌ <span class="caps">DO</span> <span class="caps">NOT</span> start new<span class="widont">&nbsp;</span>work</p>
-<p><span class="caps">IF</span> <span class="caps">PR</span> needs review/merge:<br> ✅ Get user decision: merge existing or start new<br> ❌ <span class="caps">DO</span> <span class="caps">NOT</span> assume user wants new<span class="widont">&nbsp;</span>work</p>
+<p><span class="caps">IF</span> open PRs exist:
+ <span class="caps">IF</span> <span class="caps">PR</span> has failing <span class="caps">CI</span>/<span class="caps">CD</span>:
+ ✅ Fix the existing <span class="caps">PR</span> first
+ ❌ <span class="caps">DO</span> <span class="caps">NOT</span> start new<span class="widont">&nbsp;</span>work</p>
+<p><span class="caps">IF</span> <span class="caps">PR</span> needs review/merge:
+ ✅ Get user decision: merge existing or start new
+ ❌ <span class="caps">DO</span> <span class="caps">NOT</span> assume user wants new<span class="widont">&nbsp;</span>work</p>
 <pre><code>
 When AI assistants (like Claude) work on the project, they automatically enforce these rules. The system responds with structured prompts:
 </code></pre><p>⚠️ <strong><span class="caps">OPEN</span> <span class="caps">PR</span> <span class="caps">DETECTED</span></strong>: I found 2 open<span class="widont">&nbsp;</span><span class="caps">PR</span>(s):</p>
-<p>#39: feat: implement session management (❌ 3 failing<span class="widont">&nbsp;</span>checks)  </p>
+<p>#39: feat: implement session management (❌ 3 failing<span class="widont">&nbsp;</span>checks)</p>
 <p> #41: fix: update user preferences <span class="caps">API</span> (🟡 2 pending<span class="widont">&nbsp;</span>checks)</p>
 <p><strong><span class="caps">RECOMMENDED</span> <span class="caps">ACTION</span></strong>:</p>
 <ul>
@@ -204,19 +193,17 @@ When AI assistants (like Claude) work on the project, they automatically enforce
 <ol>
 <li>Fix the existing <span class="caps">PR</span> issues first? ✅<span class="widont">&nbsp;</span>(Recommended)</li>
 <li>Help merge the ready PRs? ✅<span class="widont">&nbsp;</span>(Recommended)</li>
-<li>Start new work anyway? ⚠️ (Requires explicit<span class="widont">&nbsp;</span>approval)</li>
+<li>Start new work anyway? ⚠️ (Requires explicit approval)<span class="widont">&nbsp;</span>&#8220;`</li>
 </ol>
-<pre><code>
-### ADHD-Friendly Development Rules
-
-The agentic system includes specific support for developers with ADHD:
-
-```markdown
-### ADHD Support (MANDATORY)
-- **Rationale-first explanations**: Always explain WHY before WHAT
-- **30-minute break reminders**: Proactive breaks with housekeeping options
-- **Focus tracking**: Help maintain attention on current task
-- **Depth-on-demand**: Provide details only when requested</code></pre><p>This transforms the typical development experience from “figure it out yourself” to “guided, supportive, and<span class="widont">&nbsp;</span>sustainable.”</p>
+<h3 id="adhd-friendly-development-rules"><span class="caps">ADHD</span>-Friendly Development Rules</h3>
+<p>The agentic system includes specific support for developers with<span class="widont">&nbsp;</span><span class="caps">ADHD</span>:</p>
+<pre><code class="language-markdown"><span class="section">### <span class="caps">ADHD</span> Support (<span class="caps">MANDATORY</span>)</span>
+<span class="bullet">- </span><span class="strong">**Rationale-first explanations**</span>: Always explain <span class="caps">WHY</span> before <span class="caps">WHAT</span>
+<span class="bullet">- </span><span class="strong">**30-minute break reminders**</span>: Proactive breaks with housekeeping options
+<span class="bullet">- </span><span class="strong">**Focus tracking**</span>: Help maintain attention on current task
+<span class="bullet">- </span><span class="strong">**Depth-on-demand**</span>: Provide details only when requested
+`</code></pre>
+<p>This transforms the typical development experience from “figure it out yourself” to “guided, supportive, and<span class="widont">&nbsp;</span>sustainable.”</p>
 <h3 id="architectural-governance">Architectural Governance</h3>
 <p>The rules system enforces architectural patterns<span class="widont">&nbsp;</span>automatically:</p>
 <pre><code class="language-markdown"><span class="section">### <span class="caps">CQRS</span> + FastEndpoints Architecture Rules</span>
@@ -245,8 +232,7 @@ public class ExtractedTask
     public string TaskDescription { get; set; }
     public DateTime? DueDate { get; set; }
     // No <span class="caps">PII</span> or original content
-}
-```</span></code></pre>
+}</span></code></pre>
 <pre><code>
 ## Layer 3: Comprehensive Quality Gates
 
@@ -343,7 +329,8 @@ analyze_code_coverage() {
     else
         add_check_result &quot;Code Coverage&quot; &quot;FAIL&quot; &quot;${coverage_percent}% (below 60% minimum)&quot;
     fi
-}</code></pre><h3 id="mutation-testing-integration">Mutation Testing Integration</h3>
+}
+`</code></pre><h3 id="mutation-testing-integration">Mutation Testing Integration</h3>
 <p>The quality gates include mutation testing using Stryker.<span class="caps">NET</span>, which validates the quality of your tests by introducing small bugs and checking if tests catch<span class="widont">&nbsp;</span>them:</p>
 <pre><code class="language-json">{
   <span class="attr">"stryker-config"</span>: {
@@ -637,36 +624,46 @@ issues often compound over time, having a system that actively prevents these pr
 
         </section>
         <section class="copy">
-          <p>&copy; 2025 Dan Marshall &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
+          <p>&copy; 2026 Dan Marshall &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
         </section>
       </div>
     </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
     <script>
-      // Dark mode toggle function
-      function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('theme', newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
-        updateThemeIcon(newTheme);
+      // Theme management
+      function getTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'light';
       }
       
-      function updateThemeIcon(theme) {
-        const sunIcon = document.querySelector('.sun-icon');
-        const moonIcon = document.querySelector('.moon-icon');
-        if (theme === 'dark') {
-          sunIcon.style.display = 'none';
-          moonIcon.style.display = 'block';
-        } else {
-          sunIcon.style.display = 'block';
-          moonIcon.style.display = 'none';
+      function updateHljsTheme() {
+        const theme = getTheme();
+        const hljsLink = document.getElementById('hljs-theme');
+        const themeName = theme === 'dark' ? 'atom-one-dark' : 'atom-one-light';
+        hljsLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/${themeName}.min.css`;
+        // Re-highlight code blocks after theme change
+        if (typeof hljs !== 'undefined') {
+          document.querySelectorAll('pre code').forEach(block => {
+            hljs.highlightElement(block);
+          });
         }
       }
       
-      // Initialize icon on page load
+      // Dark mode toggle function
+      function toggleTheme() {
+        const currentTheme = getTheme();
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+        updateHljsTheme();
+      }
+      
+      // Initialize on page load
       document.addEventListener('DOMContentLoaded', function() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        updateThemeIcon(currentTheme);
+        updateHljsTheme();
+        // Highlight code blocks
+        if (typeof hljs !== 'undefined') {
+          hljs.highlightAll();
+        }
       });
     </script>
   </body>

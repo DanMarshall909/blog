@@ -9,5 +9,5 @@
 		"underscore": "^1.9.1",
 		"wintersmith": "^2.5.0"
 	},
-	"private": true
+	"private": false
 }
