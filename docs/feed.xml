@@ -309,12 +309,17 @@ Before starting ANY development task, you MUST:
 &lt;span class=&quot;bullet&quot;&gt;4. &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Get explicit approval**&lt;/span&gt;: If user wants to start new work with open PRs
 
 &lt;span class=&quot;section&quot;&gt;#### Decision Matrix&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;IF open PRs exist:&lt;br&gt; IF PR has failing CI/CD:&lt;br&gt; ✅ Fix the existing PR first&lt;br&gt; ❌ DO NOT start new work&lt;/p&gt;
-&lt;p&gt;IF PR needs review/merge:&lt;br&gt; ✅ Get user decision: merge existing or start new&lt;br&gt; ❌ DO NOT assume user wants new work&lt;/p&gt;
+&lt;p&gt;IF open PRs exist:
+ IF PR has failing CI/CD:
+ ✅ Fix the existing PR first
+ ❌ DO NOT start new work&lt;/p&gt;
+&lt;p&gt;IF PR needs review/merge:
+ ✅ Get user decision: merge existing or start new
+ ❌ DO NOT assume user wants new work&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;
 When AI assistants (like Claude) work on the project, they automatically enforce these rules. The system responds with structured prompts:
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;⚠️ &lt;strong&gt;OPEN PR DETECTED&lt;/strong&gt;: I found 2 open PR(s):&lt;/p&gt;
-&lt;p&gt;#39: feat: implement session management (❌ 3 failing checks)  &lt;/p&gt;
+&lt;p&gt;#39: feat: implement session management (❌ 3 failing checks)&lt;/p&gt;
 &lt;p&gt; #41: fix: update user preferences API (🟡 2 pending checks)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;RECOMMENDED ACTION&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
@@ -325,19 +330,18 @@ When AI assistants (like Claude) work on the project, they automatically enforce
 &lt;ol&gt;
 &lt;li&gt;Fix the existing PR issues first? ✅ (Recommended)&lt;/li&gt;
 &lt;li&gt;Help merge the ready PRs? ✅ (Recommended)&lt;/li&gt;
-&lt;li&gt;Start new work anyway? ⚠️ (Requires explicit approval)&lt;/li&gt;
+&lt;li&gt;Start new work anyway? ⚠️ (Requires explicit approval)
+```&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre&gt;&lt;code&gt;
-### ADHD-Friendly Development Rules
-
-The agentic system includes specific support for developers with ADHD:
-
-```markdown
-### ADHD Support (MANDATORY)
-- **Rationale-first explanations**: Always explain WHY before WHAT
-- **30-minute break reminders**: Proactive breaks with housekeeping options
-- **Focus tracking**: Help maintain attention on current task
-- **Depth-on-demand**: Provide details only when requested&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This transforms the typical development experience from “figure it out yourself” to “guided, supportive, and sustainable.”&lt;/p&gt;
+&lt;h3 id=&quot;adhd-friendly-development-rules&quot;&gt;ADHD-Friendly Development Rules&lt;/h3&gt;
+&lt;p&gt;The agentic system includes specific support for developers with ADHD:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;&lt;span class=&quot;section&quot;&gt;### ADHD Support (MANDATORY)&lt;/span&gt;
+&lt;span class=&quot;bullet&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Rationale-first explanations**&lt;/span&gt;: Always explain WHY before WHAT
+&lt;span class=&quot;bullet&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**30-minute break reminders**&lt;/span&gt;: Proactive breaks with housekeeping options
+&lt;span class=&quot;bullet&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Focus tracking**&lt;/span&gt;: Help maintain attention on current task
+&lt;span class=&quot;bullet&quot;&gt;- &lt;/span&gt;&lt;span class=&quot;strong&quot;&gt;**Depth-on-demand**&lt;/span&gt;: Provide details only when requested
+`&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This transforms the typical development experience from “figure it out yourself” to “guided, supportive, and sustainable.”&lt;/p&gt;
 &lt;h3 id=&quot;architectural-governance&quot;&gt;Architectural Governance&lt;/h3&gt;
 &lt;p&gt;The rules system enforces architectural patterns automatically:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;&lt;span class=&quot;section&quot;&gt;### CQRS + FastEndpoints Architecture Rules&lt;/span&gt;
@@ -366,8 +370,7 @@ public class ExtractedTask
     public string TaskDescription { get; set; }
     public DateTime? DueDate { get; set; }
     // No PII or original content
-}
-```&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;
 ## Layer 3: Comprehensive Quality Gates
 
@@ -464,7 +467,8 @@ analyze_code_coverage() {
     else
         add_check_result &amp;quot;Code Coverage&amp;quot; &amp;quot;FAIL&amp;quot; &amp;quot;${coverage_percent}% (below 60% minimum)&amp;quot;
     fi
-}&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;mutation-testing-integration&quot;&gt;Mutation Testing Integration&lt;/h3&gt;
+}
+`&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;mutation-testing-integration&quot;&gt;Mutation Testing Integration&lt;/h3&gt;
 &lt;p&gt;The quality gates include mutation testing using Stryker.NET, which validates the quality of your tests by introducing small bugs and checking if tests catch them:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{
   &lt;span class=&quot;attr&quot;&gt;&quot;stryker-config&quot;&lt;/span&gt;: {
