@@ -25,7 +25,7 @@ University of South Africa (UNISA)
 ### Back-end Development
 
 | Area | Details |
-| ------ | ------- |
+| :----- | :------ |
 | **C# / .NET** | Expert knowledge, .NET Framework 3.5 through .NET Core 9 |
 | **JVM Stack** | Spring Boot, Kotlin, Java |
 | **Architecture** | Microservices, event-driven architecture, DI, CQRS, DDD, Clean Architecture |
@@ -44,7 +44,7 @@ University of South Africa (UNISA)
 ### AI/ML Integration
 
 | Area | Details |
-| ------ | ------- |
+| :----- | :------ |
 | **Production AI Systems** | OpenAI Platform, Claude API, LangChain4j, prompt engineering |
 | **Applications** | Automation, multimodal analysis, guardrails |
 | **Platforms** | AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers |
@@ -52,14 +52,14 @@ University of South Africa (UNISA)
 ### Front-end Development
 
 | Area | Details |
-| ------ | ------- |
+| :----- | :------ |
 | **Frameworks** | TypeScript/JavaScript with React, Angular, Vite, Vitest, and ASP.NET MVC |
 | **UI Design** | CSS, Tailwind CSS, Material UI |
 
 ### General
 
 | Area | Details |
-| ------ | ------- |
+| :----- | :------ |
 | **Version Control** | Git, GitHub, Bitbucket, Azure Repos |
 | **Agile Tools** | Jira, Confluence, Azure DevOps Boards, Teams, Slack |
 | **Practices** | TDD, pair/mob programming, code review, mentorship |

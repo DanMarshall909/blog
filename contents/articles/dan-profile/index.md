@@ -30,7 +30,7 @@ Known for my approachable nature and positive energy, I genuinely enjoy listenin
 - **C# / .NET Core** – 10+ years, well-tested, modular, and scalable applications using CQRS, DDD, microservices
 - **AI Integration** – 3 years, including prompt engineering, RAG-based agents, OpenAI, Azure Cognitive Services
 - **Databases** – SQL Server (9+ years), PostgreSQL (1+ year)
-- **API Development** – REST (ASP.NET WebAPI), FastEndpoints, GraphQL, and SOAP
+- **API** – REST (ASP.NET WebAPI), FastEndpoints, GraphQL, and SOAP
 - **DevOps** – 4 years, CI/CD with Azure DevOps, TeamCity, Octopus Deploy, PowerShell scripting
 
 ### 🖥️ Front-End Development

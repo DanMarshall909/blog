@@ -6,7 +6,8 @@
       "Bash(npx:*)",
       "Bash(ls:*)",
       "mcp__serena__find_file",
-      "mcp__serena__search_for_pattern"
+      "mcp__serena__search_for_pattern",
+      "mcp__serena__list_dir"
     ],
     "deny": []
   }
