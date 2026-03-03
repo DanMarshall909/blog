@@ -171,13 +171,13 @@ Before starting ANY development task, you MUST:
 #### Decision Matrix
 ```
 
-IF open PRs exist:  
- IF PR has failing CI/CD:  
- ✅ Fix the existing PR first  
+IF open PRs exist:
+ IF PR has failing CI/CD:
+ ✅ Fix the existing PR first
  ❌ DO NOT start new work
 
-IF PR needs review/merge:  
- ✅ Get user decision: merge existing or start new  
+IF PR needs review/merge:
+ ✅ Get user decision: merge existing or start new
  ❌ DO NOT assume user wants new work
 
 ```
@@ -185,10 +185,9 @@ IF PR needs review/merge:
 When AI assistants (like Claude) work on the project, they automatically enforce these rules. The system responds with structured prompts:
 
 ```
-
 ⚠️ **OPEN PR DETECTED**: I found 2 open PR(s):
 
-#39: feat: implement session management (❌ 3 failing checks)  
+#39: feat: implement session management (❌ 3 failing checks)
  #41: fix: update user preferences API (🟡 2 pending checks)
 
 **RECOMMENDED ACTION**:
@@ -201,8 +200,7 @@ When AI assistants (like Claude) work on the project, they automatically enforce
 1.  Fix the existing PR issues first? ✅ (Recommended)
 2.  Help merge the ready PRs? ✅ (Recommended)
 3.  Start new work anyway? ⚠️ (Requires explicit approval)
-
-````
+```
 
 ### ADHD-Friendly Development Rules
 
@@ -222,7 +220,7 @@ This transforms the typical development experience from "figure it out yourself"
 
 The rules system enforces architectural patterns automatically:
 
-````markdown
+```markdown
 ### CQRS + FastEndpoints Architecture Rules
 
 #### Naming Conventions (MANDATORY)
@@ -251,9 +249,7 @@ public class ExtractedTask
     // No PII or original content
 }
 ```
-````
-
-````
+```
 
 ## Layer 3: Comprehensive Quality Gates
 

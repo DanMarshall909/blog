@@ -12,6 +12,7 @@ html(lang='en')
           = locals.name
       link(rel='alternate', href=locals.url+'/feed.xml', type='application/rss+xml', title=locals.description)
       link(rel='stylesheet', href='//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap')
+      link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-dark.min.css')
       link(rel='stylesheet', href=contents.css['main.css'].url)
       script.
         // Dark mode toggle functionality
@@ -61,6 +62,7 @@ html(lang='en')
               a(href='https://github.com/jnordberg/wintersmith') Wintersmith
               //- please leave the "powered by" if you use the design
     
+    script(src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js')
     script.
       // Dark mode toggle function
       function toggleTheme() {
@@ -70,7 +72,7 @@ html(lang='en')
         document.documentElement.setAttribute('data-theme', newTheme);
         updateThemeIcon(newTheme);
       }
-      
+
       function updateThemeIcon(theme) {
         const sunIcon = document.querySelector('.sun-icon');
         const moonIcon = document.querySelector('.moon-icon');
@@ -82,9 +84,13 @@ html(lang='en')
           moonIcon.style.display = 'none';
         }
       }
-      
+
       // Initialize icon on page load
       document.addEventListener('DOMContentLoaded', function() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         updateThemeIcon(currentTheme);
+        // Highlight code blocks
+        if (typeof hljs !== 'undefined') {
+          hljs.highlightAll();
+        }
       });
