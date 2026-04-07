@@ -145,19 +145,19 @@ huggingface-cli download prism-ml/Bonsai-8B-gguf Bonsai-8B.gguf --local-dir C:\1
 &lt;pre&gt;&lt;code&gt;main: server is listening on http://127.0.0.1:8080&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;step-5-test-it&quot;&gt;Step 5 — Test it&lt;/h3&gt;
 &lt;p&gt;Open &lt;code&gt;http://localhost:8080&lt;/code&gt; in your browser. You’ll get a basic chat UI.&lt;/p&gt;
 &lt;p&gt;Or test the API directly (it’s OpenAI-compatible):&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-powershell&quot;&gt;curl http://localhost:&lt;span class=&quot;number&quot;&gt;8080&lt;/span&gt;/v1/chat/completions `
-  &lt;span class=&quot;literal&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; `
-  &lt;span class=&quot;literal&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'{\&quot;model\&quot;:\&quot;bonsai\&quot;,\&quot;messages\&quot;:[{\&quot;role\&quot;:\&quot;user\&quot;,\&quot;content\&quot;:\&quot;Hello!\&quot;}]}'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;curl http://localhost:8080/v1/chat/completions `
+  -H &lt;span class=&quot;string&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; `
+  -d &lt;span class=&quot;string&quot;&gt;'{\&quot;model\&quot;:\&quot;bonsai\&quot;,\&quot;messages\&quot;:[{\&quot;role\&quot;:\&quot;user\&quot;,\&quot;content\&quot;:\&quot;Hello!\&quot;}]}'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;hr&gt;
 &lt;h2 id=&quot;automated-install-script&quot;&gt;Automated install script&lt;/h2&gt;
 &lt;p&gt;If you’d rather script the whole thing, here’s a PowerShell installer that handles downloading, extracting, and generating a &lt;code&gt;run.ps1&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-powershell&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Default — 8B model, CUDA 13.1, port 8080&lt;/span&gt;
-powershell &lt;span class=&quot;literal&quot;&gt;-ExecutionPolicy&lt;/span&gt; Bypass &lt;span class=&quot;operator&quot;&gt;-File&lt;/span&gt; install.ps1
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Default — 8B model, CUDA 13.1, port 8080&lt;/span&gt;
+powershell -ExecutionPolicy Bypass -File install.ps1
 
 &lt;span class=&quot;comment&quot;&gt;# Options&lt;/span&gt;
-powershell &lt;span class=&quot;literal&quot;&gt;-ExecutionPolicy&lt;/span&gt; Bypass &lt;span class=&quot;operator&quot;&gt;-File&lt;/span&gt; install.ps1 &lt;span class=&quot;literal&quot;&gt;-ModelSize&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;B
-powershell &lt;span class=&quot;literal&quot;&gt;-ExecutionPolicy&lt;/span&gt; Bypass &lt;span class=&quot;operator&quot;&gt;-File&lt;/span&gt; install.ps1 &lt;span class=&quot;literal&quot;&gt;-CudaVersion&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;12.4&lt;/span&gt;
-powershell &lt;span class=&quot;literal&quot;&gt;-ExecutionPolicy&lt;/span&gt; Bypass &lt;span class=&quot;operator&quot;&gt;-File&lt;/span&gt; install.ps1 &lt;span class=&quot;literal&quot;&gt;-InstallDir&lt;/span&gt; D:\ai\bonsai &lt;span class=&quot;literal&quot;&gt;-Port&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;8081&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+powershell -ExecutionPolicy Bypass -File install.ps1 -ModelSize 4B
+powershell -ExecutionPolicy Bypass -File install.ps1 -CudaVersion 12.4
+powershell -ExecutionPolicy Bypass -File install.ps1 -InstallDir D:\ai\bonsai -Port 8081&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;After install, use the generated &lt;code&gt;run.ps1&lt;/code&gt; to start the server with the correct flags automatically.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&quot;performance-rtx-5080-laptop-16-gb-vram-&quot;&gt;Performance (RTX 5080 Laptop, 16 GB VRAM)&lt;/h2&gt;

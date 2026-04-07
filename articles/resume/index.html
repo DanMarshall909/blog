@@ -11,21 +11,30 @@
     <link rel="stylesheet" href="/css/main.css">
     <link id="hljs-theme" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-light.min.css">
     <script>
-      // Dark mode toggle functionality
       (function() {
         const getTheme = () => localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         const setTheme = (theme) => {
           localStorage.setItem('theme', theme);
           document.documentElement.setAttribute('data-theme', theme);
         };
-        // Initialize theme
         setTheme(getTheme());
       })();
     </script>
   </head>
   <body class="article-detail">
-    <!-- Dark mode toggle button-->
+    <!-- Desktop theme toggle — hidden on mobile-->
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
+    <!-- Mobile hamburger — hidden on desktop-->
+    <button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <!-- Mobile drawer-->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+    <aside class="drawer" id="drawer">
+      <div class="drawer-header"><a class="drawer-home" href="/">← Home</a>
+        <button class="drawer-theme" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+        <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
+      </div>
+      <div class="drawer-body" id="drawer-body"></div>
+    </aside>
     <header class="header">
       <div class="content-wrap">
         <div class="title-with-image">
@@ -42,11 +51,11 @@
       <div class="content-wrap">
         <article class="article">
           <section class="content"><h1 id="dan-marshall">Dan Marshall</h1>
-<p>Senior full-stack engineer with 11+ years of delivering enterprise .<span class="caps">NET</span> and <span class="caps">JVM</span> systems. Deep expertise in microservices, event-driven architecture, and production <span class="caps">AI</span> integration. Strong advocate for <span class="caps">TDD</span>, pair programming, and collaborative engineering practices that improve code quality and team<span class="widont">&nbsp;</span>velocity.</p>
+<p>Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, and production AI integration. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.</p>
 <hr>
 <h2 id="qualifications">Qualifications</h2>
 <p><strong>Bachelor of Science</strong> (Mathematics and Computer Science)
-University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">UNISA</span>)</p>
+University of South Africa (UNISA)</p>
 <hr>
 <h2 id="skills">Skills</h2>
 <h3 id="back-end-development">Back-end Development</h3>
@@ -58,32 +67,32 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
 </tr>
 </thead>
 <tbody><tr>
-<td align="left"><strong>C# / .<span class="caps">NET</span></strong></td>
-<td align="left">Expert knowledge, .<span class="caps">NET</span> Framework 3.5 through .<span class="caps">NET</span> Core 9</td>
+<td align="left"><strong>C# / .NET</strong></td>
+<td align="left">Expert knowledge, .NET Framework 3.5 through .NET Core 9</td>
 </tr>
 <tr>
-<td align="left"><strong><span class="caps">JVM</span> Stack</strong></td>
+<td align="left"><strong>JVM Stack</strong></td>
 <td align="left">Spring Boot, Kotlin, Java</td>
 </tr>
 <tr>
 <td align="left"><strong>Architecture</strong></td>
-<td align="left">Microservices, event-driven architecture, <span class="caps">DI</span>, <span class="caps">CQRS</span>, <span class="caps">DDD</span>, Clean Architecture</td>
+<td align="left">Microservices, event-driven architecture, DI, CQRS, DDD, Clean Architecture</td>
 </tr>
 <tr>
 <td align="left"><strong>Azure</strong></td>
-<td align="left">App Services, Functions, Service Bus, Azure <span class="caps">SQL</span>, Blob Storage, App Insights, Entra</td>
+<td align="left">App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra</td>
 </tr>
 <tr>
-<td align="left"><strong><span class="caps">AWS</span></strong></td>
-<td align="left">Bedrock, <span class="caps">ECS</span>, <span class="caps">SQS</span>, S3</td>
+<td align="left"><strong>AWS</strong></td>
+<td align="left">Bedrock, ECS, SQS, S3</td>
 </tr>
 <tr>
 <td align="left"><strong>Testing</strong></td>
-<td align="left">NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, <span class="caps">TDD</span>, mutation and integration testing</td>
+<td align="left">NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, TDD, mutation and integration testing</td>
 </tr>
 <tr>
-<td align="left"><strong><span class="caps">API</span> Development</strong></td>
-<td align="left"><span class="caps">ASP</span>.<span class="caps">NET</span> WebAPI, FastEndpoints, GraphQL, Spring Boot</td>
+<td align="left"><strong>API Development</strong></td>
+<td align="left">ASP.NET WebAPI, FastEndpoints, GraphQL, Spring Boot</td>
 </tr>
 <tr>
 <td align="left"><strong>Messaging</strong></td>
@@ -91,30 +100,30 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
 </tr>
 <tr>
 <td align="left"><strong>Data Access</strong></td>
-<td align="left">Entity Framework Core, Dapper, raw <span class="caps">SQL</span></td>
+<td align="left">Entity Framework Core, Dapper, raw SQL</td>
 </tr>
 <tr>
 <td align="left"><strong>Databases</strong></td>
-<td align="left"><span class="caps">SQL</span> Server, PostgreSQL, MySQL</td>
+<td align="left">SQL Server, PostgreSQL, MySQL</td>
 </tr>
 <tr>
 <td align="left"><strong>Security</strong></td>
-<td align="left"><span class="caps">ASP</span>.<span class="caps">NET</span> Identity, OAuth2, <span class="caps">JWT</span>, Microsoft.Identity, Azure <span class="caps">AD</span> / Entra <span class="caps">ID</span></td>
+<td align="left">ASP.NET Identity, OAuth2, JWT, Microsoft.Identity, Azure AD / Entra ID</td>
 </tr>
 <tr>
 <td align="left"><strong>Libraries</strong></td>
-<td align="left">MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.<span class="caps">NET</span>, OpenAPI</td>
+<td align="left">MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.NET, OpenAPI</td>
 </tr>
 <tr>
 <td align="left"><strong>DevOps</strong></td>
-<td align="left"><span class="caps">CI</span>/<span class="caps">CD</span> with Azure DevOps, TeamCity, Octopus Deploy, PowerShell, Docker</td>
+<td align="left">CI/CD with Azure DevOps, TeamCity, Octopus Deploy, PowerShell, Docker</td>
 </tr>
 <tr>
 <td align="left"><strong>Observability</strong></td>
-<td align="left">OpenTelemetry, Seq, OpenSearch, Application Insights <span class="caps">SDK</span>, Serilog Sinks</td>
+<td align="left">OpenTelemetry, Seq, OpenSearch, Application Insights SDK, Serilog Sinks</td>
 </tr>
 </tbody></table>
-<h3 id="ai-ml-integration"><span class="caps">AI</span>/<span class="caps">ML</span> Integration</h3>
+<h3 id="ai-ml-integration">AI/ML Integration</h3>
 <table>
 <thead>
 <tr>
@@ -123,8 +132,8 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
 </tr>
 </thead>
 <tbody><tr>
-<td align="left"><strong>Production <span class="caps">AI</span> Systems</strong></td>
-<td align="left">OpenAI Platform, Claude <span class="caps">API</span>, LangChain4j, prompt engineering</td>
+<td align="left"><strong>Production AI Systems</strong></td>
+<td align="left">OpenAI Platform, Claude API, LangChain4j, prompt engineering</td>
 </tr>
 <tr>
 <td align="left"><strong>Applications</strong></td>
@@ -132,7 +141,7 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
 </tr>
 <tr>
 <td align="left"><strong>Platforms</strong></td>
-<td align="left"><span class="caps">AWS</span> Bedrock, OpenAI, local LLMs, Hugging Face Transformers</td>
+<td align="left">AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers</td>
 </tr>
 </tbody></table>
 <h3 id="front-end-development">Front-end Development</h3>
@@ -145,11 +154,11 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
 </thead>
 <tbody><tr>
 <td align="left"><strong>Frameworks</strong></td>
-<td align="left">TypeScript/JavaScript with React, Angular, Vite, Vitest, and <span class="caps">ASP</span>.<span class="caps">NET</span> <span class="caps">MVC</span></td>
+<td align="left">TypeScript/JavaScript with React, Angular, Vite, Vitest, and ASP.NET MVC</td>
 </tr>
 <tr>
-<td align="left"><strong><span class="caps">UI</span> Design</strong></td>
-<td align="left"><span class="caps">CSS</span>, Tailwind <span class="caps">CSS</span>, Material <span class="caps">UI</span></td>
+<td align="left"><strong>UI Design</strong></td>
+<td align="left">CSS, Tailwind CSS, Material UI</td>
 </tr>
 </tbody></table>
 <h3 id="general">General</h3>
@@ -170,7 +179,7 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
 </tr>
 <tr>
 <td align="left"><strong>Practices</strong></td>
-<td align="left"><span class="caps">TDD</span>, pair/mob programming, code review, mentorship</td>
+<td align="left">TDD, pair/mob programming, code review, mentorship</td>
 </tr>
 <tr>
 <td align="left"><strong>Operating Systems</strong></td>
@@ -180,99 +189,99 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
 <hr>
 <h2 id="employment">Employment</h2>
 <h3 id="reapit-reapit-com">Reapit — <a href="https://www.reapit.com">reapit.com</a></h3>
-<p><strong>Senior <span class="caps">AI</span> Engineer</strong> | September 2025 – February<span class="widont">&nbsp;</span>2026</p>
+<p><strong>Senior AI Engineer</strong> | September 2025 – February 2026</p>
 <ul>
-<li>Workshopped, built, and deployed an <span class="caps">AI</span>-driven property inspection system using <span class="caps">AWS</span> Bedrock, generating structured assessment reports constrained by business<span class="widont">&nbsp;</span>rules.</li>
-<li>Forked the LangChain4j framework to add Bedrock guardrail support when unavailable upstream. Modular architecture enabled a seamless swap to the official implementation within one day when<span class="widont">&nbsp;</span>released.</li>
-<li>Optimised <span class="caps">LLM</span> costs through strategic model selection balancing accuracy, features, performance, and token<span class="widont">&nbsp;</span>usage.</li>
-<li>Advised cross-functional teams on practical <span class="caps">AI</span> use<span class="widont">&nbsp;</span>cases.</li>
-<li>Self-directed adoption of the Kotlin/Spring Boot/<span class="caps">AWS</span> ecosystem, delivering production features while supporting the team with <span class="caps">JVM</span> implementation<span class="widont">&nbsp;</span>patterns.</li>
+<li>Workshopped, built, and deployed an AI-driven property inspection system using AWS Bedrock, generating structured assessment reports constrained by business rules.</li>
+<li>Forked the LangChain4j framework to add Bedrock guardrail support when unavailable upstream. Modular architecture enabled a seamless swap to the official implementation within one day when released.</li>
+<li>Optimised LLM costs through strategic model selection balancing accuracy, features, performance, and token usage.</li>
+<li>Advised cross-functional teams on practical AI use cases.</li>
+<li>Self-directed adoption of the Kotlin/Spring Boot/AWS ecosystem, delivering production features while supporting the team with JVM implementation patterns.</li>
 </ul>
 <hr>
-<h3 id="ract-royal-automobile-club-of-tasmania-ract-com-au"><span class="caps">RACT</span> (Royal Automobile Club of Tasmania) — <a href="https://www.ract.com.au">ract.com.au</a></h3>
-<p><strong>Senior Software Engineer – Back-end</strong> | June 2024 – July<span class="widont">&nbsp;</span>2025</p>
+<h3 id="ract-royal-automobile-club-of-tasmania-ract-com-au">RACT (Royal Automobile Club of Tasmania) — <a href="https://www.ract.com.au">ract.com.au</a></h3>
+<p><strong>Senior Software Engineer – Back-end</strong> | June 2024 – July 2025</p>
 <ul>
-<li>Applied Clean Architecture and <span class="caps">DDD</span> to enhance testability, scalability, and code<span class="widont">&nbsp;</span>clarity.</li>
-<li>Involved in pilot program to develop <span class="caps">AI</span> coding rulesets and best<span class="widont">&nbsp;</span>practices.</li>
-<li>Migrated and modernised core components from .<span class="caps">NET</span> Framework 4.7.2 to .<span class="caps">NET</span><span class="widont">&nbsp;</span>9.</li>
-<li>Built resilient microservices using MassTransit, WebAPI, GraphQL, and <span class="caps">SQL</span><span class="widont">&nbsp;</span>Server.</li>
-<li>Collaborated with cross-functional teams to deliver scalable, well-tested features aligned with business<span class="widont">&nbsp;</span>requirements.</li>
+<li>Applied Clean Architecture and DDD to enhance testability, scalability, and code clarity.</li>
+<li>Involved in pilot program to develop AI coding rulesets and best practices.</li>
+<li>Migrated and modernised core components from .NET Framework 4.7.2 to .NET 9.</li>
+<li>Built resilient microservices using MassTransit, WebAPI, GraphQL, and SQL Server.</li>
+<li>Collaborated with cross-functional teams to deliver scalable, well-tested features aligned with business requirements.</li>
 </ul>
 <hr>
 <h3 id="national-grower-register-ngr-com-au">National Grower Register — <a href="https://www.ngr.com.au">ngr.com.au</a></h3>
-<p><strong>Senior Full-Stack Engineer</strong> | November 2023 – May<span class="widont">&nbsp;</span>2024</p>
+<p><strong>Senior Full-Stack Engineer</strong> | November 2023 – May 2024</p>
 <ul>
-<li>Co-developed a modular online form solution (Flexidocs) using Clean Architecture and <span class="caps">DDD</span>, replacing an outdated<span class="widont">&nbsp;</span>system.</li>
-<li>Designed modern functional React 18 components with TypeScript and Tailwind<span class="widont">&nbsp;</span><span class="caps">CSS</span>.</li>
-<li>Provided guidance on C# programming, <span class="caps">OOP</span>, <span class="caps">AI</span> tools, and testing best<span class="widont">&nbsp;</span>practices.</li>
-<li>Researched and selected sustainable technologies to support long-term<span class="widont">&nbsp;</span>goals.</li>
-<li>Improved legacy code with unit test coverage, enabling safe<span class="widont">&nbsp;</span>refactoring.</li>
-<li>Contributed to technical documentation and Agile<span class="widont">&nbsp;</span>processes.</li>
+<li>Co-developed a modular online form solution (Flexidocs) using Clean Architecture and DDD, replacing an outdated system.</li>
+<li>Designed modern functional React 18 components with TypeScript and Tailwind CSS.</li>
+<li>Provided guidance on C# programming, OOP, AI tools, and testing best practices.</li>
+<li>Researched and selected sustainable technologies to support long-term goals.</li>
+<li>Improved legacy code with unit test coverage, enabling safe refactoring.</li>
+<li>Contributed to technical documentation and Agile processes.</li>
 <li>Mentored junior staff.</li>
 </ul>
 <hr>
 <h3 id="cloudmonitor-cloudmonitor-ai">CloudMonitor — <a href="https://www.cloudmonitor.ai">cloudmonitor.ai</a></h3>
-<p><strong>Lead Azure / Back-end Engineer</strong> | June 2023 – November<span class="widont">&nbsp;</span>2023</p>
+<p><strong>Lead Azure / Back-end Engineer</strong> | June 2023 – November 2023</p>
 <ul>
-<li>Conceptualised, developed, and maintained features running on a serverless<span class="widont">&nbsp;</span>platform.</li>
-<li>Promoted <span class="caps">TDD</span>, <span class="caps">SOLID</span> principles, Clean Architecture, and peer<span class="widont">&nbsp;</span>programming.</li>
-<li>Introduced Agile processes, leading morning standups and mentoring junior<span class="widont">&nbsp;</span>developers.</li>
-<li>Azure DevOps pipeline maintenance and<span class="widont">&nbsp;</span>troubleshooting.</li>
-<li>Introduced Entity Framework, OpenAPI, xUnit, and JetBrains<span class="widont">&nbsp;</span>Rider.</li>
-<li>Presented company-wide tech talks and engaged with external<span class="widont">&nbsp;</span>stakeholders.</li>
+<li>Conceptualised, developed, and maintained features running on a serverless platform.</li>
+<li>Promoted TDD, SOLID principles, Clean Architecture, and peer programming.</li>
+<li>Introduced Agile processes, leading morning standups and mentoring junior developers.</li>
+<li>Azure DevOps pipeline maintenance and troubleshooting.</li>
+<li>Introduced Entity Framework, OpenAPI, xUnit, and JetBrains Rider.</li>
+<li>Presented company-wide tech talks and engaged with external stakeholders.</li>
 </ul>
 <hr>
-<h3 id="vald-vald-com"><span class="caps">VALD</span> — <a href="https://www.vald.com">vald.com</a></h3>
-<p><strong>Software Engineer – Back-end</strong> | January 2023 – May<span class="widont">&nbsp;</span>2023</p>
+<h3 id="vald-vald-com">VALD — <a href="https://www.vald.com">vald.com</a></h3>
+<p><strong>Software Engineer – Back-end</strong> | January 2023 – May 2023</p>
 <ul>
-<li>Maintained, refactored, and contributed to various legacy <span class="caps">REST</span> APIs and<span class="widont">&nbsp;</span>microservices.</li>
-<li>Contributed to the integration testing<span class="widont">&nbsp;</span>framework.</li>
-<li>Promoted <span class="caps">TDD</span> and peer<span class="widont">&nbsp;</span>programming.</li>
-<li>Chaired and contributed to various Agile<span class="widont">&nbsp;</span>ceremonies.</li>
+<li>Maintained, refactored, and contributed to various legacy REST APIs and microservices.</li>
+<li>Contributed to the integration testing framework.</li>
+<li>Promoted TDD and peer programming.</li>
+<li>Chaired and contributed to various Agile ceremonies.</li>
 </ul>
 <hr>
 <h3 id="situ-systems-situsystems-com">Situ Systems — <a href="https://www.situsystems.com">situsystems.com</a></h3>
-<p><strong>Senior Software Engineer – Full-Stack</strong> | November 2021 – October<span class="widont">&nbsp;</span>2022</p>
+<p><strong>Senior Software Engineer – Full-Stack</strong> | November 2021 – October 2022</p>
 <ul>
-<li>Authored numerous front-end and back-end<span class="widont">&nbsp;</span>features.</li>
-<li>Substantially increased test coverage and improved testing<span class="widont">&nbsp;</span>methodologies.</li>
-<li>Tuned <span class="caps">SQL</span> queries, dramatically improving performance in critical<span class="widont">&nbsp;</span>reports.</li>
-<li>Used Pulumi to automate deployment of<span class="widont">&nbsp;</span>infrastructure.</li>
-<li>Implemented <span class="caps">CI</span> workflows in Azure<span class="widont">&nbsp;</span>DevOps.</li>
-<li>Contributed to internal development<span class="widont">&nbsp;</span>tools.</li>
+<li>Authored numerous front-end and back-end features.</li>
+<li>Substantially increased test coverage and improved testing methodologies.</li>
+<li>Tuned SQL queries, dramatically improving performance in critical reports.</li>
+<li>Used Pulumi to automate deployment of infrastructure.</li>
+<li>Implemented CI workflows in Azure DevOps.</li>
+<li>Contributed to internal development tools.</li>
 </ul>
 <hr>
-<h3 id="hub24-limited-hub24-com-au"><span class="caps">HUB24</span> Limited — <a href="https://www.hub24.com.au">hub24.com.au</a></h3>
-<p><strong>Data and Full-Stack Engineer</strong> | December 2019 – November<span class="widont">&nbsp;</span>2021</p>
+<h3 id="hub24-limited-hub24-com-au">HUB24 Limited — <a href="https://www.hub24.com.au">hub24.com.au</a></h3>
+<p><strong>Data and Full-Stack Engineer</strong> | December 2019 – November 2021</p>
 <ul>
-<li>Authored a sophisticated and successful system for cleaning, transforming, and validating fund transfers between superannuation<span class="widont">&nbsp;</span>funds.</li>
-<li>Maintained strong working relationships with DBAs, architects, BAs, clients (e.g. Bank of New York), and senior<span class="widont">&nbsp;</span>management.</li>
-<li>Provided emergency on-call support across the organisation and managed client infrastructure, triaging and fixing or escalating issues to meet strict<span class="widont">&nbsp;</span>SLAs.</li>
-<li>Updated legacy web applications to deploy using Azure<span class="widont">&nbsp;</span>Pipelines.</li>
-<li>Championed <span class="caps">TDD</span> and automated integration<span class="widont">&nbsp;</span>testing.</li>
-<li>Authored, maintained, and supported numerous APIs and <span class="caps">ETL</span><span class="widont">&nbsp;</span>projects.</li>
+<li>Authored a sophisticated and successful system for cleaning, transforming, and validating fund transfers between superannuation funds.</li>
+<li>Maintained strong working relationships with DBAs, architects, BAs, clients (e.g. Bank of New York), and senior management.</li>
+<li>Provided emergency on-call support across the organisation and managed client infrastructure, triaging and fixing or escalating issues to meet strict SLAs.</li>
+<li>Updated legacy web applications to deploy using Azure Pipelines.</li>
+<li>Championed TDD and automated integration testing.</li>
+<li>Authored, maintained, and supported numerous APIs and ETL projects.</li>
 </ul>
 <hr>
 <h3 id="chandler-personalised-communications-chandler-com-au">Chandler Personalised Communications — <a href="https://www.chandler.com.au">chandler.com.au</a></h3>
-<p><strong>Data and Full-Stack Engineer</strong> | March 2016 – December<span class="widont">&nbsp;</span>2019</p>
+<p><strong>Data and Full-Stack Engineer</strong> | March 2016 – December 2019</p>
 <ul>
-<li>Worked within an <span class="caps">ISO</span> 27001 certified organisation meeting strict security<span class="widont">&nbsp;</span>standards.</li>
-<li>Built and maintained web applications servicing government, public utility, and financial<span class="widont">&nbsp;</span>sectors.</li>
-<li>Web design using <span class="caps">ASP</span>.<span class="caps">NET</span>, Bootstrap, <span class="caps">CSS</span>, jQuery, and<span class="widont">&nbsp;</span>JavaScript.</li>
-<li>Database design in Azure <span class="caps">SQL</span><span class="widont">&nbsp;</span>Server.</li>
-<li>Authored <span class="caps">SSIS</span> <span class="caps">ETL</span> packages to cleanse and process superannuation member data for web, print, and email<span class="widont">&nbsp;</span>campaigns.</li>
-<li>Liaised with technical and non-technical stakeholders to develop bespoke<span class="widont">&nbsp;</span>solutions.</li>
+<li>Worked within an ISO 27001 certified organisation meeting strict security standards.</li>
+<li>Built and maintained web applications servicing government, public utility, and financial sectors.</li>
+<li>Web design using ASP.NET, Bootstrap, CSS, jQuery, and JavaScript.</li>
+<li>Database design in Azure SQL Server.</li>
+<li>Authored SSIS ETL packages to cleanse and process superannuation member data for web, print, and email campaigns.</li>
+<li>Liaised with technical and non-technical stakeholders to develop bespoke solutions.</li>
 </ul>
 <hr>
-<h3 id="worldsmart-pos-solutions-worldsmart-com-au">WorldSmart <span class="caps">POS</span> Solutions — <a href="https://www.worldsmart.com.au">worldsmart.com.au</a></h3>
-<p><strong>Software Engineer, <span class="caps">QA</span> and Support</strong> | February 2011 – February<span class="widont">&nbsp;</span>2016</p>
+<h3 id="worldsmart-pos-solutions-worldsmart-com-au">WorldSmart POS Solutions — <a href="https://www.worldsmart.com.au">worldsmart.com.au</a></h3>
+<p><strong>Software Engineer, QA and Support</strong> | February 2011 – February 2016</p>
 <ul>
-<li>Developed and maintained enterprise software for retail<span class="widont">&nbsp;</span>groups.</li>
-<li>Integrated financial, <span class="caps">CRM</span>, and stock modules with<span class="widont">&nbsp;</span><span class="caps">MYOB</span>.</li>
-<li>Provided <span class="caps">QA</span> via automated scripting and manual<span class="widont">&nbsp;</span>testing.</li>
-<li>Authored technical and end-user documentation and provided internal<span class="widont">&nbsp;</span>training.</li>
-<li>Maintained internal support utilities and automated<span class="widont">&nbsp;</span>scripts.</li>
-<li>Installed and supported Point of Sale hardware and<span class="widont">&nbsp;</span>software.</li>
+<li>Developed and maintained enterprise software for retail groups.</li>
+<li>Integrated financial, CRM, and stock modules with MYOB.</li>
+<li>Provided QA via automated scripting and manual testing.</li>
+<li>Authored technical and end-user documentation and provided internal training.</li>
+<li>Maintained internal support utilities and automated scripts.</li>
+<li>Installed and supported Point of Sale hardware and software.</li>
 </ul>
 <hr>
 <h2 id="contact">Contact</h2>
@@ -285,8 +294,8 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
 <h2 id="references">References</h2>
 <p>Available on request.</p>
 <blockquote>
-<p>*”Dan is an absolute pleasure to work with and I would highly recommend him for any full-stack web development position. We worked together for just under a year and during that time Dan was always friendly, professional and went above and beyond when implementing code and designing systems. He has a keen eye for where things can be improved and is always looking to find the optimal solution to any problem he faces. He writes clean, well-structured code that is easy to maintain. He takes advice and constructive criticism well and brings a positive attitude to every meeting. Dan would be an invaluable addition to any software<span class="widont">&nbsp;</span>team.”*</p>
-<p>— <strong>Alistair Doulin</strong>, <span class="caps">CTO</span>, Situ Systems Pty<span class="widont">&nbsp;</span>Ltd</p>
+<p>*”Dan is an absolute pleasure to work with and I would highly recommend him for any full-stack web development position. We worked together for just under a year and during that time Dan was always friendly, professional and went above and beyond when implementing code and designing systems. He has a keen eye for where things can be improved and is always looking to find the optimal solution to any problem he faces. He writes clean, well-structured code that is easy to maintain. He takes advice and constructive criticism well and brings a positive attitude to every meeting. Dan would be an invaluable addition to any software team.”*</p>
+<p>— <strong>Alistair Doulin</strong>, CTO, Situ Systems Pty Ltd</p>
 </blockquote>
 
           </section>
@@ -306,6 +315,19 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
     </footer>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
     <script>
+      // Drawer
+      function openDrawer() {
+        document.getElementById('drawer').classList.add('drawer-open');
+        document.getElementById('drawer-overlay').classList.add('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+      }
+      
+      function closeDrawer() {
+        document.getElementById('drawer').classList.remove('drawer-open');
+        document.getElementById('drawer-overlay').classList.remove('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+      }
+      
       // Table of contents — article pages only
       document.addEventListener('DOMContentLoaded', function() {
         if (!document.body.classList.contains('article-detail')) return;
@@ -316,7 +338,6 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
         var headings = content.querySelectorAll('h2, h3');
         if (headings.length < 2) return;
       
-        // Slug helper
         function slugify(text) {
           return text.trim()
             .toLowerCase()
@@ -325,7 +346,6 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
             .replace(/-{2,}/g, '-');
         }
       
-        // Assign IDs to headings that don't have one
         var usedIds = {};
         headings.forEach(function(h) {
           if (!h.id) {
@@ -338,14 +358,13 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
           usedIds[h.id] = true;
         });
       
-        // Build nav element
         var nav = document.createElement('nav');
         nav.className = 'toc';
         nav.setAttribute('aria-label', 'Table of contents');
       
-        var titleEl = document.createElement('button');
+        var titleEl = document.createElement('div');
         titleEl.className = 'toc-title';
-        titleEl.innerHTML = '<span>On this page</span><span class="toc-chevron">&#9660;</span>';
+        titleEl.innerHTML = '<span>On this page</span>';
         nav.appendChild(titleEl);
       
         var list = document.createElement('ul');
@@ -362,7 +381,7 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
             e.preventDefault();
             document.getElementById(h.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
             history.pushState(null, null, '#' + h.id);
-            if (window.innerWidth <= 900) nav.classList.add('toc-collapsed');
+            closeDrawer();
           });
           li.appendChild(a);
           list.appendChild(li);
@@ -370,23 +389,20 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
       
         nav.appendChild(list);
       
-        // Insert before article, wrap in flex layout
-        var article = document.querySelector('article.article');
-        if (!article) return;
-        article.parentElement.classList.add('article-with-toc');
-        article.parentElement.insertBefore(nav, article);
+        var hamburger = document.getElementById('hamburger');
+        var isMobile = hamburger && window.getComputedStyle(hamburger).display !== 'none';
       
-        // Auto-collapse on mobile
-        if (window.innerWidth <= 900) {
-          nav.classList.add('toc-collapsed');
+        if (isMobile) {
+          // Mobile: put TOC inside the drawer
+          var drawerBody = document.getElementById('drawer-body');
+          if (drawerBody) drawerBody.appendChild(nav);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector('article.article');
+          if (!article) return;
+          article.parentElement.classList.add('article-with-toc');
+          article.parentElement.insertBefore(nav, article);
         }
-      
-        // Mobile collapse toggle
-        titleEl.addEventListener('click', function() {
-          if (window.innerWidth <= 900) {
-            nav.classList.toggle('toc-collapsed');
-          }
-        });
       
         // Highlight active heading via IntersectionObserver
         var tocLinks = [].slice.call(nav.querySelectorAll('.toc-link'));
@@ -405,9 +421,9 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
       
         headings.forEach(function(h) { observer.observe(h); });
       });
+      
     </script>
     <script>
-      // Theme management
       function getTheme() {
         return document.documentElement.getAttribute('data-theme') || 'light';
       }
@@ -417,15 +433,14 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
         const hljsLink = document.getElementById('hljs-theme');
         const themeName = theme === 'dark' ? 'atom-one-dark' : 'atom-one-light';
         hljsLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/${themeName}.min.css`;
-        // Re-highlight code blocks after theme change
         if (typeof hljs !== 'undefined') {
           document.querySelectorAll('pre code').forEach(block => {
+            delete block.dataset.highlighted;
             hljs.highlightElement(block);
           });
         }
       }
       
-      // Dark mode toggle function
       function toggleTheme() {
         const currentTheme = getTheme();
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -434,13 +449,8 @@ University of South Africa<span class="widont">&nbsp;</span>(<span class="caps">
         updateHljsTheme();
       }
       
-      // Initialize on page load
       document.addEventListener('DOMContentLoaded', function() {
         updateHljsTheme();
-        // Highlight code blocks
-        if (typeof hljs !== 'undefined') {
-          hljs.highlightAll();
-        }
       });
     </script>
   </body>
