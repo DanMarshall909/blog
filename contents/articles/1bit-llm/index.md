@@ -4,6 +4,7 @@ author: Dan Marshall
 date: "2026-04-06"
 tags: ["AI", "LLM", "local AI", "BitNet", "Bonsai", "llama.cpp", "Windows", "CUDA"]
 template: article.pug
+heroImage: /articles/1bit-llm/bonzai.png
 ---
 
 A 27-billion-parameter model that fits in 2 GB of RAM. An 8B model that runs at 180+ tokens/sec on a laptop GPU using just 1.1 GB of VRAM. These aren't hypotheticals — this is what 1-bit quantisation actually delivers today.
