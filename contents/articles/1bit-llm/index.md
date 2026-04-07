@@ -152,6 +152,8 @@ curl http://localhost:8080/v1/chat/completions `
 
 If you'd rather script the whole thing, here's a PowerShell installer that handles downloading, extracting, and generating a `run.ps1`:
 
+[Download install.ps1](/articles/1bit-llm/install.ps1)
+
 ```bash
 # Default — 8B model, CUDA 13.1, port 8080
 powershell -ExecutionPolicy Bypass -File install.ps1
