@@ -139,7 +139,7 @@ Open `http://localhost:8080` in your browser. You'll get a basic chat UI.
 
 Or test the API directly (it's OpenAI-compatible):
 
-```powershell
+```bash
 curl http://localhost:8080/v1/chat/completions `
   -H "Content-Type: application/json" `
   -d '{\"model\":\"bonsai\",\"messages\":[{\"role\":\"user\",\"content\":\"Hello!\"}]}'
@@ -151,7 +151,7 @@ curl http://localhost:8080/v1/chat/completions `
 
 If you'd rather script the whole thing, here's a PowerShell installer that handles downloading, extracting, and generating a `run.ps1`:
 
-```powershell
+```bash
 # Default — 8B model, CUDA 13.1, port 8080
 powershell -ExecutionPolicy Bypass -File install.ps1
 

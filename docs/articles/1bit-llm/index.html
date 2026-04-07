@@ -11,21 +11,30 @@
     <link rel="stylesheet" href="/css/main.css">
     <link id="hljs-theme" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-light.min.css">
     <script>
-      // Dark mode toggle functionality
       (function() {
         const getTheme = () => localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         const setTheme = (theme) => {
           localStorage.setItem('theme', theme);
           document.documentElement.setAttribute('data-theme', theme);
         };
-        // Initialize theme
         setTheme(getTheme());
       })();
     </script>
   </head>
   <body class="article-detail">
-    <!-- Dark mode toggle button-->
+    <!-- Desktop theme toggle — hidden on mobile-->
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
+    <!-- Mobile hamburger — hidden on desktop-->
+    <button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <!-- Mobile drawer-->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+    <aside class="drawer" id="drawer">
+      <div class="drawer-header"><a class="drawer-home" href="/">← Home</a>
+        <button class="drawer-theme" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+        <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
+      </div>
+      <div class="drawer-body" id="drawer-body"></div>
+    </aside>
     <header class="header">
       <div class="content-wrap">
         <div class="title-with-image">
@@ -41,50 +50,50 @@
     <div id="content">
       <div class="content-wrap">
         <article class="article">
-          <section class="content"><p>A 27-billion-parameter model that fits in 2 <span class="caps">GB</span> of <span class="caps">RAM</span>. An 8B model that runs at 180+ tokens/sec on a laptop <span class="caps">GPU</span> using just 1.1 <span class="caps">GB</span> of <span class="caps">VRAM</span>. These aren’t hypotheticals — this is what 1-bit quantisation actually delivers<span class="widont">&nbsp;</span>today.</p>
-<p>This post covers what 1-bit LLMs are, why they’re different from regular quantised models, and a complete walkthrough for getting the <strong>Bonsai 8B</strong> model running on Windows with an <span class="caps">NVIDIA</span><span class="widont">&nbsp;</span><span class="caps">GPU</span>.</p>
+          <section class="content"><p>A 27-billion-parameter model that fits in 2 GB of RAM. An 8B model that runs at 180+ tokens/sec on a laptop GPU using just 1.1 GB of VRAM. These aren’t hypotheticals — this is what 1-bit quantisation actually delivers today.</p>
+<p>This post covers what 1-bit LLMs are, why they’re different from regular quantised models, and a complete walkthrough for getting the <strong>Bonsai 8B</strong> model running on Windows with an NVIDIA GPU.</p>
 <hr>
-<h2 id="what-is-a-1-bit-llm-">What is a 1-bit<span class="widont">&nbsp;</span><span class="caps">LLM</span>?</h2>
-<p>Most LLMs store their weights as 16-bit or 32-bit floating-point numbers. Quantisation (Q4, Q8, etc.) compresses these to smaller integer representations, trading some accuracy for smaller file sizes. A Q4 model is roughly half the size of its <span class="caps">FP16</span><span class="widont">&nbsp;</span>equivalent.</p>
-<p><strong>1-bit models take this to the extreme.</strong> Each weight is represented using just a single bit — effectively <code>-1</code>, <code>0</code>, or <code>+1</code>. The <a href="https://arxiv.org/abs/2310.11453">BitNet paper (2023)</a> from Microsoft Research proposed this architecture and showed it could theoretically match full-precision accuracy if the model is <strong>trained from scratch</strong> with 1-bit weights rather than compressed after<span class="widont">&nbsp;</span>training.</p>
-<p>That last part is the key<span class="widont">&nbsp;</span>distinction:</p>
+<h2 id="what-is-a-1-bit-llm-">What is a 1-bit LLM?</h2>
+<p>Most LLMs store their weights as 16-bit or 32-bit floating-point numbers. Quantisation (Q4, Q8, etc.) compresses these to smaller integer representations, trading some accuracy for smaller file sizes. A Q4 model is roughly half the size of its FP16 equivalent.</p>
+<p><strong>1-bit models take this to the extreme.</strong> Each weight is represented using just a single bit — effectively <code>-1</code>, <code>0</code>, or <code>+1</code>. The <a href="https://arxiv.org/abs/2310.11453">BitNet paper (2023)</a> from Microsoft Research proposed this architecture and showed it could theoretically match full-precision accuracy if the model is <strong>trained from scratch</strong> with 1-bit weights rather than compressed after training.</p>
+<p>That last part is the key distinction:</p>
 <blockquote>
-<p>1-bit models are not compressed versions of existing models. They are entirely new models trained differently from the ground<span class="widont">&nbsp;</span>up.</p>
+<p>1-bit models are not compressed versions of existing models. They are entirely new models trained differently from the ground up.</p>
 </blockquote>
-<p>This means you can’t just take Llama 3 and “1-bit quantise” it. You need a model purpose-built for this architecture — which is why it took years for any commercially viable 1-bit model to<span class="widont">&nbsp;</span>appear.</p>
+<p>This means you can’t just take Llama 3 and “1-bit quantise” it. You need a model purpose-built for this architecture — which is why it took years for any commercially viable 1-bit model to appear.</p>
 <hr>
-<h2 id="why-does-this-matter-">Why does this<span class="widont">&nbsp;</span>matter?</h2>
-<p>The memory savings are extraordinary. Consider the Bonsai 8B<span class="widont">&nbsp;</span>model:</p>
+<h2 id="why-does-this-matter-">Why does this matter?</h2>
+<p>The memory savings are extraordinary. Consider the Bonsai 8B model:</p>
 <table>
 <thead>
 <tr>
 <th>Format</th>
 <th>File size</th>
-<th><span class="caps">VRAM</span> needed</th>
+<th>VRAM needed</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><span class="caps">FP16</span> (full precision)</td>
-<td>~16.3 <span class="caps">GB</span></td>
-<td>~16+ <span class="caps">GB</span></td>
+<td>FP16 (full precision)</td>
+<td>~16.3 GB</td>
+<td>~16+ GB</td>
 </tr>
 <tr>
 <td>Q4_K_M (standard quant)</td>
-<td>~4.9 <span class="caps">GB</span></td>
-<td>~5–6 <span class="caps">GB</span></td>
+<td>~4.9 GB</td>
+<td>~5–6 GB</td>
 </tr>
 <tr>
 <td><strong>Bonsai 1-bit</strong></td>
-<td><strong>1.16 <span class="caps">GB</span></strong></td>
-<td><strong>~1.1 <span class="caps">GB</span></strong></td>
+<td><strong>1.16 GB</strong></td>
+<td><strong>~1.1 GB</strong></td>
 </tr>
 </tbody></table>
-<p>That’s a 14× reduction from <span class="caps">FP16</span> — and with <strong>no meaningful accuracy loss</strong> compared to a standard 8B model, because the intelligence comes from the architecture, not from<span class="widont">&nbsp;</span>precision.</p>
-<p>The other win is speed. Because the weight operations reduce to simple additions rather than floating-point multiplications, the <span class="caps">CPU</span> and <span class="caps">GPU</span> can process tokens significantly faster. On an <span class="caps">RTX</span> 5080, Bonsai 8B generates around <strong>181 tokens/sec</strong> — roughly 3–4× faster than a typical Q4 8B<span class="widont">&nbsp;</span>model.</p>
-<p>For context: combine this with <span class="caps">KV</span> cache compression techniques like <a href="https://arxiv.org/abs/2404.03382">TurboQuant</a> and you could theoretically run a <strong>27B-class model with a 32K context window in under 4 <span class="caps">GB</span> of <span class="caps">RAM</span></strong>. That changes what’s possible on consumer hardware<span class="widont">&nbsp;</span>entirely.</p>
+<p>That’s a 14× reduction from FP16 — and with <strong>no meaningful accuracy loss</strong> compared to a standard 8B model, because the intelligence comes from the architecture, not from precision.</p>
+<p>The other win is speed. Because the weight operations reduce to simple additions rather than floating-point multiplications, the CPU and GPU can process tokens significantly faster. On an RTX 5080, Bonsai 8B generates around <strong>181 tokens/sec</strong> — roughly 3–4× faster than a typical Q4 8B model.</p>
+<p>For context: combine this with KV cache compression techniques like <a href="https://arxiv.org/abs/2404.03382">TurboQuant</a> and you could theoretically run a <strong>27B-class model with a 32K context window in under 4 GB of RAM</strong>. That changes what’s possible on consumer hardware entirely.</p>
 <hr>
-<h2 id="enter-bonsai-the-first-viable-1-bit-models">Enter Bonsai — the first viable 1-bit<span class="widont">&nbsp;</span>models</h2>
-<p>In early 2025, <a href="https://prism-ml.com/">PrismML</a> released <strong>Bonsai</strong> — the first commercially usable 1-bit LLMs. Three sizes are<span class="widont">&nbsp;</span>available:</p>
+<h2 id="enter-bonsai-the-first-viable-1-bit-models">Enter Bonsai — the first viable 1-bit models</h2>
+<p>In early 2025, <a href="https://prism-ml.com/">PrismML</a> released <strong>Bonsai</strong> — the first commercially usable 1-bit LLMs. Three sizes are available:</p>
 <table>
 <thead>
 <tr>
@@ -95,57 +104,57 @@
 </thead>
 <tbody><tr>
 <td><a href="https://huggingface.co/prism-ml/Bonsai-1.7B-gguf">Bonsai-1.7B</a></td>
-<td>~300 <span class="caps">MB</span></td>
+<td>~300 MB</td>
 <td>Mobile / very constrained hardware</td>
 </tr>
 <tr>
 <td><a href="https://huggingface.co/prism-ml/Bonsai-4B-gguf">Bonsai-4B</a></td>
-<td>~600 <span class="caps">MB</span></td>
+<td>~600 MB</td>
 <td>Mid-range, up to ~130 tok/sec on M4 Pro</td>
 </tr>
 <tr>
 <td><a href="https://huggingface.co/prism-ml/Bonsai-8B-gguf">Bonsai-8B</a></td>
-<td>1.16 <span class="caps">GB</span></td>
+<td>1.16 GB</td>
 <td>Recommended for laptop/desktop</td>
 </tr>
 </tbody></table>
-<p>All three ship in <span class="caps">GGUF</span> format (and Apple <span class="caps">MLX</span> format for Mac). They support a <strong>65,536-token context window</strong> — far larger than most small models. Tool calling works well, and in practice the 8B feels closer to a 13B model in<span class="widont">&nbsp;</span>capability.</p>
-<p>One important caveat: <strong>these models are proprietary</strong>. They are not open-weight. If that matters to you, the Microsoft BitNet repo has open models (up to 8B) but they are undertrained and not currently<span class="widont">&nbsp;</span>production-quality.</p>
+<p>All three ship in GGUF format (and Apple MLX format for Mac). They support a <strong>65,536-token context window</strong> — far larger than most small models. Tool calling works well, and in practice the 8B feels closer to a 13B model in capability.</p>
+<p>One important caveat: <strong>these models are proprietary</strong>. They are not open-weight. If that matters to you, the Microsoft BitNet repo has open models (up to 8B) but they are undertrained and not currently production-quality.</p>
 <hr>
-<h2 id="the-catch-you-need-a-special-llama-cpp-fork">The catch — you need a special llama.cpp<span class="widont">&nbsp;</span>fork</h2>
-<p>Standard <code>llama.cpp</code> will refuse to load a Bonsai <span class="caps">GGUF</span> with an <code>invalid ggml type</code> error. Bonsai uses a custom quantisation type (<code>Q1_0_g128</code>) that requires dedicated <span class="caps">CUDA</span> kernels not yet in the upstream<span class="widont">&nbsp;</span>release.</p>
-<p>PrismML maintain their own fork of llama.cpp with these kernels<span class="widont">&nbsp;</span>included:</p>
+<h2 id="the-catch-you-need-a-special-llama-cpp-fork">The catch — you need a special llama.cpp fork</h2>
+<p>Standard <code>llama.cpp</code> will refuse to load a Bonsai GGUF with an <code>invalid ggml type</code> error. Bonsai uses a custom quantisation type (<code>Q1_0_g128</code>) that requires dedicated CUDA kernels not yet in the upstream release.</p>
+<p>PrismML maintain their own fork of llama.cpp with these kernels included:</p>
 <p><strong><a href="https://github.com/PrismML-Eng/llama.cpp">github.com/PrismML-Eng/llama.cpp</a></strong></p>
-<p>Prebuilt Windows binaries are on the releases page — no compiling<span class="widont">&nbsp;</span>required.</p>
+<p>Prebuilt Windows binaries are on the releases page — no compiling required.</p>
 <blockquote>
-<p><strong>Tip:</strong> The fork does lag behind upstream llama.cpp. This means some newer features (like certain samplers or multimodal support) may not be available. For pure text inference it’s<span class="widont">&nbsp;</span>fine.</p>
+<p><strong>Tip:</strong> The fork does lag behind upstream llama.cpp. This means some newer features (like certain samplers or multimodal support) may not be available. For pure text inference it’s fine.</p>
 </blockquote>
 <hr>
-<h2 id="setup-on-windows-nvidia-gpu-">Setup on Windows (<span class="caps">NVIDIA</span><span class="widont">&nbsp;</span><span class="caps">GPU</span>)</h2>
+<h2 id="setup-on-windows-nvidia-gpu-">Setup on Windows (NVIDIA GPU)</h2>
 <h3 id="prerequisites">Prerequisites</h3>
 <ul>
-<li>Windows 10 or<span class="widont">&nbsp;</span>11</li>
-<li><span class="caps">NVIDIA</span> <span class="caps">GPU</span> with <span class="caps">CUDA</span> 12.4 or 13.1 drivers<span class="widont">&nbsp;</span>installed</li>
-<li>~3 <span class="caps">GB</span> free disk<span class="widont">&nbsp;</span>space</li>
+<li>Windows 10 or 11</li>
+<li>NVIDIA GPU with CUDA 12.4 or 13.1 drivers installed</li>
+<li>~3 GB free disk space</li>
 </ul>
-<h3 id="step-1-create-the-install-folder">Step 1 — Create the install<span class="widont">&nbsp;</span>folder</h3>
+<h3 id="step-1-create-the-install-folder">Step 1 — Create the install folder</h3>
 <pre><code>mkdir C:\1bitllm
 mkdir C:\1bitllm\bin
-mkdir C:\1bitllm\models</code></pre><h3 id="step-2-download-the-prismml-llama-cpp-binaries">Step 2 — Download the PrismML llama.cpp<span class="widont">&nbsp;</span>binaries</h3>
-<p>Go to the <a href="https://github.com/PrismML-Eng/llama.cpp/releases">PrismML llama.cpp releases page</a> and download two zip files matching your <span class="caps">CUDA</span><span class="widont">&nbsp;</span>version:</p>
+mkdir C:\1bitllm\models</code></pre><h3 id="step-2-download-the-prismml-llama-cpp-binaries">Step 2 — Download the PrismML llama.cpp binaries</h3>
+<p>Go to the <a href="https://github.com/PrismML-Eng/llama.cpp/releases">PrismML llama.cpp releases page</a> and download two zip files matching your CUDA version:</p>
 <ul>
 <li><code>llama-prism-b1-f5dda72-bin-win-cuda-13.1-x64.zip</code></li>
 <li><code>cudart-llama-bin-win-cuda-13.1-x64.zip</code></li>
 </ul>
 <p>Extract both into <code>C:\1bitllm\bin\</code>. The folder should contain <code>llama-server.exe</code>, <code>llama-cli.exe</code>, and several <code>.dll</code> files including <code>ggml-cuda.dll</code>.</p>
 <blockquote>
-<p><strong><span class="caps">CUDA</span> version tip:</strong> Check your driver version with <code>nvidia-smi</code>. <span class="caps">CUDA</span> 13.1 requires driver 570+. If you’re on an older driver, download the <span class="caps">CUDA</span> 12.4 variants<span class="widont">&nbsp;</span>instead.</p>
+<p><strong>CUDA version tip:</strong> Check your driver version with <code>nvidia-smi</code>. CUDA 13.1 requires driver 570+. If you’re on an older driver, download the CUDA 12.4 variants instead.</p>
 </blockquote>
-<h3 id="step-3-download-the-bonsai-model">Step 3 — Download the Bonsai<span class="widont">&nbsp;</span>model</h3>
-<p>From <a href="https://huggingface.co/prism-ml/Bonsai-8B-gguf">huggingface.co/prism-ml/Bonsai-8B-gguf</a>, download <code>Bonsai-8B.gguf</code> (1.16 <span class="caps">GB</span>) and save it to <code>C:\1bitllm\models\</code>.</p>
-<p>You can also use the Hugging Face<span class="widont">&nbsp;</span><span class="caps">CLI</span>:</p>
+<h3 id="step-3-download-the-bonsai-model">Step 3 — Download the Bonsai model</h3>
+<p>From <a href="https://huggingface.co/prism-ml/Bonsai-8B-gguf">huggingface.co/prism-ml/Bonsai-8B-gguf</a>, download <code>Bonsai-8B.gguf</code> (1.16 GB) and save it to <code>C:\1bitllm\models\</code>.</p>
+<p>You can also use the Hugging Face CLI:</p>
 <pre><code>pip install huggingface_hub
-huggingface-cli download prism-ml/Bonsai-8B-gguf Bonsai-8B.gguf --local-dir C:\1bitllm\models</code></pre><h3 id="step-4-start-the-server">Step 4 — Start the<span class="widont">&nbsp;</span>server</h3>
+huggingface-cli download prism-ml/Bonsai-8B-gguf Bonsai-8B.gguf --local-dir C:\1bitllm\models</code></pre><h3 id="step-4-start-the-server">Step 4 — Start the server</h3>
 <p>Open a terminal in <code>C:\1bitllm\bin\</code> and run:</p>
 <pre><code>llama-server.exe -m ..\models\Bonsai-8B.gguf -ngl 99 --ctx-size 65536 --port 8080</code></pre><p>Flag breakdown:</p>
 <table>
@@ -157,7 +166,7 @@ huggingface-cli download prism-ml/Bonsai-8B-gguf Bonsai-8B.gguf --local-dir C:\1
 </thead>
 <tbody><tr>
 <td><code>-ngl 99</code></td>
-<td>Offload all layers to <span class="caps">GPU</span>. Remove this for <span class="caps">CPU</span>-only.</td>
+<td>Offload all layers to GPU. Remove this for CPU-only.</td>
 </tr>
 <tr>
 <td><code>--ctx-size 65536</code></td>
@@ -165,29 +174,29 @@ huggingface-cli download prism-ml/Bonsai-8B-gguf Bonsai-8B.gguf --local-dir C:\1
 </tr>
 <tr>
 <td><code>--port 8080</code></td>
-<td>Port for the built-in web <span class="caps">UI</span> and OpenAI-compatible <span class="caps">API</span></td>
+<td>Port for the built-in web UI and OpenAI-compatible API</td>
 </tr>
 </tbody></table>
 <p>Wait for:</p>
-<pre><code>main: server is listening on http://127.0.0.1:8080</code></pre><h3 id="step-5-test-it">Step 5 — Test<span class="widont">&nbsp;</span>it</h3>
-<p>Open <code>http://localhost:8080</code> in your browser. You’ll get a basic chat<span class="widont">&nbsp;</span><span class="caps">UI</span>.</p>
-<p>Or test the <span class="caps">API</span> directly (it’s<span class="widont">&nbsp;</span>OpenAI-compatible):</p>
-<pre><code class="language-powershell">curl http://localhost:<span class="number">8080</span>/v1/chat/completions `
-  <span class="literal">-H</span> <span class="string">"Content-Type: application/json"</span> `
-  <span class="literal">-d</span> <span class="string">'{\"model\":\"bonsai\",\"messages\":[{\"role\":\"user\",\"content\":\"Hello!\"}]}'</span></code></pre>
+<pre><code>main: server is listening on http://127.0.0.1:8080</code></pre><h3 id="step-5-test-it">Step 5 — Test it</h3>
+<p>Open <code>http://localhost:8080</code> in your browser. You’ll get a basic chat UI.</p>
+<p>Or test the API directly (it’s OpenAI-compatible):</p>
+<pre><code class="language-bash">curl http://localhost:8080/v1/chat/completions `
+  -H <span class="string">"Content-Type: application/json"</span> `
+  -d <span class="string">'{\"model\":\"bonsai\",\"messages\":[{\"role\":\"user\",\"content\":\"Hello!\"}]}'</span></code></pre>
 <hr>
 <h2 id="automated-install-script">Automated install script</h2>
 <p>If you’d rather script the whole thing, here’s a PowerShell installer that handles downloading, extracting, and generating a <code>run.ps1</code>:</p>
-<pre><code class="language-powershell"><span class="comment"># Default — 8B model, <span class="caps">CUDA</span> 13.1, port 8080</span>
-powershell <span class="literal">-ExecutionPolicy</span> Bypass <span class="operator">-File</span> install.ps1
+<pre><code class="language-bash"><span class="comment"># Default — 8B model, CUDA 13.1, port 8080</span>
+powershell -ExecutionPolicy Bypass -File install.ps1
 
 <span class="comment"># Options</span>
-powershell <span class="literal">-ExecutionPolicy</span> Bypass <span class="operator">-File</span> install.ps1 <span class="literal">-ModelSize</span> <span class="number">4</span>B
-powershell <span class="literal">-ExecutionPolicy</span> Bypass <span class="operator">-File</span> install.ps1 <span class="literal">-CudaVersion</span> <span class="number">12.4</span>
-powershell <span class="literal">-ExecutionPolicy</span> Bypass <span class="operator">-File</span> install.ps1 <span class="literal">-InstallDir</span> D:\ai\bonsai <span class="literal">-Port</span> <span class="number">8081</span></code></pre>
-<p>After install, use the generated <code>run.ps1</code> to start the server with the correct flags<span class="widont">&nbsp;</span>automatically.</p>
+powershell -ExecutionPolicy Bypass -File install.ps1 -ModelSize 4B
+powershell -ExecutionPolicy Bypass -File install.ps1 -CudaVersion 12.4
+powershell -ExecutionPolicy Bypass -File install.ps1 -InstallDir D:\ai\bonsai -Port 8081</code></pre>
+<p>After install, use the generated <code>run.ps1</code> to start the server with the correct flags automatically.</p>
 <hr>
-<h2 id="performance-rtx-5080-laptop-16-gb-vram-">Performance (<span class="caps">RTX</span> 5080 Laptop, 16 <span class="caps">GB</span><span class="widont">&nbsp;</span><span class="caps">VRAM</span>)</h2>
+<h2 id="performance-rtx-5080-laptop-16-gb-vram-">Performance (RTX 5080 Laptop, 16 GB VRAM)</h2>
 <table>
 <thead>
 <tr>
@@ -196,8 +205,8 @@ powershell <span class="literal">-ExecutionPolicy</span> Bypass <span class="ope
 </tr>
 </thead>
 <tbody><tr>
-<td><span class="caps">VRAM</span> used</td>
-<td>~1.1 <span class="caps">GB</span></td>
+<td>VRAM used</td>
+<td>~1.1 GB</td>
 </tr>
 <tr>
 <td>Generation speed</td>
@@ -216,42 +225,42 @@ powershell <span class="literal">-ExecutionPolicy</span> Bypass <span class="ope
 <td>65,536 tokens</td>
 </tr>
 </tbody></table>
-<p>Speed drops as the context fills — this is expected, as the <span class="caps">KV</span> cache grows and attention computation scales with sequence length. Even at 32K tokens in context it stays very<span class="widont">&nbsp;</span>usable.</p>
+<p>Speed drops as the context fills — this is expected, as the KV cache grows and attention computation scales with sequence length. Even at 32K tokens in context it stays very usable.</p>
 <hr>
-<h2 id="connecting-it-to-other-tools">Connecting it to other<span class="widont">&nbsp;</span>tools</h2>
-<p>The server exposes an OpenAI-compatible <span class="caps">API</span> at <code>http://localhost:8080/v1</code>, which means it drops straight<span class="widont">&nbsp;</span>into:</p>
+<h2 id="connecting-it-to-other-tools">Connecting it to other tools</h2>
+<p>The server exposes an OpenAI-compatible API at <code>http://localhost:8080/v1</code>, which means it drops straight into:</p>
 <ul>
-<li><strong><a href="https://anythingllm.com/">AnythingLLM</a></strong> — add a custom OpenAI endpoint and you get <span class="caps">RAG</span>, web search, <span class="caps">PDF</span> generation, tool calling, and agents all working against the local<span class="widont">&nbsp;</span>model</li>
-<li><strong><a href="https://github.com/open-webui/open-webui">Open WebUI</a></strong> — clean chat interface with conversation<span class="widont">&nbsp;</span>history</li>
-<li><strong><a href="https://continue.dev/">Continue</a></strong> — <span class="caps">VS</span> Code / JetBrains extension for inline <span class="caps">AI</span><span class="widont">&nbsp;</span>assistance</li>
-<li>Any OpenAI <span class="caps">SDK</span> — just set <code>base_url</code> to <code>http://localhost:8080/v1</code> and <code>api_key</code> to anything</li>
+<li><strong><a href="https://anythingllm.com/">AnythingLLM</a></strong> — add a custom OpenAI endpoint and you get RAG, web search, PDF generation, tool calling, and agents all working against the local model</li>
+<li><strong><a href="https://github.com/open-webui/open-webui">Open WebUI</a></strong> — clean chat interface with conversation history</li>
+<li><strong><a href="https://continue.dev/">Continue</a></strong> — VS Code / JetBrains extension for inline AI assistance</li>
+<li>Any OpenAI SDK — just set <code>base_url</code> to <code>http://localhost:8080/v1</code> and <code>api_key</code> to anything</li>
 </ul>
-<p>The tool-calling capability is notably stronger than other 1-bit models currently available. Multi-step agentic tasks (web search → summarise → create document) work<span class="widont">&nbsp;</span>reliably.</p>
+<p>The tool-calling capability is notably stronger than other 1-bit models currently available. Multi-step agentic tasks (web search → summarise → create document) work reliably.</p>
 <hr>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p><strong><code>invalid ggml type</code> on load</strong>
-You’re using standard llama.cpp. Download the PrismML fork from the releases page linked<span class="widont">&nbsp;</span>above.</p>
-<p><strong>Slow generation / <span class="caps">CPU</span> fallback</strong>
-Run <code>nvidia-smi</code> to check <span class="caps">GPU</span> memory usage. If the model isn’t appearing there, try removing <code>-ngl 99</code> and re-adding it, or verify the <span class="caps">CUDA</span> DLLs are in the same folder as <code>llama-server.exe</code>.</p>
-<p><strong>Out of <span class="caps">VRAM</span></strong>
-The 8B model only needs ~1.1 <span class="caps">GB</span>. If you’re hitting limits, another application is likely holding <span class="caps">VRAM</span>. Close browsers, games, or other <span class="caps">AI</span> tools and<span class="widont">&nbsp;</span>retry.</p>
+You’re using standard llama.cpp. Download the PrismML fork from the releases page linked above.</p>
+<p><strong>Slow generation / CPU fallback</strong>
+Run <code>nvidia-smi</code> to check GPU memory usage. If the model isn’t appearing there, try removing <code>-ngl 99</code> and re-adding it, or verify the CUDA DLLs are in the same folder as <code>llama-server.exe</code>.</p>
+<p><strong>Out of VRAM</strong>
+The 8B model only needs ~1.1 GB. If you’re hitting limits, another application is likely holding VRAM. Close browsers, games, or other AI tools and retry.</p>
 <p><strong>Port already in use</strong>
-Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) and update any connected tools<span class="widont">&nbsp;</span>accordingly.</p>
+Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) and update any connected tools accordingly.</p>
 <hr>
 <h2 id="what-s-next">What’s next</h2>
-<p>The model sizes currently top out at 8B. But PrismML’s Discord has community members already experimenting with applying the 1-bit transformation to open-weight models like Qwen3 27B. If that proves out, running a 27B-class model on a mid-range laptop with 8 <span class="caps">GB</span> <span class="caps">RAM</span> becomes<span class="widont">&nbsp;</span>realistic.</p>
-<p>Pair that with proper <span class="caps">KV</span> cache compression (TurboQuant is tracking toward upstream llama.cpp) and local <span class="caps">AI</span> inference takes a meaningful step toward matching the experience of calling a cloud <span class="caps">API</span> — without the latency, cost, or privacy<span class="widont">&nbsp;</span>tradeoffs.</p>
+<p>The model sizes currently top out at 8B. But PrismML’s Discord has community members already experimenting with applying the 1-bit transformation to open-weight models like Qwen3 27B. If that proves out, running a 27B-class model on a mid-range laptop with 8 GB RAM becomes realistic.</p>
+<p>Pair that with proper KV cache compression (TurboQuant is tracking toward upstream llama.cpp) and local AI inference takes a meaningful step toward matching the experience of calling a cloud API — without the latency, cost, or privacy tradeoffs.</p>
 <p>Worth watching.</p>
 <hr>
 <h2 id="links">Links</h2>
 <ul>
-<li><a href="https://arxiv.org/abs/2310.11453">BitNet paper (arXiv,<span class="widont">&nbsp;</span>2023)</a></li>
+<li><a href="https://arxiv.org/abs/2310.11453">BitNet paper (arXiv, 2023)</a></li>
 <li><a href="https://github.com/microsoft/BitNet">Microsoft BitNet repo</a></li>
 <li><a href="https://prism-ml.com/bonsai">PrismML Bonsai announcement</a></li>
 <li><a href="https://github.com/PrismML-Eng/llama.cpp">PrismML llama.cpp fork</a></li>
-<li><a href="https://huggingface.co/prism-ml/Bonsai-8B-gguf">Bonsai-8B on Hugging<span class="widont">&nbsp;</span>Face</a></li>
-<li><a href="https://huggingface.co/prism-ml/Bonsai-4B-gguf">Bonsai-4B on Hugging<span class="widont">&nbsp;</span>Face</a></li>
-<li><a href="https://huggingface.co/prism-ml/Bonsai-1.7B-gguf">Bonsai-1.7B on Hugging<span class="widont">&nbsp;</span>Face</a></li>
+<li><a href="https://huggingface.co/prism-ml/Bonsai-8B-gguf">Bonsai-8B on Hugging Face</a></li>
+<li><a href="https://huggingface.co/prism-ml/Bonsai-4B-gguf">Bonsai-4B on Hugging Face</a></li>
+<li><a href="https://huggingface.co/prism-ml/Bonsai-1.7B-gguf">Bonsai-1.7B on Hugging Face</a></li>
 <li><a href="https://arxiv.org/abs/2404.03382">TurboQuant paper (arXiv)</a></li>
 <li><a href="https://anythingllm.com/">AnythingLLM</a></li>
 </ul>
@@ -273,6 +282,19 @@ Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) a
     </footer>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
     <script>
+      // Drawer
+      function openDrawer() {
+        document.getElementById('drawer').classList.add('drawer-open');
+        document.getElementById('drawer-overlay').classList.add('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+      }
+      
+      function closeDrawer() {
+        document.getElementById('drawer').classList.remove('drawer-open');
+        document.getElementById('drawer-overlay').classList.remove('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+      }
+      
       // Table of contents — article pages only
       document.addEventListener('DOMContentLoaded', function() {
         if (!document.body.classList.contains('article-detail')) return;
@@ -283,7 +305,6 @@ Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) a
         var headings = content.querySelectorAll('h2, h3');
         if (headings.length < 2) return;
       
-        // Slug helper
         function slugify(text) {
           return text.trim()
             .toLowerCase()
@@ -292,7 +313,6 @@ Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) a
             .replace(/-{2,}/g, '-');
         }
       
-        // Assign IDs to headings that don't have one
         var usedIds = {};
         headings.forEach(function(h) {
           if (!h.id) {
@@ -305,14 +325,13 @@ Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) a
           usedIds[h.id] = true;
         });
       
-        // Build nav element
         var nav = document.createElement('nav');
         nav.className = 'toc';
         nav.setAttribute('aria-label', 'Table of contents');
       
-        var titleEl = document.createElement('button');
+        var titleEl = document.createElement('div');
         titleEl.className = 'toc-title';
-        titleEl.innerHTML = '<span>On this page</span><span class="toc-chevron">&#9660;</span>';
+        titleEl.innerHTML = '<span>On this page</span>';
         nav.appendChild(titleEl);
       
         var list = document.createElement('ul');
@@ -329,7 +348,7 @@ Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) a
             e.preventDefault();
             document.getElementById(h.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
             history.pushState(null, null, '#' + h.id);
-            if (window.innerWidth <= 900) nav.classList.add('toc-collapsed');
+            closeDrawer();
           });
           li.appendChild(a);
           list.appendChild(li);
@@ -337,23 +356,20 @@ Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) a
       
         nav.appendChild(list);
       
-        // Insert before article, wrap in flex layout
-        var article = document.querySelector('article.article');
-        if (!article) return;
-        article.parentElement.classList.add('article-with-toc');
-        article.parentElement.insertBefore(nav, article);
+        var hamburger = document.getElementById('hamburger');
+        var isMobile = hamburger && window.getComputedStyle(hamburger).display !== 'none';
       
-        // Auto-collapse on mobile
-        if (window.innerWidth <= 900) {
-          nav.classList.add('toc-collapsed');
+        if (isMobile) {
+          // Mobile: put TOC inside the drawer
+          var drawerBody = document.getElementById('drawer-body');
+          if (drawerBody) drawerBody.appendChild(nav);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector('article.article');
+          if (!article) return;
+          article.parentElement.classList.add('article-with-toc');
+          article.parentElement.insertBefore(nav, article);
         }
-      
-        // Mobile collapse toggle
-        titleEl.addEventListener('click', function() {
-          if (window.innerWidth <= 900) {
-            nav.classList.toggle('toc-collapsed');
-          }
-        });
       
         // Highlight active heading via IntersectionObserver
         var tocLinks = [].slice.call(nav.querySelectorAll('.toc-link'));
@@ -372,9 +388,9 @@ Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) a
       
         headings.forEach(function(h) { observer.observe(h); });
       });
+      
     </script>
     <script>
-      // Theme management
       function getTheme() {
         return document.documentElement.getAttribute('data-theme') || 'light';
       }
@@ -384,15 +400,14 @@ Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) a
         const hljsLink = document.getElementById('hljs-theme');
         const themeName = theme === 'dark' ? 'atom-one-dark' : 'atom-one-light';
         hljsLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/${themeName}.min.css`;
-        // Re-highlight code blocks after theme change
         if (typeof hljs !== 'undefined') {
           document.querySelectorAll('pre code').forEach(block => {
+            delete block.dataset.highlighted;
             hljs.highlightElement(block);
           });
         }
       }
       
-      // Dark mode toggle function
       function toggleTheme() {
         const currentTheme = getTheme();
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -401,13 +416,8 @@ Change <code>--port 8080</code> to <code>--port 8081</code> (or any free port) a
         updateHljsTheme();
       }
       
-      // Initialize on page load
       document.addEventListener('DOMContentLoaded', function() {
         updateHljsTheme();
-        // Highlight code blocks
-        if (typeof hljs !== 'undefined') {
-          hljs.highlightAll();
-        }
       });
     </script>
   </body>

@@ -11,21 +11,30 @@
     <link rel="stylesheet" href="/css/main.css">
     <link id="hljs-theme" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-light.min.css">
     <script>
-      // Dark mode toggle functionality
       (function() {
         const getTheme = () => localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         const setTheme = (theme) => {
           localStorage.setItem('theme', theme);
           document.documentElement.setAttribute('data-theme', theme);
         };
-        // Initialize theme
         setTheme(getTheme());
       })();
     </script>
   </head>
   <body class="article-detail">
-    <!-- Dark mode toggle button-->
+    <!-- Desktop theme toggle — hidden on mobile-->
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
+    <!-- Mobile hamburger — hidden on desktop-->
+    <button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <!-- Mobile drawer-->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+    <aside class="drawer" id="drawer">
+      <div class="drawer-header"><a class="drawer-home" href="/">← Home</a>
+        <button class="drawer-theme" onclick="toggleTheme()" aria-label="Toggle theme"></button>
+        <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
+      </div>
+      <div class="drawer-body" id="drawer-body"></div>
+    </aside>
     <header class="header">
       <div class="content-wrap">
         <div class="title-with-image">
@@ -42,37 +51,37 @@
       <div class="content-wrap">
         <article class="article has-hero">
           <section class="content"><img class="hero-image" src="/articles/bankers-rounding/death-by-accountant.jpg" alt="Avoid death by accountant - Get bankers rounding right!"><p><img src="/articles/bankers-rounding/death-by-accountant.jpg" alt="Death by Accountant"></p>
-<p>If you work with financial data, you will run into the situation where you need to round calculated values to the nearest<span class="widont">&nbsp;</span>cent.</p>
-<p>If you round up in every case, then that may work internally, but if your accounting package works otherwise (<strong>it will</strong>), and the other side of the ledger comes from somewhere other than your code, you may well have values that don’t balance exactly—which is critical for accounting<span class="widont">&nbsp;</span>purposes. </p>
-<p>So it’s important to have these rounding algorithms in sync, or you’ll run into an <strong>angry accountant</strong>. Given the number of transactions that occur daily in most systems, this will pop up often if it doesn’t get done<span class="widont">&nbsp;</span>right.</p>
+<p>If you work with financial data, you will run into the situation where you need to round calculated values to the nearest cent.</p>
+<p>If you round up in every case, then that may work internally, but if your accounting package works otherwise (<strong>it will</strong>), and the other side of the ledger comes from somewhere other than your code, you may well have values that don’t balance exactly—which is critical for accounting purposes. </p>
+<p>So it’s important to have these rounding algorithms in sync, or you’ll run into an <strong>angry accountant</strong>. Given the number of transactions that occur daily in most systems, this will pop up often if it doesn’t get done right.</p>
 <h2 id="different-rounding-methods"><strong>Different Rounding Methods</strong></h2>
 <p>There are many possible ways to calculate rounding when you have a difference of exactly <strong>$0.005</strong>. <a href="https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even">See wikipedia</a>. </p>
-<p>Do you round up to <strong>1c</strong>, or down to <strong>0c</strong>? Note that this isn’t an issue for <strong>$0.0051</strong>, which is closer to <strong>1c</strong>. It’s only for <strong>exact amounts ending in 5</strong> as the third significant<span class="widont">&nbsp;</span>digit.</p>
-<h2 id="bankers-rounding-the-standard-in-finance"><strong>Bankers Rounding - The Standard in<span class="widont">&nbsp;</span>Finance</strong></h2>
-<p>Thankfully, a convention has arisen in the financial world called <strong>Bankers Rounding</strong>. This is the <strong>default rounding mode in C#</strong> for <code>decimal</code>, but it <strong>can be overridden</strong> by choosing a different midpoint rounding<span class="widont">&nbsp;</span>mode. </p>
-<p>I’ve seen this done a lot, <strong>often for no good reason.</strong><span class="widont">&nbsp;</span>😬</p>
-<h3 id="how-bankers-rounding-works"><strong>How Bankers Rounding<span class="widont">&nbsp;</span>Works</strong></h3>
-<p>Bankers Rounding rounds every amount <strong>up or down to the nearest <span class="caps">EVEN</span><span class="widont">&nbsp;</span>cent</strong>.</p>
-<h3 id="example-1-rounding-up"><strong>Example 1 - Rounding<span class="widont">&nbsp;</span>Up</strong></h3>
-<p>Consider <strong>$0.555</strong>, which has two <span class="caps">EVEN</span> cents on either<span class="widont">&nbsp;</span>side:</p>
-<p>$0.54 (difference of 1.5c) → rounding down. $0.555 $0.56 (difference of 0.5c) → rounding<span class="widont">&nbsp;</span>up.</p>
-<p>Since <strong>0.5 &lt; 1.5</strong>, we round<span class="widont">&nbsp;</span>up.</p>
+<p>Do you round up to <strong>1c</strong>, or down to <strong>0c</strong>? Note that this isn’t an issue for <strong>$0.0051</strong>, which is closer to <strong>1c</strong>. It’s only for <strong>exact amounts ending in 5</strong> as the third significant digit.</p>
+<h2 id="bankers-rounding-the-standard-in-finance"><strong>Bankers Rounding - The Standard in Finance</strong></h2>
+<p>Thankfully, a convention has arisen in the financial world called <strong>Bankers Rounding</strong>. This is the <strong>default rounding mode in C#</strong> for <code>decimal</code>, but it <strong>can be overridden</strong> by choosing a different midpoint rounding mode. </p>
+<p>I’ve seen this done a lot, <strong>often for no good reason.</strong> 😬</p>
+<h3 id="how-bankers-rounding-works"><strong>How Bankers Rounding Works</strong></h3>
+<p>Bankers Rounding rounds every amount <strong>up or down to the nearest EVEN cent</strong>.</p>
+<h3 id="example-1-rounding-up"><strong>Example 1 - Rounding Up</strong></h3>
+<p>Consider <strong>$0.555</strong>, which has two EVEN cents on either side:</p>
+<p>$0.54 (difference of 1.5c) → rounding down. $0.555 $0.56 (difference of 0.5c) → rounding up.</p>
+<p>Since <strong>0.5 &lt; 1.5</strong>, we round up.</p>
 <p><strong>$0.555 → $0.56</strong></p>
-<h3 id="example-2-rounding-down"><strong>Example 2 - Rounding<span class="widont">&nbsp;</span>Down</strong></h3>
-<p>Consider <strong>$0.565</strong>, which also has two <span class="caps">EVEN</span> cents on either<span class="widont">&nbsp;</span>side:</p>
-<p>$0.56 (difference of 0.5c) → rounding down. $0.565 $0.58 (difference of 1.5c) → rounding<span class="widont">&nbsp;</span>up.</p>
-<p>Since <strong>0.5 &lt; 1.5</strong>, we round<span class="widont">&nbsp;</span>up.</p>
+<h3 id="example-2-rounding-down"><strong>Example 2 - Rounding Down</strong></h3>
+<p>Consider <strong>$0.565</strong>, which also has two EVEN cents on either side:</p>
+<p>$0.56 (difference of 0.5c) → rounding down. $0.565 $0.58 (difference of 1.5c) → rounding up.</p>
+<p>Since <strong>0.5 &lt; 1.5</strong>, we round up.</p>
 <p><strong>$0.565 → $0.56</strong></p>
 <hr>
-<h2 id="best-practice-use-a-financial-math-library"><strong>Best Practice: Use a Financial Math<span class="widont">&nbsp;</span>Library</strong></h2>
-<p>To prevent issues, <strong>create an organization-wide Financial Math library</strong> that includes a rounding method like<span class="widont">&nbsp;</span>this:</p>
+<h2 id="best-practice-use-a-financial-math-library"><strong>Best Practice: Use a Financial Math Library</strong></h2>
+<p>To prevent issues, <strong>create an organization-wide Financial Math library</strong> that includes a rounding method like this:</p>
 <pre><code class="language-csharp"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">decimal</span> <span class="title">UsingBankersRoundingToNearestCent</span>(<span class="params"><span class="keyword">this</span> <span class="keyword">decimal</span> amount</span>)</span> 
     =&gt; Math.Round(amount, <span class="number">2</span>, MidpointRounding.ToEven);</code></pre>
-<p>And enforce its usage across your<span class="widont">&nbsp;</span>codebase.</p>
+<p>And enforce its usage across your codebase.</p>
 <p>Even better:</p>
 <ul>
-<li>Add a linting rule to detect any usage of Math.Round() and flag it as an<span class="widont">&nbsp;</span>error.</li>
-<li>Require explicit overrides when necessary, ensuring no unexpected rounding bugs creep<span class="widont">&nbsp;</span>in.</li>
+<li>Add a linting rule to detect any usage of Math.Round() and flag it as an error.</li>
+<li>Require explicit overrides when necessary, ensuring no unexpected rounding bugs creep in.</li>
 </ul>
 
           </section>
@@ -92,6 +101,19 @@
     </footer>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
     <script>
+      // Drawer
+      function openDrawer() {
+        document.getElementById('drawer').classList.add('drawer-open');
+        document.getElementById('drawer-overlay').classList.add('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+      }
+      
+      function closeDrawer() {
+        document.getElementById('drawer').classList.remove('drawer-open');
+        document.getElementById('drawer-overlay').classList.remove('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+      }
+      
       // Table of contents — article pages only
       document.addEventListener('DOMContentLoaded', function() {
         if (!document.body.classList.contains('article-detail')) return;
@@ -102,7 +124,6 @@
         var headings = content.querySelectorAll('h2, h3');
         if (headings.length < 2) return;
       
-        // Slug helper
         function slugify(text) {
           return text.trim()
             .toLowerCase()
@@ -111,7 +132,6 @@
             .replace(/-{2,}/g, '-');
         }
       
-        // Assign IDs to headings that don't have one
         var usedIds = {};
         headings.forEach(function(h) {
           if (!h.id) {
@@ -124,14 +144,13 @@
           usedIds[h.id] = true;
         });
       
-        // Build nav element
         var nav = document.createElement('nav');
         nav.className = 'toc';
         nav.setAttribute('aria-label', 'Table of contents');
       
-        var titleEl = document.createElement('button');
+        var titleEl = document.createElement('div');
         titleEl.className = 'toc-title';
-        titleEl.innerHTML = '<span>On this page</span><span class="toc-chevron">&#9660;</span>';
+        titleEl.innerHTML = '<span>On this page</span>';
         nav.appendChild(titleEl);
       
         var list = document.createElement('ul');
@@ -148,7 +167,7 @@
             e.preventDefault();
             document.getElementById(h.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
             history.pushState(null, null, '#' + h.id);
-            if (window.innerWidth <= 900) nav.classList.add('toc-collapsed');
+            closeDrawer();
           });
           li.appendChild(a);
           list.appendChild(li);
@@ -156,23 +175,20 @@
       
         nav.appendChild(list);
       
-        // Insert before article, wrap in flex layout
-        var article = document.querySelector('article.article');
-        if (!article) return;
-        article.parentElement.classList.add('article-with-toc');
-        article.parentElement.insertBefore(nav, article);
+        var hamburger = document.getElementById('hamburger');
+        var isMobile = hamburger && window.getComputedStyle(hamburger).display !== 'none';
       
-        // Auto-collapse on mobile
-        if (window.innerWidth <= 900) {
-          nav.classList.add('toc-collapsed');
+        if (isMobile) {
+          // Mobile: put TOC inside the drawer
+          var drawerBody = document.getElementById('drawer-body');
+          if (drawerBody) drawerBody.appendChild(nav);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector('article.article');
+          if (!article) return;
+          article.parentElement.classList.add('article-with-toc');
+          article.parentElement.insertBefore(nav, article);
         }
-      
-        // Mobile collapse toggle
-        titleEl.addEventListener('click', function() {
-          if (window.innerWidth <= 900) {
-            nav.classList.toggle('toc-collapsed');
-          }
-        });
       
         // Highlight active heading via IntersectionObserver
         var tocLinks = [].slice.call(nav.querySelectorAll('.toc-link'));
@@ -191,9 +207,9 @@
       
         headings.forEach(function(h) { observer.observe(h); });
       });
+      
     </script>
     <script>
-      // Theme management
       function getTheme() {
         return document.documentElement.getAttribute('data-theme') || 'light';
       }
@@ -203,15 +219,14 @@
         const hljsLink = document.getElementById('hljs-theme');
         const themeName = theme === 'dark' ? 'atom-one-dark' : 'atom-one-light';
         hljsLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/${themeName}.min.css`;
-        // Re-highlight code blocks after theme change
         if (typeof hljs !== 'undefined') {
           document.querySelectorAll('pre code').forEach(block => {
+            delete block.dataset.highlighted;
             hljs.highlightElement(block);
           });
         }
       }
       
-      // Dark mode toggle function
       function toggleTheme() {
         const currentTheme = getTheme();
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -220,13 +235,8 @@
         updateHljsTheme();
       }
       
-      // Initialize on page load
       document.addEventListener('DOMContentLoaded', function() {
         updateHljsTheme();
-        // Highlight code blocks
-        if (typeof hljs !== 'undefined') {
-          hljs.highlightAll();
-        }
       });
     </script>
   </body>

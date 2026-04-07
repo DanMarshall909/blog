@@ -24,7 +24,7 @@ block content
     section.content
       if page.metadata.heroImage
         img.hero-image(src=page.metadata.heroImage alt=page.title)
-      != typogr(page.html).typogrify()
+      != page.html
 
 block prepend footer
   div.nav

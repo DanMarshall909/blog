@@ -15,20 +15,33 @@ html(lang='en')
       link(rel='stylesheet', href=contents.css['main.css'].url)
       link#hljs-theme(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-light.min.css')
       script.
-        // Dark mode toggle functionality
         (function() {
           const getTheme = () => localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
           const setTheme = (theme) => {
             localStorage.setItem('theme', theme);
             document.documentElement.setAttribute('data-theme', theme);
           };
-          // Initialize theme
           setTheme(getTheme());
         })();
   body(class=bodyclass)
-    // Dark mode toggle button
+    // Desktop theme toggle — hidden on mobile
     button.theme-toggle(onclick="toggleTheme()" aria-label="Toggle dark mode")
-    
+
+    // Mobile hamburger — hidden on desktop
+    button.hamburger(id="hamburger" onclick="openDrawer()" aria-label="Open menu")
+      span
+      span
+      span
+
+    // Mobile drawer
+    div.drawer-overlay(id="drawer-overlay" onclick="closeDrawer()")
+    aside.drawer(id="drawer")
+      div.drawer-header
+        a.drawer-home(href="/") ← Home
+        button.drawer-theme(onclick="toggleTheme()" aria-label="Toggle theme")
+        button.drawer-close(onclick="closeDrawer()" aria-label="Close") ✕
+      div.drawer-body(id="drawer-body")
+
     header.header
       div.content-wrap
         block header
@@ -49,9 +62,22 @@ html(lang='en')
             p &copy; #{ new Date().getFullYear() } #{ locals.owner } &mdash; powered by&nbsp;
               a(href='https://github.com/jnordberg/wintersmith') Wintersmith
               //- please leave the "powered by" if you use the design
-    
+
     script(src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js')
     script.
+      // Drawer
+      function openDrawer() {
+        document.getElementById('drawer').classList.add('drawer-open');
+        document.getElementById('drawer-overlay').classList.add('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+      }
+
+      function closeDrawer() {
+        document.getElementById('drawer').classList.remove('drawer-open');
+        document.getElementById('drawer-overlay').classList.remove('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+      }
+
       // Table of contents — article pages only
       document.addEventListener('DOMContentLoaded', function() {
         if (!document.body.classList.contains('article-detail')) return;
@@ -62,7 +88,6 @@ html(lang='en')
         var headings = content.querySelectorAll('h2, h3');
         if (headings.length < 2) return;
 
-        // Slug helper
         function slugify(text) {
           return text.trim()
             .toLowerCase()
@@ -71,7 +96,6 @@ html(lang='en')
             .replace(/-{2,}/g, '-');
         }
 
-        // Assign IDs to headings that don't have one
         var usedIds = {};
         headings.forEach(function(h) {
           if (!h.id) {
@@ -84,14 +108,13 @@ html(lang='en')
           usedIds[h.id] = true;
         });
 
-        // Build nav element
         var nav = document.createElement('nav');
         nav.className = 'toc';
         nav.setAttribute('aria-label', 'Table of contents');
 
-        var titleEl = document.createElement('button');
+        var titleEl = document.createElement('div');
         titleEl.className = 'toc-title';
-        titleEl.innerHTML = '<span>On this page</span><span class="toc-chevron">&#9660;</span>';
+        titleEl.innerHTML = '<span>On this page</span>';
         nav.appendChild(titleEl);
 
         var list = document.createElement('ul');
@@ -108,7 +131,7 @@ html(lang='en')
             e.preventDefault();
             document.getElementById(h.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
             history.pushState(null, null, '#' + h.id);
-            if (window.innerWidth <= 900) nav.classList.add('toc-collapsed');
+            closeDrawer();
           });
           li.appendChild(a);
           list.appendChild(li);
@@ -116,23 +139,20 @@ html(lang='en')
 
         nav.appendChild(list);
 
-        // Insert before article, wrap in flex layout
-        var article = document.querySelector('article.article');
-        if (!article) return;
-        article.parentElement.classList.add('article-with-toc');
-        article.parentElement.insertBefore(nav, article);
+        var hamburger = document.getElementById('hamburger');
+        var isMobile = hamburger && window.getComputedStyle(hamburger).display !== 'none';
 
-        // Auto-collapse on mobile
-        if (window.innerWidth <= 900) {
-          nav.classList.add('toc-collapsed');
+        if (isMobile) {
+          // Mobile: put TOC inside the drawer
+          var drawerBody = document.getElementById('drawer-body');
+          if (drawerBody) drawerBody.appendChild(nav);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector('article.article');
+          if (!article) return;
+          article.parentElement.classList.add('article-with-toc');
+          article.parentElement.insertBefore(nav, article);
         }
-
-        // Mobile collapse toggle
-        titleEl.addEventListener('click', function() {
-          if (window.innerWidth <= 900) {
-            nav.classList.toggle('toc-collapsed');
-          }
-        });
 
         // Highlight active heading via IntersectionObserver
         var tocLinks = [].slice.call(nav.querySelectorAll('.toc-link'));
@@ -151,8 +171,8 @@ html(lang='en')
 
         headings.forEach(function(h) { observer.observe(h); });
       });
+
     script.
-      // Theme management
       function getTheme() {
         return document.documentElement.getAttribute('data-theme') || 'light';
       }
@@ -162,15 +182,14 @@ html(lang='en')
         const hljsLink = document.getElementById('hljs-theme');
         const themeName = theme === 'dark' ? 'atom-one-dark' : 'atom-one-light';
         hljsLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/${themeName}.min.css`;
-        // Re-highlight code blocks after theme change
         if (typeof hljs !== 'undefined') {
           document.querySelectorAll('pre code').forEach(block => {
+            delete block.dataset.highlighted;
             hljs.highlightElement(block);
           });
         }
       }
 
-      // Dark mode toggle function
       function toggleTheme() {
         const currentTheme = getTheme();
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -179,11 +198,6 @@ html(lang='en')
         updateHljsTheme();
       }
 
-      // Initialize on page load
       document.addEventListener('DOMContentLoaded', function() {
         updateHljsTheme();
-        // Highlight code blocks
-        if (typeof hljs !== 'undefined') {
-          hljs.highlightAll();
-        }
       });
