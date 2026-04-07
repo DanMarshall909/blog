@@ -220,6 +220,7 @@ Worth watching.
 
 ## Links
 
+- [YouTube: How to run Bonsai 8B on Windows (the video that started this)](https://www.youtube.com/watch?v=0fWFetwHkVE)
 - [BitNet paper (arXiv, 2023)](https://arxiv.org/abs/2310.11453)
 - [Microsoft BitNet repo](https://github.com/microsoft/BitNet)
 - [PrismML Bonsai announcement](https://prism-ml.com/bonsai)
