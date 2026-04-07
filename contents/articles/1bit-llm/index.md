@@ -7,7 +7,7 @@ template: article.pug
 heroImage: /articles/1bit-llm/bonzai.png
 ---
 
-A 27-billion-parameter model that fits in 2 GB of RAM. An 8B model that runs at 180+ tokens/sec on a laptop GPU using just 1.1 GB of VRAM. These aren't hypotheticals — this is what 1-bit quantisation actually delivers today.
+An 8B model that runs at 180+ tokens/sec on a laptop GPU using just 1.1 GB of VRAM. That's not a future promise — this is what 1-bit quantisation actually delivers today.
 
 This post covers what 1-bit LLMs are, why they're different from regular quantised models, and a complete walkthrough for getting the **Bonsai 8B** model running on Windows with an NVIDIA GPU.
 
