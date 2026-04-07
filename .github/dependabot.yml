@@ -1,0 +1,23 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      # These are all bundled inside wintersmith's internal npm@6.14.18.
+      # wintersmith pins tar to ^4.4.x via npm, node-gyp, and pacote —
+      # there is no resolvable upgrade path without replacing wintersmith itself.
+      - dependency-name: "tar"
+      - dependency-name: "minimatch"
+      - dependency-name: "semver"
+      - dependency-name: "ip"
+      - dependency-name: "qs"
+      - dependency-name: "got"
+      - dependency-name: "request"
+      - dependency-name: "tough-cookie"
+      - dependency-name: "ansi-regex"
+      - dependency-name: "cross-spawn"
+      - dependency-name: "form-data"
+      - dependency-name: "http-cache-semantics"
+      - dependency-name: "brace-expansion"
