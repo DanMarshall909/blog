@@ -4,7 +4,7 @@ extends layout
 block content
   include author
   each article in articles
-    article.article.intro(data-has-hero=article.metadata.heroImage ? 'true' : false style=article.metadata.heroImage ? `background-image: url(${article.metadata.heroImage})` : '')
+    article.article.intro(class=article.metadata.heroImage ? 'has-hero' : '')
       header
         p.date
           span= moment.utc(article.date).format('DD. MMMM YYYY')
@@ -12,6 +12,9 @@ block content
           h2
             a(href=article.url)= article.title
       section.content
+        if article.metadata.heroImage
+          a.hero-link(href=article.url)
+            img.hero-image(src=article.metadata.heroImage alt=article.title)
         if article.intro.length > 0
           != typogr(article.intro).typogrify()
         if article.hasMore

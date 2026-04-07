@@ -20,8 +20,11 @@ block header
           span.tag= tag
 
 block content
-  article.article(data-has-hero=page.metadata.heroImage ? 'true' : false style=page.metadata.heroImage ? `background-image: url(${page.metadata.heroImage})` : '')
-    section.content!= typogr(page.html).typogrify()
+  article.article(class=page.metadata.heroImage ? 'has-hero' : '')
+    section.content
+      if page.metadata.heroImage
+        img.hero-image(src=page.metadata.heroImage alt=page.title)
+      != typogr(page.html).typogrify()
 
 block prepend footer
   div.nav

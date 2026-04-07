@@ -5,9 +5,231 @@
     <atom:link href="https://blog.danmarshall.dev/feed.xml" rel="self" type="application/rss+xml"></atom:link>
     <link>https://blog.danmarshall.dev</link>
     <description>Thoughts on software engineering and life as a developer</description>
-    <pubDate>Mon, 02 Mar 2026 10:00:00 +1000</pubDate>
+    <pubDate>Mon, 06 Apr 2026 10:00:00 +1000</pubDate>
     <generator>Wintersmith - https://github.com/jnordberg/wintersmith</generator>
     <language>en</language>
+    <item>
+      <title>Running a 1-Bit LLM on Windows — Bonsai 8B Setup Guide</title>
+      <link>https://blog.danmarshall.dev/articles/1bit-llm/</link>
+      <pubDate>Mon, 06 Apr 2026 10:00:00 +1000</pubDate>
+      <guid isPermaLink="true">https://blog.danmarshall.dev/articles/1bit-llm/</guid>
+      <author></author>
+      <description>&lt;p&gt;A 27-billion-parameter model that fits in 2 GB of RAM. An 8B model that runs at 180+ tokens/sec on a laptop GPU using just 1.1 GB of VRAM. These aren’t hypotheticals — this is what 1-bit quantisation actually delivers today.&lt;/p&gt;
+&lt;p&gt;This post covers what 1-bit LLMs are, why they’re different from regular quantised models, and a complete walkthrough for getting the &lt;strong&gt;Bonsai 8B&lt;/strong&gt; model running on Windows with an NVIDIA GPU.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;what-is-a-1-bit-llm-&quot;&gt;What is a 1-bit LLM?&lt;/h2&gt;
+&lt;p&gt;Most LLMs store their weights as 16-bit or 32-bit floating-point numbers. Quantisation (Q4, Q8, etc.) compresses these to smaller integer representations, trading some accuracy for smaller file sizes. A Q4 model is roughly half the size of its FP16 equivalent.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1-bit models take this to the extreme.&lt;/strong&gt; Each weight is represented using just a single bit — effectively &lt;code&gt;-1&lt;/code&gt;, &lt;code&gt;0&lt;/code&gt;, or &lt;code&gt;+1&lt;/code&gt;. The &lt;a href=&quot;https://arxiv.org/abs/2310.11453&quot;&gt;BitNet paper (2023)&lt;/a&gt; from Microsoft Research proposed this architecture and showed it could theoretically match full-precision accuracy if the model is &lt;strong&gt;trained from scratch&lt;/strong&gt; with 1-bit weights rather than compressed after training.&lt;/p&gt;
+&lt;p&gt;That last part is the key distinction:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1-bit models are not compressed versions of existing models. They are entirely new models trained differently from the ground up.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This means you can’t just take Llama 3 and “1-bit quantise” it. You need a model purpose-built for this architecture — which is why it took years for any commercially viable 1-bit model to appear.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;why-does-this-matter-&quot;&gt;Why does this matter?&lt;/h2&gt;
+&lt;p&gt;The memory savings are extraordinary. Consider the Bonsai 8B model:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Format&lt;/th&gt;
+&lt;th&gt;File size&lt;/th&gt;
+&lt;th&gt;VRAM needed&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;FP16 (full precision)&lt;/td&gt;
+&lt;td&gt;~16.3 GB&lt;/td&gt;
+&lt;td&gt;~16+ GB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Q4_K_M (standard quant)&lt;/td&gt;
+&lt;td&gt;~4.9 GB&lt;/td&gt;
+&lt;td&gt;~5–6 GB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Bonsai 1-bit&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;1.16 GB&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;~1.1 GB&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;That’s a 14× reduction from FP16 — and with &lt;strong&gt;no meaningful accuracy loss&lt;/strong&gt; compared to a standard 8B model, because the intelligence comes from the architecture, not from precision.&lt;/p&gt;
+&lt;p&gt;The other win is speed. Because the weight operations reduce to simple additions rather than floating-point multiplications, the CPU and GPU can process tokens significantly faster. On an RTX 5080, Bonsai 8B generates around &lt;strong&gt;181 tokens/sec&lt;/strong&gt; — roughly 3–4× faster than a typical Q4 8B model.&lt;/p&gt;
+&lt;p&gt;For context: combine this with KV cache compression techniques like &lt;a href=&quot;https://arxiv.org/abs/2404.03382&quot;&gt;TurboQuant&lt;/a&gt; and you could theoretically run a &lt;strong&gt;27B-class model with a 32K context window in under 4 GB of RAM&lt;/strong&gt;. That changes what’s possible on consumer hardware entirely.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;enter-bonsai-the-first-viable-1-bit-models&quot;&gt;Enter Bonsai — the first viable 1-bit models&lt;/h2&gt;
+&lt;p&gt;In early 2025, &lt;a href=&quot;https://prism-ml.com/&quot;&gt;PrismML&lt;/a&gt; released &lt;strong&gt;Bonsai&lt;/strong&gt; — the first commercially usable 1-bit LLMs. Three sizes are available:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Model&lt;/th&gt;
+&lt;th&gt;Size&lt;/th&gt;
+&lt;th&gt;Best for&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;a href=&quot;https://huggingface.co/prism-ml/Bonsai-1.7B-gguf&quot;&gt;Bonsai-1.7B&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;~300 MB&lt;/td&gt;
+&lt;td&gt;Mobile / very constrained hardware&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&quot;https://huggingface.co/prism-ml/Bonsai-4B-gguf&quot;&gt;Bonsai-4B&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;~600 MB&lt;/td&gt;
+&lt;td&gt;Mid-range, up to ~130 tok/sec on M4 Pro&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&quot;https://huggingface.co/prism-ml/Bonsai-8B-gguf&quot;&gt;Bonsai-8B&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;1.16 GB&lt;/td&gt;
+&lt;td&gt;Recommended for laptop/desktop&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;All three ship in GGUF format (and Apple MLX format for Mac). They support a &lt;strong&gt;65,536-token context window&lt;/strong&gt; — far larger than most small models. Tool calling works well, and in practice the 8B feels closer to a 13B model in capability.&lt;/p&gt;
+&lt;p&gt;One important caveat: &lt;strong&gt;these models are proprietary&lt;/strong&gt;. They are not open-weight. If that matters to you, the Microsoft BitNet repo has open models (up to 8B) but they are undertrained and not currently production-quality.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;the-catch-you-need-a-special-llama-cpp-fork&quot;&gt;The catch — you need a special llama.cpp fork&lt;/h2&gt;
+&lt;p&gt;Standard &lt;code&gt;llama.cpp&lt;/code&gt; will refuse to load a Bonsai GGUF with an &lt;code&gt;invalid ggml type&lt;/code&gt; error. Bonsai uses a custom quantisation type (&lt;code&gt;Q1_0_g128&lt;/code&gt;) that requires dedicated CUDA kernels not yet in the upstream release.&lt;/p&gt;
+&lt;p&gt;PrismML maintain their own fork of llama.cpp with these kernels included:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/PrismML-Eng/llama.cpp&quot;&gt;github.com/PrismML-Eng/llama.cpp&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Prebuilt Windows binaries are on the releases page — no compiling required.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Tip:&lt;/strong&gt; The fork does lag behind upstream llama.cpp. This means some newer features (like certain samplers or multimodal support) may not be available. For pure text inference it’s fine.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;setup-on-windows-nvidia-gpu-&quot;&gt;Setup on Windows (NVIDIA GPU)&lt;/h2&gt;
+&lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows 10 or 11&lt;/li&gt;
+&lt;li&gt;NVIDIA GPU with CUDA 12.4 or 13.1 drivers installed&lt;/li&gt;
+&lt;li&gt;~3 GB free disk space&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;step-1-create-the-install-folder&quot;&gt;Step 1 — Create the install folder&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;mkdir C:\1bitllm
+mkdir C:\1bitllm\bin
+mkdir C:\1bitllm\models&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;step-2-download-the-prismml-llama-cpp-binaries&quot;&gt;Step 2 — Download the PrismML llama.cpp binaries&lt;/h3&gt;
+&lt;p&gt;Go to the &lt;a href=&quot;https://github.com/PrismML-Eng/llama.cpp/releases&quot;&gt;PrismML llama.cpp releases page&lt;/a&gt; and download two zip files matching your CUDA version:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;llama-prism-b1-f5dda72-bin-win-cuda-13.1-x64.zip&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cudart-llama-bin-win-cuda-13.1-x64.zip&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Extract both into &lt;code&gt;C:\1bitllm\bin\&lt;/code&gt;. The folder should contain &lt;code&gt;llama-server.exe&lt;/code&gt;, &lt;code&gt;llama-cli.exe&lt;/code&gt;, and several &lt;code&gt;.dll&lt;/code&gt; files including &lt;code&gt;ggml-cuda.dll&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;CUDA version tip:&lt;/strong&gt; Check your driver version with &lt;code&gt;nvidia-smi&lt;/code&gt;. CUDA 13.1 requires driver 570+. If you’re on an older driver, download the CUDA 12.4 variants instead.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;step-3-download-the-bonsai-model&quot;&gt;Step 3 — Download the Bonsai model&lt;/h3&gt;
+&lt;p&gt;From &lt;a href=&quot;https://huggingface.co/prism-ml/Bonsai-8B-gguf&quot;&gt;huggingface.co/prism-ml/Bonsai-8B-gguf&lt;/a&gt;, download &lt;code&gt;Bonsai-8B.gguf&lt;/code&gt; (1.16 GB) and save it to &lt;code&gt;C:\1bitllm\models\&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can also use the Hugging Face CLI:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip install huggingface_hub
+huggingface-cli download prism-ml/Bonsai-8B-gguf Bonsai-8B.gguf --local-dir C:\1bitllm\models&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;step-4-start-the-server&quot;&gt;Step 4 — Start the server&lt;/h3&gt;
+&lt;p&gt;Open a terminal in &lt;code&gt;C:\1bitllm\bin\&lt;/code&gt; and run:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;llama-server.exe -m ..\models\Bonsai-8B.gguf -ngl 99 --ctx-size 65536 --port 8080&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Flag breakdown:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Flag&lt;/th&gt;
+&lt;th&gt;What it does&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;-ngl 99&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Offload all layers to GPU. Remove this for CPU-only.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--ctx-size 65536&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Enable the full 65K context window&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--port 8080&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Port for the built-in web UI and OpenAI-compatible API&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Wait for:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;main: server is listening on http://127.0.0.1:8080&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&quot;step-5-test-it&quot;&gt;Step 5 — Test it&lt;/h3&gt;
+&lt;p&gt;Open &lt;code&gt;http://localhost:8080&lt;/code&gt; in your browser. You’ll get a basic chat UI.&lt;/p&gt;
+&lt;p&gt;Or test the API directly (it’s OpenAI-compatible):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-powershell&quot;&gt;curl http://localhost:&lt;span class=&quot;number&quot;&gt;8080&lt;/span&gt;/v1/chat/completions `
+  &lt;span class=&quot;literal&quot;&gt;-H&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;Content-Type: application/json&quot;&lt;/span&gt; `
+  &lt;span class=&quot;literal&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;'{\&quot;model\&quot;:\&quot;bonsai\&quot;,\&quot;messages\&quot;:[{\&quot;role\&quot;:\&quot;user\&quot;,\&quot;content\&quot;:\&quot;Hello!\&quot;}]}'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;automated-install-script&quot;&gt;Automated install script&lt;/h2&gt;
+&lt;p&gt;If you’d rather script the whole thing, here’s a PowerShell installer that handles downloading, extracting, and generating a &lt;code&gt;run.ps1&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-powershell&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# Default — 8B model, CUDA 13.1, port 8080&lt;/span&gt;
+powershell &lt;span class=&quot;literal&quot;&gt;-ExecutionPolicy&lt;/span&gt; Bypass &lt;span class=&quot;operator&quot;&gt;-File&lt;/span&gt; install.ps1
+
+&lt;span class=&quot;comment&quot;&gt;# Options&lt;/span&gt;
+powershell &lt;span class=&quot;literal&quot;&gt;-ExecutionPolicy&lt;/span&gt; Bypass &lt;span class=&quot;operator&quot;&gt;-File&lt;/span&gt; install.ps1 &lt;span class=&quot;literal&quot;&gt;-ModelSize&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;B
+powershell &lt;span class=&quot;literal&quot;&gt;-ExecutionPolicy&lt;/span&gt; Bypass &lt;span class=&quot;operator&quot;&gt;-File&lt;/span&gt; install.ps1 &lt;span class=&quot;literal&quot;&gt;-CudaVersion&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;12.4&lt;/span&gt;
+powershell &lt;span class=&quot;literal&quot;&gt;-ExecutionPolicy&lt;/span&gt; Bypass &lt;span class=&quot;operator&quot;&gt;-File&lt;/span&gt; install.ps1 &lt;span class=&quot;literal&quot;&gt;-InstallDir&lt;/span&gt; D:\ai\bonsai &lt;span class=&quot;literal&quot;&gt;-Port&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;8081&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After install, use the generated &lt;code&gt;run.ps1&lt;/code&gt; to start the server with the correct flags automatically.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;performance-rtx-5080-laptop-16-gb-vram-&quot;&gt;Performance (RTX 5080 Laptop, 16 GB VRAM)&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;Result&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;VRAM used&lt;/td&gt;
+&lt;td&gt;~1.1 GB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Generation speed&lt;/td&gt;
+&lt;td&gt;~181 tokens/sec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Prompt eval (512 tokens)&lt;/td&gt;
+&lt;td&gt;~4,882 tokens/sec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Prompt eval (16K tokens)&lt;/td&gt;
+&lt;td&gt;~1,591 tokens/sec&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Context window&lt;/td&gt;
+&lt;td&gt;65,536 tokens&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;Speed drops as the context fills — this is expected, as the KV cache grows and attention computation scales with sequence length. Even at 32K tokens in context it stays very usable.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;connecting-it-to-other-tools&quot;&gt;Connecting it to other tools&lt;/h2&gt;
+&lt;p&gt;The server exposes an OpenAI-compatible API at &lt;code&gt;http://localhost:8080/v1&lt;/code&gt;, which means it drops straight into:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://anythingllm.com/&quot;&gt;AnythingLLM&lt;/a&gt;&lt;/strong&gt; — add a custom OpenAI endpoint and you get RAG, web search, PDF generation, tool calling, and agents all working against the local model&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/open-webui/open-webui&quot;&gt;Open WebUI&lt;/a&gt;&lt;/strong&gt; — clean chat interface with conversation history&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://continue.dev/&quot;&gt;Continue&lt;/a&gt;&lt;/strong&gt; — VS Code / JetBrains extension for inline AI assistance&lt;/li&gt;
+&lt;li&gt;Any OpenAI SDK — just set &lt;code&gt;base_url&lt;/code&gt; to &lt;code&gt;http://localhost:8080/v1&lt;/code&gt; and &lt;code&gt;api_key&lt;/code&gt; to anything&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The tool-calling capability is notably stronger than other 1-bit models currently available. Multi-step agentic tasks (web search → summarise → create document) work reliably.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;invalid ggml type&lt;/code&gt; on load&lt;/strong&gt;
+You’re using standard llama.cpp. Download the PrismML fork from the releases page linked above.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Slow generation / CPU fallback&lt;/strong&gt;
+Run &lt;code&gt;nvidia-smi&lt;/code&gt; to check GPU memory usage. If the model isn’t appearing there, try removing &lt;code&gt;-ngl 99&lt;/code&gt; and re-adding it, or verify the CUDA DLLs are in the same folder as &lt;code&gt;llama-server.exe&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Out of VRAM&lt;/strong&gt;
+The 8B model only needs ~1.1 GB. If you’re hitting limits, another application is likely holding VRAM. Close browsers, games, or other AI tools and retry.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Port already in use&lt;/strong&gt;
+Change &lt;code&gt;--port 8080&lt;/code&gt; to &lt;code&gt;--port 8081&lt;/code&gt; (or any free port) and update any connected tools accordingly.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;what-s-next&quot;&gt;What’s next&lt;/h2&gt;
+&lt;p&gt;The model sizes currently top out at 8B. But PrismML’s Discord has community members already experimenting with applying the 1-bit transformation to open-weight models like Qwen3 27B. If that proves out, running a 27B-class model on a mid-range laptop with 8 GB RAM becomes realistic.&lt;/p&gt;
+&lt;p&gt;Pair that with proper KV cache compression (TurboQuant is tracking toward upstream llama.cpp) and local AI inference takes a meaningful step toward matching the experience of calling a cloud API — without the latency, cost, or privacy tradeoffs.&lt;/p&gt;
+&lt;p&gt;Worth watching.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;links&quot;&gt;Links&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2310.11453&quot;&gt;BitNet paper (arXiv, 2023)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/microsoft/BitNet&quot;&gt;Microsoft BitNet repo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://prism-ml.com/bonsai&quot;&gt;PrismML Bonsai announcement&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/PrismML-Eng/llama.cpp&quot;&gt;PrismML llama.cpp fork&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://huggingface.co/prism-ml/Bonsai-8B-gguf&quot;&gt;Bonsai-8B on Hugging Face&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://huggingface.co/prism-ml/Bonsai-4B-gguf&quot;&gt;Bonsai-4B on Hugging Face&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://huggingface.co/prism-ml/Bonsai-1.7B-gguf&quot;&gt;Bonsai-1.7B on Hugging Face&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2404.03382&quot;&gt;TurboQuant paper (arXiv)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://anythingllm.com/&quot;&gt;AnythingLLM&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     <item>
       <title>Resume</title>
       <link>https://blog.danmarshall.dev/articles/resume/</link>
