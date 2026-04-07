@@ -218,6 +218,7 @@ Change &lt;code&gt;--port 8080&lt;/code&gt; to &lt;code&gt;--port 8081&lt;/code&
 &lt;hr&gt;
 &lt;h2 id=&quot;links&quot;&gt;Links&lt;/h2&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=0fWFetwHkVE&quot;&gt;YouTube: How to run Bonsai 8B on Windows (the video that started this)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://arxiv.org/abs/2310.11453&quot;&gt;BitNet paper (arXiv, 2023)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/microsoft/BitNet&quot;&gt;Microsoft BitNet repo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://prism-ml.com/bonsai&quot;&gt;PrismML Bonsai announcement&lt;/a&gt;&lt;/li&gt;

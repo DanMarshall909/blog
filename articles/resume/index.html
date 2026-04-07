@@ -12,7 +12,7 @@
     <link id="hljs-theme" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-light.min.css">
     <script>
       (function() {
-        const getTheme = () => localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const getTheme = () => localStorage.getItem('theme') || 'dark';
         const setTheme = (theme) => {
           localStorage.setItem('theme', theme);
           document.documentElement.setAttribute('data-theme', theme);
