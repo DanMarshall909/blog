@@ -1,13 +1,12 @@
 {
 	"scripts": {
-		"build": "wintersmith build"
+		"dev": "astro dev --port 3000",
+		"build": "astro build",
+		"preview": "astro preview"
 	},
 	"dependencies": {
-		"highlight.js": "^11.11.1",
-		"moment": "^2.22.2",
-		"typogr": "0.6.x",
-		"underscore": "^1.13.8",
-		"wintersmith": "^2.5.0"
+		"@astrojs/rss": "^4.0.18",
+		"astro": "^6.1.4"
 	},
 	"private": false
 }

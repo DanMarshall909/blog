@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Avoid death by accountant - Get bankers rounding right! - Technical Scratches
-    </title>
-    <link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
-    <link rel="stylesheet" href="/css/main.css">
-    <link id="hljs-theme" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/atom-one-light.min.css">
-    <script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Avoid death by accountant - Get bankers rounding right! - Technical Scratches</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer"><link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap"><link rel="stylesheet" href="/styles/main.css"><script>
       (function() {
         const getTheme = () => localStorage.getItem('theme') || 'dark';
         const setTheme = (theme) => {
@@ -19,111 +7,66 @@
         };
         setTheme(getTheme());
       })();
-    </script>
-  </head>
-  <body class="article-detail">
-    <!-- Desktop theme toggle — hidden on mobile-->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode"></button>
-    <!-- Mobile hamburger — hidden on desktop-->
-    <button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu"><span></span><span></span><span></span></button>
-    <!-- Mobile drawer-->
-    <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
-    <aside class="drawer" id="drawer">
-      <div class="drawer-header"><a class="drawer-home" href="/">← Home</a>
-        <button class="drawer-theme" onclick="toggleTheme()" aria-label="Toggle theme"></button>
-        <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
-      </div>
-      <div class="drawer-body" id="drawer-body"></div>
-    </aside>
-    <header class="header">
-      <div class="content-wrap">
-        <div class="title-with-image">
-          <h1>Avoid death by accountant - Get bankers rounding right!</h1>
-        </div>
-        <div class="article-meta">   
-          <p class="publish-date">February 23, 2025</p>
-          <div class="tags"><span class="tag">finance</span><span class="tag">rounding</span><span class="tag">bankers rounding</span><span class="tag">accounting</span><span class="tag">C#</span>
-          </div>
-        </div>
-      </div>
-    </header>
-    <div id="content">
-      <div class="content-wrap">
-        <article class="article has-hero">
-          <section class="content"><img class="hero-image" src="/articles/bankers-rounding/death-by-accountant.jpg" alt="Avoid death by accountant - Get bankers rounding right!"><p><img src="/articles/bankers-rounding/death-by-accountant.jpg" alt="Death by Accountant"></p>
+    </script></head> <body class="article-detail"> <!-- Desktop top bar: back link only — hidden on mobile --> <div class="desktop-topbar"> <a class="desktop-back" href="/" aria-label="Back to home"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> </a> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> </div> <!-- Mobile hamburger — hidden on desktop --> <button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu"> <span></span> <span></span> <span></span> </button> <!-- Mobile drawer --> <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div> <aside class="drawer" id="drawer"> <div class="drawer-header"> <a class="drawer-home" href="/"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+Home
+</a> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button> </div> <div class="drawer-body" id="drawer-body">  </div> </aside> <header class="header"> <div class="content-wrap">  <div class="title-with-image"> <h1>Avoid death by accountant - Get bankers rounding right!</h1> </div> <div class="article-meta"> <p class="publish-date">23 February 2025</p> <div class="tags"> <span class="tag">finance</span><span class="tag">rounding</span><span class="tag">bankers rounding</span><span class="tag">accounting</span><span class="tag">C#</span> </div> </div>  </div> </header> <div id="content"> <div class="content-wrap">   <article class="article has-hero"> <section class="content"> <img class="hero-image" src="/articles/bankers-rounding/death-by-accountant.jpg" alt="Avoid death by accountant - Get bankers rounding right!"> <p><img src="/articles/bankers-rounding/death-by-accountant.jpg" alt="Death by Accountant"></p>
 <p>If you work with financial data, you will run into the situation where you need to round calculated values to the nearest cent.</p>
-<p>If you round up in every case, then that may work internally, but if your accounting package works otherwise (<strong>it will</strong>), and the other side of the ledger comes from somewhere other than your code, you may well have values that don’t balance exactly—which is critical for accounting purposes. </p>
+<p>If you round up in every case, then that may work internally, but if your accounting package works otherwise (<strong>it will</strong>), and the other side of the ledger comes from somewhere other than your code, you may well have values that don’t balance exactly—which is critical for accounting purposes.</p>
 <p>So it’s important to have these rounding algorithms in sync, or you’ll run into an <strong>angry accountant</strong>. Given the number of transactions that occur daily in most systems, this will pop up often if it doesn’t get done right.</p>
 <h2 id="different-rounding-methods"><strong>Different Rounding Methods</strong></h2>
-<p>There are many possible ways to calculate rounding when you have a difference of exactly <strong>$0.005</strong>. <a href="https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even">See wikipedia</a>. </p>
+<p>There are many possible ways to calculate rounding when you have a difference of exactly <strong>$0.005</strong>. <a href="https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even">See wikipedia</a>.</p>
 <p>Do you round up to <strong>1c</strong>, or down to <strong>0c</strong>? Note that this isn’t an issue for <strong>$0.0051</strong>, which is closer to <strong>1c</strong>. It’s only for <strong>exact amounts ending in 5</strong> as the third significant digit.</p>
-<h2 id="bankers-rounding-the-standard-in-finance"><strong>Bankers Rounding - The Standard in Finance</strong></h2>
-<p>Thankfully, a convention has arisen in the financial world called <strong>Bankers Rounding</strong>. This is the <strong>default rounding mode in C#</strong> for <code>decimal</code>, but it <strong>can be overridden</strong> by choosing a different midpoint rounding mode. </p>
+<h2 id="bankers-rounding---the-standard-in-finance"><strong>Bankers Rounding - The Standard in Finance</strong></h2>
+<p>Thankfully, a convention has arisen in the financial world called <strong>Bankers Rounding</strong>. This is the <strong>default rounding mode in C#</strong> for <code>decimal</code>, but it <strong>can be overridden</strong> by choosing a different midpoint rounding mode.</p>
 <p>I’ve seen this done a lot, <strong>often for no good reason.</strong> 😬</p>
 <h3 id="how-bankers-rounding-works"><strong>How Bankers Rounding Works</strong></h3>
 <p>Bankers Rounding rounds every amount <strong>up or down to the nearest EVEN cent</strong>.</p>
-<h3 id="example-1-rounding-up"><strong>Example 1 - Rounding Up</strong></h3>
+<h3 id="example-1---rounding-up"><strong>Example 1 - Rounding Up</strong></h3>
 <p>Consider <strong>$0.555</strong>, which has two EVEN cents on either side:</p>
 <p>$0.54 (difference of 1.5c) → rounding down. $0.555 $0.56 (difference of 0.5c) → rounding up.</p>
-<p>Since <strong>0.5 &lt; 1.5</strong>, we round up.</p>
+<p>Since <strong>0.5 &#x3C; 1.5</strong>, we round up.</p>
 <p><strong>$0.555 → $0.56</strong></p>
-<h3 id="example-2-rounding-down"><strong>Example 2 - Rounding Down</strong></h3>
+<h3 id="example-2---rounding-down"><strong>Example 2 - Rounding Down</strong></h3>
 <p>Consider <strong>$0.565</strong>, which also has two EVEN cents on either side:</p>
 <p>$0.56 (difference of 0.5c) → rounding down. $0.565 $0.58 (difference of 1.5c) → rounding up.</p>
-<p>Since <strong>0.5 &lt; 1.5</strong>, we round up.</p>
+<p>Since <strong>0.5 &#x3C; 1.5</strong>, we round up.</p>
 <p><strong>$0.565 → $0.56</strong></p>
 <hr>
 <h2 id="best-practice-use-a-financial-math-library"><strong>Best Practice: Use a Financial Math Library</strong></h2>
 <p>To prevent issues, <strong>create an organization-wide Financial Math library</strong> that includes a rounding method like this:</p>
-<pre><code class="language-csharp"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">decimal</span> <span class="title">UsingBankersRoundingToNearestCent</span>(<span class="params"><span class="keyword">this</span> <span class="keyword">decimal</span> amount</span>)</span> 
-    =&gt; Math.Round(amount, <span class="number">2</span>, MidpointRounding.ToEven);</code></pre>
+<pre class="astro-code astro-code-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">public</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> static</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> decimal</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> UsingBankersRoundingToNearestCent</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">this</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> decimal</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0"> amount</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">) </span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    =></span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> Math.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0">Round</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(amount, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, MidpointRounding.ToEven);</span></span></code></pre>
 <p>And enforce its usage across your codebase.</p>
 <p>Even better:</p>
 <ul>
 <li>Add a linting rule to detect any usage of Math.Round() and flag it as an error.</li>
 <li>Require explicit overrides when necessary, ensuring no unexpected rounding bugs creep in.</li>
-</ul>
-
-          </section>
-        </article>
-      </div>
-    </div>
-    <footer>
-      <div class="content-wrap">
-        <div class="nav"><a href="/">&laquo; Full blog</a></div>
-        <section class="about"><p>Dan Marshall’s blog</p>
-
-        </section>
-        <section class="copy">
-          <p>&copy; 2026 Dan Marshall &mdash; powered by&nbsp;<a href="https://github.com/jnordberg/wintersmith">Wintersmith</a></p>
-        </section>
-      </div>
-    </footer>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/highlight.min.js"></script>
-    <script>
+</ul> </section> </article>   </div> </div> <footer> <div class="content-wrap">  <div class="nav"> <a href="/">&laquo; Full blog</a> </div>  <section class="about"> <p>Dan Marshall's blog</p> </section> <section class="copy"> <p>&copy; 2026 Dan Marshall &mdash; powered by&nbsp;
+<a href="https://astro.build">Astro</a> </p> </section> </div> </footer> <script>
       // Drawer
       function openDrawer() {
         document.getElementById('drawer').classList.add('drawer-open');
         document.getElementById('drawer-overlay').classList.add('drawer-overlay-visible');
         document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
       }
-      
+
       function closeDrawer() {
         document.getElementById('drawer').classList.remove('drawer-open');
         document.getElementById('drawer-overlay').classList.remove('drawer-overlay-visible');
         document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
       }
-      
+
       // Table of contents — article pages only
-      document.addEventListener('DOMContentLoaded', function() {
+      // Script is is:inline at bottom of body — DOM is already available, no need for DOMContentLoaded
+      (function() {
         if (!document.body.classList.contains('article-detail')) return;
-      
+
         var content = document.querySelector('section.content');
         if (!content) return;
-      
+
         var headings = content.querySelectorAll('h2, h3');
         if (headings.length < 2) return;
-      
+
         function slugify(text) {
           return text.trim()
             .toLowerCase()
@@ -131,7 +74,7 @@
             .replace(/\s+/g, '-')
             .replace(/-{2,}/g, '-');
         }
-      
+
         var usedIds = {};
         headings.forEach(function(h) {
           if (!h.id) {
@@ -143,19 +86,19 @@
           }
           usedIds[h.id] = true;
         });
-      
+
         var nav = document.createElement('nav');
         nav.className = 'toc';
         nav.setAttribute('aria-label', 'Table of contents');
-      
+
         var titleEl = document.createElement('div');
         titleEl.className = 'toc-title';
         titleEl.innerHTML = '<span>On this page</span>';
         nav.appendChild(titleEl);
-      
+
         var list = document.createElement('ul');
         list.className = 'toc-list';
-      
+
         headings.forEach(function(h) {
           var li = document.createElement('li');
           li.className = 'toc-item toc-' + h.tagName.toLowerCase();
@@ -172,12 +115,12 @@
           li.appendChild(a);
           list.appendChild(li);
         });
-      
+
         nav.appendChild(list);
-      
+
         var hamburger = document.getElementById('hamburger');
         var isMobile = hamburger && window.getComputedStyle(hamburger).display !== 'none';
-      
+
         if (isMobile) {
           // Mobile: put TOC inside the drawer
           var drawerBody = document.getElementById('drawer-body');
@@ -189,11 +132,11 @@
           article.parentElement.classList.add('article-with-toc');
           article.parentElement.insertBefore(nav, article);
         }
-      
+
         // Highlight active heading via IntersectionObserver
         var tocLinks = [].slice.call(nav.querySelectorAll('.toc-link'));
         var activeLink = null;
-      
+
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) {
@@ -204,40 +147,14 @@
             }
           });
         }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
-      
+
         headings.forEach(function(h) { observer.observe(h); });
-      });
-      
-    </script>
-    <script>
-      function getTheme() {
-        return document.documentElement.getAttribute('data-theme') || 'light';
-      }
-      
-      function updateHljsTheme() {
-        const theme = getTheme();
-        const hljsLink = document.getElementById('hljs-theme');
-        const themeName = theme === 'dark' ? 'atom-one-dark' : 'atom-one-light';
-        hljsLink.href = `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/${themeName}.min.css`;
-        if (typeof hljs !== 'undefined') {
-          document.querySelectorAll('pre code').forEach(block => {
-            delete block.dataset.highlighted;
-            hljs.highlightElement(block);
-          });
-        }
-      }
-      
+      })();
+    </script> <script>
       function toggleTheme() {
-        const currentTheme = getTheme();
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('theme', newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
-        updateHljsTheme();
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        document.documentElement.setAttribute('data-theme', next);
       }
-      
-      document.addEventListener('DOMContentLoaded', function() {
-        updateHljsTheme();
-      });
-    </script>
-  </body>
-</html>
+    </script> </body> </html>

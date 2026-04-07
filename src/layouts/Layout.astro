@@ -1,0 +1,245 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  bodyClass?: string;
+  description?: string;
+}
+const { title, bodyClass, description } = Astro.props;
+const siteTitle = 'Technical Scratches';
+const siteDescription = 'Thoughts on software engineering and life as a developer';
+const siteUrl = 'https://blog.danmarshall.dev';
+const owner = 'Dan Marshall';
+const currentYear = new Date().getFullYear();
+
+const navArticles = (await getCollection('articles'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const isArticlePage = bodyClass === 'article-detail';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" href={`${siteUrl}/feed.xml`} type="application/rss+xml" title={siteDescription} />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <script is:inline>
+      (function() {
+        const getTheme = () => localStorage.getItem('theme') || 'dark';
+        const setTheme = (theme) => {
+          localStorage.setItem('theme', theme);
+          document.documentElement.setAttribute('data-theme', theme);
+        };
+        setTheme(getTheme());
+      })();
+    </script>
+  </head>
+  <body class={bodyClass}>
+    <!-- Desktop top bar: back link only — hidden on mobile -->
+    <div class="desktop-topbar">
+      <a class="desktop-back" href="/" aria-label="Back to home">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </a>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile hamburger — hidden on desktop -->
+    <button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Mobile drawer -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+    <aside class="drawer" id="drawer">
+      <div class="drawer-header">
+        <a class="drawer-home" href="/">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
+      </div>
+      <div class="drawer-body" id="drawer-body">
+        {!isArticlePage && (
+          <nav class="drawer-article-nav">
+            <div class="drawer-nav-title">Articles</div>
+            <ul>
+              {navArticles.map(a => {
+                const slug = a.id.replace(/\/index$/, '');
+                return (
+                  <li>
+                    <a href={`/articles/${slug}/`}>{a.data.title}</a>
+                    <span class="drawer-nav-date">{a.data.date.toLocaleDateString('en-AU', { year: 'numeric', month: 'short', timeZone: 'UTC' })}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        )}
+      </div>
+    </aside>
+
+    <header class="header">
+      <div class="content-wrap">
+        <slot name="header">
+          <div class="logo">
+            <h1><a href={siteUrl}>{siteTitle}</a></h1>
+            <p class="description">{siteDescription}</p>
+          </div>
+        </slot>
+      </div>
+    </header>
+
+    <div id="content">
+      <div class="content-wrap">
+        <slot />
+      </div>
+    </div>
+
+    <footer>
+      <div class="content-wrap">
+        <slot name="footer-nav" />
+        <section class="about">
+          <p>Dan Marshall's blog</p>
+        </section>
+        <section class="copy">
+          <p>&copy; {currentYear} {owner} &mdash; powered by&nbsp;
+            <a href="https://astro.build">Astro</a>
+          </p>
+        </section>
+      </div>
+    </footer>
+
+    <script is:inline>
+      // Drawer
+      function openDrawer() {
+        document.getElementById('drawer').classList.add('drawer-open');
+        document.getElementById('drawer-overlay').classList.add('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+      }
+
+      function closeDrawer() {
+        document.getElementById('drawer').classList.remove('drawer-open');
+        document.getElementById('drawer-overlay').classList.remove('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+      }
+
+      // Table of contents — article pages only
+      // Script is is:inline at bottom of body — DOM is already available, no need for DOMContentLoaded
+      (function() {
+        if (!document.body.classList.contains('article-detail')) return;
+
+        var content = document.querySelector('section.content');
+        if (!content) return;
+
+        var headings = content.querySelectorAll('h2, h3');
+        if (headings.length < 2) return;
+
+        function slugify(text) {
+          return text.trim()
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-{2,}/g, '-');
+        }
+
+        var usedIds = {};
+        headings.forEach(function(h) {
+          if (!h.id) {
+            var base = slugify(h.textContent);
+            var id = base;
+            var n = 2;
+            while (usedIds[id]) { id = base + '-' + n++; }
+            h.id = id;
+          }
+          usedIds[h.id] = true;
+        });
+
+        var nav = document.createElement('nav');
+        nav.className = 'toc';
+        nav.setAttribute('aria-label', 'Table of contents');
+
+        var titleEl = document.createElement('div');
+        titleEl.className = 'toc-title';
+        titleEl.innerHTML = '<span>On this page</span>';
+        nav.appendChild(titleEl);
+
+        var list = document.createElement('ul');
+        list.className = 'toc-list';
+
+        headings.forEach(function(h) {
+          var li = document.createElement('li');
+          li.className = 'toc-item toc-' + h.tagName.toLowerCase();
+          var a = document.createElement('a');
+          a.href = '#' + h.id;
+          a.className = 'toc-link';
+          a.textContent = h.textContent;
+          a.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById(h.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.pushState(null, null, '#' + h.id);
+            closeDrawer();
+          });
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+
+        nav.appendChild(list);
+
+        var hamburger = document.getElementById('hamburger');
+        var isMobile = hamburger && window.getComputedStyle(hamburger).display !== 'none';
+
+        if (isMobile) {
+          // Mobile: put TOC inside the drawer
+          var drawerBody = document.getElementById('drawer-body');
+          if (drawerBody) drawerBody.appendChild(nav);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector('article.article');
+          if (!article) return;
+          article.parentElement.classList.add('article-with-toc');
+          article.parentElement.insertBefore(nav, article);
+        }
+
+        // Highlight active heading via IntersectionObserver
+        var tocLinks = [].slice.call(nav.querySelectorAll('.toc-link'));
+        var activeLink = null;
+
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var href = '#' + entry.target.id;
+              if (activeLink) activeLink.classList.remove('toc-active');
+              activeLink = tocLinks.find(function(l) { return l.getAttribute('href') === href; }) || null;
+              if (activeLink) activeLink.classList.add('toc-active');
+            }
+          });
+        }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+        headings.forEach(function(h) { observer.observe(h); });
+      })();
+    </script>
+    <script is:inline>
+      function toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        document.documentElement.setAttribute('data-theme', next);
+      }
+    </script>
+  </body>
+</html>
