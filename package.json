@@ -6,7 +6,7 @@
 	},
 	"dependencies": {
 		"@astrojs/rss": "^4.0.18",
-		"astro": "^6.1.4"
+		"astro": "^6.1.6"
 	},
 	"private": false
 }
