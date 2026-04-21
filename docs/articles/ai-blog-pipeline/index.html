@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>I built a /blogpost command that writes, illustrates, and publishes for me - Technical Scratches</title><meta name="description" content="One /blogpost command: Claude drafts the article, generates cartoon illustrations locally with Flux, previews in the browser, publishes to GitHub Pages, and fires off a LinkedIn post — all without leaving the terminal."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer"><link rel="stylesheet" href="//fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap"><link rel="stylesheet" href="/styles/main.css"><script>
+      (function() {
+        const getTheme = () => localStorage.getItem('theme') || 'dark';
+        const setTheme = (theme) => {
+          localStorage.setItem('theme', theme);
+          document.documentElement.setAttribute('data-theme', theme);
+        };
+        setTheme(getTheme());
+      })();
+    </script></head> <body class="article-detail"> <!-- Desktop top bar: back link only — hidden on mobile --> <div class="desktop-topbar"> <a class="desktop-back" href="/" aria-label="Back to home"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> </a> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> </div> <!-- Mobile hamburger — hidden on desktop --> <button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu"> <span></span> <span></span> <span></span> </button> <!-- Mobile drawer --> <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div> <aside class="drawer" id="drawer"> <div class="drawer-header"> <a class="drawer-home" href="/"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+Home
+</a> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button> </div> <div class="drawer-body" id="drawer-body">  </div> </aside> <header class="header"> <div class="content-wrap">  <div class="title-with-image"> <h1>I built a /blogpost command that writes, illustrates, and publishes for me</h1> </div> <div class="article-meta"> <p class="publish-date">21 April 2026</p> <div class="tags"> <span class="tag">Claude Code</span><span class="tag">AI</span><span class="tag">ComfyUI</span><span class="tag">automation</span><span class="tag">developer tools</span><span class="tag">LinkedIn</span> </div> </div>  </div> </header> <div id="content"> <div class="content-wrap">   <article class="article has-hero"> <section class="content"> <img class="hero-image" src="/articles/ai-blog-pipeline/cartoon.png" alt="I built a /blogpost command that writes, illustrates, and publishes for me"> <p>Today I built a <code>/blogpost</code> skill for Claude Code that takes an idea and handles everything through to a live post with a cartoon illustration and a LinkedIn update.</p>
+<p>Here’s what happens when I type <code>/blogpost</code>:</p>
+<ol>
+<li>Claude drafts the article in my Astro blog</li>
+<li>ComfyUI starts up locally (if it isn’t already running) and generates 3 cartoon hero images — one character-focused, one metaphor, one scene</li>
+<li>I pick the best image</li>
+<li>Claude opens a browser preview via the chrome-devtools MCP</li>
+<li>I say <strong>publish</strong> — it builds, commits, and pushes to GitHub Pages</li>
+<li>The LinkedIn post gets drafted and posted via a Python CLI tool</li>
+</ol>
+<p>The whole thing is a Claude Code skill — a markdown file that Claude reads and executes step by step.</p>
+<hr>
+<h2 id="how-the-image-generation-works">How the image generation works</h2>
+<p>The images are generated locally using <a href="https://github.com/comfyanonymous/ComfyUI">ComfyUI</a> with a Flux fp8 model. No API costs, no rate limits, no sending your content to a third party.</p>
+<p>Claude constructs a ComfyUI workflow JSON and POSTs it to the local API:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">workflow </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> {</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  "1"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"class_type"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"CheckpointLoaderSimple"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"inputs"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"ckpt_name"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"flux1-dev-fp8.safetensors"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}},</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  "2"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"class_type"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"CLIPTextEncodeFlux"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"inputs"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    "clip"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"1"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">], </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"clip_l"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: prompt, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"t5xxl"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: prompt, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"guidance"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">5.0</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }},</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  "4"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"class_type"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"EmptySD3LatentImage"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"inputs"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"width"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1024</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"height"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1024</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"batch_size"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}},</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">  "5"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"class_type"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"KSampler"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"inputs"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: {</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    "seed"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: seed, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"steps"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">35</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"cfg"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1.0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">    "sampler_name"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"euler"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"scheduler"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"simple"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"denoise"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">1.0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">,</span></span>
+<span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">    ...</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">  }},</span></span>
+<span class="line"><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">  ...</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">}</span></span></code></pre>
+<p>Rather than polling the ComfyUI API to check if it’s done, the skill watches the output folder directly:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">output_dir </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583"> r</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF">C:</span><span style="--shiki-light:#22863A;--shiki-light-font-weight:bold;--shiki-dark:#85E89D;--shiki-dark-font-weight:bold">\f</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF">lux</span><span style="--shiki-light:#22863A;--shiki-light-font-weight:bold;--shiki-dark:#85E89D;--shiki-dark-font-weight:bold">\C</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF">omfyUI_windows_portable</span><span style="--shiki-light:#22863A;--shiki-light-font-weight:bold;--shiki-dark:#85E89D;--shiki-dark-font-weight:bold">\C</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF">omfyUI</span><span style="--shiki-light:#22863A;--shiki-light-font-weight:bold;--shiki-dark:#85E89D;--shiki-dark-font-weight:bold">\o</span><span style="--shiki-light:#032F62;--shiki-dark:#DBEDFF">utput</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">expected </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> [</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"blog_v1_00001_.png"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"blog_v2_00001_.png"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"blog_v3_00001_.png"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> i </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">in</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF"> range</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">200</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">):</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">    time.sleep(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">    for</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> fname </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">in</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> expected:</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">        fpath </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> os.path.join(output_dir, fname)</span></span>
+<span class="line"><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">        if</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> os.path.exists(fpath):</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">            shutil.copy2(fpath, dest)</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">            found.add(fname)</span></span></code></pre>
+<p>This runs in the background — Claude gets notified when all 3 are ready and proceeds automatically.</p>
+<p>The 3 distinct angles matter. Early versions generated 5 variations of the same prompt and the results were nearly identical. Giving each image a different brief (character / object / environment) means you actually have something to choose between.</p>
+<hr>
+<h2 id="the-linkedin-integration">The LinkedIn integration</h2>
+<p>LinkedIn posting uses the official API with OAuth2. The flow:</p>
+<ol>
+<li>One-time setup: <code>python linkedin_post.py --auth</code> — opens the browser, saves tokens to <code>~/.linkedin_token.json</code></li>
+<li>Posting: <code>python linkedin_post.py "post text"</code> — checks token expiry, refreshes if needed, posts</li>
+</ol>
+<p>A few things that weren’t obvious from the docs:</p>
+<p><strong>Use <code>/rest/posts</code>, not <code>/ugcPosts</code></strong> — the older endpoint is deprecated. The new one requires a <code>LinkedIn-Version: YYYYMM</code> header.</p>
+<p><strong>You need two LinkedIn products provisioned</strong>, not one. <code>w_member_social</code> alone gives you posting rights but no way to get the author’s person ID. You also need “Sign In with LinkedIn using OpenID Connect” for the <code>openid profile</code> scopes. The person ID comes from <code>/v2/userinfo</code> as the <code>sub</code> field:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">resp </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> requests.get(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"https://api.linkedin.com/v2/userinfo"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">headers</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">auth_headers(tokens))</span></span>
+<span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">person_id </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> resp.json()[</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"sub"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">]</span></span></code></pre>
+<p><strong>Windows encoding</strong> — if you’re on Windows and post text contains emoji, force UTF-8 on stdout:</p>
+<pre class="astro-code astro-code-themes github-light github-dark" style="--shiki-light:#24292e;--shiki-dark:#e1e4e8;--shiki-light-bg:#fff;--shiki-dark-bg:#24292e; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">sys.stdout </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8"> io.TextIOWrapper(sys.stdout.buffer, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">encoding</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"utf-8"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">, </span><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70">errors</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583">=</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF">"replace"</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8">)</span></span></code></pre>
+<hr>
+<h2 id="the-skill-itself">The skill itself</h2>
+<p>The whole pipeline is a markdown file that Claude reads as instructions. No framework, no config — just a description of what to do and in what order.</p>
+<p>Skills live in <code>~/.claude/skills/&#x3C;name>/SKILL.md</code>. They’re loaded into context when invoked and Claude follows them step by step. The blogpost skill is about 250 lines and covers every edge case we hit building it: ComfyUI startup, port detection for the dev server, where to save images so Astro can serve them, when to add <code>heroImage</code> to frontmatter (after the image exists, not before).</p>
+<p>The LinkedIn poster is a separate <code>linkedin-post</code> skill that wraps the Python CLI — so it can be called from <code>/blogpost</code> or standalone from anything else.</p>
+<p>I also added a line to my <code>CLAUDE.md</code> so Claude proactively suggests a LinkedIn post at the end of any session where something interesting gets built. It’s easy to forget to share things publicly — having the suggestion baked into the workflow means it actually happens.</p>
+<hr>
+<h2 id="what-it-looks-like-in-practice">What it looks like in practice</h2>
+<p>This post was written and published through the pipeline. The cartoon above was generated by the Flux model running on my laptop GPU, picked from 3 options, and placed automatically.</p>
+<p>Total time from “make a blogpost about this” to live: about 10 minutes, most of which was image generation.</p> </section> </article>   </div> </div> <footer> <div class="content-wrap">  <div class="nav"> <a href="/">&laquo; Full blog</a> </div>  <section class="about"> <p>Dan Marshall's blog</p> </section> <section class="copy"> <p>&copy; 2026 Dan Marshall &mdash; powered by&nbsp;
+<a href="https://astro.build">Astro</a> </p> </section> </div> </footer> <script>
+      // Drawer
+      function openDrawer() {
+        document.getElementById('drawer').classList.add('drawer-open');
+        document.getElementById('drawer-overlay').classList.add('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+      }
+
+      function closeDrawer() {
+        document.getElementById('drawer').classList.remove('drawer-open');
+        document.getElementById('drawer-overlay').classList.remove('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+      }
+
+      // Table of contents — article pages only
+      // Script is is:inline at bottom of body — DOM is already available, no need for DOMContentLoaded
+      (function() {
+        if (!document.body.classList.contains('article-detail')) return;
+
+        var content = document.querySelector('section.content');
+        if (!content) return;
+
+        var headings = content.querySelectorAll('h2, h3');
+        if (headings.length < 2) return;
+
+        function slugify(text) {
+          return text.trim()
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-{2,}/g, '-');
+        }
+
+        var usedIds = {};
+        headings.forEach(function(h) {
+          if (!h.id) {
+            var base = slugify(h.textContent);
+            var id = base;
+            var n = 2;
+            while (usedIds[id]) { id = base + '-' + n++; }
+            h.id = id;
+          }
+          usedIds[h.id] = true;
+        });
+
+        var nav = document.createElement('nav');
+        nav.className = 'toc';
+        nav.setAttribute('aria-label', 'Table of contents');
+
+        var titleEl = document.createElement('div');
+        titleEl.className = 'toc-title';
+        titleEl.innerHTML = '<span>On this page</span>';
+        nav.appendChild(titleEl);
+
+        var list = document.createElement('ul');
+        list.className = 'toc-list';
+
+        headings.forEach(function(h) {
+          var li = document.createElement('li');
+          li.className = 'toc-item toc-' + h.tagName.toLowerCase();
+          var a = document.createElement('a');
+          a.href = '#' + h.id;
+          a.className = 'toc-link';
+          a.textContent = h.textContent;
+          a.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById(h.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.pushState(null, null, '#' + h.id);
+            closeDrawer();
+          });
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+
+        nav.appendChild(list);
+
+        var hamburger = document.getElementById('hamburger');
+        var isMobile = hamburger && window.getComputedStyle(hamburger).display !== 'none';
+
+        if (isMobile) {
+          // Mobile: put TOC inside the drawer
+          var drawerBody = document.getElementById('drawer-body');
+          if (drawerBody) drawerBody.appendChild(nav);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector('article.article');
+          if (!article) return;
+          article.parentElement.classList.add('article-with-toc');
+          article.parentElement.insertBefore(nav, article);
+        }
+
+        // Highlight active heading via IntersectionObserver
+        var tocLinks = [].slice.call(nav.querySelectorAll('.toc-link'));
+        var activeLink = null;
+
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var href = '#' + entry.target.id;
+              if (activeLink) activeLink.classList.remove('toc-active');
+              activeLink = tocLinks.find(function(l) { return l.getAttribute('href') === href; }) || null;
+              if (activeLink) activeLink.classList.add('toc-active');
+            }
+          });
+        }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+        headings.forEach(function(h) { observer.observe(h); });
+      })();
+    </script> <script>
+      function toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        document.documentElement.setAttribute('data-theme', next);
+      }
+    </script> </body> </html>
