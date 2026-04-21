@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('articles');
+const articles = allArticles.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-AU', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
+// Extract the first prose paragraph from raw markdown body,
+// converted to basic HTML (bold, italic, code spans, links).
+// Skips headings, image lines, and thematic breaks.
+function getIntroHtml(description: string | undefined, body: string): string {
+  // Prefer explicit frontmatter description
+  if (description?.trim()) {
+    return `<p>${description.trim()}</p>`;
+  }
+
+  const lines = body.split('\n');
+  const paraLines: string[] = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (/^#{1,6}\s/.test(trimmed)) continue;  // skip headings
+    if (trimmed === '---') continue;           // skip thematic breaks
+    if (/^!\[/.test(trimmed)) continue;        // skip image lines
+    if (trimmed === '' && paraLines.length > 0) break; // end of first para
+    if (trimmed !== '') paraLines.push(trimmed);
+  }
+
+  if (paraLines.length === 0) return '';
+
+  let text = paraLines.join(' ');
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  text = text.replace(/_([^_]+)_/g, '<em>$1</em>');
+  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+  return `<p>${text}</p>`;
+}
+---
+<Layout title="Technical Scratches">
+  <Fragment slot="footer-nav">
+    <div class="nav">
+      <a href="/archive/">&laquo; Archives</a>
+    </div>
+  </Fragment>
+
+  {articles.map((article) => {
+    const slug = article.id.replace(/\/index$/, '');
+    const intro = getIntroHtml(article.data.description, article.body ?? '');
+    return (
+      <article class={`article intro${article.data.heroImage ? ' has-hero' : ''}`}>
+        <div class="card-layout">
+          <div class="card-main">
+            <header>
+              <div class="title-with-image">
+                <h2><a href={`/articles/${slug}/`}>{article.data.title}</a></h2>
+                <p class="date"><span>{formatDate(article.data.date)}</span></p>
+              </div>
+            </header>
+            <section class="content">
+              {intro && <Fragment set:html={intro} />}
+            </section>
+          </div>
+          {article.data.heroImage && (
+            <a class="card-hero" href={`/articles/${slug}/`}>
+              <img src={article.data.heroImage} alt={article.data.title} />
+            </a>
+          )}
+        </div>
+      </article>
+    );
+  })}
+</Layout>

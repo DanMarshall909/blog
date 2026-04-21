@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+// Group by year then month
+const grouped: Record<string, Record<string, typeof articles>> = {};
+for (const article of articles) {
+  const year = article.data.date.getFullYear().toString();
+  const month = article.data.date.getMonth().toString();
+  if (!grouped[year]) grouped[year] = {};
+  if (!grouped[year][month]) grouped[year][month] = [];
+  grouped[year][month].push(article);
+}
+
+const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const years = Object.keys(grouped).sort((a, b) => Number(b) - Number(a));
+---
+<Layout title="Archive - Technical Scratches">
+  <section class="archive">
+    <h2>Archive</h2>
+    {years.map(year => (
+      <div class="archive-year">
+        <h3 class="archive-year-label">{year}</h3>
+        {Object.keys(grouped[year]).sort((a, b) => Number(b) - Number(a)).map(month => (
+          <div class="archive-month">
+            <h4 class="archive-month-label">{monthNames[Number(month)]}</h4>
+            <ul class="archive-list">
+              {grouped[year][month].map(article => (
+                <li class="archive-item">
+                  <span class="archive-date">
+                    {article.data.date.toLocaleDateString('en-AU', { month: 'short', day: '2-digit', timeZone: 'UTC' })}
+                  </span>
+                  <a href={`/articles/${article.id.replace(/\/index$/, '')}/`}>{article.data.title}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    ))}
+  </section>
+</Layout>

@@ -4,8 +4,8 @@
 # Stop on error
 $ErrorActionPreference = 'Stop'
 
-Write-Host "Building site with Wintersmith..."
-node_modules\.bin\wintersmith build
+Write-Host "Building site with Astro..."
+npm run build
 
 Write-Host "Adding changes to git..."
 git add .

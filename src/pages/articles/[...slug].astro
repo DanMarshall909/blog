@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map(article => {
+    // Strip trailing /index from id to get the URL slug
+    // e.g. "1bit-llm/index" → "1bit-llm"
+    const slug = article.id.replace(/\/index$/, '');
+    return {
+      params: { slug },
+      props: { article },
+    };
+  });
+}
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+
+const formattedDate = article.data.date.toLocaleDateString('en-AU', {
+  year: 'numeric',
+  month: 'long',
+  day: '2-digit',
+  timeZone: 'UTC',
+});
+
+// Derive URL slug from id
+const urlSlug = article.id.replace(/\/index$/, '');
+---
+<Layout
+  title={`${article.data.title} - Technical Scratches`}
+  bodyClass="article-detail"
+  description={article.data.description}
+>
+  <Fragment slot="header">
+    <div class="title-with-image">
+      <h1>{article.data.title}</h1>
+    </div>
+    <div class="article-meta">
+      {article.data.date && <p class="publish-date">{formattedDate}</p>}
+      {article.data.tags.length > 0 && (
+        <div class="tags">
+          {article.data.tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+      )}
+    </div>
+  </Fragment>
+
+  <article class={`article${article.data.heroImage ? ' has-hero' : ''}`}>
+    <section class="content">
+      {article.data.heroImage && (
+        <img class="hero-image" src={article.data.heroImage} alt={article.data.title} />
+      )}
+      <Content />
+    </section>
+  </article>
+
+  <Fragment slot="footer-nav">
+    <div class="nav">
+      <a href="/">&laquo; Full blog</a>
+    </div>
+  </Fragment>
+</Layout>
