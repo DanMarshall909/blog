@@ -5,6 +5,7 @@ date: 2026-03-02
 author: "Dan Marshall"
 template: article.pug
 tags: [resume, career, fullstack, dotnet, csharp, azure, ai, testing, microservices]
+heroImage: /articles/resume/cartoon.png
 ---
 
 # Dan Marshall
