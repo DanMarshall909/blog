@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Picture from '../components/Picture.astro';
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles');
@@ -75,7 +76,7 @@ function getIntroHtml(description: string | undefined, body: string): string {
           </div>
           {article.data.heroImage && (
             <a class="card-hero" href={`/articles/${slug}/`}>
-              <img src={article.data.heroImage} alt={article.data.title} />
+              <Picture src={article.data.heroImage} alt={article.data.title} loading="lazy" />
             </a>
           )}
         </div>
