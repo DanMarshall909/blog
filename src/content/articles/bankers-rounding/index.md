@@ -3,6 +3,7 @@ title: "Avoid death by accountant - Get bankers rounding right!"
 author: Dan Marshall
 date: "2025-02-23"
 tags: ["finance", "rounding", "bankers rounding", "accounting", "C#"]
+description: "Why bankers rounding is the right default for financial code in C#, how it works, and how to avoid an angry accountant when ledgers don't balance."
 template: article.pug
 heroImage: /articles/bankers-rounding/cartoon.png
 ---

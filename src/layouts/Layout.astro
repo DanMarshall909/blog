@@ -24,7 +24,7 @@ const isArticlePage = bodyClass === 'article-detail';
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    {description && <meta name="description" content={description} />}
+    <meta name="description" content={description ?? siteDescription} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" href={`${siteUrl}/feed.xml`} type="application/rss+xml" title={siteDescription} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
