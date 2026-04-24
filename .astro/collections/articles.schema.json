@@ -24,7 +24,8 @@
       "type": "string"
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "minLength": 70
     },
     "template": {
       "type": "string"
@@ -35,6 +36,7 @@
   },
   "required": [
     "title",
-    "date"
+    "date",
+    "description"
   ]
 }

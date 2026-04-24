@@ -1,7 +1,5 @@
 # Technical Scratches Blog
 
-A static blog powered by [Wintersmith](https://github.com/jnordberg/wintersmith).
-
 ## Getting Started
 
 1. **Install dependencies:**
