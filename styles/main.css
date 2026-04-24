@@ -546,38 +546,44 @@ td {
     margin: 0 var(--space-lg);
 }
 
-/* Index card two-column layout */
+/* Index card — image floats right at 50% opacity, text flows over it */
+.article.has-hero {
+    position: relative;
+}
+
 .card-layout {
-    display: flex;
-    gap: var(--space-xl);
-    align-items: flex-start;
 }
 
 .card-main {
-    flex: 1;
+    position: relative;
+    z-index: 1;
     min-width: 0;
 }
 
 .card-hero {
-    flex-shrink: 0;
-    width: 180px;
-    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    overflow: hidden;
+    opacity: 0.1;
 }
 
 .card-hero img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    height: 100%;
     object-fit: cover;
-    border-radius: var(--border-radius);
+    border-radius: 0;
     display: block;
 }
 
 @media (max-width: 600px) {
-    .card-layout {
-        flex-direction: column;
-    }
     .card-hero {
+        position: relative;
         width: 100%;
+        height: 180px;
+        opacity: 0.5;
     }
 }
 
