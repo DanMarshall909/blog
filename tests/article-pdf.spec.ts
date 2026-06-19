@@ -27,6 +27,14 @@ test.describe('Article PDF action', () => {
     expect(pageCount).toBe(1);
   });
 
+  test('the printed brief resume omits the article title and includes the resume heading', async ({ page }) => {
+    await page.goto('/articles/resume-brief/');
+    await page.emulateMedia({ media: 'print' });
+
+    await expect(page.locator('.header')).toBeHidden();
+    await expect(page.getByRole('heading', { name: 'Dan Marshall' })).toBeVisible();
+  });
+
   test('printed code blocks wrap without scrollbars', async ({ page }) => {
     await page.goto('/articles/1bit-llm/');
     await page.emulateMedia({ media: 'print' });

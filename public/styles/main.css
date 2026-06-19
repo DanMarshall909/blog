@@ -1664,13 +1664,7 @@ code.hljs {
     }
 
     body.article-resume-brief .header {
-        padding-bottom: 3mm !important;
-        margin-bottom: 3mm;
-    }
-
-    body.article-resume-brief .header h1 {
-        font-size: 18pt !important;
-        margin-bottom: 1mm;
+        display: none;
     }
 
     body.article-resume-brief .article-meta {
@@ -1683,7 +1677,9 @@ code.hljs {
     }
 
     body.article-resume-brief h1 {
-        display: none;
+        display: block;
+        font-size: 18pt !important;
+        margin: 0 0 1.5mm;
     }
 
     body.article-resume-brief h2 {
