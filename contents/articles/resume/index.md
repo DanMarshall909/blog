@@ -1,15 +1,16 @@
 ---
 title: "Resume"
-description: "Senior full-stack engineer with 11+ years of experience in .NET, JVM, microservices, and production AI systems."
-date: 2026-03-02
+description: "Senior full-stack engineer with 11+ years of experience in .NET, JVM, microservices, production AI systems, AI-assisted delivery, and developer tooling."
+date: 2026-06-19
 author: "Dan Marshall"
 template: article.pug
 tags: [resume, career, fullstack, dotnet, csharp, azure, ai, testing, microservices]
+heroImage: /articles/resume/cartoon.png
 ---
 
 # Dan Marshall
 
-Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, and production AI integration. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.
+Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, production AI integration, AI-assisted delivery systems, and developer tooling. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.
 
 ---
 
@@ -38,22 +39,26 @@ University of South Africa (UNISA)
 | **Databases** | SQL Server, PostgreSQL, MySQL |
 | **Security** | ASP.NET Identity, OAuth2, JWT, Microsoft.Identity, Azure AD / Entra ID |
 | **Libraries** | MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.NET, OpenAPI |
-| **DevOps** | CI/CD with Azure DevOps, TeamCity, Octopus Deploy, PowerShell, Docker |
+| **DevOps** | CI/CD with Azure DevOps, TeamCity, Octopus Deploy, GitHub Pages, PowerShell, Docker |
 | **Observability** | OpenTelemetry, Seq, OpenSearch, Application Insights SDK, Serilog Sinks |
+| **Static Sites** | Astro, content collections, RSS, metadata validation, image optimisation |
+| **Developer Tooling** | Roslyn semantic analysis/refactoring, CLI design, backlog automation, scripted workflows |
 
 ### AI/ML Integration
 
 | Area | Details |
 | :----- | :------ |
-| **Production AI Systems** | OpenAI Platform, Claude API, LangChain4j, prompt engineering |
-| **Applications** | Automation, multimodal analysis, guardrails |
-| **Platforms** | AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers |
+| **Production AI Systems** | OpenAI Platform, Claude API, LangChain4j, AWS Bedrock, prompt engineering |
+| **Applications** | Automation, multimodal analysis, guardrails, agentic coding workflows, technical content pipelines |
+| **Platforms** | AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers, llama.cpp-compatible runtimes |
+| **Developer Tooling** | Claude Code skills, MCP integration, Codex workflows, PRD backlog automation, prompt and workflow optimisation |
+| **Media Generation** | ComfyUI, Flux-based image generation, local AI asset pipelines |
 
 ### Front-end Development
 
 | Area | Details |
 | :----- | :------ |
-| **Frameworks** | TypeScript/JavaScript with React, Angular, Vite, Vitest, and ASP.NET MVC |
+| **Frameworks** | TypeScript/JavaScript with React, Angular, Astro, Vite, Vitest, and ASP.NET MVC |
 | **UI Design** | CSS, Tailwind CSS, Material UI |
 
 ### General
@@ -67,7 +72,30 @@ University of South Africa (UNISA)
 
 ---
 
+## Recent Projects and Achievements
+
+- Built an AI-assisted delivery system around Claude Code/Codex: reusable skills, project memory, PRD backlog management, TDD execution, mutation testing, Jira/Bitbucket workflow automation, and post-session reflection.
+- Built a Roslyn-based C# refactoring CLI for semantic solution-wide rename, move, reference lookup, dependency analysis, duplicate detection, and safe refactoring across legacy ProjectX solutions.
+- Drove technical analysis for a pre-launch tour booking platform, including Hero API source-of-truth decisions, PII minimisation, Stripe/Hero payment flow diagnosis, EF migration constraints, and Jira/PR delivery workflow.
+- Built an AI-assisted publishing workflow for this Astro blog that drafts articles, generates local illustrations, opens browser previews, publishes to GitHub Pages, and prepares LinkedIn posts from a single command.
+- Published technical write-ups on local LLM inference, Claude Code/MCP context optimisation, AI workflow design, and financial rounding correctness.
+- Created a Windows setup guide and installer script for running a Bonsai 8B 1-bit LLM locally with CUDA and an OpenAI-compatible API.
+- Improved this site with AVIF/WebP image generation, deferred font loading, Shiki syntax highlighting, RSS support, and Playwright coverage for meta descriptions.
+
+---
+
 ## Employment
+
+### Independent / Contract — AI-assisted software delivery and platform engineering
+**Senior Software Engineer / AI Workflow Engineer** | March 2026 – Present
+
+- Built and maintained a personal AI engineering system using Claude Code and Codex skills, project memory, reusable agents, and scripted workflows to keep delivery scoped, test-led, and auditable.
+- Created PRD backlog automation for story intake, acceptance criteria expansion, execution tracking, completion, parking, and visualisation.
+- Developed a Roslyn-powered C# refactoring CLI to support semantic rename, move, reference lookup, structural analysis, and safe cross-project refactoring in complex .NET solutions.
+- Led technical delivery and risk reduction for a pre-launch tour booking platform, including Hero API integration strategy, PII minimisation, Stripe payment reconciliation, Azure image storage decisions, and Jira/Bitbucket workflow.
+- Formalised TDD, mutation testing, code review, and refactoring workflows into reusable skills and agents for consistent AI-assisted engineering.
+
+---
 
 ### Reapit — [reapit.com](https://www.reapit.com)
 **Senior AI Engineer** | September 2025 – February 2026
