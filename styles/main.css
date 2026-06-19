@@ -233,7 +233,7 @@ td {
     padding: var(--space-2xl) 0 var(--space-xl);
     background: linear-gradient(135deg,
         oklch(from var(--color-background-dark) calc(l + 0.45) calc(c + 0.07) h),
-        oklch(from var(--color-background-dark) calc(l + 0.15) calc(c + 0.05) h)
+        oklch(from var(--color-background-dark) calc(l + 0.1) calc(c + 0.02) h)
     );
     position: relative;
 }
@@ -578,6 +578,16 @@ td {
     display: block;
 }
 
+.card-hero[href="/articles/my-resume-is-now-a-static-site-feature/"] {
+    opacity: 0.42;
+}
+
+.card-hero[href="/articles/my-resume-is-now-a-static-site-feature/"] img {
+    object-fit: contain;
+    object-position: right bottom;
+    padding: var(--space-md);
+}
+
 @media (max-width: 600px) {
     .card-hero {
         position: relative;
@@ -745,6 +755,24 @@ body.article-resume-brief .hero-image-picture .hero-image {
         aspect-ratio: 1141 / 1247;
         margin: 0 auto var(--space-lg);
         shape-outside: none;
+    }
+}
+
+@media (max-width: 900px) {
+    body.article-resume .hero-image-picture,
+    body.article-resume-brief .hero-image-picture {
+        float: none;
+        width: min(75vw, 18rem);
+        aspect-ratio: 1141 / 1247;
+        margin: 0 auto var(--space-lg);
+        shape-outside: none;
+    }
+
+    body.article-resume .content > h1:first-of-type,
+    body.article-resume-brief .content > h1:first-of-type {
+        clear: both;
+        text-align: center;
+        white-space: nowrap;
     }
 }
 
