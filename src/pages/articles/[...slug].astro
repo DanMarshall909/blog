@@ -33,10 +33,11 @@ const formattedDate = article.data.date.toLocaleDateString('en-AU', {
 
 // Derive URL slug from id
 const urlSlug = article.id.replace(/\/index$/, '');
+const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-').toLowerCase()}`;
 ---
 <Layout
   title={`${article.data.title} - Technical Scratches`}
-  bodyClass="article-detail"
+  bodyClass={pageClass}
   description={article.data.description}
 >
   <Fragment slot="header">

@@ -5,12 +5,14 @@ date: 2026-06-19
 author: "Dan Marshall"
 template: article.pug
 tags: [resume, career, fullstack, dotnet, csharp, azure, ai, testing, microservices]
-heroImage: /articles/resume/cartoon.png
+heroImage: /articles/resume/profile-alpha-trimmed.png
 ---
 
 # Dan Marshall
 
 Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, production AI integration, AI-assisted delivery systems, and developer tooling. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.
+
+[One-page resume](/articles/resume-brief/) available for a concise PDF-friendly version.
 
 ---
 

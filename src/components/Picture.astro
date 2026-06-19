@@ -10,8 +10,9 @@ const { src, alt, class: className, loading, fetchpriority } = Astro.props;
 const base = src.replace(/\.(png|jpe?g)$/i, '');
 const avif = `${base}.avif`;
 const webp = `${base}.webp`;
+const pictureClass = className ? `${className}-picture` : undefined;
 ---
-<picture>
+<picture class={pictureClass}>
   <source type="image/avif" srcset={avif} />
   <source type="image/webp" srcset={webp} />
   <img
