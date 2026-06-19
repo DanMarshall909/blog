@@ -35,6 +35,37 @@ test.describe('Article PDF action', () => {
     await expect(page.getByRole('heading', { name: 'Dan Marshall' })).toBeVisible();
   });
 
+  test('the brief resume mobile layout keeps the portrait from splitting the name', async ({ page }) => {
+    await page.setViewportSize({ width: 535, height: 720 });
+    await page.goto('/articles/resume-brief/');
+
+    const heading = page.getByRole('heading', { name: 'Dan Marshall' });
+    const portrait = page.locator('.hero-image-picture').first();
+
+    await expect(heading).toBeVisible();
+    await expect(portrait).toBeVisible();
+
+    const layout = await heading.evaluate((h1) => {
+      const portrait = document.querySelector('.hero-image-picture');
+      const headingRect = h1.getBoundingClientRect();
+      const portraitRect = portrait?.getBoundingClientRect();
+      const style = portrait ? getComputedStyle(portrait) : null;
+
+      return {
+        headingLineHeight: parseFloat(getComputedStyle(h1).lineHeight),
+        headingHeight: headingRect.height,
+        headingCenterDelta: Math.abs((headingRect.left + headingRect.right) / 2 - window.innerWidth / 2),
+        portraitFloat: style?.float,
+        portraitBeforeHeading: portraitRect ? portraitRect.bottom <= headingRect.top : false,
+      };
+    });
+
+    expect(layout.portraitFloat).toBe('none');
+    expect(layout.portraitBeforeHeading).toBe(true);
+    expect(layout.headingCenterDelta).toBeLessThan(8);
+    expect(layout.headingHeight).toBeLessThan(layout.headingLineHeight * 1.6);
+  });
+
   test('printed code blocks wrap without scrollbars', async ({ page }) => {
     await page.goto('/articles/1bit-llm/');
     await page.emulateMedia({ media: 'print' });
