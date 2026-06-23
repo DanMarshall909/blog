@@ -891,6 +891,55 @@ pre code {
     word-break: normal;
 }
 
+.code-disclosure {
+    margin: var(--space-lg) 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background: var(--color-code-bg);
+    overflow: hidden;
+}
+
+.code-disclosure-summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    list-style: none;
+    padding: var(--space-sm) var(--space-lg);
+    cursor: pointer;
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    user-select: none;
+}
+
+.code-disclosure-summary::-webkit-details-marker {
+    display: none;
+}
+
+.code-disclosure-summary::before {
+    content: '›';
+    display: inline-block;
+    font-size: 1.25em;
+    line-height: 1;
+    transform: rotate(0deg);
+    transition: transform var(--transition-fast);
+}
+
+.code-disclosure[open] .code-disclosure-summary {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.code-disclosure[open] .code-disclosure-summary::before {
+    transform: rotate(90deg);
+}
+
+.code-disclosure pre {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+}
+
 /* Shiki dual-theme: apply dark vars by default, light vars when data-theme="light" */
 .astro-code,
 .astro-code span {
@@ -1211,6 +1260,14 @@ body.article-detail .article::before {
         font-size: 14px;
     }
 
+    .code-disclosure {
+        margin: var(--space-md) 0;
+    }
+
+    .code-disclosure-summary {
+        padding: var(--space-sm) var(--space-md);
+    }
+
     pre code {
         font-size: 13px;
         line-height: 1.4;
@@ -1253,6 +1310,15 @@ body.article-detail .article::before {
         margin: var(--space-sm) 0;
         border-radius: 4px;
         font-size: 13px;
+    }
+
+    .code-disclosure {
+        margin: var(--space-sm) 0;
+        border-radius: 4px;
+    }
+
+    .code-disclosure-summary {
+        padding: var(--space-xs) var(--space-sm);
     }
 
     pre code {
@@ -1633,6 +1699,7 @@ code.hljs {
     li,
     blockquote,
     table,
+    .code-disclosure,
     pre {
         break-inside: avoid;
     }
@@ -1647,6 +1714,16 @@ code.hljs {
         border-color: var(--color-border) !important;
         color: var(--color-print) !important;
         background: var(--color-code-bg) !important;
+    }
+
+    .code-disclosure {
+        border: 0 !important;
+        background: transparent !important;
+        margin: var(--space-lg) 0 !important;
+    }
+
+    .code-disclosure-summary {
+        display: none !important;
     }
 
     pre,
