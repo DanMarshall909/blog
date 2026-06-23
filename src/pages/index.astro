@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Picture from '../components/Picture.astro';
 import { getCollection } from 'astro:content';
+import { tagHref } from '../utils/tags';
 
 const allArticles = await getCollection('articles');
 const articles = allArticles
@@ -17,11 +18,6 @@ const topicGroups = [
   'TDD',
   'Astro',
 ];
-
-function tagHref(tag: string): string {
-  const slug = tag.trim().toLowerCase().replace(/#/g, 'sharp').replace(/\+/g, 'plus').replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  return `/tags/${slug}/`;
-}
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-AU', {
@@ -162,6 +158,7 @@ function getIntroHtml(description: string | undefined, body: string): string {
     </div>
     <ul>
       {topicGroups.map((topic) => <li><a href={tagHref(topic)}>{topic}</a></li>)}
+      <li><a href="/topics/">All topics</a></li>
     </ul>
   </section>
 </Layout>

@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { tagSlug } from '../utils/tags';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const tagMap = new Map<string, { label: string; count: number }>();
+
+for (const article of articles) {
+  for (const tag of article.data.tags) {
+    const slug = tagSlug(tag);
+    const existing = tagMap.get(slug);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      tagMap.set(slug, { label: tag, count: 1 });
+    }
+  }
+}
+
+const topics = [...tagMap.values()].sort((a, b) => {
+  if (b.count !== a.count) return b.count - a.count;
+  return a.label.localeCompare(b.label);
+});
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-AU', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+---
+<Layout title="Topics - Technical Scratches" description="Browse Technical Scratches articles by topic and tag.">
+  <section class="topics-page">
+    <p class="eyebrow">Topics</p>
+    <h1>Browse by topic</h1>
+    <p>Choose a tag to filter related articles.</p>
+
+    <div class="topics-filter" aria-label="Filter articles by topic">
+      <button class="topic-filter is-active" type="button" data-topic-filter="all" aria-pressed="true">
+        <span>All topics</span>
+        <strong>{articles.length}</strong>
+      </button>
+      {topics.map((topic) => (
+        <button class="topic-filter" type="button" data-topic-filter={tagSlug(topic.label)} aria-pressed="false">
+          <span>{topic.label}</span>
+          <strong>{topic.count}</strong>
+        </button>
+      ))}
+    </div>
+
+    <p class="topics-count" aria-live="polite">
+      Showing <span id="topics-visible-count">{articles.length}</span> {articles.length === 1 ? 'article' : 'articles'}.
+    </p>
+
+    <div class="topics-results">
+      {articles.map((article) => {
+        const articleSlug = article.id.replace(/\/index$/, '');
+        const articleTags = article.data.tags.map(tagSlug);
+        return (
+          <article class="topics-result" data-topic-tags={articleTags.join(' ')}>
+            <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
+            <h2><a href={`/articles/${articleSlug}/`}>{article.data.title}</a></h2>
+            <p>{article.data.description}</p>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+
+  <script is:inline>
+    (function() {
+      var buttons = Array.from(document.querySelectorAll('[data-topic-filter]'));
+      var cards = Array.from(document.querySelectorAll('[data-topic-tags]'));
+      var count = document.getElementById('topics-visible-count');
+
+      function setFilter(filter) {
+        var visible = 0;
+
+        buttons.forEach(function(button) {
+          var active = button.getAttribute('data-topic-filter') === filter;
+          button.classList.toggle('is-active', active);
+          button.setAttribute('aria-pressed', String(active));
+        });
+
+        cards.forEach(function(card) {
+          var tags = (card.getAttribute('data-topic-tags') || '').split(' ');
+          var show = filter === 'all' || tags.indexOf(filter) !== -1;
+          if (show) visible += 1;
+
+          if (show) {
+            card.hidden = false;
+            requestAnimationFrame(function() {
+              card.classList.remove('is-collapsed');
+            });
+          } else {
+            card.classList.add('is-collapsed');
+            window.setTimeout(function() {
+              if (card.classList.contains('is-collapsed')) card.hidden = true;
+            }, 320);
+          }
+
+          card.setAttribute('aria-hidden', String(!show));
+        });
+
+        if (count) count.textContent = String(visible);
+      }
+
+      buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          setFilter(button.getAttribute('data-topic-filter') || 'all');
+        });
+      });
+    })();
+  </script>
+</Layout>
