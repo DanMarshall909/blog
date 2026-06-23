@@ -1,5 +1,6 @@
 ---
 import { Picture as AstroPicture } from 'astro:assets';
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import sharp from 'sharp';
 
@@ -9,8 +10,9 @@ interface Props {
   class?: string;
   loading?: 'lazy' | 'eager';
   fetchpriority?: 'high' | 'low' | 'auto';
+  sizes?: string;
 }
-const { src, alt, class: className, loading, fetchpriority } = Astro.props;
+const { src, alt, class: className, loading, fetchpriority, sizes } = Astro.props;
 const pictureClass = className ? `${className}-picture` : undefined;
 const assetPath = src.startsWith('/articles/') ? `../content${src}` : src;
 const imageModules = import.meta.glob('../content/articles/**/*.{png,jpg,jpeg,webp,avif}', {
@@ -18,8 +20,11 @@ const imageModules = import.meta.glob('../content/articles/**/*.{png,jpg,jpeg,we
   import: 'default',
 });
 const image = imageModules[assetPath] ?? src;
-const imageDimensions = typeof image === 'string'
-  ? await sharp(join(process.cwd(), 'public', image.replace(/^\//, ''))).metadata()
+const publicImagePath = typeof image === 'string' && image.startsWith('/')
+  ? join(process.cwd(), 'public', image.replace(/^\//, ''))
+  : undefined;
+const imageDimensions = publicImagePath && existsSync(publicImagePath)
+  ? await sharp(publicImagePath).metadata()
   : undefined;
 ---
 <AstroPicture
@@ -32,4 +37,5 @@ const imageDimensions = typeof image === 'string'
   height={imageDimensions?.height}
   loading={loading}
   fetchpriority={fetchpriority}
+  sizes={sizes}
 />

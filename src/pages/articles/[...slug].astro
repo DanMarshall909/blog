@@ -23,6 +23,7 @@ interface Props {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
+const readingMinutes = Math.max(1, Math.round((article.body ?? '').split(/\s+/).filter(Boolean).length / 220));
 
 const formattedDate = article.data.date.toLocaleDateString('en-AU', {
   year: 'numeric',
@@ -30,6 +31,11 @@ const formattedDate = article.data.date.toLocaleDateString('en-AU', {
   day: '2-digit',
   timeZone: 'UTC',
 });
+
+function tagHref(tag: string): string {
+  const slug = tag.trim().toLowerCase().replace(/#/g, 'sharp').replace(/\+/g, 'plus').replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return `/tags/${slug}/`;
+}
 
 // Derive URL slug from id
 const urlSlug = article.id.replace(/\/index$/, '');
@@ -41,15 +47,23 @@ const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-')
   description={article.data.description}
 >
   <Fragment slot="header">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Writing</a>
+      <span aria-hidden="true">/</span>
+      <span>{article.data.title}</span>
+    </nav>
     <div class="title-with-image">
       <h1>{article.data.title}</h1>
     </div>
     <div class="article-meta">
       {article.data.date && <p class="publish-date">{formattedDate}</p>}
+      <p class="reading-time">{readingMinutes} min read</p>
       {article.data.tags.length > 0 && (
-        <div class="tags">
-          {article.data.tags.map(tag => <span class="tag">{tag}</span>)}
-        </div>
+        <ul class="tags" aria-label="Article topics">
+          {article.data.tags.map(tag => (
+            <li><a class="tag" href={tagHref(tag)}>{tag}</a></li>
+          ))}
+        </ul>
       )}
     </div>
   </Fragment>
@@ -57,7 +71,14 @@ const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-')
   <article class={`article${article.data.heroImage ? ' has-hero' : ''}`}>
     <section class="content">
       {article.data.heroImage && (
-        <Picture class="hero-image" src={article.data.heroImage} alt={article.data.title} loading="eager" fetchpriority="high" />
+        <Picture
+          class="hero-image"
+          src={article.data.heroImage}
+          alt={article.data.title}
+          loading="eager"
+          fetchpriority="high"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
       )}
       <Content />
     </section>

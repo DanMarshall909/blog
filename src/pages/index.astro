@@ -4,9 +4,24 @@ import Picture from '../components/Picture.astro';
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles');
-const articles = allArticles.sort(
+const articles = allArticles
+  .filter((article) => !['resume', 'resume-brief', 'resume/index', 'resume-brief/index'].includes(article.id))
+  .sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+const [featuredArticle, ...recentArticles] = articles;
+const topicGroups = [
+  'AI-assisted development',
+  'developer tools',
+  'Local AI',
+  'TDD',
+  'Astro',
+];
+
+function tagHref(tag: string): string {
+  const slug = tag.trim().toLowerCase().replace(/#/g, 'sharp').replace(/\+/g, 'plus').replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return `/tags/${slug}/`;
+}
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-AU', {
@@ -57,30 +72,96 @@ function getIntroHtml(description: string | undefined, body: string): string {
     </div>
   </Fragment>
 
-  {articles.map((article) => {
-    const slug = article.id.replace(/\/index$/, '');
-    const intro = getIntroHtml(article.data.description, article.body ?? '');
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-hero-copy">
+      <p class="eyebrow">Technical Scratches</p>
+      <h1 id="home-title">Dan Marshall</h1>
+      <p class="home-intro">
+        Software engineering notes on .NET, AI-assisted delivery, local AI, testing, and developer tooling.
+      </p>
+      <div class="home-actions">
+        <a class="button primary" href={featuredArticle ? `/articles/${featuredArticle.id.replace(/\/index$/, '')}/` : '/archive/'}>
+          Read latest
+        </a>
+        <a class="button secondary" href="/articles/resume/">View resume</a>
+      </div>
+    </div>
+  </section>
+
+  {featuredArticle && (() => {
+    const slug = featuredArticle.id.replace(/\/index$/, '');
+    const intro = getIntroHtml(featuredArticle.data.description, featuredArticle.body ?? '');
+    const primaryTag = featuredArticle.data.tags[0];
     return (
-      <article class={`article intro${article.data.heroImage ? ' has-hero' : ''}`}>
-        <div class="card-layout">
-          <div class="card-main">
-            <header>
-              <div class="title-with-image">
-                <h2><a href={`/articles/${slug}/`}>{article.data.title}</a></h2>
-                <p class="date"><span>{formatDate(article.data.date)}</span></p>
-              </div>
-            </header>
-            <section class="content">
-              {intro && <Fragment set:html={intro} />}
-            </section>
+      <section class="featured-writing" aria-labelledby="featured-title">
+        <div class="section-heading">
+          <p class="eyebrow">Featured article</p>
+          <h2 id="featured-title">Start here</h2>
+        </div>
+        <article class="featured-card">
+          <div class="featured-card-copy">
+            <div class="article-card-meta">
+              {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
+              <time datetime={featuredArticle.data.date.toISOString()}>{formatDate(featuredArticle.data.date)}</time>
+            </div>
+            <h3><a href={`/articles/${slug}/`}>{featuredArticle.data.title}</a></h3>
+            <div class="featured-summary" set:html={intro} />
           </div>
-          {article.data.heroImage && (
-            <a class="card-hero" href={`/articles/${slug}/`}>
-              <Picture src={article.data.heroImage} alt={article.data.title} loading="lazy" />
+          {featuredArticle.data.heroImage && (
+            <a class="featured-image-link" href={`/articles/${slug}/`} aria-label={featuredArticle.data.title}>
+              <Picture
+                class="featured-image"
+                src={featuredArticle.data.heroImage}
+                alt={featuredArticle.data.title}
+                loading="eager"
+                fetchpriority="high"
+                sizes="(max-width: 760px) 100vw, 36rem"
+              />
             </a>
           )}
+        </article>
+      </section>
+    );
+  })()}
+
+  <section class="recent-writing" aria-labelledby="recent-title">
+    <div class="section-heading">
+      <p class="eyebrow">Recent writing</p>
+      <h2 id="recent-title">Notes from the workbench</h2>
+    </div>
+    <div class="article-grid">
+  {recentArticles.map((article) => {
+    const slug = article.id.replace(/\/index$/, '');
+    const intro = getIntroHtml(article.data.description, article.body ?? '');
+    const primaryTag = article.data.tags[0];
+    return (
+      <article class="article-card">
+        <div class="article-card-meta">
+          {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
+          <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
         </div>
+        <h3><a href={`/articles/${slug}/`}>{article.data.title}</a></h3>
+        {intro && <div class="article-card-summary" set:html={intro} />}
+        {article.data.tags.length > 0 && (
+          <ul class="mini-tag-list" aria-label="Article topics">
+            {article.data.tags.slice(0, 3).map((tag) => (
+              <li><a href={tagHref(tag)}>{tag}</a></li>
+            ))}
+          </ul>
+        )}
       </article>
     );
   })}
+    </div>
+  </section>
+
+  <section class="topic-cloud" aria-labelledby="topics-title">
+    <div class="section-heading">
+      <p class="eyebrow">Topics</p>
+      <h2 id="topics-title">What I keep coming back to</h2>
+    </div>
+    <ul>
+      {topicGroups.map((topic) => <li><a href={tagHref(topic)}>{topic}</a></li>)}
+    </ul>
+  </section>
 </Layout>

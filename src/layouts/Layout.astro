@@ -93,6 +93,12 @@ const isArticlePage = bodyClass?.split(/\s+/).includes('article-detail') ?? fals
         <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
       </div>
       <div class="drawer-body" id="drawer-body">
+        <nav class="drawer-primary-nav" aria-label="Primary navigation">
+          <a href="/">Writing</a>
+          <a href="/archive/">Archive</a>
+          <a href="/articles/resume/">Resume</a>
+          <a href="/feed.xml">RSS</a>
+        </nav>
         {!isArticlePage && (
           <nav class="drawer-article-nav">
             <div class="drawer-nav-title">Articles</div>
@@ -114,6 +120,12 @@ const isArticlePage = bodyClass?.split(/\s+/).includes('article-detail') ?? fals
 
     <header class="header">
       <div class="content-wrap">
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a href="/">Writing</a>
+          <a href="/archive/">Archive</a>
+          <a href="/articles/resume/">Resume</a>
+          <a href="/feed.xml">RSS</a>
+        </nav>
         <slot name="header">
           <div class="logo">
             <h1><a href={siteUrl}>{siteTitle}</a></h1>
