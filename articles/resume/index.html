@@ -323,6 +323,61 @@ University of South Africa (UNISA)</p>
         var content = document.querySelector('section.content');
         if (!content) return;
 
+        var longCodeBlocks = [];
+        var longCodeThreshold = 14;
+
+        function getCodeLineCount(pre) {
+          var shikiLines = pre.querySelectorAll('.line');
+          if (shikiLines.length) return shikiLines.length;
+
+          var text = pre.textContent || '';
+          var lines = text.split(/\r\n|\r|\n/);
+          if (lines.length > 1 && lines[lines.length - 1] === '') lines.pop();
+          return lines.length;
+        }
+
+        function setCodeToggleLabel(summary, details) {
+          var lines = details.getAttribute('data-code-lines');
+          summary.textContent = (details.open ? 'Hide code' : 'Show code') + ' (' + lines + ' lines)';
+        }
+
+        content.querySelectorAll('pre').forEach(function(pre) {
+          if (pre.closest('.code-disclosure')) return;
+
+          var lineCount = getCodeLineCount(pre);
+          if (lineCount <= longCodeThreshold) return;
+
+          var details = document.createElement('details');
+          details.className = 'code-disclosure';
+          details.setAttribute('data-code-lines', String(lineCount));
+
+          var summary = document.createElement('summary');
+          summary.className = 'code-disclosure-summary';
+          details.appendChild(summary);
+
+          pre.parentNode.insertBefore(details, pre);
+          details.appendChild(pre);
+          setCodeToggleLabel(summary, details);
+
+          details.addEventListener('toggle', function() {
+            setCodeToggleLabel(summary, details);
+          });
+
+          longCodeBlocks.push(details);
+        });
+
+        if (longCodeBlocks.length) {
+          var printOpenedBlocks = [];
+          window.addEventListener('beforeprint', function() {
+            printOpenedBlocks = longCodeBlocks.filter(function(details) { return !details.open; });
+            printOpenedBlocks.forEach(function(details) { details.open = true; });
+          });
+          window.addEventListener('afterprint', function() {
+            printOpenedBlocks.forEach(function(details) { details.open = false; });
+            printOpenedBlocks = [];
+          });
+        }
+
         var headings = content.querySelectorAll('h2, h3');
         if (headings.length < 2) return;
 
