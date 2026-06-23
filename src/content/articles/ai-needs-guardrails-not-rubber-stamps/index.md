@@ -4,6 +4,7 @@ author: Dan Marshall
 date: "2026-06-23"
 tags: ["quality", "TDD", "AI assisted development", "AI", "mutation testing"]
 description: "Approving AI-written code is too easy to rubber-stamp. The quality comes back when you write the scaffolding, tests, tooling, and constraints first."
+heroImage: /articles/ai-needs-guardrails-not-rubber-stamps/rubber_stamp.png
 ---
 
 > The only way to go fast is to go well.
@@ -12,15 +13,27 @@ description: "Approving AI-written code is too easy to rubber-stamp. The quality
 
 ## Introduction
 
-I get what many people are saying. There is a real skill in reviewing AI-generated code instead of writing every line yourself. But approving code is prone to rubber stamping. I know, because I used to do it a lot.
+I get what many people are saying. There is a real value in AI-generated code instead of writing every line yourself. But approving code is prone to rubber stamping. It works. Yes, I would have done it differently, but it's too exhausting to make it better. Just get it shipped... I know, because I used to do it a lot myself.
 
-If I am honest, the quality of the code I was shipping for a while was poor compared to what I used to produce when I wrote every line by hand. Not because AI is useless. My 40-plus years behind a keyboard did not count for nought. I just was not applying each thing in the right place - I was letting the machine fill too much of the shape of the solution. I was telling it what but not how.
+This is not even a new problem. Pull requests can create the same failure mode in traditional workflows. The author disappears into a branch, comes back with a slab of code, and the reviewer is expected to reconstruct all of the thinking after the fact. That is hard work, so review becomes a gate, then a skim, then a rubber stamp. AI assisted development can replicate the same pattern at higher speed: the machine disappears into the implementation, comes back with a slab of code, and now I am the tired reviewer trying to reverse-engineer the decisions.
 
-Now to be clear, the how is something I've always been very wary of specifying. A core principle of TDD is that implementation detail should stay out of your acceptance criteria.
+Pair programming fixes this in both cases because the thinking happens while the code is being shaped. You do not review the finished mystery object; you participate in the choices that created it. With AI, the equivalent is staying in the loop: write the scaffolding, constrain the architecture, guide the tests, and correct the shape while it is still cheap.
 
-And that's a very good rule in general. TDD does produce loosely coupled code on the whole, but AI often does not necessarily do very well on the refactor step. Acceptance criteria should describe behaviour, but the architecture itself needs constraints, examples, and feedback loops. In the past I would do this instinctively. I leant on my experience to write well structured code. AI
+That matters because review is not just a logical exercise. It is also an attention problem. If the code follows my conventions, uses the shapes I expect, and puts things where I would naturally look for them, reading it is more pleasant. When reading it is more pleasant, I am much more likely to actually review it instead of skimming until the green ticks reassure me.
 
-That has improved a lot now, that that a fist full of pennies have dropped and the change was not a better prompt. It was a maturation in how I think about AI-assisted development.
+So if I am honest, the quality of the code I was shipping for a while was poor compared to what I used to produce when I wrote every line by hand. Not because AI is useless. My 40-plus years behind a keyboard did not count for nought. I just was not applying my expertise in the right place - I was letting the machine fill too much of the shape of the solution. I was telling it what but not how.
+
+## But, isn't AI assisted TDD/BDD going to save us?
+
+The how is something I've always been very wary of specifying. An important principle of BDD is that implementation detail should stay out of your acceptance criteria.
+
+And that's a very good rule in general. TDD does produce loosely coupled code on the whole, but AI often does not do very well on the refactor step. In fact I've written TDD frameworks to enforce this because it simply WOULD NOT LISTEN. In its zeal to get the tests passing it would write all sorts of slop. The solution worked, but it was not something I'd happily put my name behind.
+
+The point of AI assisted development is to improve velocity, which is exactly the same goal as automated testing, but illegible code and lack of structure meant I found things very hard to follow. I was discouraged to even read the code any longer because it was exhausting.
+
+Acceptance criteria should describe behaviour, but the architecture itself needs constraints, examples, and feedback loops. In the past I would do this instinctively. I leant on my experience to write well structured code. 
+
+That has improved a lot now that a fistful of pennies have dropped, and the change was not a better prompt. It was a maturation in how I think about AI-assisted development.
 
 ## The pennies
 
@@ -52,8 +65,8 @@ I'm obviously a big fan of automated quality control, but linting alone won't sa
 
 The important shift is this: I do not treat AI as a junior developer. That narrative is wrong because people usually listen to you, use their intuition, and hopefully learn from their mistakes. AI can do this if you reflect on it and curate its memory, but it will often fail to do so. Instead I treat it as an implementation engine that needs mechanical, strict boundaries and examples.
 
-Without such constraints, AI will take the path of least resistance. In the moment that feels fast. Over time it is usually the path of **most** resistance and will lead to project failure.
+Without such constraints, AI will take the path of least resistance. In the moment that feels fast. Over time it is usually the path of **most** resistance and can lead to project failure.
 
-When those gates are in place however AI becomes a significant multiplier. Without them, it becomes a technical debt accelerator.
+When those gates are in place, however, AI becomes a significant multiplier. Without them, it becomes a technical debt accelerator.
 
-I still write way less code by hand than I ever have. But I am concentrating the very most important code: the boundaries, the harnesses, the checks, the tools, the patterns. That is where the experience goes now.
+I still write way less code by hand than I ever have. But I am concentrating on the most important code: the boundaries, the harnesses, the checks, the tools, the patterns. That is where the experience goes now.
