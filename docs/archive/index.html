@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Archive - Technical Scratches</title><meta name="description" content="Thoughts on software engineering and life as a developer"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript><link rel="stylesheet" href="/styles/main.css"><script>
       (function() {
-        const getTheme = () => localStorage.getItem('theme') || 'dark';
+        const getTheme = () => localStorage.getItem('theme') || 'light';
         const setTheme = (theme) => {
           localStorage.setItem('theme', theme);
           document.documentElement.setAttribute('data-theme', theme);
@@ -119,7 +119,7 @@ Home
       })();
     </script> <script>
       function toggleTheme() {
-        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
         const next = current === 'dark' ? 'light' : 'dark';
         localStorage.setItem('theme', next);
         document.documentElement.setAttribute('data-theme', next);

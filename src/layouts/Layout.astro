@@ -41,7 +41,7 @@ const isArticlePage = bodyClass?.split(/\s+/).includes('article-detail') ?? fals
     <link rel="stylesheet" href="/styles/main.css" />
     <script is:inline>
       (function() {
-        const getTheme = () => localStorage.getItem('theme') || 'dark';
+        const getTheme = () => localStorage.getItem('theme') || 'light';
         const setTheme = (theme) => {
           localStorage.setItem('theme', theme);
           document.documentElement.setAttribute('data-theme', theme);
@@ -252,7 +252,7 @@ const isArticlePage = bodyClass?.split(/\s+/).includes('article-detail') ?? fals
     </script>
     <script is:inline>
       function toggleTheme() {
-        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
         const next = current === 'dark' ? 'light' : 'dark';
         localStorage.setItem('theme', next);
         document.documentElement.setAttribute('data-theme', next);
