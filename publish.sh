@@ -20,7 +20,7 @@ else
 fi
 
 echo "Pushing main..."
-git pull --rebase origin main
+git pull --rebase --autostash origin main
 git push origin main
 
 echo "Syncing gh-pages to main..."
