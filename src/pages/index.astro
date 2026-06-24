@@ -97,8 +97,9 @@ function getIntroHtml(description: string | undefined, body: string): string {
             <p class="eyebrow">Featured article</p>
             <article
               class:list={['featured-card', !featuredArticle.data.heroImage && 'featured-card-text-only']}
-              style={`--card-bg-image: url('${featuredCardImage}')`}
+              data-card-image={featuredCardImage}
             >
+              <a class="card-link" href={`/articles/${slug}/`} aria-label={`Read ${featuredArticle.data.title}`}><span>Read {featuredArticle.data.title}</span></a>
               <div class="featured-card-copy">
                 <div class="article-card-meta">
                   {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
@@ -111,13 +112,13 @@ function getIntroHtml(description: string | undefined, body: string): string {
           </div>
           <div class="featured-card-column">
             <p class="eyebrow">Available profile</p>
-            <section class="resume-callout" aria-labelledby="resume-callout-title" style={`--card-bg-image: url('${resumeCardImage}')`}>
+            <section class="resume-callout" aria-labelledby="resume-callout-title" data-card-image={resumeCardImage}>
               <div>
                 <h2 id="resume-callout-title">Resume</h2>
               </div>
               <div class="resume-callout-actions">
                 <a class="button secondary" href="/articles/resume-brief/">TLDR</a>
-                <a class="button primary" href="/articles/resume/">Full</a>
+                <a class="button secondary" href="/articles/resume/">Full</a>
               </div>
             </section>
           </div>
@@ -138,7 +139,8 @@ function getIntroHtml(description: string | undefined, body: string): string {
     const primaryTag = article.data.tags[0];
     const articleCardImage = getArticleCardImage(article.id, article.data.heroImage, index);
     return (
-      <article class="article-card" style={`--card-bg-image: url('${articleCardImage}')`}>
+      <article class="article-card" data-card-image={articleCardImage}>
+        <a class="card-link" href={`/articles/${slug}/`} aria-label={`Read ${article.data.title}`}><span>Read {article.data.title}</span></a>
         <div class="article-card-meta">
           {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
           <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
@@ -168,4 +170,20 @@ function getIntroHtml(description: string | undefined, body: string): string {
       <li><a href="/topics/">All topics</a></li>
     </ul>
   </section>
+
+  <script is:inline>
+    document.querySelectorAll('[data-card-image]').forEach((card) => {
+      card.style.setProperty('--card-bg-image', `url("${card.dataset.cardImage}")`);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (event.target.closest('a, button')) return;
+
+      const card = event.target.closest('.featured-card, .article-card');
+      const link = card?.querySelector('.card-link');
+      if (link instanceof HTMLAnchorElement) {
+        link.click();
+      }
+    });
+  </script>
 </Layout>

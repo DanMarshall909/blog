@@ -3,6 +3,7 @@ title: "Selected public projects"
 author: Dan Marshall
 date: "2026-06-24"
 tags: ["portfolio", "AI", "developer tools", "C#", "Python", "Rust", "frontend"]
+heroImage: /articles/selected-public-projects/cartoon.png
 description: "A short portfolio of public projects covering AI tooling, semantic search, C# engineering, frontend work, Rust, and local-LLM experiments."
 ---
 

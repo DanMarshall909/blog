@@ -888,7 +888,7 @@ hr {
 .featured-card {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 36rem);
+    grid-template-columns: minmax(0, 30rem);
     align-items: stretch;
     gap: var(--space-2xl);
     padding: var(--space-xl);
@@ -897,6 +897,7 @@ hr {
     background: var(--color-surface);
     box-shadow: var(--shadow-sm);
     color: inherit;
+    cursor: pointer;
     isolation: isolate;
     overflow: hidden;
     text-decoration: none;
@@ -918,9 +919,43 @@ hr {
     transform: translateY(-2px);
 }
 
+.card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+}
+
+.card-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -4px;
+}
+
+.card-link span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.featured-card-copy,
+.article-card > :not(.card-link) {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.featured-card-copy a,
+.article-card > :not(.card-link) a {
+    pointer-events: auto;
+}
+
 .featured-card-copy {
     display: flex;
     min-width: 0;
+    max-width: 30rem;
     flex-direction: column;
     justify-content: center;
 }
@@ -990,6 +1025,7 @@ hr {
     border-radius: var(--border-radius);
     background: var(--color-surface);
     box-shadow: var(--shadow-sm);
+    cursor: pointer;
     isolation: isolate;
     transition:
         transform var(--transition-fast),

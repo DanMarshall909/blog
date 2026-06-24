@@ -59,6 +59,9 @@ function readWranglerAccountId() {
     const out = execFileSync('npx', ['-y', 'wrangler', 'whoami'], { encoding: 'utf8' });
     const match = out.match(/Account ID\s+│\s+([a-f0-9]{32})/i);
     if (match) return match[1];
+
+    const idMatch = out.match(/\b[a-f0-9]{32}\b/i);
+    if (idMatch) return idMatch[0];
   } catch {
     // Fall through to env-based discovery.
   }
