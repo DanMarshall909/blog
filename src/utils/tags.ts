@@ -1,3 +1,20 @@
+export const SANCTIONED_TAGS = [
+  'ai',
+  'ai assisted development',
+  'career',
+  'developer tools',
+  'dotnet',
+  'finance',
+  'llm',
+  'local ai',
+  'productivity',
+  'static sites',
+  'tdd',
+  'testing',
+] as const;
+
+export type SanctionedTag = typeof SANCTIONED_TAGS[number];
+
 export function tagSlug(tag: string): string {
   return tag
     .trim()

@@ -4,7 +4,7 @@ description: "Senior full-stack engineer with 11+ years of experience in .NET, J
 date: 2026-06-19
 author: "Dan Marshall"
 template: article.pug
-tags: [resume, career, fullstack, dotnet, csharp, azure, ai, testing, microservices]
+tags: [career, dotnet, testing, static sites]
 heroImage: /articles/resume/profile-alpha-trimmed.png
 ---
 

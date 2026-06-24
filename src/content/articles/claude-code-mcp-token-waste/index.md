@@ -2,7 +2,7 @@
 title: "Claude Code is wasting ~9,400 tokens every session — here's the fix"
 author: Dan Marshall
 date: "2026-04-21"
-tags: ["Claude Code", "AI", "productivity", "LLM", "developer tools"]
+tags: ["ai", "developer tools", "llm", "productivity"]
 description: "Claude Code silently loads MCP server definitions for integrations you've never used. Here's how to find out how bad it is and fix it in 30 seconds."
 heroImage: /articles/claude-code-mcp-token-waste/cartoon.png
 ---

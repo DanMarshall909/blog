@@ -2,7 +2,7 @@
 title: "Building a custom job-search ranking workflow"
 author: Dan Marshall
 date: "2026-06-23"
-tags: ["AI", "job search", "developer tools", "automation", "search"]
+tags: ["ai", "career", "developer tools", "productivity"]
 description: "How I used an AI-assisted browser workflow to turn noisy job listings into a ranked, reviewable shortlist."
 heroImage: /articles/ai-assisted-job-search/cartoon-hero.jpg
 ---

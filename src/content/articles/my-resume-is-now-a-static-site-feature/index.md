@@ -2,7 +2,7 @@
 title: "My resume is now a static site feature"
 author: Dan Marshall
 date: "2026-06-19"
-tags: ["Astro", "resume", "CSS", "Playwright", "developer tools", "static sites"]
+tags: ["career", "developer tools", "static sites"]
 description: "I turned my resume into a versioned, printable, mobile-friendly page that is easier to share and keep current."
 heroImage: /articles/my-resume-is-now-a-static-site-feature/cartoon.png
 ---

@@ -2,7 +2,7 @@
 title: "Going meta: making AI think like me"
 author: Dan Marshall
 date: "2026-04-23"
-tags: ["Claude Code", "AI", "productivity", "developer tools", "meta"]
+tags: ["ai", "ai assisted development", "developer tools", "productivity"]
 description: "How I use Claude Code to keep myself on track — PRDs for scope, pomodoros for pace, rules files so I don't have to hold everything in my head."
 heroImage: /articles/making-ai-think-like-you/cartoon.png
 ---

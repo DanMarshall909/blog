@@ -1,0 +1,520 @@
+- generic [ref=e1]:
+  - link [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+    - text: Skip to main content
+  - banner [ref=e3]:
+    - navigation [ref=e4]:
+      - link [ref=e5] [cursor=pointer]:
+        - /url: /?trk=public_jobs_nav-header-logo
+        - generic [ref=e6]: LinkedIn
+      - generic [ref=e8]:
+        - button [ref=e10] [cursor=pointer]:
+          - generic [ref=e11]: Jobs
+        - tabpanel [ref=e12]:
+          - search [ref=e13]:
+            - generic [ref=e14]:
+              - combobox [ref=e15]: Senior .NET/Azure Full Stack Engineer
+              - button [ref=e16] [cursor=pointer]:
+                - generic [ref=e17]: Clear text
+            - generic [ref=e18]:
+              - combobox [ref=e19]: Teneriffe, QLD
+              - button [ref=e20] [cursor=pointer]:
+                - generic [ref=e21]: Clear text
+            - button [ref=e22] [cursor=pointer]
+        - status [ref=e23]
+      - generic [ref=e24]:
+        - link [ref=e25] [cursor=pointer]:
+          - /url: https://www.linkedin.com/login?emailAddress=&fromSignIn=&fromSignIn=true&session_redirect=https%3A%2F%2Fwww.linkedin.com%2Fjobs%2Fview%2F4432077955%2F&trk=public_jobs_nav-header-signin
+          - text: Sign in
+        - link [ref=e26] [cursor=pointer]:
+          - /url: https://www.linkedin.com/signup/cold-join?source=jobs_registration&session_redirect=https%3A%2F%2Fwww.linkedin.com%2Fjobs%2Fview%2F4432077955%2F&trk=public_jobs_nav-header-join
+          - text: Join now
+  - main [ref=e27]:
+    - generic [ref=e29]:
+      - generic [ref=e31]:
+        - link [ref=e32] [cursor=pointer]:
+          - /url: https://au.linkedin.com/company/kodezaustralia?trk=public_jobs_topcard_logo
+          - img [ref=e33]
+        - generic [ref=e35]:
+          - heading [level=1] [ref=e36]: Senior .NET/Azure Full Stack Engineer
+          - heading [level=4] [ref=e37]:
+            - generic [ref=e38]:
+              - link [ref=e40] [cursor=pointer]:
+                - /url: https://au.linkedin.com/company/kodezaustralia?trk=public_jobs_topcard-org-name
+                - text: Kodez
+              - text: · Melbourne, Victoria, Australia
+            - generic [ref=e41]: 19 hours ago · 35 applicants
+            - link [ref=e42] [cursor=pointer]:
+              - /url: https://www.linkedin.com/login?session_redirect=https%3A%2F%2Fwww%2Elinkedin%2Ecom%2Fsearch%2Fresults%2Fpeople%2F%3FfacetCurrentCompany%3D14505010%26title%3DFull%2BStack%2BEngineer&emailAddress=&fromSignIn=&trk=public_jobs_see-who-was-hired_people-search-link_face-pile-cta
+              - generic [ref=e43]:
+                - img [ref=e44]
+                - img [ref=e45]
+                - img [ref=e46]
+              - paragraph [ref=e48]: See who Kodez has hired for this role
+          - generic [ref=e49]:
+            - button [ref=e50] [cursor=pointer]: Apply
+            - link [ref=e51] [cursor=pointer]:
+              - /url: https://www.linkedin.com/login?emailAddress=&fromSignIn=&session_redirect=https%3A%2F%2Fau.linkedin.com%2Fjobs%2Fview%2Fsenior-net-azure-full-stack-engineer-at-kodez-4432077955&trk=public_jobs
+              - text: Save
+        - button [ref=e54] [cursor=pointer]
+      - generic [ref=e55]:
+        - generic [ref=e57]:
+          - generic [ref=e59]:
+            - generic [ref=e60]:
+              - paragraph [ref=e61]:
+                - strong [ref=e62]: "Department:"
+                - text: Consulting
+              - paragraph [ref=e63]:
+                - strong [ref=e64]: "Location:"
+                - text: Melbourne
+              - strong [ref=e65]: Description
+              - text: Permanent role | Remote We’re looking for a Senior Full Stack Engineer who uses AI to help deliver better customer outcomes — not just to move faster, but to build the right things with greater quality, clarity and impact. You’ll work hands‑on across the stack — Azure and React, with backend development in C# (.NET Core) — and be involved from problem framing through to production. You’ll shape solutions, guide AI‑native delivery practices, make pragmatic technical decisions, and work directly with clients to turn business intent into usable software.
+              - strong [ref=e66]: What you’ll be doing?
+              - list [ref=e67]:
+                - listitem [ref=e68]: Building and shipping full‑stack features end‑to‑end with a strong focus on customer outcomes.
+                - listitem [ref=e69]: Designing and delivering cloud‑native solutions using Azure Functions and event‑driven patterns.
+                - listitem [ref=e70]: Using AI to accelerate discovery, solution design, implementation and testing while keeping quality, security and maintainability front of mind.
+                - listitem [ref=e71]: Creating reliable delivery flows with Azure DevOps and GitHub Actions, including strong validation and release discipline.
+                - listitem [ref=e72]: Turning business needs into clear delivery slices, acceptance criteria and prioritised backlog items.
+                - listitem [ref=e73]: Collaborating directly with clients and internal teams to validate ideas quickly and deliver meaningful value
+              - strong [ref=e74]: You’ll thrive here if you…
+              - list [ref=e75]:
+                - listitem [ref=e76]: Senior engineering experience (6-8 + years) with a track record of delivering value, not just completing tickets.
+                - listitem [ref=e77]: Experience in React.
+                - listitem [ref=e78]: Backend experience with C# (.NET Core).
+                - listitem [ref=e79]: Experience building and running systems on Azure.
+                - listitem [ref=e80]: Strong judgement in using AI tools and agents — able to direct, validate and refine output to improve customer outcomes.
+                - listitem [ref=e81]: Communicate clearly, influence with confidence, and stay calm under pressure.
+                - listitem [ref=e82]: Can translate business needs into technical solutions that make sense.
+              - text: We’re more interested in your thinking, your energy, and your impact than a perfect list of tech buzzwords.
+              - strong [ref=e83]: Why you’ll love working at Kodez?
+              - list [ref=e84]:
+                - listitem [ref=e85]: Real career growth — opportunities to step into more senior roles as we scale
+                - listitem [ref=e86]: Hybrid flexibility — work from home 2–3 days a week
+                - listitem [ref=e87]: A supportive culture focused on wellbeing and psychological safety
+                - listitem [ref=e88]: Competitive salary and meaningful perks
+                - listitem [ref=e89]: Professional Development Days to invest in your craft
+                - listitem [ref=e90]: Bonus leave — including your birthday off, plus options to purchase extra leave or take extended breaks
+                - listitem [ref=e91]: Work that’s never boring — diverse projects, modern tech, great clients
+                - listitem [ref=e92]: A team that values curiosity, kindness and continuous learning
+              - text: At Kodez, we care about building software that matters — and about building teams that feel good to be part of. Interested - click apply and we will be in touch soon.
+            - button [ref=e93] [cursor=pointer]: Show more
+          - list [ref=e95]:
+            - listitem [ref=e96]:
+              - heading [level=3] [ref=e97]: Seniority level
+              - text: Mid-Senior level
+            - listitem [ref=e98]:
+              - heading [level=3] [ref=e99]: Employment type
+              - text: Full-time
+            - listitem [ref=e100]:
+              - heading [level=3] [ref=e101]: Job function
+              - text: Engineering and Information Technology
+            - listitem [ref=e102]:
+              - heading [level=3] [ref=e103]: Industries
+              - text: IT Services and IT Consulting
+        - generic [ref=e108]:
+          - paragraph [ref=e109]: Referrals increase your chances of interviewing at Kodez by 2x
+          - link [ref=e110] [cursor=pointer]:
+            - /url: https://www.linkedin.com/login?session_redirect=https%3A%2F%2Fwww%2Elinkedin%2Ecom%2Fsearch%2Fresults%2Fpeople%2F%3FfacetCurrentCompany%3D14505010&emailAddress=&fromSignIn=&trk=public_jobs_find-a-referral-cta
+            - text: See who you know
+      - generic [ref=e113]:
+        - paragraph [ref=e114]:
+          - text: Get notified about new Full Stack Engineer jobs in
+          - strong [ref=e115]: Melbourne, Victoria, Australia
+          - text: .
+        - link [ref=e116] [cursor=pointer]:
+          - /url: https://www.linkedin.com/login?emailAddress=&fromSignIn=&session_redirect=https%3A%2F%2Fau.linkedin.com%2Fjobs%2Fview%2Fsenior-net-azure-full-stack-engineer-at-kodez-4432077955&trk=public_jobs_job-alert-guest-redirect-cta
+          - text: Sign in to create job alert
+      - generic [ref=e117]:
+        - heading [level=2] [ref=e118]: Similar jobs
+        - generic [ref=e120]:
+          - list [ref=e121]:
+            - listitem [ref=e122]:
+              - generic [ref=e123]:
+                - link [ref=e124] [cursor=pointer]:
+                  - /url: https://au.linkedin.com/jobs/view/senior-c%23-full-stack-software-engineer-at-breadcrumb-4423103087?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=RzT6NHPvjU994aOoluIobA%3D%3D
+                  - generic [ref=e125]: Senior C# Full-Stack Software Engineer
+                - generic [ref=e126]:
+                  - heading [level=3] [ref=e127]: Senior C# Full-Stack Software Engineer
+                  - heading [level=4] [ref=e128]:
+                    - link [ref=e129] [cursor=pointer]:
+                      - /url: https://au.linkedin.com/company/breadcrumbhq?trk=public_jobs_similar-jobs_main-jobs-card-subtitle
+                      - text: Breadcrumb
+                  - generic [ref=e130]:
+                    - generic [ref=e131]: Greater Melbourne Area
+                    - time [ref=e132]: 1 week ago
+            - listitem [ref=e133]:
+              - generic [ref=e134]:
+                - link [ref=e135] [cursor=pointer]:
+                  - /url: https://au.linkedin.com/jobs/view/senior-software-engineer-at-triniti-4417853488?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=OfyklWAdLEP6tT0392cpQw%3D%3D
+                  - generic [ref=e136]: Senior Software Engineer
+                - generic [ref=e137]:
+                  - heading [level=3] [ref=e138]: Senior Software Engineer
+                  - heading [level=4] [ref=e139]:
+                    - link [ref=e140] [cursor=pointer]:
+                      - /url: https://au.linkedin.com/company/triniti?trk=public_jobs_similar-jobs_main-jobs-card-subtitle
+                      - text: triniti
+                  - generic [ref=e141]:
+                    - generic [ref=e142]: Melbourne, Victoria, Australia
+                    - generic [ref=e143]: A$140,000 - A$160,000
+                    - time [ref=e144]: 4 weeks ago
+            - listitem [ref=e145]:
+              - generic [ref=e146]:
+                - link [ref=e147] [cursor=pointer]:
+                  - /url: https://au.linkedin.com/jobs/view/senior-software-engineer-net-core-azure-at-nixil-4423319981?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=Dr6bzIVuCcSJA8JDGIN73w%3D%3D
+                  - generic [ref=e148]: Senior Software Engineer (.NET Core / Azure)
+                - generic [ref=e149]:
+                  - heading [level=3] [ref=e150]: Senior Software Engineer (.NET Core / Azure)
+                  - heading [level=4] [ref=e151]:
+                    - link [ref=e152] [cursor=pointer]:
+                      - /url: https://au.linkedin.com/company/nixil?trk=public_jobs_similar-jobs_main-jobs-card-subtitle
+                      - text: Nixil
+                  - generic [ref=e153]:
+                    - generic [ref=e154]: Melbourne, Victoria, Australia
+                    - time [ref=e155]: 4 days ago
+            - listitem [ref=e156]:
+              - generic [ref=e157]:
+                - link [ref=e158] [cursor=pointer]:
+                  - /url: https://au.linkedin.com/jobs/view/backend-engineer-c%23-azure-at-mod-io-4418599488?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=gBkcsWgq1UaEcw4QCvFxNA%3D%3D
+                  - generic [ref=e159]: Backend Engineer (C#/Azure)
+                - generic [ref=e160]:
+                  - heading [level=3] [ref=e161]: Backend Engineer (C#/Azure)
+                  - heading [level=4] [ref=e162]:
+                    - link [ref=e163] [cursor=pointer]:
+                      - /url: https://au.linkedin.com/company/modiohq?trk=public_jobs_similar-jobs_main-jobs-card-subtitle
+                      - text: mod.io
+                  - generic [ref=e164]:
+                    - generic [ref=e165]: Prahran, Victoria, Australia
+                    - time [ref=e166]: 3 weeks ago
+            - listitem [ref=e167]:
+              - generic [ref=e168]:
+                - link [ref=e169] [cursor=pointer]:
+                  - /url: https://au.linkedin.com/jobs/view/senior-software-engineer-at-mcmillan-shakespeare-mmsg-4418872680?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=3ykOulnWNf%2BdHm3C3eHUxg%3D%3D
+                  - generic [ref=e170]: Senior Software Engineer
+                - generic [ref=e171]:
+                  - heading [level=3] [ref=e172]: Senior Software Engineer
+                  - heading [level=4] [ref=e173]:
+                    - link [ref=e174] [cursor=pointer]:
+                      - /url: https://au.linkedin.com/company/mcmillan-shakespeare?trk=public_jobs_similar-jobs_main-jobs-card-subtitle
+                      - text: McMillan Shakespeare (MMSG)
+                  - generic [ref=e175]:
+                    - generic [ref=e176]: Melbourne, Victoria, Australia
+                    - time [ref=e177]: 3 weeks ago
+            - listitem [ref=e178]:
+              - generic [ref=e179]:
+                - link [ref=e180] [cursor=pointer]:
+                  - /url: https://au.linkedin.com/jobs/view/technical-architect-senior-net-full-stack-developer-at-n2s-global-4429786429?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=5aqC3Cu4Xk%2BmDrzL4vjmNw%3D%3D
+                  - generic [ref=e181]: Technical Architect / Senior .NET Full Stack Developer
+                - generic [ref=e182]:
+                  - heading [level=3] [ref=e183]: Technical Architect / Senior .NET Full Stack Developer
+                  - heading [level=4] [ref=e184]:
+                    - link [ref=e185] [cursor=pointer]:
+                      - /url: https://www.linkedin.com/company/n2sglobal?trk=public_jobs_similar-jobs_main-jobs-card-subtitle
+                      - text: N2S.Global
+                  - generic [ref=e186]:
+                    - generic [ref=e187]: Melbourne, Victoria, Australia
+                    - time [ref=e188]: 16 hours ago
+          - button [ref=e189] [cursor=pointer]: Show more jobs like this
+    - generic [ref=e191]:
+      - generic [ref=e192]:
+        - heading [level=2] [ref=e193]: People also viewed
+        - list [ref=e195]:
+          - listitem [ref=e196]:
+            - generic [ref=e197]:
+              - link [ref=e198] [cursor=pointer]:
+                - /url: https://au.linkedin.com/jobs/view/staff-software-engineer-at-traild-4407956463?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=qgB%2F7y8LHZsRtCfapqNoaw%3D%3D
+                - generic [ref=e199]: Staff Software Engineer
+              - generic [ref=e200]:
+                - heading [level=3] [ref=e201]: Staff Software Engineer
+                - paragraph [ref=e202]:
+                  - link [ref=e203] [cursor=pointer]:
+                    - /url: https://www.linkedin.com/company/traild?trk=public_jobs_people-also-viewed_aside-job-card-subtitle
+                    - text: Traild
+                - generic [ref=e204]:
+                  - generic [ref=e205]: Melbourne, Victoria, Australia
+                  - time [ref=e206]: 1 month ago
+          - listitem [ref=e207]:
+            - generic [ref=e208]:
+              - link [ref=e209] [cursor=pointer]:
+                - /url: https://au.linkedin.com/jobs/view/senior-net-and-react-developers-el1-at-gosourcing-4411446560?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=2%2FocN%2B%2FiMfsyNlxCdNeqqA%3D%3D
+                - generic [ref=e210]: Senior .NET and React Developers (EL1)
+              - generic [ref=e211]:
+                - heading [level=3] [ref=e212]: Senior .NET and React Developers (EL1)
+                - paragraph [ref=e213]:
+                  - link [ref=e214] [cursor=pointer]:
+                    - /url: https://au.linkedin.com/company/gosourcing-pty-ltd?trk=public_jobs_people-also-viewed_aside-job-card-subtitle
+                    - text: GoSourcing
+                - generic [ref=e215]:
+                  - generic [ref=e216]: Melbourne, Victoria, Australia
+                  - time [ref=e217]: 1 month ago
+          - listitem [ref=e218]:
+            - generic [ref=e219]:
+              - link [ref=e220] [cursor=pointer]:
+                - /url: https://au.linkedin.com/jobs/view/senior-developer-integration-at-viva-energy-australia-4426579460?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=7bzMMmN%2BWlEUam1HswBURA%3D%3D
+                - generic [ref=e221]: Senior Developer - Integration
+              - generic [ref=e222]:
+                - heading [level=3] [ref=e223]: Senior Developer - Integration
+                - paragraph [ref=e224]:
+                  - link [ref=e225] [cursor=pointer]:
+                    - /url: https://au.linkedin.com/company/viva-energy-australia?trk=public_jobs_people-also-viewed_aside-job-card-subtitle
+                    - text: Viva Energy Australia
+                - generic [ref=e226]:
+                  - generic [ref=e227]: Melbourne, Victoria, Australia
+                  - time [ref=e228]: 1 week ago
+          - listitem [ref=e229]:
+            - generic [ref=e230]:
+              - link [ref=e231] [cursor=pointer]:
+                - /url: https://au.linkedin.com/jobs/view/senior-application-developer-vpp-at-momentum-energy-4423174538?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=fhK2BVwtvIYWEjwI4BmmxQ%3D%3D
+                - generic [ref=e232]: Senior Application Developer (VPP)
+              - generic [ref=e233]:
+                - heading [level=3] [ref=e234]: Senior Application Developer (VPP)
+                - paragraph [ref=e235]:
+                  - link [ref=e236] [cursor=pointer]:
+                    - /url: https://au.linkedin.com/company/momentum-energy?trk=public_jobs_people-also-viewed_aside-job-card-subtitle
+                    - text: Momentum Energy
+                - generic [ref=e237]:
+                  - generic [ref=e238]: Melbourne, Victoria, Australia
+                  - time [ref=e239]: 1 week ago
+          - listitem [ref=e240]:
+            - generic [ref=e241]:
+              - link [ref=e242] [cursor=pointer]:
+                - /url: https://au.linkedin.com/jobs/view/full-stack-engineer-at-open-point-4425067579?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=oMk13qyd6TX8cc3gTtp6bQ%3D%3D
+                - generic [ref=e243]: Full Stack Engineer
+              - generic [ref=e244]:
+                - heading [level=3] [ref=e245]: Full Stack Engineer
+                - paragraph [ref=e246]:
+                  - link [ref=e247] [cursor=pointer]:
+                    - /url: https://au.linkedin.com/company/open-point-software?trk=public_jobs_people-also-viewed_aside-job-card-subtitle
+                    - text: Open Point
+                - generic [ref=e248]:
+                  - generic [ref=e249]: Fitzroy, Victoria, Australia
+                  - time [ref=e250]: 2 weeks ago
+          - listitem [ref=e251]:
+            - generic [ref=e252]:
+              - link [ref=e253] [cursor=pointer]:
+                - /url: https://au.linkedin.com/jobs/view/software-engineer-at-carsales-4430739435?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=qiAweyZ14AWxjiiC%2BYYVtA%3D%3D
+                - generic [ref=e254]: Software Engineer
+              - generic [ref=e255]:
+                - heading [level=3] [ref=e256]: Software Engineer
+                - paragraph [ref=e257]:
+                  - link [ref=e258] [cursor=pointer]:
+                    - /url: https://au.linkedin.com/company/carsales.com.au?trk=public_jobs_people-also-viewed_aside-job-card-subtitle
+                    - text: carsales
+                - generic [ref=e259]:
+                  - generic [ref=e260]: Melbourne, Victoria, Australia
+                  - time [ref=e261]: 5 days ago
+          - listitem [ref=e262]:
+            - generic [ref=e263]:
+              - link [ref=e264] [cursor=pointer]:
+                - /url: https://au.linkedin.com/jobs/view/senior-software-developer-at-davidson-4430906496?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=2JGk%2FbzepHXhCUKXgVTptQ%3D%3D
+                - generic [ref=e265]: Senior Software Developer
+              - generic [ref=e266]:
+                - heading [level=3] [ref=e267]: Senior Software Developer
+                - paragraph [ref=e268]:
+                  - link [ref=e269] [cursor=pointer]:
+                    - /url: https://au.linkedin.com/company/davidsongroup?trk=public_jobs_people-also-viewed_aside-job-card-subtitle
+                    - text: Davidson
+                - generic [ref=e270]:
+                  - generic [ref=e271]: Melbourne, Victoria, Australia
+                  - generic [ref=e272]: A$900 - A$1,000
+                  - time [ref=e273]: 4 days ago
+          - listitem [ref=e274]:
+            - generic [ref=e275]:
+              - link [ref=e276] [cursor=pointer]:
+                - /url: https://au.linkedin.com/jobs/view/senior-full-stack-developer-data-ai-at-myob-4387251634?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=%2BwIufU5p%2FXLmZ1HCo3UgtA%3D%3D
+                - generic [ref=e277]: Senior Full Stack Developer - Data & AI
+              - generic [ref=e278]:
+                - heading [level=3] [ref=e279]: Senior Full Stack Developer - Data & AI
+                - paragraph [ref=e280]:
+                  - link [ref=e281] [cursor=pointer]:
+                    - /url: https://au.linkedin.com/company/myob?trk=public_jobs_people-also-viewed_aside-job-card-subtitle
+                    - text: MYOB
+                - generic [ref=e282]:
+                  - generic [ref=e283]: Melbourne, Victoria, Australia
+                  - time [ref=e284]: 1 week ago
+          - listitem [ref=e285]:
+            - generic [ref=e286]:
+              - link [ref=e287] [cursor=pointer]:
+                - /url: https://au.linkedin.com/jobs/view/software-engineer-at-onyx-gaming-4421650764?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=xW%2BVsN3zUrXc4vwyl22K5w%3D%3D
+                - generic [ref=e288]: Software Engineer
+              - generic [ref=e289]:
+                - heading [level=3] [ref=e290]: Software Engineer
+                - paragraph [ref=e291]:
+                  - link [ref=e292] [cursor=pointer]:
+                    - /url: https://au.linkedin.com/company/onyx-gaming-pty-ltd?trk=public_jobs_people-also-viewed_aside-job-card-subtitle
+                    - text: Onyx Gaming
+                - generic [ref=e293]:
+                  - generic [ref=e294]: Port Melbourne, Victoria, Australia
+                  - time [ref=e295]: 3 weeks ago
+          - listitem [ref=e296]:
+            - generic [ref=e297]:
+              - link [ref=e298] [cursor=pointer]:
+                - /url: https://au.linkedin.com/jobs/view/software-engineer-contract-or-perm-at-ncs-group-australia-4416478798?refId=pYJF6SiNWGDdetL7xmw7yQ%3D%3D&trackingId=I3wQhT%2FsK3Df%2B0sa%2FKVo%2Fg%3D%3D
+                - generic [ref=e299]: Software Engineer (contract or perm)
+              - generic [ref=e300]:
+                - heading [level=3] [ref=e301]: Software Engineer (contract or perm)
+                - paragraph [ref=e302]:
+                  - link [ref=e303] [cursor=pointer]:
+                    - /url: https://au.linkedin.com/company/ncs-group-australia?trk=public_jobs_people-also-viewed_aside-job-card-subtitle
+                    - text: NCS Group Australia
+                - generic [ref=e304]:
+                  - generic [ref=e305]: Melbourne, Victoria, Australia
+                  - time [ref=e306]: 1 week ago
+      - generic [ref=e307]:
+        - heading [level=2] [ref=e308]: Similar Searches
+        - generic [ref=e310]:
+          - list [ref=e311]:
+            - listitem [ref=e312]:
+              - link [ref=e313] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/javascript-developer-jobs?trk=public_jobs_full-click
+                - generic [ref=e314]:
+                  - heading [level=3] [ref=e315]: Javascript Developer jobs
+                  - generic [ref=e316]: 925 open jobs
+            - listitem [ref=e317]:
+              - link [ref=e318] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/java-software-engineer-jobs?trk=public_jobs_full-click
+                - generic [ref=e319]:
+                  - heading [level=3] [ref=e320]: Java Software Engineer jobs
+                  - generic [ref=e321]: 760 open jobs
+            - listitem [ref=e322]:
+              - link [ref=e323] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/developer-jobs?trk=public_jobs_full-click
+                - generic [ref=e324]:
+                  - heading [level=3] [ref=e325]: Developer jobs
+                  - generic [ref=e326]: 5,939 open jobs
+            - listitem [ref=e327]:
+              - link [ref=e328] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/coldfusion-developer-jobs?trk=public_jobs_full-click
+                - generic [ref=e329]:
+                  - heading [level=3] [ref=e330]: Coldfusion Developer jobs
+                  - generic [ref=e331]: 533 open jobs
+            - listitem [ref=e332]:
+              - link [ref=e333] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/senior-software-engineer-jobs?trk=public_jobs_full-click
+                - generic [ref=e334]:
+                  - heading [level=3] [ref=e335]: Senior Software Engineer jobs
+                  - generic [ref=e336]: 1,571 open jobs
+            - listitem [ref=e337]:
+              - link [ref=e338] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/php-developer-jobs?trk=public_jobs_full-click
+                - generic [ref=e339]:
+                  - heading [level=3] [ref=e340]: PHP Developer jobs
+                  - generic [ref=e341]: 282 open jobs
+            - listitem [ref=e342]:
+              - link [ref=e343] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/java-application-developer-jobs?trk=public_jobs_full-click
+                - generic [ref=e344]:
+                  - heading [level=3] [ref=e345]: Java Application Developer jobs
+                  - generic [ref=e346]: 259 open jobs
+            - listitem [ref=e347]:
+              - link [ref=e348] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/senior-web-developer-jobs?trk=public_jobs_full-click
+                - generic [ref=e349]:
+                  - heading [level=3] [ref=e350]: Senior Web Developer jobs
+                  - generic [ref=e351]: 799 open jobs
+            - listitem [ref=e352]:
+              - link [ref=e353] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/django-developer-jobs?trk=public_jobs_full-click
+                - generic [ref=e354]:
+                  - heading [level=3] [ref=e355]: Django Developer jobs
+                  - generic [ref=e356]: 770 open jobs
+            - listitem [ref=e357]:
+              - link [ref=e358] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/associate-software-engineer-jobs?trk=public_jobs_full-click
+                - generic [ref=e359]:
+                  - heading [level=3] [ref=e360]: Associate Software Engineer jobs
+                  - generic [ref=e361]: 4,325 open jobs
+            - listitem [ref=e362]:
+              - link [ref=e363] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/ruby-on-rails-developer-jobs?trk=public_jobs_full-click
+                - generic [ref=e364]:
+                  - heading [level=3] [ref=e365]: Ruby on Rails Developer jobs
+                  - generic [ref=e366]: 793 open jobs
+            - listitem [ref=e367]:
+              - link [ref=e368] [cursor=pointer]:
+                - /url: https://www.linkedin.com/jobs/web-developer-jobs?trk=public_jobs_full-click
+                - generic [ref=e369]:
+                  - heading [level=3] [ref=e370]: Web Developer jobs
+                  - generic [ref=e371]: 945 open jobs
+          - button [ref=e372] [cursor=pointer]: Show more
+      - generic [ref=e376]:
+        - heading [level=2] [ref=e378]: Explore top content on LinkedIn
+        - paragraph [ref=e379]: Find curated posts and insights for relevant topics all in one place.
+        - link [ref=e380] [cursor=pointer]:
+          - /url: https://www.linkedin.com/top-content/
+          - text: View top content
+  - button [ref=e385] [cursor=pointer]: More searches
+  - contentinfo [ref=e387]:
+    - list [ref=e388]:
+      - listitem [ref=e389]:
+        - generic [ref=e390]: LinkedIn
+        - generic [ref=e392]: © 2026
+      - listitem [ref=e393]:
+        - link [ref=e394] [cursor=pointer]:
+          - /url: https://about.linkedin.com?trk=d_jobs_guest_details_footer-about
+          - text: About
+      - listitem [ref=e395]:
+        - link [ref=e396] [cursor=pointer]:
+          - /url: https://www.linkedin.com/accessibility?trk=d_jobs_guest_details_footer-accessibility
+          - text: Accessibility
+      - listitem [ref=e397]:
+        - link [ref=e398] [cursor=pointer]:
+          - /url: https://www.linkedin.com/legal/user-agreement?trk=d_jobs_guest_details_footer-user-agreement
+          - text: User Agreement
+      - listitem [ref=e399]:
+        - link [ref=e400] [cursor=pointer]:
+          - /url: https://www.linkedin.com/legal/privacy-policy?trk=d_jobs_guest_details_footer-privacy-policy
+          - text: Privacy Policy
+      - listitem [ref=e401]:
+        - link [ref=e402] [cursor=pointer]:
+          - /url: https://www.linkedin.com/legal/cookie-policy?trk=d_jobs_guest_details_footer-cookie-policy
+          - text: Cookie Policy
+      - listitem [ref=e403]:
+        - link [ref=e404] [cursor=pointer]:
+          - /url: https://www.linkedin.com/legal/copyright-policy?trk=d_jobs_guest_details_footer-copyright-policy
+          - text: Copyright Policy
+      - listitem [ref=e405]:
+        - link [ref=e406] [cursor=pointer]:
+          - /url: https://brand.linkedin.com/policies?trk=d_jobs_guest_details_footer-brand-policy
+          - text: Brand Policy
+      - listitem [ref=e407]:
+        - link [ref=e408] [cursor=pointer]:
+          - /url: https://www.linkedin.com/psettings/guest-controls?trk=d_jobs_guest_details_footer-guest-controls
+          - text: Guest Controls
+      - listitem [ref=e409]:
+        - link [ref=e410] [cursor=pointer]:
+          - /url: https://www.linkedin.com/legal/professional-community-policies?trk=d_jobs_guest_details_footer-community-guide
+          - text: Community Guidelines
+      - listitem [ref=e411]:
+        - button [ref=e413]: Language
+  - dialog "Sign in to see who you already know at Kodez" [active] [ref=e416]:
+    - button "Dismiss" [ref=e417] [cursor=pointer]
+    - generic [ref=e419]:
+      - generic [ref=e420]:
+        - img [ref=e421]
+        - heading "Sign in to see who you already know at Kodez" [level=2] [ref=e422]
+      - generic [ref=e423]:
+        - generic:
+          - generic:
+            - button "Continue with google"
+        - button "Sign in with Email" [ref=e424] [cursor=pointer]:
+          - generic [ref=e426]: Sign in with Email
+        - paragraph [ref=e428]: or
+        - generic:
+          - generic:
+            - button "Continue with google"
+        - paragraph [ref=e429]:
+          - text: New to LinkedIn?
+          - link "Join now" [ref=e430] [cursor=pointer]:
+            - /url: https://www.linkedin.com/signup/cold-join?source=jobs_registration&trk=public_jobs_contextual-sign-in-modal_join-link
+        - paragraph [ref=e431]:
+          - text: By clicking Continue to join or sign in, you agree to LinkedIn’s
+          - link "User Agreement" [ref=e432] [cursor=pointer]:
+            - /url: /legal/user-agreement?trk=linkedin-tc_auth-button_user-agreement
+          - text: ","
+          - link "Privacy Policy" [ref=e433] [cursor=pointer]:
+            - /url: /legal/privacy-policy?trk=linkedin-tc_auth-button_privacy-policy
+          - text: ", and"
+          - link "Cookie Policy" [ref=e434] [cursor=pointer]:
+            - /url: /legal/cookie-policy?trk=linkedin-tc_auth-button_cookie-policy
+          - text: .

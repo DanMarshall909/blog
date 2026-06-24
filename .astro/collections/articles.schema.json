@@ -17,7 +17,21 @@
       "default": [],
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "enum": [
+          "ai",
+          "ai assisted development",
+          "career",
+          "developer tools",
+          "dotnet",
+          "finance",
+          "llm",
+          "local ai",
+          "productivity",
+          "static sites",
+          "tdd",
+          "testing"
+        ]
       }
     },
     "heroImage": {

@@ -4,7 +4,7 @@ description: "A concise one-page resume for Dan Marshall, covering senior full-s
 date: 2026-06-19
 author: "Dan Marshall"
 template: article.pug
-tags: [resume, career, fullstack, dotnet, ai]
+tags: [career, dotnet, static sites]
 heroImage: /articles/resume/profile-alpha-trimmed.png
 ---
 

@@ -2,7 +2,7 @@
 title: "I built a /blogpost command that writes, illustrates, and publishes for me"
 author: Dan Marshall
 date: "2026-04-21"
-tags: ["Claude Code", "AI", "ComfyUI", "automation", "developer tools", "LinkedIn"]
+tags: ["ai", "ai assisted development", "developer tools", "productivity"]
 description: "One /blogpost command: Claude drafts the article, generates cartoon illustrations locally with Flux, previews in the browser, publishes to GitHub Pages, and fires off a LinkedIn post — all without leaving the terminal."
 heroImage: /articles/ai-blog-pipeline/cartoon.png
 ---

@@ -2,7 +2,7 @@
 title: "AI needs guardrails, not rubber stamps"
 author: Dan Marshall
 date: "2026-06-23"
-tags: ["quality", "TDD", "AI assisted development", "AI", "mutation testing"]
+tags: ["ai", "ai assisted development", "testing"]
 description: "Approving AI-written code is too easy to rubber-stamp. The quality comes back when you write the scaffolding, tests, tooling, and constraints first."
 heroImage: /articles/ai-needs-guardrails-not-rubber-stamps/rubber_stamp-hero.png
 ---
