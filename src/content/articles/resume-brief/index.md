@@ -12,9 +12,9 @@ heroImage: /articles/resume/profile-alpha-trimmed.png
 
 Senior full-stack engineer with 11+ years of enterprise .NET and JVM delivery across microservices, event-driven systems, cloud platforms, production AI, and developer tooling.
 
-Full version: [blog.danmarshall.dev/articles/resume](https://blog.danmarshall.dev/articles/resume/)
+Full version: [blog.danmarshall.dev/articles/resume](/articles/resume/)
 
-Selected public projects: [blog.danmarshall.dev/articles/selected-public-projects](https://blog.danmarshall.dev/articles/selected-public-projects/)
+Selected public projects: [blog.danmarshall.dev/articles/selected-public-projects](/articles/selected-public-projects/)
 
 ## Strengths
 
