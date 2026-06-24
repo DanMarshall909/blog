@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Picture from '../components/Picture.astro';
 import { getCollection } from 'astro:content';
+import { tagHref } from '../utils/tags';
 
 const allArticles = await getCollection('articles');
 const articles = allArticles
@@ -17,11 +18,6 @@ const topicGroups = [
   'TDD',
   'Astro',
 ];
-
-function tagHref(tag: string): string {
-  const slug = tag.trim().toLowerCase().replace(/#/g, 'sharp').replace(/\+/g, 'plus').replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  return `/tags/${slug}/`;
-}
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-AU', {
@@ -72,22 +68,6 @@ function getIntroHtml(description: string | undefined, body: string): string {
     </div>
   </Fragment>
 
-  <section class="home-hero" aria-labelledby="home-title">
-    <div class="home-hero-copy">
-      <p class="eyebrow">Technical Scratches</p>
-      <h1 id="home-title">Dan Marshall</h1>
-      <p class="home-intro">
-        Software engineering notes on .NET, AI-assisted delivery, local AI, testing, and developer tooling.
-      </p>
-      <div class="home-actions">
-        <a class="button primary" href={featuredArticle ? `/articles/${featuredArticle.id.replace(/\/index$/, '')}/` : '/archive/'}>
-          Read latest
-        </a>
-        <a class="button secondary" href="/articles/resume/">View resume</a>
-      </div>
-    </div>
-  </section>
-
   {featuredArticle && (() => {
     const slug = featuredArticle.id.replace(/\/index$/, '');
     const intro = getIntroHtml(featuredArticle.data.description, featuredArticle.body ?? '');
@@ -123,6 +103,17 @@ function getIntroHtml(description: string | undefined, body: string): string {
       </section>
     );
   })()}
+
+  <section class="resume-callout" aria-labelledby="resume-callout-title">
+    <div>
+      <p class="eyebrow">Available profile</p>
+      <h2 id="resume-callout-title">Senior full-stack and AI engineer</h2>
+    </div>
+    <div class="resume-callout-actions">
+      <a class="button primary" href="/articles/resume/">View resume</a>
+      <a class="button secondary" href="/articles/resume-brief/">One-page version</a>
+    </div>
+  </section>
 
   <section class="recent-writing" aria-labelledby="recent-title">
     <div class="section-heading">
@@ -162,6 +153,7 @@ function getIntroHtml(description: string | undefined, body: string): string {
     </div>
     <ul>
       {topicGroups.map((topic) => <li><a href={tagHref(topic)}>{topic}</a></li>)}
+      <li><a href="/topics/">All topics</a></li>
     </ul>
   </section>
 </Layout>
