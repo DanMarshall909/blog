@@ -14,6 +14,8 @@ Senior full-stack engineer with 11+ years of enterprise .NET and JVM delivery ac
 
 Full version: [blog.danmarshall.dev/articles/resume](https://blog.danmarshall.dev/articles/resume/)
 
+Selected public projects: [blog.danmarshall.dev/articles/selected-public-projects](https://blog.danmarshall.dev/articles/selected-public-projects/)
+
 ## Strengths
 
 - Enterprise C#/.NET engineering from .NET Framework 3.5 through modern .NET, with Clean Architecture, DDD, CQRS, WebAPI, GraphQL, MassTransit, EF Core, Dapper, and SQL Server.

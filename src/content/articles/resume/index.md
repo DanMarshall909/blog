@@ -14,6 +14,8 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 
 [One-page resume](/articles/resume-brief/) available for a concise PDF-friendly version.
 
+[Selected public projects](/articles/selected-public-projects/) are available as a short portfolio reference for technical reviewers.
+
 ---
 
 ## Qualifications
