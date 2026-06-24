@@ -1,8 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Picture from '../components/Picture.astro';
 import { getCollection } from 'astro:content';
 import { tagHref } from '../utils/tags';
+
+const featuredCardFallbackImage = '/articles/ai-blog-pipeline/cartoon.png';
+const resumeCardImage = '/articles/resume/profile-alpha-trimmed.png';
+const articleCardFallbackImages = [
+  '/articles/ai-blog-pipeline/cartoon.png',
+  '/articles/claude-code-mcp-token-waste/cartoon.png',
+  '/articles/making-ai-think-like-you/cartoon.png',
+];
+const publicHeroImageOverrides = new Map([
+  ['ai-assisted-job-search', '/articles/ai-assisted-job-search/cartoon.jpg'],
+  ['ai-assisted-job-search/index', '/articles/ai-assisted-job-search/cartoon.jpg'],
+  ['ai-needs-guardrails-not-rubber-stamps', '/articles/ai-needs-guardrails-not-rubber-stamps/rubber_stamp.png'],
+  ['ai-needs-guardrails-not-rubber-stamps/index', '/articles/ai-needs-guardrails-not-rubber-stamps/rubber_stamp.png'],
+]);
 
 const allArticles = await getCollection('articles');
 const articles = allArticles
@@ -26,6 +39,10 @@ function formatDate(date: Date): string {
     year: 'numeric',
     timeZone: 'UTC',
   });
+}
+
+function getArticleCardImage(articleId: string, heroImage: string | undefined, index: number): string {
+  return publicHeroImageOverrides.get(articleId) ?? heroImage ?? articleCardFallbackImages[index % articleCardFallbackImages.length];
 }
 
 // Extract the first prose paragraph from raw markdown body,
@@ -72,48 +89,42 @@ function getIntroHtml(description: string | undefined, body: string): string {
     const slug = featuredArticle.id.replace(/\/index$/, '');
     const intro = getIntroHtml(featuredArticle.data.description, featuredArticle.body ?? '');
     const primaryTag = featuredArticle.data.tags[0];
+    const featuredCardImage = featuredArticle.data.heroImage ?? featuredCardFallbackImage;
     return (
       <section class="featured-writing" aria-labelledby="featured-title">
-        <div class="section-heading">
-          <p class="eyebrow">Featured article</p>
-          <h2 id="featured-title">Start here</h2>
-        </div>
-        <article class="featured-card">
-          <div class="featured-card-copy">
-            <div class="article-card-meta">
-              {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
-              <time datetime={featuredArticle.data.date.toISOString()}>{formatDate(featuredArticle.data.date)}</time>
-            </div>
-            <h3><a href={`/articles/${slug}/`}>{featuredArticle.data.title}</a></h3>
-            <div class="featured-summary" set:html={intro} />
+        <div class="featured-card-row">
+          <div class="featured-card-column">
+            <p class="eyebrow">Featured article</p>
+            <article
+              class:list={['featured-card', !featuredArticle.data.heroImage && 'featured-card-text-only']}
+              style={`--card-bg-image: url('${featuredCardImage}')`}
+            >
+              <div class="featured-card-copy">
+                <div class="article-card-meta">
+                  {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
+                  <time datetime={featuredArticle.data.date.toISOString()}>{formatDate(featuredArticle.data.date)}</time>
+                </div>
+                <h3><a href={`/articles/${slug}/`}>{featuredArticle.data.title}</a></h3>
+                <div class="featured-summary" set:html={intro} />
+              </div>
+            </article>
           </div>
-          {featuredArticle.data.heroImage && (
-            <a class="featured-image-link" href={`/articles/${slug}/`} aria-label={featuredArticle.data.title}>
-              <Picture
-                class="featured-image"
-                src={featuredArticle.data.heroImage}
-                alt={featuredArticle.data.title}
-                loading="eager"
-                fetchpriority="high"
-                sizes="(max-width: 760px) 100vw, 36rem"
-              />
-            </a>
-          )}
-        </article>
+          <div class="featured-card-column">
+            <p class="eyebrow">Available profile</p>
+            <section class="resume-callout" aria-labelledby="resume-callout-title" style={`--card-bg-image: url('${resumeCardImage}')`}>
+              <div>
+                <h2 id="resume-callout-title">Resume</h2>
+              </div>
+              <div class="resume-callout-actions">
+                <a class="button secondary" href="/articles/resume-brief/">TLDR</a>
+                <a class="button primary" href="/articles/resume/">Full</a>
+              </div>
+            </section>
+          </div>
+        </div>
       </section>
     );
   })()}
-
-  <section class="resume-callout" aria-labelledby="resume-callout-title">
-    <div>
-      <p class="eyebrow">Available profile</p>
-      <h2 id="resume-callout-title">Senior full-stack and AI engineer</h2>
-    </div>
-    <div class="resume-callout-actions">
-      <a class="button primary" href="/articles/resume/">View resume</a>
-      <a class="button secondary" href="/articles/resume-brief/">One-page version</a>
-    </div>
-  </section>
 
   <section class="recent-writing" aria-labelledby="recent-title">
     <div class="section-heading">
@@ -121,12 +132,13 @@ function getIntroHtml(description: string | undefined, body: string): string {
       <h2 id="recent-title">Notes from the workbench</h2>
     </div>
     <div class="article-grid">
-  {recentArticles.map((article) => {
+  {recentArticles.map((article, index) => {
     const slug = article.id.replace(/\/index$/, '');
     const intro = getIntroHtml(article.data.description, article.body ?? '');
     const primaryTag = article.data.tags[0];
+    const articleCardImage = getArticleCardImage(article.id, article.data.heroImage, index);
     return (
-      <article class="article-card">
+      <article class="article-card" style={`--card-bg-image: url('${articleCardImage}')`}>
         <div class="article-card-meta">
           {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
           <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
