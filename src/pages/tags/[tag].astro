@@ -12,6 +12,10 @@ function formatDate(date: Date): string {
   });
 }
 
+function getTagArticleCardImage(articleId: string, heroImage: string | undefined): string {
+  return heroImage ?? '/articles/ai-blog-pipeline/cartoon.png';
+}
+
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
   const tags = new Map<string, string>();
@@ -48,8 +52,10 @@ const articles = (await getCollection('articles'))
     <ul class="tag-article-list">
       {articles.map((article) => {
         const articleSlug = article.id.replace(/\/index$/, '');
+        const cardImage = getTagArticleCardImage(article.id, article.data.heroImage);
         return (
-          <li>
+          <li class="article-card tag-article-card" data-card-image={cardImage}>
+            <a class="card-link" href={`/articles/${articleSlug}/`} aria-label={`Read ${article.data.title}`}><span>Read {article.data.title}</span></a>
             <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
             <a href={`/articles/${articleSlug}/`}>{article.data.title}</a>
             <p>{article.data.description}</p>
@@ -58,4 +64,20 @@ const articles = (await getCollection('articles'))
       })}
     </ul>
   </section>
+
+  <script is:inline>
+    document.querySelectorAll('[data-card-image]').forEach((card) => {
+      card.style.setProperty('--card-bg-image', `url("${card.dataset.cardImage}")`);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (event.target.closest('a, button')) return;
+
+      const card = event.target.closest('.featured-card, .article-card');
+      const link = card?.querySelector('.card-link');
+      if (link instanceof HTMLAnchorElement) {
+        link.click();
+      }
+    });
+  </script>
 </Layout>

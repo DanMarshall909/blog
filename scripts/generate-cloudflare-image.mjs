@@ -68,6 +68,35 @@ function readWranglerAccountId() {
   return process.env.CF_ACCOUNT_ID || '';
 }
 
+function ensureCloudflareAuthentication() {
+  const auth = readWranglerAuth();
+  const token = process.env.CF_API_TOKEN || auth.token || '';
+  const accountId = process.env.CF_ACCOUNT_ID || readWranglerAccountId();
+
+  if (token && accountId) return { token, accountId };
+
+  try {
+    execFileSync('npx', ['-y', 'wrangler', 'whoami'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  } catch {
+    console.warn('Cloudflare authentication not detected. Launching Wrangler login...');
+    execFileSync('npx', ['-y', 'wrangler', 'login'], { stdio: 'inherit' });
+  }
+
+  const refreshedAuth = readWranglerAuth();
+  const refreshedToken = process.env.CF_API_TOKEN || refreshedAuth.token || '';
+  const refreshedAccountId = process.env.CF_ACCOUNT_ID || readWranglerAccountId();
+
+  if (!refreshedToken) {
+    throw new Error('Cloudflare authentication is still unavailable after login.');
+  }
+
+  if (!refreshedAccountId) {
+    throw new Error('Cloudflare account ID is still unavailable after login.');
+  }
+
+  return { token: refreshedToken, accountId: refreshedAccountId };
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
@@ -78,9 +107,9 @@ async function main() {
   if (!args.prompt) throw new Error('--prompt is required');
   if (!args.output) throw new Error('--output is required');
 
-  const auth = readWranglerAuth();
-  const token = args.token || process.env.CF_API_TOKEN || auth.token;
-  const accountId = args.accountId || readWranglerAccountId();
+  const auth = ensureCloudflareAuthentication();
+  const token = args.token || auth.token;
+  const accountId = args.accountId || auth.accountId;
 
   if (!token) throw new Error('No Cloudflare token found. Pass --token or login with wrangler.');
   if (!accountId) throw new Error('No Cloudflare account ID found. Pass --account-id or run wrangler whoami.');

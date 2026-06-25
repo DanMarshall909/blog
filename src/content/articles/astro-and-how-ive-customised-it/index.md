@@ -4,6 +4,7 @@ author: Dan Marshall
 date: "2026-06-25"
 tags: ["Astro", "static sites", "GitHub Pages", "frontend", "developer tools"]
 description: "A practical beginner-friendly guide to building a polished personal website cheaply with Astro, GitHub Pages, and a custom domain."
+heroImage: /articles/astro-and-how-ive-customised-it/astro.png
 ---
 
 If you want a website like this without spending much money, a static website is a very good option.
@@ -44,7 +45,7 @@ A simple setup looks like this:
 1. **Astro** for the site structure and content.
 2. **GitHub** as the source of truth.
 3. **GitHub Pages** for hosting.
-4. **A custom domain** from a registrar like [VentraIP](https://ventraip.com.au/).
+4. **A custom domain** from a registrar like [VentraIP](https://ventraip.com.au/). This costs me about $70 a year for `danmarshal.dev`
 
 That is enough to get a modern-looking site online without paying for a VPS, shared hosting plan, WordPress hosting, or a managed application platform.
 

@@ -3,27 +3,28 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { tagHref } from '../utils/tags';
 
-const featuredCardFallbackImage = '/articles/ai-blog-pipeline/cartoon.png';
 const resumeCardImage = '/articles/resume/profile-alpha-trimmed.png';
-const articleCardFallbackImages = [
+
+const excludedArticleIds = new Set([
+  'resume',
+  'resume/index',
+  'resume-brief',
+  'resume-brief/index',
+]);
+
+const articleFallbackImages = [
   '/articles/ai-blog-pipeline/cartoon.png',
   '/articles/claude-code-mcp-token-waste/cartoon.png',
   '/articles/making-ai-think-like-you/cartoon.png',
 ];
-const publicHeroImageOverrides = new Map([
+
+const heroImageOverrides = new Map<string, string>([
   ['ai-assisted-job-search', '/articles/ai-assisted-job-search/cartoon.jpg'],
   ['ai-assisted-job-search/index', '/articles/ai-assisted-job-search/cartoon.jpg'],
   ['ai-needs-guardrails-not-rubber-stamps', '/articles/ai-needs-guardrails-not-rubber-stamps/rubber_stamp.png'],
   ['ai-needs-guardrails-not-rubber-stamps/index', '/articles/ai-needs-guardrails-not-rubber-stamps/rubber_stamp.png'],
 ]);
 
-const allArticles = await getCollection('articles');
-const articles = allArticles
-  .filter((article) => !['resume', 'resume-brief', 'resume/index', 'resume-brief/index'].includes(article.id))
-  .sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
-const [featuredArticle, ...recentArticles] = articles;
 const topicGroups = [
   'AI-assisted development',
   'developer tools',
@@ -31,6 +32,18 @@ const topicGroups = [
   'TDD',
   'Astro',
 ];
+
+const allArticles = await getCollection('articles');
+
+const articles = allArticles
+  .filter((article) => !excludedArticleIds.has(article.id))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const [featuredArticle, ...recentArticles] = articles;
+
+function getArticleSlug(articleId: string): string {
+  return articleId.replace(/\/index$/, '');
+}
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-AU', {
@@ -41,43 +54,64 @@ function formatDate(date: Date): string {
   });
 }
 
-function getArticleCardImage(articleId: string, heroImage: string | undefined, index: number): string {
-  return publicHeroImageOverrides.get(articleId) ?? heroImage ?? articleCardFallbackImages[index % articleCardFallbackImages.length];
+function getArticleCardImage(
+  articleId: string,
+  heroImage: string | undefined,
+  fallbackIndex = 0,
+): string {
+  return (
+    heroImageOverrides.get(articleId) ??
+    heroImage ??
+    articleFallbackImages[fallbackIndex % articleFallbackImages.length]
+  );
 }
 
-// Extract the first prose paragraph from raw markdown body,
-// converted to basic HTML (bold, italic, code spans, links).
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function markdownInlineToHtml(value: string): string {
+  return escapeHtml(value)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    .replace(/_([^_]+)_/g, '<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+}
+
+// Extract the first prose paragraph from raw markdown body.
 // Skips headings, image lines, and thematic breaks.
 function getIntroHtml(description: string | undefined, body: string): string {
-  // Prefer explicit frontmatter description
   if (description?.trim()) {
-    return `<p>${description.trim()}</p>`;
+    return `<p>${escapeHtml(description.trim())}</p>`;
   }
 
-  const lines = body.split('\n');
-  const paraLines: string[] = [];
+  const paragraphLines: string[] = [];
 
-  for (const line of lines) {
+  for (const line of body.split('\n')) {
     const trimmed = line.trim();
-    if (/^#{1,6}\s/.test(trimmed)) continue;  // skip headings
-    if (trimmed === '---') continue;           // skip thematic breaks
-    if (/^!\[/.test(trimmed)) continue;        // skip image lines
-    if (trimmed === '' && paraLines.length > 0) break; // end of first para
-    if (trimmed !== '') paraLines.push(trimmed);
+
+    if (/^#{1,6}\s/.test(trimmed)) continue;
+    if (trimmed === '---') continue;
+    if (/^!\[/.test(trimmed)) continue;
+
+    if (trimmed === '' && paragraphLines.length > 0) break;
+    if (trimmed !== '') paragraphLines.push(trimmed);
   }
 
-  if (paraLines.length === 0) return '';
+  if (paragraphLines.length === 0) {
+    return '';
+  }
 
-  let text = paraLines.join(' ');
-  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-  text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-  text = text.replace(/_([^_]+)_/g, '<em>$1</em>');
-  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-
-  return `<p>${text}</p>`;
+  return `<p>${markdownInlineToHtml(paragraphLines.join(' '))}</p>`;
 }
 ---
+
 <Layout title="Technical Scratches">
   <Fragment slot="footer-nav">
     <div class="nav">
@@ -85,78 +119,125 @@ function getIntroHtml(description: string | undefined, body: string): string {
     </div>
   </Fragment>
 
-  {featuredArticle && (() => {
-    const slug = featuredArticle.id.replace(/\/index$/, '');
-    const intro = getIntroHtml(featuredArticle.data.description, featuredArticle.body ?? '');
-    const primaryTag = featuredArticle.data.tags[0];
-    const featuredCardImage = featuredArticle.data.heroImage ?? featuredCardFallbackImage;
-    return (
-      <section class="featured-writing" aria-labelledby="featured-title">
-        <div class="featured-card-row">
-          <div class="featured-card-column">
-            <p class="eyebrow">Featured article</p>
-            <article
-              class:list={['featured-card', !featuredArticle.data.heroImage && 'featured-card-text-only']}
-              data-card-image={featuredCardImage}
-            >
-              <a class="card-link" href={`/articles/${slug}/`} aria-label={`Read ${featuredArticle.data.title}`}><span>Read {featuredArticle.data.title}</span></a>
-              <div class="featured-card-copy">
-                <div class="article-card-meta">
-                  {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
-                  <time datetime={featuredArticle.data.date.toISOString()}>{formatDate(featuredArticle.data.date)}</time>
+  {
+    featuredArticle && (() => {
+      const slug = getArticleSlug(featuredArticle.id);
+      const intro = getIntroHtml(featuredArticle.data.description, featuredArticle.body ?? '');
+      const primaryTag = featuredArticle.data.tags[0];
+      const image = getArticleCardImage(
+        featuredArticle.id,
+        featuredArticle.data.heroImage,
+      );
+
+      return (
+        <section class="featured-writing" aria-labelledby="featured-title">
+          <div class="featured-card-row">
+            <div class="featured-card-column">
+              <p class="eyebrow">Featured article</p>
+
+              <article
+                class:list={['featured-card', !featuredArticle.data.heroImage && 'featured-card-text-only']}
+                data-card-image={image}
+              >
+                <a
+                  class="card-link"
+                  href={`/articles/${slug}/`}
+                  aria-label={`Read ${featuredArticle.data.title}`}
+                >
+                  <span>Read {featuredArticle.data.title}</span>
+                </a>
+
+                <div class="featured-card-copy">
+                  <div class="article-card-meta">
+                    {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
+                    <time datetime={featuredArticle.data.date.toISOString()}>
+                      {formatDate(featuredArticle.data.date)}
+                    </time>
+                  </div>
+
+                  <h3>
+                    <a href={`/articles/${slug}/`}>{featuredArticle.data.title}</a>
+                  </h3>
+
+                  {intro && <div class="featured-summary" set:html={intro} />}
                 </div>
-                <h3><a href={`/articles/${slug}/`}>{featuredArticle.data.title}</a></h3>
-                <div class="featured-summary" set:html={intro} />
-              </div>
-            </article>
+              </article>
+            </div>
+
+            <div class="featured-card-column">
+              <p class="eyebrow">Available profile</p>
+
+              <section
+                class="resume-callout"
+                aria-labelledby="resume-callout-title"
+                data-card-image={resumeCardImage}
+              >
+                <div>
+                  <h2 id="resume-callout-title">Resume</h2>
+                </div>
+
+                <div class="resume-callout-actions">
+                  <a class="button secondary" href="/articles/resume-brief/">TLDR</a>
+                  <a class="button secondary" href="/articles/resume/">Full</a>
+                </div>
+              </section>
+            </div>
           </div>
-          <div class="featured-card-column">
-            <p class="eyebrow">Available profile</p>
-            <section class="resume-callout" aria-labelledby="resume-callout-title" data-card-image={resumeCardImage}>
-              <div>
-                <h2 id="resume-callout-title">Resume</h2>
-              </div>
-              <div class="resume-callout-actions">
-                <a class="button secondary" href="/articles/resume-brief/">TLDR</a>
-                <a class="button secondary" href="/articles/resume/">Full</a>
-              </div>
-            </section>
-          </div>
-        </div>
-      </section>
-    );
-  })()}
+        </section>
+      );
+    })()
+  }
 
   <section class="recent-writing" aria-labelledby="recent-title">
     <div class="section-heading">
       <p class="eyebrow">Recent writing</p>
       <h2 id="recent-title">Notes from the workbench</h2>
     </div>
+
     <div class="article-grid">
-  {recentArticles.map((article, index) => {
-    const slug = article.id.replace(/\/index$/, '');
-    const intro = getIntroHtml(article.data.description, article.body ?? '');
-    const primaryTag = article.data.tags[0];
-    const articleCardImage = getArticleCardImage(article.id, article.data.heroImage, index);
-    return (
-      <article class="article-card" data-card-image={articleCardImage}>
-        <a class="card-link" href={`/articles/${slug}/`} aria-label={`Read ${article.data.title}`}><span>Read {article.data.title}</span></a>
-        <div class="article-card-meta">
-          {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
-          <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
-        </div>
-        <h3><a href={`/articles/${slug}/`}>{article.data.title}</a></h3>
-        {intro && <div class="article-card-summary" set:html={intro} />}
-        {article.data.tags.length > 0 && (
-          <ul class="mini-tag-list" aria-label="Article topics">
-            {article.data.tags.slice(0, 3).map((tag) => (
-              <li><a href={tagHref(tag)}>{tag}</a></li>
-            ))}
-          </ul>
-        )}
-      </article>
-    );
-  })}
+      {
+        recentArticles.map((article, index) => {
+          const slug = getArticleSlug(article.id);
+          const intro = getIntroHtml(article.data.description, article.body ?? '');
+          const primaryTag = article.data.tags[0];
+          const image = getArticleCardImage(article.id, article.data.heroImage, index);
+
+          return (
+            <article class="article-card" data-card-image={image}>
+              <a
+                class="card-link"
+                href={`/articles/${slug}/`}
+                aria-label={`Read ${article.data.title}`}
+              >
+                <span>Read {article.data.title}</span>
+              </a>
+
+              <div class="article-card-meta">
+                {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
+                <time datetime={article.data.date.toISOString()}>
+                  {formatDate(article.data.date)}
+                </time>
+              </div>
+
+              <h3>
+                <a href={`/articles/${slug}/`}>{article.data.title}</a>
+              </h3>
+
+              {intro && <div class="article-card-summary" set:html={intro} />}
+
+              {article.data.tags.length > 0 && (
+                <ul class="mini-tag-list" aria-label="Article topics">
+                  {article.data.tags.slice(0, 3).map((tag) => (
+                    <li>
+                      <a href={tagHref(tag)}>{tag}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          );
+        })
+      }
     </div>
   </section>
 
@@ -165,22 +246,36 @@ function getIntroHtml(description: string | undefined, body: string): string {
       <p class="eyebrow">Topics</p>
       <h2 id="topics-title">What I keep coming back to</h2>
     </div>
+
     <ul>
-      {topicGroups.map((topic) => <li><a href={tagHref(topic)}>{topic}</a></li>)}
-      <li><a href="/topics/">All topics</a></li>
+      {topicGroups.map((topic) => (
+        <li>
+          <a href={tagHref(topic)}>{topic}</a>
+        </li>
+      ))}
+      <li>
+        <a href="/topics/">All topics</a>
+      </li>
     </ul>
   </section>
 
   <script is:inline>
     document.querySelectorAll('[data-card-image]').forEach((card) => {
-      card.style.setProperty('--card-bg-image', `url("${card.dataset.cardImage}")`);
+      if (!(card instanceof HTMLElement)) return;
+
+      card.style.setProperty(
+        '--card-bg-image',
+        `url("${card.dataset.cardImage}")`,
+      );
     });
 
     document.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) return;
       if (event.target.closest('a, button')) return;
 
       const card = event.target.closest('.featured-card, .article-card');
       const link = card?.querySelector('.card-link');
+
       if (link instanceof HTMLAnchorElement) {
         link.click();
       }
