@@ -67,14 +67,16 @@ const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-')
   <article class={`article${article.data.heroImage ? ' has-hero' : ''}`}>
     <section class="content">
       {article.data.heroImage && (
-        <Picture
-          class="hero-image"
-          src={article.data.heroImage}
-          alt={article.data.title}
-          loading="eager"
-          fetchpriority="high"
-          sizes="(max-width: 768px) 100vw, 33vw"
-        />
+        <a class="hero-link" href={article.data.heroImage}>
+          <Picture
+            class="hero-image"
+            src={article.data.heroImage}
+            alt={article.data.title}
+            loading="eager"
+            fetchpriority="high"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
+        </a>
       )}
       <Content />
     </section>

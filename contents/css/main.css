@@ -526,27 +526,27 @@ td {
     margin-bottom: 0;
 }
 
-/* Hero image — floats right at 50%, text wraps on the left */
-.hero-image,
+/* Hero image — floats right and lets article text wrap around it */
 .hero-link {
     float: right;
-    width: 50%;
-    aspect-ratio: 1 / 1;
+    width: min(38%, 18rem);
     display: block;
     margin: 0 0 var(--space-lg) var(--space-xl);
+    shape-outside: inset(0);
+    shape-margin: var(--space-sm);
+}
+
+.hero-image-picture {
+    display: block;
+    width: 100%;
 }
 
 .hero-image {
-    object-fit: cover;
-    border-radius: var(--border-radius);
-}
-
-/* When the img is inside a link, the link is the float — reset the img */
-.hero-link .hero-image {
-    float: none;
+    display: block;
     width: 100%;
-    margin: 0;
-    aspect-ratio: 1 / 1;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0;
 }
 
 /* Clearfix so the container stretches to contain the float */
@@ -558,11 +558,11 @@ td {
 
 /* Mobile — full width, no float */
 @media (max-width: 768px) {
-    .hero-image,
     .hero-link {
         float: none;
-        width: 100%;
-        margin: 0 0 var(--space-lg) 0;
+        width: min(100%, 22rem);
+        margin: 0 auto var(--space-lg);
+        shape-outside: none;
     }
 }
 
