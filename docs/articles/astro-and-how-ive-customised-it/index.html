@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Building a cheap static website like this - Technical Scratches</title><meta name="description" content="A practical way to build a polished personal website on the cheap with Astro, GitHub Pages, and a custom domain."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript><link rel="stylesheet" href="/styles/main.css"><script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Building a Cheap Static Website with Astro and GitHub Pages - Technical Scratches</title><meta name="description" content="A practical beginner-friendly guide to building a polished personal website cheaply with Astro, GitHub Pages, and a custom domain."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript><link rel="stylesheet" href="/styles/main.css"><script>
       (function() {
         const getTheme = () => localStorage.getItem('theme') || 'light';
         const setTheme = (theme) => {
@@ -9,70 +9,129 @@
       })();
     </script></head> <body class="article-detail article-astro-and-how-ive-customised-it"> <aside class="contact-topbar" aria-label="Contact Dan Marshall"> <a class="utility-icon" href="mailto:danmarshall909@gmail.com" aria-label="Email Dan Marshall" data-tooltip="Send me an email"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="3" y="5" width="18" height="14" rx="2"></rect> <path d="m3 7 9 6 9-6"></path> </svg> </a> <a class="utility-icon" href="https://www.linkedin.com/in/developerdan/" aria-label="Open Dan Marshall on LinkedIn" data-tooltip="View my LinkedIn profile"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"> <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 8h4V23h-4V8Zm7.5 0h3.83v2.05h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.14V23h-4v-7.85c0-1.87-.03-4.28-2.61-4.28-2.61 0-3.01 2.04-3.01 4.15V23h-4V8Z"></path> </svg> </a> </aside> <!-- Desktop top bar: back link only — hidden on mobile --> <div class="desktop-topbar"> <a class="desktop-back" href="/" aria-label="Back to home" data-tooltip="Back to the homepage"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> </a> <button class="pdf-button" type="button" onclick="window.print()" aria-label="Create PDF from this article" data-tooltip="Print or save this page as PDF"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <polyline points="6 9 6 2 18 2 18 9"></polyline> <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path> <rect x="6" y="14" width="12" height="8"></rect> </svg> </button> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" data-tooltip="Switch light or dark theme"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> </div> <!-- Mobile hamburger — hidden on desktop --> <button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu" data-tooltip="Open site menu"> <span></span> <span></span> <span></span> </button> <!-- Mobile drawer --> <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div> <aside class="drawer" id="drawer"> <div class="drawer-header"> <a class="drawer-home" href="/" data-tooltip="Back to the homepage"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
 Home
-</a> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme" data-tooltip="Switch light or dark theme"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> <button class="drawer-close" onclick="closeDrawer()" aria-label="Close" data-tooltip="Close the menu">✕</button> </div> <div class="drawer-body" id="drawer-body"> <nav class="drawer-primary-nav" aria-label="Primary navigation"> <a href="/" data-tooltip="Latest writing and featured posts">Writing</a> <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a> <a href="/archive/" data-tooltip="Browse every article">Archive</a> <a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a> <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Email Dan</a> <a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile">LinkedIn</a> <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a> </nav>  </div> </aside> <header class="header"> <div class="content-wrap"> <nav class="site-nav" aria-label="Primary navigation"> <a href="/" data-tooltip="Latest writing and featured posts">Writing</a> <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a> <a href="/archive/" data-tooltip="Browse every article">Archive</a> <a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a> <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a> <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Contact</a> </nav>  <nav class="breadcrumb" aria-label="Breadcrumb"> <a href="/">Writing</a> <span aria-hidden="true">/</span> <span>Building a cheap static website like this</span> </nav> <div class="title-with-image"> <h1>Building a cheap static website like this</h1> </div> <div class="article-meta"> <p class="publish-date">25 June 2026</p> <p class="reading-time">3 min read</p> <ul class="tags" aria-label="Article topics"> <li><a class="tag" href="/tags/astro/">Astro</a></li><li><a class="tag" href="/tags/static-sites/">static sites</a></li><li><a class="tag" href="/tags/frontend/">frontend</a></li><li><a class="tag" href="/tags/developer-tools/">developer tools</a></li> </ul> </div>  </div> </header> <div id="content"> <div class="content-wrap">   <article class="article"> <section class="content">  <p>If you want a site like this without spending much money, a static website is a very good option. It is fast, cheap to host, and easy to maintain. For a personal site, blog, portfolio, or resume page, that is often all you need.</p>
-<p>I built this blog with Astro because it gives me a solid foundation without making the setup feel heavy. But the bigger idea is simpler: you can get a polished, custom-looking website online for very little money.</p>
-<h2 id="what-this-kind-of-site-looks-like">What this kind of site looks like</h2>
-<p>A static site is just HTML, CSS, and maybe a little JavaScript. There is no backend, no database, and no server process to babysit. That means:</p>
+</a> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme" data-tooltip="Switch light or dark theme"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> <button class="drawer-close" onclick="closeDrawer()" aria-label="Close" data-tooltip="Close the menu">✕</button> </div> <div class="drawer-body" id="drawer-body"> <nav class="drawer-primary-nav" aria-label="Primary navigation"> <a href="/" data-tooltip="Latest writing and featured posts">Writing</a> <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a> <a href="/archive/" data-tooltip="Browse every article">Archive</a> <a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a> <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Email Dan</a> <a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile">LinkedIn</a> <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a> </nav>  </div> </aside> <header class="header"> <div class="content-wrap"> <nav class="site-nav" aria-label="Primary navigation"> <a href="/" data-tooltip="Latest writing and featured posts">Writing</a> <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a> <a href="/archive/" data-tooltip="Browse every article">Archive</a> <a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a> <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a> <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Contact</a> </nav>  <nav class="breadcrumb" aria-label="Breadcrumb"> <a href="/">Writing</a> <span aria-hidden="true">/</span> <span>Building a Cheap Static Website with Astro and GitHub Pages</span> </nav> <div class="title-with-image"> <h1>Building a Cheap Static Website with Astro and GitHub Pages</h1> </div> <div class="article-meta"> <p class="publish-date">25 June 2026</p> <p class="reading-time">5 min read</p> <ul class="tags" aria-label="Article topics"> <li><a class="tag" href="/tags/astro/">Astro</a></li><li><a class="tag" href="/tags/static-sites/">static sites</a></li><li><a class="tag" href="/tags/github-pages/">GitHub Pages</a></li><li><a class="tag" href="/tags/frontend/">frontend</a></li><li><a class="tag" href="/tags/developer-tools/">developer tools</a></li> </ul> </div>  </div> </header> <div id="content"> <div class="content-wrap">   <article class="article"> <section class="content">  <p>If you want a website like this without spending much money, a static website is a very good option.</p>
+<p>It is fast, cheap to host, and simple to maintain. For a personal site, blog, portfolio, resume page, or small business landing page, that is often all you need.</p>
+<p>I built this blog with <a href="https://astro.build/">Astro</a> because it gives me a solid foundation without making the setup feel heavy. But the bigger idea is simpler than Astro itself: you can get a polished, custom-looking website online for very little money.</p>
+<p>You do not need a big hosting package.<br>
+You do not need a server to manage.<br>
+You do not need a database just to publish a few pages.</p>
+<p>You can start with a static site and add more later only if you actually need it.</p>
+<h2 id="what-a-static-website-actually-is">What a static website actually is</h2>
+<p>A static site is mostly made from HTML, CSS, and sometimes a little JavaScript.</p>
+<p>There is no backend server running your application. There is no database sitting behind every page. There is no admin dashboard or server control panel you need to babysit.</p>
+<p>That sounds limiting, but for a lot of websites it is exactly the right trade-off.</p>
+<p>A static site is good because:</p>
 <ul>
-<li>the pages are fast to load</li>
-<li>the hosting cost is tiny</li>
-<li>you can publish from GitHub</li>
-<li>you can version the site in git</li>
+<li>the pages load quickly</li>
+<li>hosting can be free or very cheap</li>
+<li>updates can be published from GitHub</li>
+<li>the whole site can be versioned in git</li>
+<li>there is less infrastructure to break</li>
+<li>there is less ongoing maintenance</li>
 </ul>
-<p>For a portfolio, resume, small business landing page, or personal blog, that is often more than enough.</p>
+<p>For a portfolio, resume, blog, simple documentation site, or small landing page, that is usually more than enough.</p>
 <h2 id="the-cheap-stack">The cheap stack</h2>
-<p>A simple setup can be:</p>
+<p>A simple setup looks like this:</p>
 <ol>
-<li>Astro for the site generator and content structure</li>
-<li>GitHub as the source of truth</li>
-<li>GitHub Pages for hosting</li>
-<li>a cheap domain name from a registrar like <a href="https://ventraip.com.au/">VentraIP</a></li>
+<li><strong>Astro</strong> for the site structure and content.</li>
+<li><strong>GitHub</strong> as the source of truth.</li>
+<li><strong>GitHub Pages</strong> for hosting.</li>
+<li><strong>A custom domain</strong> from a registrar like <a href="https://ventraip.com.au/">VentraIP</a>.</li>
 </ol>
-<p>That is enough to get a modern-looking site online without paying for a VPS or a managed hosting plan.</p>
+<p>That is enough to get a modern-looking site online without paying for a VPS, shared hosting plan, WordPress hosting, or a managed application platform.</p>
+<p>The main cost is usually the domain name.</p>
+<h2 id="why-i-used-astro">Why I used Astro</h2>
+<p>Astro works well for this kind of site because it is designed for content-heavy websites.</p>
+<p>That makes it a good fit for:</p>
+<ul>
+<li>blogs</li>
+<li>portfolio pages</li>
+<li>resumes</li>
+<li>documentation</li>
+<li>simple marketing pages</li>
+</ul>
+<p>You can write content in Markdown, keep the structure clean, and still customise the design when you want to.</p>
+<p>The part I like is that it does not force the site to become heavier than it needs to be. You can add JavaScript where it helps, but you are not forced to turn the whole site into a frontend application just to publish articles.</p>
+<p>For a personal website, that is a strong default.</p>
 <h2 id="domain-registration">Domain registration</h2>
-<p>If you want a proper web address, the domain registration step is usually the only recurring cost you need to think about. I use <a href="https://ventraip.com.au/">VentraIP</a> for domain registration because it is straightforward and gives me the control I want over DNS records.</p>
-<p>The workflow is simple:</p>
+<p>If you want a proper web address, domain registration is usually the only recurring cost you need to think about.</p>
+<p>I use <a href="https://ventraip.com.au/">VentraIP</a> for domain registration because it is straightforward and gives me the DNS control I need.</p>
+<p>The basic workflow is:</p>
 <ul>
 <li>buy the domain name</li>
-<li>point it at GitHub Pages via the DNS settings</li>
-<li>wait for the records to propagate</li>
-<li>publish the site and it appears under your own domain</li>
+<li>open the DNS settings</li>
+<li>point the domain at GitHub Pages</li>
+<li>wait for the DNS records to propagate</li>
+<li>publish the site</li>
 </ul>
-<p>That is one of the nicest parts of this setup. You do not need to buy a big hosting package or learn a server control panel just to get a custom domain.</p>
+<p>Once that is done, your site can appear under your own domain instead of a default GitHub Pages address.</p>
+<p>That is one of the nicest parts of this setup. You do not need to buy a large hosting package or learn a server control panel just to use a custom domain.</p>
 <h2 id="hosting-with-github-pages">Hosting with GitHub Pages</h2>
-<p>GitHub Pages is a very practical hosting option for static sites. It is free for personal projects, it integrates well with GitHub repositories, and it works well with Astro builds.</p>
-<p>The typical flow is:</p>
+<p>GitHub Pages is a practical hosting option for static websites.</p>
+<p>It is free for personal projects, integrates directly with GitHub repositories, and works well with Astro builds.</p>
+<p>The usual flow is:</p>
 <ul>
 <li>push your site to a GitHub repo</li>
+<li>configure the Astro build</li>
 <li>enable GitHub Pages in the repo settings</li>
-<li>tell it to publish from the build output</li>
+<li>publish the build output</li>
 <li>connect your custom domain</li>
 </ul>
-<p>Once that is done, you have a site that is live and easy to update. For a blog or portfolio, that is hard to beat.</p>
+<p>After that, updating the site is mostly a matter of changing the content, committing it, and pushing it to GitHub.</p>
+<p>For a blog or portfolio, that is hard to beat.</p>
 <h2 id="what-this-setup-is-good-for">What this setup is good for</h2>
-<p>This approach is great when you want to publish:</p>
+<p>This approach works well when you want to publish:</p>
 <ul>
 <li>a blog</li>
 <li>a resume</li>
 <li>a portfolio</li>
 <li>a simple product landing page</li>
+<li>a small business website</li>
 <li>a documentation site</li>
 </ul>
-<p>It is not trying to be a full application platform. That is the point. It keeps the complexity low and the maintenance burden even lower.</p>
+<p>It is not trying to be a full application platform. That is the point.</p>
+<p>The value is in keeping the site simple, fast, and easy to maintain.</p>
 <h2 id="limitations">Limitations</h2>
-<p>There are a few important limitations.</p>
-<h3 id="no-database">No database</h3>
-<p>If you need user accounts, comments, search over dynamic content, or a backend for storing data, a static site is not the right fit. You can still do a lot, but the data layer is usually external.</p>
-<h3 id="no-vm">No VM</h3>
-<p>You also do not get a virtual machine to run arbitrary services. If you need background jobs, server-side rendering with custom runtime dependencies, or a full app stack, this approach becomes limiting.</p>
-<h3 id="no-real-time-features">No real-time features</h3>
-<p>Things like live chat, notifications, or custom APIs usually need a separate service. For a personal website, that is usually fine.</p>
-<p>That said, for most static content needs, the trade-off is excellent. You get speed, simplicity, and low cost.</p>
+<p>There are a few limitations worth knowing before you start.</p>
+<h3 id="no-built-in-database">No built-in database</h3>
+<p>A static site does not come with a database.</p>
+<p>That means it is not the best fit if you need:</p>
+<ul>
+<li>user accounts</li>
+<li>private dashboards</li>
+<li>custom comments</li>
+<li>dynamic search over live data</li>
+<li>forms that store information directly in your own backend</li>
+</ul>
+<p>You can still add external services for some of these things, but they are not built into the static site itself.</p>
+<h3 id="no-virtual-machine">No virtual machine</h3>
+<p>You also do not get a virtual machine where you can run arbitrary services.</p>
+<p>If you need background jobs, long-running server processes, scheduled workers, custom APIs, or server-side runtime dependencies, this setup will probably become limiting.</p>
+<p>That does not make it bad. It just means it has a clear job.</p>
+<h3 id="no-custom-real-time-features">No custom real-time features</h3>
+<p>Features like live chat, notifications, multiplayer interactions, or custom real-time APIs usually need a separate service.</p>
+<p>For a personal website, that is usually fine. Most personal sites do not need real-time infrastructure.</p>
+<h2 id="why-the-trade-off-is-worth-it">Why the trade-off is worth it</h2>
+<p>For most static content, the trade-off is excellent.</p>
+<p>You get:</p>
+<ul>
+<li>low cost</li>
+<li>strong performance</li>
+<li>simple deployment</li>
+<li>fewer moving parts</li>
+<li>easy rollback through git</li>
+<li>a site that is not tied to a heavy hosting platform</li>
+</ul>
+<p>That makes it much easier to actually ship something.</p>
+<p>The site can start small, then grow naturally as you need more features.</p>
 <h2 id="how-i-automate-the-boring-parts">How I automate the boring parts</h2>
-<p>Once the site exists, the rest of the workflow becomes much easier. I have also written about how I automate things like keeping my resume current and publishing article updates to LinkedIn in <a href="/articles/my-resume-is-now-a-static-site-feature/">my resume is now a static site feature</a> and <a href="/articles/ai-blog-pipeline/">I built a /blogpost command that writes, illustrates, and publishes for me</a>.</p>
-<p>That is the real win here: the website is cheap to build, but the automation makes it feel much more like a system than a one-off project.</p>
-<h2 id="the-short-version">The short version</h2>
-<p>If you want a website that looks polished without costing much, a static site built with Astro, hosted on GitHub Pages, and served under a custom domain is a very strong option. It is simple enough to maintain, flexible enough to customise, and cheap enough that you can actually ship it.</p> </section> </article>   </div> </div> <footer> <div class="content-wrap">  <div class="nav"> <a href="/">&laquo; Full blog</a> </div>  <section class="about"> <p>Dan Marshall's blog</p> </section> <section class="copy"> <p>&copy; 2026 Dan Marshall</p> </section> </div> </footer> <script>
+<p>Once the site exists, the rest of the workflow becomes much easier.</p>
+<p>I have also written about how I automate things like keeping my resume current and publishing article updates to LinkedIn in <a href="/articles/my-resume-is-now-a-static-site-feature/">my resume is now a static site feature</a> and <a href="/articles/ai-blog-pipeline/">I built a /blogpost command that writes, illustrates, and publishes for me</a>.</p>
+<p>That is the real win here.</p>
+<p>The website is cheap to build, but the automation makes it feel much more like a useful publishing system than a one-off project.</p>
+<h2 id="final-thought">Final thought</h2>
+<p>If you want a website that looks polished without costing much, a static site built with Astro, hosted on GitHub Pages, and served under a custom domain is a very strong option.</p>
+<p>It is simple enough to maintain, flexible enough to customise, and cheap enough that you can actually ship it.</p> </section> </article>   </div> </div> <footer> <div class="content-wrap">  <div class="nav"> <a href="/">&laquo; Full blog</a> </div>  <section class="about"> <p>Dan Marshall's blog</p> </section> <section class="copy"> <p>&copy; 2026 Dan Marshall</p> </section> </div> </footer> <script>
       // Drawer
       function openDrawer() {
         document.getElementById('drawer').classList.add('drawer-open');
