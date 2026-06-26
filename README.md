@@ -1,37 +1,44 @@
 # Technical Scratches Blog
 
+Built with [Astro](https://astro.build), deployed via [GitHub Actions](.github/workflows/publish.yml) to GitHub Pages.
+
 ## Getting Started
 
-1. **Install dependencies:**
-   ```sh
-   npm install
-   ```
+```sh
+npm install
+npm run dev        # dev server on http://localhost:3000
+npm run build      # static build output to docs/
+npm run preview    # preview the production build
+npm test           # run Playwright tests
+```
 
-2. **Run the local preview server:**
-   ```sh
-   npx wintersmith preview
-   ```
-   Open [http://localhost:8080](http://localhost:8080) in your browser.
+## Project structure
 
-3. **Build the static site:**
-   ```sh
-   npx wintersmith build
-   ```
-   The output will be in the `docs/` folder (ready for GitHub Pages).
+```
+src/
+├── components/     # Astro components (ArticleCard, Picture, etc.)
+├── content/
+│   └── articles/   # Blog posts as <slug>/index.md
+├── layouts/        # Page layouts
+├── pages/          # Route pages (index, archive, topics, tags, articles)
+└── utils/          # Shared utilities (tag helpers, etc.)
+public/
+└── styles/         # main.css — all styling with CSS custom properties
+```
 
-## Publishing to GitHub Pages
+## Adding an article
 
-1. Commit and push your changes to the `main` branch (or `master` if that's your default):
-   ```sh
-   git add .
-   git commit -m "Update site content"
-   git push origin main
-   ```
+Create `src/content/articles/<slug>/index.md` with frontmatter:
 
-2. Ensure your repository is configured to serve from the `docs/` folder in the GitHub Pages settings.
-
-Your site will be published at `https://<your-username>.github.io/<your-repo>/`.
-
+```yaml
 ---
+title: "Article Title"
+author: Dan Marshall
+date: "YYYY-MM-DD"
+tags: ["tag1", "tag2"]
+template: article.pug
+heroImage: /articles/<slug>/<image.ext>
+---
+```
 
-**Add new articles** to `contents/articles/<your-article>/index.md` with appropriate front-matter (see existing articles for examples).
+See existing articles for examples. The site rebuilds automatically when pushed to `main` via GitHub Actions.

@@ -1,9 +1,30 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
 import { tagHref } from '../utils/tags';
 
-const resumeCardImage = '/articles/resume/profile-alpha-trimmed.png';
+const heroImageOverrides = new Map<string, string>();
+
+const articleFallbackImages = [
+  '/articles/ai-blog-pipeline/cartoon.png',
+  '/articles/1bit-llm/cartoon.png',
+  '/articles/claude-code-mcp-token-waste/cartoon.png',
+  '/articles/bankers-rounding/cartoon.png',
+];
+
+const topicGroups = [
+  'AI',
+  'developer tools',
+  'Astro',
+  'C#',
+  'Python',
+  'Rust',
+  'CSS',
+  'productivity',
+  'career',
+  'testing',
+];
 
 const excludedArticleIds = new Set([
   'resume',
@@ -12,28 +33,9 @@ const excludedArticleIds = new Set([
   'resume-brief/index',
 ]);
 
-const articleFallbackImages = [
-  '/articles/ai-blog-pipeline/cartoon.png',
-  '/articles/claude-code-mcp-token-waste/cartoon.png',
-  '/articles/making-ai-think-like-you/cartoon.png',
-];
-
-const heroImageOverrides = new Map<string, string>([
-  ['ai-assisted-job-search', '/articles/ai-assisted-job-search/cartoon.jpg'],
-  ['ai-assisted-job-search/index', '/articles/ai-assisted-job-search/cartoon.jpg'],
-  ['ai-needs-guardrails-not-rubber-stamps', '/articles/ai-needs-guardrails-not-rubber-stamps/rubber_stamp.png'],
-  ['ai-needs-guardrails-not-rubber-stamps/index', '/articles/ai-needs-guardrails-not-rubber-stamps/rubber_stamp.png'],
-]);
-
-const topicGroups = [
-  'AI-assisted development',
-  'developer tools',
-  'Local AI',
-  'TDD',
-  'Astro',
-];
-
 const allArticles = await getCollection('articles');
+
+const resumeArticle = allArticles.find(a => a.id === 'resume' || a.id === 'resume/index');
 
 const articles = allArticles
   .filter((article) => !excludedArticleIds.has(article.id))
@@ -135,52 +137,37 @@ function getIntroHtml(description: string | undefined, body: string): string {
             <div class="featured-card-column">
               <p class="eyebrow">Featured article</p>
 
-              <article
-                class:list={['featured-card', !featuredArticle.data.heroImage && 'featured-card-text-only']}
-                data-card-image={image}
-              >
-                <a
-                  class="card-link"
-                  href={`/articles/${slug}/`}
-                  aria-label={`Read ${featuredArticle.data.title}`}
-                >
-                  <span>Read {featuredArticle.data.title}</span>
-                </a>
-
-                <div class="featured-card-copy">
-                  <div class="article-card-meta">
-                    {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
-                    <time datetime={featuredArticle.data.date.toISOString()}>
-                      {formatDate(featuredArticle.data.date)}
-                    </time>
-                  </div>
-
-                  <h3>
-                    <a href={`/articles/${slug}/`}>{featuredArticle.data.title}</a>
-                  </h3>
-
-                  {intro && <div class="featured-summary" set:html={intro} />}
-                </div>
-              </article>
+              <ArticleCard
+                variant="featured"
+                title={featuredArticle.data.title}
+                href={`/articles/${slug}/`}
+                dateTime={featuredArticle.data.date.toISOString()}
+                dateLabel={formatDate(featuredArticle.data.date)}
+                cardImage={image}
+                primaryTag={primaryTag}
+                summary={intro}
+              />
             </div>
 
             <div class="featured-card-column">
-              <p class="eyebrow">Available profile</p>
-
-              <section
-                class="resume-callout"
-                aria-labelledby="resume-callout-title"
-                data-card-image={resumeCardImage}
-              >
-                <div>
-                  <h2 id="resume-callout-title">Resume</h2>
-                </div>
-
-                <div class="resume-callout-actions">
-                  <a class="button secondary" href="/articles/resume-brief/">TLDR</a>
-                  <a class="button secondary" href="/articles/resume/">Full</a>
-                </div>
-              </section>
+              {resumeArticle && (() => {
+                const resumeSlug = getArticleSlug(resumeArticle.id);
+                const resumeIntro = getIntroHtml(resumeArticle.data.description, resumeArticle.body ?? '');
+                const resumeImage = resumeArticle.data.heroImage ?? '/articles/resume/profile-alpha-trimmed.png';
+                return (
+                  <ArticleCard
+                    variant="featured"
+                    title={resumeArticle.data.title}
+                    href={`/articles/${resumeSlug}/`}
+                    dateTime={resumeArticle.data.date.toISOString()}
+                    dateLabel={formatDate(resumeArticle.data.date)}
+                    cardImage={resumeImage}
+                    primaryTag={resumeArticle.data.tags[0]}
+                    tags={resumeArticle.data.tags}
+                    summary={resumeIntro}
+                  />
+                );
+              })()}
             </div>
           </div>
         </section>
@@ -203,38 +190,16 @@ function getIntroHtml(description: string | undefined, body: string): string {
           const image = getArticleCardImage(article.id, article.data.heroImage, index);
 
           return (
-            <article class="article-card" data-card-image={image}>
-              <a
-                class="card-link"
-                href={`/articles/${slug}/`}
-                aria-label={`Read ${article.data.title}`}
-              >
-                <span>Read {article.data.title}</span>
-              </a>
-
-              <div class="article-card-meta">
-                {primaryTag && <a href={tagHref(primaryTag)}>{primaryTag}</a>}
-                <time datetime={article.data.date.toISOString()}>
-                  {formatDate(article.data.date)}
-                </time>
-              </div>
-
-              <h3>
-                <a href={`/articles/${slug}/`}>{article.data.title}</a>
-              </h3>
-
-              {intro && <div class="article-card-summary" set:html={intro} />}
-
-              {article.data.tags.length > 0 && (
-                <ul class="mini-tag-list" aria-label="Article topics">
-                  {article.data.tags.slice(0, 3).map((tag) => (
-                    <li>
-                      <a href={tagHref(tag)}>{tag}</a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </article>
+            <ArticleCard
+              title={article.data.title}
+              href={`/articles/${slug}/`}
+              dateTime={article.data.date.toISOString()}
+              dateLabel={formatDate(article.data.date)}
+              cardImage={image}
+              primaryTag={primaryTag}
+              tags={article.data.tags}
+              summary={intro}
+            />
           );
         })
       }
@@ -259,26 +224,4 @@ function getIntroHtml(description: string | undefined, body: string): string {
     </ul>
   </section>
 
-  <script is:inline>
-    document.querySelectorAll('[data-card-image]').forEach((card) => {
-      if (!(card instanceof HTMLElement)) return;
-
-      card.style.setProperty(
-        '--card-bg-image',
-        `url("${card.dataset.cardImage}")`,
-      );
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!(event.target instanceof Element)) return;
-      if (event.target.closest('a, button')) return;
-
-      const card = event.target.closest('.featured-card, .article-card');
-      const link = card?.querySelector('.card-link');
-
-      if (link instanceof HTMLAnchorElement) {
-        link.click();
-      }
-    });
-  </script>
 </Layout>

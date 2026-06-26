@@ -18,9 +18,8 @@ Senior full-stack engineer with 11+ years of enterprise .NET and JVM delivery ac
 - [github.com/DanMarshall909](https://github.com/DanMarshall909) 
 - [linkedin.com/in/developerdan](https://www.linkedin.com/in/developerdan)
 
-Full version: [blog.danmarshall.dev/articles/resume](/articles/resume/)
-
-Selected public projects: [blog.danmarshall.dev/articles/selected-public-projects](/articles/selected-public-projects/)
+**Full version**: [blog.danmarshall.dev/articles/resume](/articles/resume/) 
+**Portfolio**: [blog.danmarshall.dev/articles/selected-public-projects](/articles/selected-public-projects/)
 
 ## Strengths
 
@@ -51,8 +50,3 @@ June 2024 - July 2025
 
 - Modernised .NET Framework 4.7.2 components to .NET 9 and built resilient services using MassTransit, WebAPI, GraphQL, and SQL Server.
 - Applied Clean Architecture and DDD, and contributed to an AI coding-rules pilot focused on safer LLM-assisted engineering.
-
-**Earlier roles**
-
-Senior/full-stack and data engineering roles at National Grower Register, CloudMonitor, VALD, Situ Systems, HUB24, Chandler Personalised Communications, and WorldSmart POS Solutions.
-

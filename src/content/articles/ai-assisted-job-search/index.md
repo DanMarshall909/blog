@@ -4,7 +4,7 @@ author: Dan Marshall
 date: "2026-06-23"
 tags: ["AI", "job search", "developer tools", "automation", "search"]
 description: "How I used an AI-assisted browser workflow to turn noisy job listings into a ranked, reviewable shortlist."
-heroImage: /articles/ai-assisted-job-search/cartoon-hero.jpg
+heroImage: /articles/ai-assisted-job-search/cartoon.jpg
 ---
 
 Job search has a poor signal-to-noise ratio.

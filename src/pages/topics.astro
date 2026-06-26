@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
 import { tagSlug } from '../utils/tags';
 
@@ -61,12 +62,20 @@ function formatDate(date: Date): string {
       {articles.map((article) => {
         const articleSlug = article.id.replace(/\/index$/, '');
         const articleTags = article.data.tags.map(tagSlug);
+        const image = article.data.heroImage ?? '/articles/ai-blog-pipeline/cartoon.png';
         return (
-          <article class="topics-result" data-topic-tags={articleTags.join(' ')}>
-            <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
-            <h2><a href={`/articles/${articleSlug}/`}>{article.data.title}</a></h2>
-            <p>{article.data.description}</p>
-          </article>
+          <ArticleCard
+            title={article.data.title}
+            href={`/articles/${articleSlug}/`}
+            dateTime={article.data.date.toISOString()}
+            dateLabel={formatDate(article.data.date)}
+            cardImage={image}
+            primaryTag={article.data.tags[0]}
+            tags={article.data.tags}
+            topicTags={articleTags.join(' ')}
+            summary={article.data.description ? `<p>${article.data.description}</p>` : undefined}
+            collapsible
+          />
         );
       })}
     </div>
@@ -75,7 +84,7 @@ function formatDate(date: Date): string {
   <script is:inline>
     (function() {
       var buttons = Array.from(document.querySelectorAll('[data-topic-filter]'));
-      var cards = Array.from(document.querySelectorAll('[data-topic-tags]'));
+      var cards = Array.from(document.querySelectorAll('.topics-results > .article-card'));
       var count = document.getElementById('topics-visible-count');
 
       function setFilter(filter) {
