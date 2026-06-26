@@ -138,3 +138,6 @@ dist
 /blob-report/
 /playwright/.cache/
 .astro/data-store.json
+
+# Build output (handled by CI via GitHub Actions)
+docs/

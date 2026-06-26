@@ -7,7 +7,8 @@
 - **Content**: Markdown (`contents/articles/`)
 - **CSS**: Single file (`contents/css/main.css`) with CSS custom properties and `oklch()` colour tokens
 - **Syntax highlighting**: highlight.js 11.x via CDN (client-side only)
-- **Build output**: `docs/` (served by GitHub Pages)
+- **Build output**: `docs/` (served by GitHub Pages, gitignored — CI handles deployment)
+- **CI/CD**: GitHub Actions (`.github/workflows/publish.yml`) builds and deploys to `gh-pages`
 - **Deployment**: GitHub Pages from `gh-pages` branch, `/docs` folder
 
 ## Commands
@@ -16,20 +17,9 @@
 # Build
 npm run build
 
-# Preview server (port 3000)
-./node_modules/.bin/wintersmith preview --port 3000
-
-# Publish (build + commit + push main + sync gh-pages)
-powershell -ExecutionPolicy Bypass -File publish.ps1
+# Preview server
+npm run preview
 ```
-
-## Deployment
-
-GitHub Pages serves from the **`gh-pages` branch**, `/docs` folder at `blog.danmarshall.dev`.
-
-`publish.ps1` handles everything: build → commit → push `main` → force-push `main` to `gh-pages`.
-
-Never push to `gh-pages` manually — always go through `publish.ps1` or `git push origin main:gh-pages --force`.
 
 ## Article format
 
