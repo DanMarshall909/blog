@@ -129,29 +129,30 @@ function formatDate(date: Date): string {
         currentFilter = filter;
         var visible = 0;
 
-        var allItems = gridItems.concat(listItems);
-
-        allItems.forEach(function(item) {
-          var tags = (item.getAttribute('data-topic-tags') || '').split(' ');
+        gridItems.forEach(function(card) {
+          var tags = (card.getAttribute('data-topic-tags') || '').split(' ');
           var show = filter === 'all' || tags.indexOf(filter) !== -1;
           if (show) visible += 1;
 
-          if (item.classList.contains('article-card')) {
-            if (show) {
-              item.hidden = false;
-              requestAnimationFrame(function() {
-                item.classList.remove('is-collapsed');
-              });
-            } else {
-              item.classList.add('is-collapsed');
-              window.setTimeout(function() {
-                if (item.classList.contains('is-collapsed')) item.hidden = true;
-              }, 320);
-            }
-            item.setAttribute('aria-hidden', String(!show));
+          if (show) {
+            card.hidden = false;
+            card.removeAttribute('aria-hidden');
+            requestAnimationFrame(function() {
+              card.classList.remove('is-collapsed');
+            });
           } else {
-            item.hidden = !show;
+            card.classList.add('is-collapsed');
+            card.setAttribute('aria-hidden', 'true');
+            window.setTimeout(function() {
+              if (card.classList.contains('is-collapsed')) card.hidden = true;
+            }, 320);
           }
+        });
+
+        listItems.forEach(function(item) {
+          var tags = (item.getAttribute('data-topic-tags') || '').split(' ');
+          var show = filter === 'all' || tags.indexOf(filter) !== -1;
+          item.classList.toggle('is-filtered-out', !show);
         });
 
         if (visibleCount) visibleCount.textContent = String(visible);
