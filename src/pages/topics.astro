@@ -256,12 +256,14 @@ function formatDate(date: Date): string {
       try {
         var savedView = localStorage.getItem(viewStorageKey);
         if (savedView === 'list' || savedView === 'grid') setView(savedView);
-        var savedFilter = localStorage.getItem('topic-filter');
-        if (savedFilter) {
-          var match = options.find(function(o) { return o.getAttribute('data-topic-filter') === savedFilter; });
-          if (match) selectOption(match);
-        }
       } catch (_) {}
+
+      var urlTag = (window.location.search || '').match(/[?&]tag=([^&]+)/);
+      var initialFilter = urlTag ? urlTag[1] : null;
+      if (initialFilter) {
+        var match = options.find(function(o) { return o.getAttribute('data-topic-filter') === initialFilter; });
+        if (match) selectOption(match);
+      }
     })();
   </script>
 </Layout>
