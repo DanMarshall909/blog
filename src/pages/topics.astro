@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
-import { tagSlug } from '../utils/tags';
+import { tagHref, tagSlug } from '../utils/tags';
 
 const articles = (await getCollection('articles')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -37,93 +37,225 @@ function formatDate(date: Date): string {
 ---
 <Layout title="Topics - Technical Scratches" description="Browse Technical Scratches articles by topic and tag.">
   <section class="topics-page">
-    <p class="eyebrow">Topics</p>
-    <h1>Browse by topic</h1>
-    <p>Choose a tag to filter related articles.</p>
+    <div class="page-header-row">
+      <div>
+        <p class="eyebrow">Topics</p>
+        <h1>Browse by topic</h1>
+        <p>Choose a tag to filter related articles.</p>
+      </div>
 
-    <div class="topics-filter" aria-label="Filter articles by topic">
-      <button class="topic-filter is-active" type="button" data-topic-filter="all" aria-pressed="true">
-        <span>All topics</span>
-        <strong>{articles.length}</strong>
-      </button>
-      {topics.map((topic) => (
-        <button class="topic-filter" type="button" data-topic-filter={tagSlug(topic.label)} aria-pressed="false">
-          <span>{topic.label}</span>
-          <strong>{topic.count}</strong>
+      <div class="view-toggle" role="radiogroup" aria-label="View mode">
+        <button role="radio" aria-checked="true" data-view="grid" aria-label="Grid view">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         </button>
-      ))}
+        <button role="radio" aria-checked="false" data-view="list" aria-label="List view">
+          <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="topic-filter-wrap">
+      <input type="text" id="topic-input" placeholder="All topics" autocomplete="off" />
+      <ul class="topic-options" id="topic-options">
+        <li data-topic-filter="all" role="option" aria-selected="true">All topics <strong>{articles.length}</strong></li>
+        {topics.map((topic) => (
+          <li data-topic-filter={tagSlug(topic.label)} role="option" aria-selected="false">{topic.label} <strong>{topic.count}</strong></li>
+        ))}
+      </ul>
     </div>
 
     <p class="topics-count" aria-live="polite">
       Showing <span id="topics-visible-count">{articles.length}</span> {articles.length === 1 ? 'article' : 'articles'}.
     </p>
 
-    <div class="topics-results">
-      {articles.map((article) => {
-        const articleSlug = article.id.replace(/\/index$/, '');
-        const articleTags = article.data.tags.map(tagSlug);
-        const image = article.data.heroImage ?? '/articles/ai-blog-pipeline/cartoon.png';
-        return (
-          <ArticleCard
-            title={article.data.title}
-            href={`/articles/${articleSlug}/`}
-            dateTime={article.data.date.toISOString()}
-            dateLabel={formatDate(article.data.date)}
-            cardImage={image}
-            primaryTag={article.data.tags[0]}
-            tags={article.data.tags}
-            topicTags={articleTags.join(' ')}
-            summary={article.data.description ? `<p>${article.data.description}</p>` : undefined}
-            collapsible
-          />
-        );
-      })}
+    <div id="view-container" data-view="grid">
+      <div class="topics-results">
+        {articles.map((article) => {
+          const articleSlug = article.id.replace(/\/index$/, '');
+          const articleTags = article.data.tags.map(tagSlug);
+          const image = article.data.heroImage ?? '/articles/ai-blog-pipeline/cartoon.png';
+          return (
+            <ArticleCard
+              title={article.data.title}
+              href={`/articles/${articleSlug}/`}
+              dateTime={article.data.date.toISOString()}
+              dateLabel={formatDate(article.data.date)}
+              cardImage={image}
+              primaryTag={article.data.tags[0]}
+              tags={article.data.tags}
+              topicTags={articleTags.join(' ')}
+              summary={article.data.description ? `<p>${article.data.description}</p>` : undefined}
+              collapsible
+            />
+          );
+        })}
+      </div>
+
+      <div class="article-list">
+        {articles.map((article) => {
+          const articleSlug = article.id.replace(/\/index$/, '');
+          const articleTags = article.data.tags.map(tagSlug);
+          return (
+            <div class="list-item" data-topic-tags={articleTags.join(' ')}>
+              <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
+              <a href={`/articles/${articleSlug}/`}>{article.data.title}</a>
+              <span class="list-tags">
+                {article.data.tags.slice(0, 3).map((t) => (
+                  <a href={tagHref(t)}>{t}</a>
+                ))}
+              </span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   </section>
 
   <script is:inline>
     (function() {
-      var buttons = Array.from(document.querySelectorAll('[data-topic-filter]'));
-      var cards = Array.from(document.querySelectorAll('.topics-results > .article-card'));
-      var count = document.getElementById('topics-visible-count');
+      var input = document.getElementById('topic-input');
+      var list = document.getElementById('topic-options');
+      var options = Array.from(list.querySelectorAll('[data-topic-filter]'));
+      var visibleCount = document.getElementById('topics-visible-count');
 
-      function setFilter(filter) {
+      var gridItems = Array.from(document.querySelectorAll('.topics-results > .article-card'));
+      var listItems = Array.from(document.querySelectorAll('#view-container > .article-list > .list-item'));
+      var container = document.getElementById('view-container');
+
+      var currentFilter = 'all';
+      var isOpen = false;
+
+      function filterResults(filter) {
+        currentFilter = filter;
         var visible = 0;
 
-        buttons.forEach(function(button) {
-          var active = button.getAttribute('data-topic-filter') === filter;
-          button.classList.toggle('is-active', active);
-          button.setAttribute('aria-pressed', String(active));
-        });
+        var allItems = gridItems.concat(listItems);
 
-        cards.forEach(function(card) {
-          var tags = (card.getAttribute('data-topic-tags') || '').split(' ');
+        allItems.forEach(function(item) {
+          var tags = (item.getAttribute('data-topic-tags') || '').split(' ');
           var show = filter === 'all' || tags.indexOf(filter) !== -1;
           if (show) visible += 1;
 
-          if (show) {
-            card.hidden = false;
-            requestAnimationFrame(function() {
-              card.classList.remove('is-collapsed');
-            });
+          if (item.classList.contains('article-card')) {
+            if (show) {
+              item.hidden = false;
+              requestAnimationFrame(function() {
+                item.classList.remove('is-collapsed');
+              });
+            } else {
+              item.classList.add('is-collapsed');
+              window.setTimeout(function() {
+                if (item.classList.contains('is-collapsed')) item.hidden = true;
+              }, 320);
+            }
+            item.setAttribute('aria-hidden', String(!show));
           } else {
-            card.classList.add('is-collapsed');
-            window.setTimeout(function() {
-              if (card.classList.contains('is-collapsed')) card.hidden = true;
-            }, 320);
+            item.hidden = !show;
           }
-
-          card.setAttribute('aria-hidden', String(!show));
         });
 
-        if (count) count.textContent = String(visible);
+        if (visibleCount) visibleCount.textContent = String(visible);
       }
 
-      buttons.forEach(function(button) {
-        button.addEventListener('click', function() {
-          setFilter(button.getAttribute('data-topic-filter') || 'all');
+      function selectOption(option) {
+        var filter = option.getAttribute('data-topic-filter') || 'all';
+        var label = filter === 'all' ? 'All topics' : option.childNodes[0].textContent.trim();
+
+        options.forEach(function(o) { o.setAttribute('aria-selected', 'false'); });
+        option.setAttribute('aria-selected', 'true');
+        input.placeholder = label;
+        input.value = '';
+        filterOptions('');
+        closeDropdown();
+        filterResults(filter);
+      }
+
+      function filterOptions(query) {
+        var lower = query.toLowerCase();
+        options.forEach(function(o) {
+          var text = (o.childNodes[0].textContent || '').trim().toLowerCase();
+          o.classList.toggle('is-hidden', lower && text.indexOf(lower) === -1);
+        });
+      }
+
+      function openDropdown() {
+        isOpen = true;
+        list.classList.add('is-open');
+      }
+
+      function closeDropdown() {
+        isOpen = false;
+        list.classList.remove('is-open');
+      }
+
+      input.addEventListener('focus', function() {
+        openDropdown();
+        filterOptions(input.value);
+      });
+
+      input.addEventListener('input', function() {
+        openDropdown();
+        filterOptions(this.value);
+      });
+
+      input.addEventListener('blur', function() {
+        window.setTimeout(closeDropdown, 150);
+      });
+
+      list.addEventListener('mousedown', function(e) {
+        var li = e.target.closest('[data-topic-filter]');
+        if (li) {
+          e.preventDefault();
+          selectOption(li);
+        }
+      });
+
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeDropdown();
+        if (e.key === 'Enter' && isOpen) {
+          var visible = options.filter(function(o) { return !o.classList.contains('is-hidden'); });
+          if (visible.length === 1) selectOption(visible[0]);
+        }
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          var visible = options.filter(function(o) { return !o.classList.contains('is-hidden'); });
+          var idx = visible.indexOf(list.querySelector('.is-highlighted'));
+          if (e.key === 'ArrowDown') idx = Math.min(idx + 1, visible.length - 1);
+          else idx = Math.max(idx - 1, 0);
+          options.forEach(function(o) { o.classList.remove('is-highlighted'); });
+          if (visible[idx]) visible[idx].classList.add('is-highlighted');
+        }
+      });
+
+      // view toggle
+      var viewButtons = document.querySelectorAll('.page-header-row .view-toggle [role="radio"]');
+      var viewStorageKey = 'view-mode-topics';
+
+      function setView(view) {
+        if (!container) return;
+        container.setAttribute('data-view', view);
+        viewButtons.forEach(function(b) {
+          var active = b.getAttribute('data-view') === view;
+          b.setAttribute('aria-checked', String(active));
+        });
+        try { localStorage.setItem(viewStorageKey, view); } catch (_) {}
+      }
+
+      viewButtons.forEach(function(b) {
+        b.addEventListener('click', function() {
+          setView(b.getAttribute('data-view') || 'grid');
         });
       });
+
+      try {
+        var savedView = localStorage.getItem(viewStorageKey);
+        if (savedView === 'list' || savedView === 'grid') setView(savedView);
+        var savedFilter = localStorage.getItem('topic-filter');
+        if (savedFilter) {
+          var match = options.find(function(o) { return o.getAttribute('data-topic-filter') === savedFilter; });
+          if (match) selectOption(match);
+        }
+      } catch (_) {}
     })();
   </script>
 </Layout>
