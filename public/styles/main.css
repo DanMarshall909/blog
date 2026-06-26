@@ -1261,17 +1261,11 @@ hr {
     background: rgb(from var(--color-pill-bg) r g b / 0.8);
 }
 
-.tag-article-list {
-    list-style: none;
-    padding: 0;
-}
-
 [data-view="grid"] .article-list {
     display: none;
 }
 
 [data-view="list"] .article-grid,
-[data-view="list"] .tag-article-list,
 [data-view="list"] .topics-results {
     display: none;
 }

@@ -64,26 +64,24 @@ const articles = (await getCollection('articles'))
     </div>
 
     <div id="view-container" data-view="grid">
-      <ul class="tag-article-list">
+      <div class="article-grid">
         {articles.map((article) => {
           const articleSlug = article.id.replace(/\/index$/, '');
           const cardImage = getTagArticleCardImage(article.id, article.data.heroImage);
           return (
-            <li>
-              <ArticleCard
-                title={article.data.title}
-                href={`/articles/${articleSlug}/`}
-                dateTime={article.data.date.toISOString()}
-                dateLabel={formatDate(article.data.date)}
-                cardImage={cardImage}
-                primaryTag={article.data.tags[0]}
-                tags={article.data.tags}
-                summary={article.data.description ? `<p>${article.data.description}</p>` : undefined}
-              />
-            </li>
+            <ArticleCard
+              title={article.data.title}
+              href={`/articles/${articleSlug}/`}
+              dateTime={article.data.date.toISOString()}
+              dateLabel={formatDate(article.data.date)}
+              cardImage={cardImage}
+              primaryTag={article.data.tags[0]}
+              tags={article.data.tags}
+              summary={article.data.description ? `<p>${article.data.description}</p>` : undefined}
+            />
           );
         })}
-      </ul>
+      </div>
 
       <div class="article-list">
         {articles.map((article) => {
