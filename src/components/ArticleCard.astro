@@ -1,5 +1,5 @@
 ---
-import { tagHref } from '../utils/tags';
+import { tagHref } from "../utils/tags";
 
 interface Props {
   title: string;
@@ -7,7 +7,7 @@ interface Props {
   dateTime: string;
   dateLabel: string;
   cardImage: string;
-  variant?: 'default' | 'featured';
+  variant?: "default" | "featured";
   primaryTag?: string;
   tags?: string[];
   summary?: string;
@@ -22,7 +22,7 @@ const {
   dateTime,
   dateLabel,
   cardImage,
-  variant = 'default',
+  variant = "default",
   primaryTag,
   tags = [],
   summary,
@@ -31,9 +31,11 @@ const {
   collapsible,
 } = Astro.props;
 
-const isFeatured = variant === 'featured';
-const articleClass = isFeatured ? 'article-card featured-card' : 'article-card';
-const articleClassList = collapsible ? `${articleClass} collapsible` : articleClass;
+const isFeatured = variant === "featured";
+const articleClass = isFeatured ? "article-card featured-card" : "article-card";
+const articleClassList = collapsible
+  ? `${articleClass} collapsible`
+  : articleClass;
 ---
 
 <article
@@ -45,53 +47,59 @@ const articleClassList = collapsible ? `${articleClass} collapsible` : articleCl
     <span>Read {title}</span>
   </a>
 
-  {isFeatured ? (
-    <div class="featured-card-copy">
-      
-      <h3>
-        <a href={href}>{title}</a><div class="article-card-meta">       
-        <time datetime={dateTime}>{dateLabel}</time>
+  {
+    isFeatured ? (
+      <div class="featured-card-copy">
+        <h3>
+          <>
+            <a href={href}>{title}</a>
+            <div class="article-card-meta">
+              <time datetime={dateTime}>{dateLabel}</time>
+            </div>
+          </>
+        </h3>
+        {summary && <div class="featured-summary" set:html={summary} />}
       </div>
-      </h3>
-      {summary && <div class="featured-summary" set:html={summary} />}
-    </div>
-  ) : (
-    <>
-      
-      <h3>
-        <a href={href}>{title}</a><div class="article-card-meta">       
-        <time datetime={dateTime}>{dateLabel}</time>
-      </div>
-      </h3>
-      {summary && <div class="article-card-summary" set:html={summary} />}
-      {!noMiniTags && tags.length > 0 && (
-        <ul class="mini-tag-list" aria-label="Article topics">
-          {tags.slice(0, 3).map((tag) => (
-            <li>
-              <a href={tagHref(tag)}>{tag}</a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </>
-  )}
+    ) : (
+      <>
+        <h3>
+          <>
+            <a href={href}>{title}</a>
+            <div class="article-card-meta">
+              <time datetime={dateTime}>{dateLabel}</time>
+            </div>
+          </>
+        </h3>
+        {summary && <div class="article-card-summary" set:html={summary} />}
+        {!noMiniTags && tags.length > 0 && (
+          <ul class="mini-tag-list" aria-label="Article topics">
+            {tags.slice(0, 3).map((tag) => (
+              <li>
+                <a href={tagHref(tag)}>{tag}</a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </>
+    )
+  }
 </article>
 
 <script>
-  document.querySelectorAll('[data-card-image]').forEach((card) => {
+  document.querySelectorAll("[data-card-image]").forEach((card) => {
     if (!(card instanceof HTMLElement)) return;
     card.style.setProperty(
-      '--card-bg-image',
+      "--card-bg-image",
       `url("${card.dataset.cardImage}")`,
     );
   });
 
-  document.addEventListener('click', (event) => {
+  document.addEventListener("click", (event) => {
     if (!(event.target instanceof Element)) return;
-    if (event.target.closest('a, button')) return;
+    if (event.target.closest("a, button")) return;
 
-    const card = event.target.closest('.article-card, .featured-card');
-    const link = card?.querySelector('.card-link');
+    const card = event.target.closest(".article-card, .featured-card");
+    const link = card?.querySelector(".card-link");
 
     if (link instanceof HTMLAnchorElement) {
       link.click();
