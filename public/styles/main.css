@@ -1186,6 +1186,11 @@ hr {
     margin-bottom: 0;
 }
 
+.page-header-row .section-heading {
+    margin-bottom: 0;
+    max-width: none;
+}
+
 .article-list {
     display: flex;
     flex-direction: column;
@@ -1247,6 +1252,11 @@ hr {
 .list-tags a:hover {
     border-color: rgb(from var(--color-pill-border) r g b / 0.9);
     background: rgb(from var(--color-pill-bg) r g b / 0.8);
+}
+
+.tag-article-list {
+    list-style: none;
+    padding: 0;
 }
 
 [data-view="grid"] .article-list {

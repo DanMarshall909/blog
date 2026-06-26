@@ -176,35 +176,96 @@ function getIntroHtml(description: string | undefined, body: string): string {
   }
 
   <section class="recent-writing" aria-labelledby="recent-title">
-    <div class="section-heading">
-      <p class="eyebrow">Recent writing</p>
-      <h2 id="recent-title">Notes from the workbench</h2>
+    <div class="page-header-row">
+      <div class="section-heading">
+        <p class="eyebrow">Recent writing</p>
+        <h2 id="recent-title">Notes from the workbench</h2>
+      </div>
+
+      <div class="view-toggle" role="radiogroup" aria-label="View mode">
+        <button role="radio" aria-checked="true" data-view="grid" aria-label="Grid view">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </button>
+        <button role="radio" aria-checked="false" data-view="list" aria-label="List view">
+          <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
     </div>
 
-    <div class="article-grid">
-      {
-        recentArticles.map((article, index) => {
-          const slug = getArticleSlug(article.id);
-          const intro = getIntroHtml(article.data.description, article.body ?? '');
-          const primaryTag = article.data.tags[0];
-          const image = getArticleCardImage(article.id, article.data.heroImage, index);
+    <div id="view-container" data-view="grid">
+      <div class="article-grid">
+        {
+          recentArticles.map((article, index) => {
+            const slug = getArticleSlug(article.id);
+            const intro = getIntroHtml(article.data.description, article.body ?? '');
+            const primaryTag = article.data.tags[0];
+            const image = getArticleCardImage(article.id, article.data.heroImage, index);
 
-          return (
-            <ArticleCard
-              title={article.data.title}
-              href={`/articles/${slug}/`}
-              dateTime={article.data.date.toISOString()}
-              dateLabel={formatDate(article.data.date)}
-              cardImage={image}
-              primaryTag={primaryTag}
-              tags={article.data.tags}
-              summary={intro}
-            />
-          );
-        })
-      }
+            return (
+              <ArticleCard
+                title={article.data.title}
+                href={`/articles/${slug}/`}
+                dateTime={article.data.date.toISOString()}
+                dateLabel={formatDate(article.data.date)}
+                cardImage={image}
+                primaryTag={primaryTag}
+                tags={article.data.tags}
+                summary={intro}
+              />
+            );
+          })
+        }
+      </div>
+
+      <div class="article-list">
+        {
+          recentArticles.map((article) => {
+            const slug = getArticleSlug(article.id);
+            return (
+              <div class="list-item">
+                <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
+                <a href={`/articles/${slug}/`}>{article.data.title}</a>
+                <span class="list-tags">
+                  {article.data.tags.slice(0, 3).map((tag) => (
+                    <a href={tagHref(tag)}>{tag}</a>
+                  ))}
+                </span>
+              </div>
+            );
+          })
+        }
+      </div>
     </div>
   </section>
+
+  <script is:inline>
+    (function () {
+      var container = document.getElementById('view-container');
+      if (!container) return;
+      var buttons = container.parentElement.querySelectorAll('.view-toggle [role="radio"]');
+      var storageKey = 'view-mode-home';
+
+      function setView(view) {
+        container.setAttribute('data-view', view);
+        buttons.forEach(function (b) {
+          var active = b.getAttribute('data-view') === view;
+          b.setAttribute('aria-checked', String(active));
+        });
+        try { localStorage.setItem(storageKey, view); } catch (_) {}
+      }
+
+      buttons.forEach(function (b) {
+        b.addEventListener('click', function () {
+          setView(b.getAttribute('data-view') || 'grid');
+        });
+      });
+
+      try {
+        var saved = localStorage.getItem(storageKey);
+        if (saved === 'list' || saved === 'grid') setView(saved);
+      } catch (_) {}
+    })();
+  </script>
 
   <section class="topic-cloud" aria-labelledby="topics-title">
     <div class="section-heading">
