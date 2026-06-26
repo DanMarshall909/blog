@@ -5,8 +5,9 @@ interface Props {
   title: string;
   bodyClass?: string;
   description?: string;
+  heroImage?: string;
 }
-const { title, bodyClass, description } = Astro.props;
+const { title, bodyClass, description, heroImage } = Astro.props;
 const siteTitle = 'Technical Scratches';
 const siteDescription = 'Thoughts on software engineering and life as a developer';
 const siteUrl = 'https://blog.danmarshall.dev';
@@ -16,6 +17,13 @@ const currentYear = new Date().getFullYear();
 const navArticles = (await getCollection('articles'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const isArticlePage = bodyClass?.split(/\s+/).includes('article-detail') ?? false;
+
+const backgroundImages = [
+  heroImage,
+  ...navArticles.map((article) => article.data.heroImage),
+]
+  .filter((image): image is string => Boolean(image))
+  .slice(0, 12);
 ---
 <!doctype html>
 <html lang="en">
@@ -136,6 +144,14 @@ const isArticlePage = bodyClass?.split(/\s+/).includes('article-detail') ?? fals
     </aside>
 
     <header class="header">
+      <div
+        class="site-background-slideshow"
+        aria-hidden="true"
+        data-background-images={JSON.stringify(backgroundImages)}
+      >
+        <div class="site-background-slide site-background-slide-a"></div>
+        <div class="site-background-slide site-background-slide-b"></div>
+      </div>
       <div class="content-wrap">
         <nav class="site-nav" aria-label="Primary navigation">
           <a href="/" data-tooltip="Latest writing and featured posts">Writing</a>
@@ -343,6 +359,64 @@ const isArticlePage = bodyClass?.split(/\s+/).includes('article-detail') ?? fals
         localStorage.setItem('theme', next);
         document.documentElement.setAttribute('data-theme', next);
       }
+    </script>
+    <script is:inline>
+      (function () {
+        const root = document.querySelector('.site-background-slideshow');
+        if (!(root instanceof HTMLElement)) return;
+
+        const rawImages = root.dataset.backgroundImages;
+        if (!rawImages) return;
+
+        let images = [];
+
+        try {
+          images = JSON.parse(rawImages);
+        } catch {
+          return;
+        }
+
+        images = images.filter((image) => typeof image === 'string' && image.trim() !== '');
+
+        if (images.length === 0) return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const slides = [
+          root.querySelector('.site-background-slide-a'),
+          root.querySelector('.site-background-slide-b'),
+        ].filter((slide) => slide instanceof HTMLElement);
+
+        if (slides.length < 2) return;
+
+        let imageIndex = 0;
+        let activeSlideIndex = 0;
+
+        function setSlideImage(slide, image) {
+          slide.style.backgroundImage = `url("${image}")`;
+        }
+
+        function showNextImage() {
+          const activeSlide = slides[activeSlideIndex];
+          const inactiveSlide = slides[1 - activeSlideIndex];
+          const nextImage = images[imageIndex % images.length];
+
+          setSlideImage(inactiveSlide, nextImage);
+
+          inactiveSlide.classList.add('is-active');
+          activeSlide.classList.remove('is-active');
+
+          activeSlideIndex = 1 - activeSlideIndex;
+          imageIndex += 1;
+        }
+
+        setSlideImage(slides[0], images[0]);
+        slides[0].classList.add('is-active');
+        imageIndex = 1;
+
+        if (prefersReducedMotion || images.length === 1) return;
+
+        window.setInterval(showNextImage, 9000);
+      })();
     </script>
   </body>
 </html>

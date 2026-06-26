@@ -12,6 +12,12 @@ heroImage: /articles/resume/profile-alpha-trimmed.png
 
 Senior full-stack engineer with 11+ years of enterprise .NET and JVM delivery across microservices, event-driven systems, cloud platforms, production AI, and developer tooling.
 
+**B.Sc. Mathematics and Computer Science** — University of South Africa (UNISA)
+
+- [danmarshall909@gmail.com](mailto:danmarshall909@gmail.com) 
+- [github.com/DanMarshall909](https://github.com/DanMarshall909) 
+- [linkedin.com/in/developerdan](https://www.linkedin.com/in/developerdan)
+
 Full version: [blog.danmarshall.dev/articles/resume](/articles/resume/)
 
 Selected public projects: [blog.danmarshall.dev/articles/selected-public-projects](/articles/selected-public-projects/)
@@ -50,10 +56,3 @@ June 2024 - July 2025
 
 Senior/full-stack and data engineering roles at National Grower Register, CloudMonitor, VALD, Situ Systems, HUB24, Chandler Personalised Communications, and WorldSmart POS Solutions.
 
-## Qualifications and Contact
-
-**Bachelor of Science** (Mathematics and Computer Science), University of South Africa
-
-- Email: [danmarshall909@gmail.com](mailto:danmarshall909@gmail.com)
-- GitHub: [github.com/DanMarshall909](https://github.com/DanMarshall909)
-- LinkedIn: [linkedin.com/in/developerdan](https://www.linkedin.com/in/developerdan)

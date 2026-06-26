@@ -41,6 +41,7 @@ const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-')
   title={`${article.data.title} - Technical Scratches`}
   bodyClass={pageClass}
   description={article.data.description}
+  heroImage={article.data.heroImage}
 >
   <Fragment slot="header">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -64,7 +65,7 @@ const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-')
     </div>
   </Fragment>
 
-  <article class={`article${article.data.heroImage ? ' has-hero' : ''}`}>
+  <article id="article-start" class={`article${article.data.heroImage ? ' has-hero' : ''}`}>
     <section class="content">
       {article.data.heroImage && (
         <Picture
@@ -85,4 +86,26 @@ const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-')
       <a href="/">&laquo; Full blog</a>
     </div>
   </Fragment>
+
+  <script is:inline>
+    (function () {
+      if (window.location.hash) return;
+      if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+      var navigationEntry = performance.getEntriesByType('navigation')[0];
+      if (navigationEntry && navigationEntry.type === 'back_forward') return;
+
+      function scrollToArticleStart() {
+        var articleStart = document.getElementById('article-start');
+        if (!articleStart) return;
+        articleStart.scrollIntoView({ block: 'start', inline: 'nearest' });
+      }
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(scrollToArticleStart);
+      });
+
+      window.addEventListener('load', scrollToArticleStart, { once: true });
+    })();
+  </script>
 </Layout>

@@ -694,7 +694,7 @@ ol {
 }
 
 li {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-xs);
     color: var(--color-secondary);
 }
 

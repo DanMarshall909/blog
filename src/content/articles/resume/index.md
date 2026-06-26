@@ -12,16 +12,13 @@ heroImage: /articles/resume/profile-alpha-trimmed.png
 
 Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, production AI integration, AI-assisted delivery systems, and developer tooling. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.
 
+**B.Sc. Mathematics and Computer Science** — University of South Africa (UNISA)
+
+[danmarshall909@gmail.com](mailto:danmarshall909@gmail.com) · [github.com/DanMarshall909](https://github.com/DanMarshall909) · [linkedin.com/in/developerdan](https://www.linkedin.com/in/developerdan)
+
 [One-page resume](/articles/resume-brief/) available for a concise PDF-friendly version.
 
 [Selected public projects](/articles/selected-public-projects/) are available as a short portfolio reference for technical reviewers.
-
----
-
-## Qualifications
-
-**Bachelor of Science** (Mathematics and Computer Science)
-University of South Africa (UNISA)
 
 ---
 
@@ -204,13 +201,6 @@ University of South Africa (UNISA)
 - Maintained internal support utilities and automated scripts.
 - Installed and supported Point of Sale hardware and software.
 
----
-
-## Contact
-
-- **Email**: [danmarshall909@gmail.com](mailto:danmarshall909@gmail.com)
-- **GitHub**: [github.com/DanMarshall909](https://github.com/DanMarshall909)
-- **LinkedIn**: [linkedin.com/in/developerdan](https://www.linkedin.com/in/developerdan)
 
 ---
 
