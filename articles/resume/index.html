@@ -9,14 +9,12 @@
       })();
     </script></head> <body class="article-detail article-resume"> <aside class="contact-topbar" aria-label="Contact Dan Marshall"> <a class="utility-icon" href="mailto:danmarshall909@gmail.com" aria-label="Email Dan Marshall" data-tooltip="Send me an email"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="3" y="5" width="18" height="14" rx="2"></rect> <path d="m3 7 9 6 9-6"></path> </svg> </a> <a class="utility-icon" href="https://www.linkedin.com/in/developerdan/" aria-label="Open Dan Marshall on LinkedIn" data-tooltip="View my LinkedIn profile"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"> <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 8h4V23h-4V8Zm7.5 0h3.83v2.05h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.14V23h-4v-7.85c0-1.87-.03-4.28-2.61-4.28-2.61 0-3.01 2.04-3.01 4.15V23h-4V8Z"></path> </svg> </a> </aside> <!-- Desktop top bar: back link only — hidden on mobile --> <div class="desktop-topbar"> <a class="desktop-back" href="/" aria-label="Back to home" data-tooltip="Back to the homepage"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> </a> <button class="pdf-button" type="button" onclick="window.print()" aria-label="Create PDF from this article" data-tooltip="Print or save this page as PDF"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <polyline points="6 9 6 2 18 2 18 9"></polyline> <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path> <rect x="6" y="14" width="12" height="8"></rect> </svg> </button> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" data-tooltip="Switch light or dark theme"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> </div> <!-- Mobile hamburger — hidden on desktop --> <button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu" data-tooltip="Open site menu"> <span></span> <span></span> <span></span> </button> <!-- Mobile drawer --> <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div> <aside class="drawer" id="drawer"> <div class="drawer-header"> <a class="drawer-home" href="/" data-tooltip="Back to the homepage"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
 Home
-</a> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme" data-tooltip="Switch light or dark theme"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> <button class="drawer-close" onclick="closeDrawer()" aria-label="Close" data-tooltip="Close the menu">✕</button> </div> <div class="drawer-body" id="drawer-body"> <nav class="drawer-primary-nav" aria-label="Primary navigation"> <a href="/" data-tooltip="Latest writing and featured posts">Writing</a> <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a> <a href="/archive/" data-tooltip="Browse every article">Archive</a> <a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a> <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Email Dan</a> <a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile">LinkedIn</a> <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a> </nav>  </div> </aside> <header class="header"> <div class="content-wrap"> <nav class="site-nav" aria-label="Primary navigation"> <a href="/" data-tooltip="Latest writing and featured posts">Writing</a> <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a> <a href="/archive/" data-tooltip="Browse every article">Archive</a> <a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a> <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a> <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Contact</a> </nav>  <nav class="breadcrumb" aria-label="Breadcrumb"> <a href="/">Writing</a> <span aria-hidden="true">/</span> <span>Resume</span> </nav> <div class="title-with-image"> <h1>Resume</h1> </div> <div class="article-meta"> <p class="publish-date">19 June 2026</p> <p class="reading-time">8 min read</p> <ul class="tags" aria-label="Article topics"> <li><a class="tag" href="/tags/resume/">resume</a></li><li><a class="tag" href="/tags/career/">career</a></li><li><a class="tag" href="/tags/fullstack/">fullstack</a></li><li><a class="tag" href="/tags/dotnet/">dotnet</a></li><li><a class="tag" href="/tags/csharp/">csharp</a></li><li><a class="tag" href="/tags/azure/">azure</a></li><li><a class="tag" href="/tags/ai/">ai</a></li><li><a class="tag" href="/tags/testing/">testing</a></li><li><a class="tag" href="/tags/microservices/">microservices</a></li> </ul> </div>  </div> </header> <div id="content"> <div class="content-wrap">   <article class="article has-hero"> <section class="content"> <picture class="hero-image-picture"> <source srcset="/_astro/profile-alpha-trimmed.DCsq1__4_Z1QA5kE.avif" type="image/avif" sizes="(max-width: 768px) 100vw, 33vw"><source srcset="/_astro/profile-alpha-trimmed.DCsq1__4_1AFtzK.webp" type="image/webp" sizes="(max-width: 768px) 100vw, 33vw">  <img src="/_astro/profile-alpha-trimmed.DCsq1__4_Z1CohwJ.png" alt="Resume" loading="eager" fetchpriority="high" sizes="(max-width: 768px) 100vw, 33vw" decoding="async" width="1141" height="1247" class="hero-image"> </picture> <h1 id="dan-marshall">Dan Marshall</h1>
+</a> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme" data-tooltip="Switch light or dark theme"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> <button class="drawer-close" onclick="closeDrawer()" aria-label="Close" data-tooltip="Close the menu">✕</button> </div> <div class="drawer-body" id="drawer-body"> <nav class="drawer-primary-nav" aria-label="Primary navigation"> <a href="/" data-tooltip="Latest writing and featured posts">Writing</a> <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a> <a href="/archive/" data-tooltip="Browse every article">Archive</a> <a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a> <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Email Dan</a> <a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile">LinkedIn</a> <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a> </nav>  </div> </aside> <header class="header"> <div class="site-background-slideshow" aria-hidden="true" data-background-images="[&quot;/articles/resume/profile-alpha-trimmed.png&quot;,&quot;/articles/astro-and-how-ive-customised-it/astro.png&quot;,&quot;/articles/selected-public-projects/cartoon.png&quot;,&quot;/articles/tome-mcp-semantic-search/cartoon.png&quot;,&quot;/articles/ai-assisted-job-search/cartoon-hero.jpg&quot;,&quot;/articles/ai-needs-guardrails-not-rubber-stamps/rubber_stamp-hero.png&quot;,&quot;/articles/my-resume-is-now-a-static-site-feature/cartoon.png&quot;,&quot;/articles/resume/profile-alpha-trimmed.png&quot;,&quot;/articles/resume/profile-alpha-trimmed.png&quot;,&quot;/articles/making-ai-think-like-you/cartoon.png&quot;,&quot;/articles/ai-blog-pipeline/cartoon.png&quot;,&quot;/articles/claude-code-mcp-token-waste/cartoon.png&quot;]"> <div class="site-background-slide site-background-slide-a"></div> <div class="site-background-slide site-background-slide-b"></div> </div> <div class="content-wrap"> <nav class="site-nav" aria-label="Primary navigation"> <a href="/" data-tooltip="Latest writing and featured posts">Writing</a> <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a> <a href="/archive/" data-tooltip="Browse every article">Archive</a> <a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a> <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a> <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Contact</a> </nav>  <nav class="breadcrumb" aria-label="Breadcrumb"> <a href="/">Writing</a> <span aria-hidden="true">/</span> <span>Resume</span> </nav> <div class="title-with-image"> <h1>Resume</h1> </div> <div class="article-meta"> <p class="publish-date">19 June 2026</p> <p class="reading-time">8 min read</p> <ul class="tags" aria-label="Article topics"> <li><a class="tag" href="/tags/resume/">resume</a></li><li><a class="tag" href="/tags/career/">career</a></li><li><a class="tag" href="/tags/fullstack/">fullstack</a></li><li><a class="tag" href="/tags/dotnet/">dotnet</a></li><li><a class="tag" href="/tags/csharp/">csharp</a></li><li><a class="tag" href="/tags/azure/">azure</a></li><li><a class="tag" href="/tags/ai/">ai</a></li><li><a class="tag" href="/tags/testing/">testing</a></li><li><a class="tag" href="/tags/microservices/">microservices</a></li> </ul> </div>  </div> </header> <div id="content"> <div class="content-wrap">   <article id="article-start" class="article has-hero"> <section class="content"> <picture class="hero-image-picture"> <source srcset="/_astro/profile-alpha-trimmed.DCsq1__4_Z1QA5kE.avif" type="image/avif" sizes="(max-width: 768px) 100vw, 33vw"><source srcset="/_astro/profile-alpha-trimmed.DCsq1__4_1AFtzK.webp" type="image/webp" sizes="(max-width: 768px) 100vw, 33vw">  <img src="/_astro/profile-alpha-trimmed.DCsq1__4_Z1CohwJ.png" alt="Resume" loading="eager" fetchpriority="high" sizes="(max-width: 768px) 100vw, 33vw" decoding="async" width="1141" height="1247" class="hero-image"> </picture> <h1 id="dan-marshall">Dan Marshall</h1>
 <p>Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, production AI integration, AI-assisted delivery systems, and developer tooling. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.</p>
+<p><strong>B.Sc. Mathematics and Computer Science</strong> — University of South Africa (UNISA)</p>
+<p><a href="mailto:danmarshall909@gmail.com">danmarshall909@gmail.com</a> · <a href="https://github.com/DanMarshall909">github.com/DanMarshall909</a> · <a href="https://www.linkedin.com/in/developerdan">linkedin.com/in/developerdan</a></p>
 <p><a href="/articles/resume-brief/">One-page resume</a> available for a concise PDF-friendly version.</p>
 <p><a href="/articles/selected-public-projects/">Selected public projects</a> are available as a short portfolio reference for technical reviewers.</p>
-<hr>
-<h2 id="qualifications">Qualifications</h2>
-<p><strong>Bachelor of Science</strong> (Mathematics and Computer Science)
-University of South Africa (UNISA)</p>
 <hr>
 <h2 id="skills">Skills</h2>
 <h3 id="back-end-development">Back-end Development</h3>
@@ -290,19 +288,32 @@ University of South Africa (UNISA)</p>
 <li>Installed and supported Point of Sale hardware and software.</li>
 </ul>
 <hr>
-<h2 id="contact">Contact</h2>
-<ul>
-<li><strong>Email</strong>: <a href="mailto:danmarshall909@gmail.com">danmarshall909@gmail.com</a></li>
-<li><strong>GitHub</strong>: <a href="https://github.com/DanMarshall909">github.com/DanMarshall909</a></li>
-<li><strong>LinkedIn</strong>: <a href="https://www.linkedin.com/in/developerdan">linkedin.com/in/developerdan</a></li>
-</ul>
-<hr>
 <h2 id="references">References</h2>
 <p>Available on request.</p>
 <blockquote>
 <p><em>“Dan is an absolute pleasure to work with and I would highly recommend him for any full-stack web development position. We worked together for just under a year and during that time Dan was always friendly, professional and went above and beyond when implementing code and designing systems. He has a keen eye for where things can be improved and is always looking to find the optimal solution to any problem he faces. He writes clean, well-structured code that is easy to maintain. He takes advice and constructive criticism well and brings a positive attitude to every meeting. Dan would be an invaluable addition to any software team.”</em></p>
 <p>— <strong>Alistair Doulin</strong>, CTO, Situ Systems Pty Ltd</p>
-</blockquote> </section> </article>   </div> </div> <footer> <div class="content-wrap">  <div class="nav"> <a href="/">&laquo; Full blog</a> </div>  <section class="about"> <p>Dan Marshall's blog</p> </section> <section class="copy"> <p>&copy; 2026 Dan Marshall</p> </section> </div> </footer> <script>
+</blockquote> </section> </article>  <script>
+    (function () {
+      if (window.location.hash) return;
+      if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+      var navigationEntry = performance.getEntriesByType('navigation')[0];
+      if (navigationEntry && navigationEntry.type === 'back_forward') return;
+
+      function scrollToArticleStart() {
+        var articleStart = document.getElementById('article-start');
+        if (!articleStart) return;
+        articleStart.scrollIntoView({ block: 'start', inline: 'nearest' });
+      }
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(scrollToArticleStart);
+      });
+
+      window.addEventListener('load', scrollToArticleStart, { once: true });
+    })();
+  </script>  </div> </div> <footer> <div class="content-wrap">  <div class="nav"> <a href="/">&laquo; Full blog</a> </div>  <section class="about"> <p>Dan Marshall's blog</p> </section> <section class="copy"> <p>&copy; 2026 Dan Marshall</p> </section> </div> </footer> <script>
       // Drawer
       function openDrawer() {
         document.getElementById('drawer').classList.add('drawer-open');
@@ -472,4 +483,61 @@ University of South Africa (UNISA)</p>
         localStorage.setItem('theme', next);
         document.documentElement.setAttribute('data-theme', next);
       }
+    </script> <script>
+      (function () {
+        const root = document.querySelector('.site-background-slideshow');
+        if (!(root instanceof HTMLElement)) return;
+
+        const rawImages = root.dataset.backgroundImages;
+        if (!rawImages) return;
+
+        let images = [];
+
+        try {
+          images = JSON.parse(rawImages);
+        } catch {
+          return;
+        }
+
+        images = images.filter((image) => typeof image === 'string' && image.trim() !== '');
+
+        if (images.length === 0) return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const slides = [
+          root.querySelector('.site-background-slide-a'),
+          root.querySelector('.site-background-slide-b'),
+        ].filter((slide) => slide instanceof HTMLElement);
+
+        if (slides.length < 2) return;
+
+        let imageIndex = 0;
+        let activeSlideIndex = 0;
+
+        function setSlideImage(slide, image) {
+          slide.style.backgroundImage = `url("${image}")`;
+        }
+
+        function showNextImage() {
+          const activeSlide = slides[activeSlideIndex];
+          const inactiveSlide = slides[1 - activeSlideIndex];
+          const nextImage = images[imageIndex % images.length];
+
+          setSlideImage(inactiveSlide, nextImage);
+
+          inactiveSlide.classList.add('is-active');
+          activeSlide.classList.remove('is-active');
+
+          activeSlideIndex = 1 - activeSlideIndex;
+          imageIndex += 1;
+        }
+
+        setSlideImage(slides[0], images[0]);
+        slides[0].classList.add('is-active');
+        imageIndex = 1;
+
+        if (prefersReducedMotion || images.length === 1) return;
+
+        window.setInterval(showNextImage, 9000);
+      })();
     </script> </body> </html>
