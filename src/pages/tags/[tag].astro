@@ -224,6 +224,11 @@ const tagCount = allArticles.filter((a) => a.data.tags.some((t) => tagSlug(t) ==
         filterOptions(input.value);
       });
 
+      input.addEventListener('click', function () {
+        openDropdown();
+        filterOptions(this.value);
+      });
+
       input.addEventListener('input', function () {
         openDropdown();
         filterOptions(this.value);

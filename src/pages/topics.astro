@@ -193,6 +193,11 @@ function formatDate(date: Date): string {
         filterOptions(input.value);
       });
 
+      input.addEventListener('click', function() {
+        openDropdown();
+        filterOptions(this.value);
+      });
+
       input.addEventListener('input', function() {
         openDropdown();
         filterOptions(this.value);
