@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
-import { tagSlug } from '../../utils/tags';
+import { tagHref, tagSlug } from '../../utils/tags';
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-AU', {
@@ -16,6 +16,28 @@ function formatDate(date: Date): string {
 function getTagArticleCardImage(articleId: string, heroImage: string | undefined): string {
   return heroImage ?? '/articles/ai-blog-pipeline/cartoon.png';
 }
+
+const allArticles = (await getCollection('articles')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const tagMap = new Map<string, { label: string; count: number }>();
+
+for (const article of allArticles) {
+  for (const tag of article.data.tags) {
+    const slug = tagSlug(tag);
+    const existing = tagMap.get(slug);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      tagMap.set(slug, { label: tag, count: 1 });
+    }
+  }
+}
+
+const topics = [...tagMap.values()].sort((a, b) => {
+  if (b.count !== a.count) return b.count - a.count;
+  return a.label.localeCompare(b.label);
+});
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
@@ -39,10 +61,8 @@ interface Props {
 }
 
 const { tag } = Astro.props;
-const slug = tagSlug(tag);
-const articles = (await getCollection('articles'))
-  .filter((article) => article.data.tags.some((articleTag) => tagSlug(articleTag) === slug))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const tagSlugged = tagSlug(tag);
+const tagCount = allArticles.filter((a) => a.data.tags.some((t) => tagSlug(t) === tagSlugged)).length;
 ---
 <Layout title={`${tag} articles - Technical Scratches`} description={`Articles tagged ${tag} on Technical Scratches.`}>
   <section class="tag-page">
@@ -50,7 +70,7 @@ const articles = (await getCollection('articles'))
       <div>
         <p class="eyebrow">Tagged</p>
         <h1>{tag}</h1>
-        <p>{articles.length} {articles.length === 1 ? 'article' : 'articles'} filed here.</p>
+        <p>{tagCount} {tagCount === 1 ? 'article' : 'articles'} with this tag.</p>
       </div>
 
       <div class="view-toggle" role="radiogroup" aria-label="View mode">
@@ -63,10 +83,25 @@ const articles = (await getCollection('articles'))
       </div>
     </div>
 
+    <div class="topic-filter-wrap">
+      <input type="text" id="topic-input" placeholder="All topics" autocomplete="off" />
+      <ul class="topic-options" id="topic-options">
+        <li data-topic-filter="all" role="option" aria-selected="true">All topics <strong>{allArticles.length}</strong></li>
+        {topics.map((topic) => (
+          <li data-topic-filter={tagSlug(topic.label)} role="option" aria-selected="false">{topic.label} <strong>{topic.count}</strong></li>
+        ))}
+      </ul>
+    </div>
+
+    <p class="topics-count" aria-live="polite">
+      Showing <span id="topics-visible-count">{allArticles.length}</span> articles.
+    </p>
+
     <div id="view-container" data-view="grid">
-      <div class="article-grid">
-        {articles.map((article) => {
+      <div class="topics-results">
+        {allArticles.map((article) => {
           const articleSlug = article.id.replace(/\/index$/, '');
+          const articleTags = article.data.tags.map(tagSlug);
           const cardImage = getTagArticleCardImage(article.id, article.data.heroImage);
           return (
             <ArticleCard
@@ -77,22 +112,25 @@ const articles = (await getCollection('articles'))
               cardImage={cardImage}
               primaryTag={article.data.tags[0]}
               tags={article.data.tags}
+              topicTags={articleTags.join(' ')}
               summary={article.data.description ? `<p>${article.data.description}</p>` : undefined}
+              collapsible
             />
           );
         })}
       </div>
 
       <div class="article-list">
-        {articles.map((article) => {
+        {allArticles.map((article) => {
           const articleSlug = article.id.replace(/\/index$/, '');
+          const articleTags = article.data.tags.map(tagSlug);
           return (
-            <div class="list-item">
+            <div class="list-item" data-topic-tags={articleTags.join(' ')}>
               <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
               <a href={`/articles/${articleSlug}/`}>{article.data.title}</a>
               <span class="list-tags">
                 {article.data.tags.slice(0, 3).map((t) => (
-                  <a href={`/tags/${tagSlug(t)}/`}>{t}</a>
+                  <a href={tagHref(t)}>{t}</a>
                 ))}
               </span>
             </div>
@@ -104,30 +142,152 @@ const articles = (await getCollection('articles'))
 
   <script is:inline>
     (function () {
+      var tagFilter = '{tagSlugged}';
+
+      var input = document.getElementById('topic-input');
+      var list = document.getElementById('topic-options');
+      var options = Array.from(list.querySelectorAll('[data-topic-filter]'));
+      var visibleCount = document.getElementById('topics-visible-count');
+
+      var gridItems = Array.from(document.querySelectorAll('.topics-results > .article-card'));
+      var listItems = Array.from(document.querySelectorAll('#view-container > .article-list > .list-item'));
       var container = document.getElementById('view-container');
-      var buttons = document.querySelectorAll('.view-toggle [role="radio"]');
-      var storageKey = 'view-mode-tag';
+
+      var currentFilter = 'all';
+      var isOpen = false;
+
+      function filterResults(filter) {
+        currentFilter = filter;
+        var visible = 0;
+
+        var allItems = gridItems.concat(listItems);
+
+        allItems.forEach(function (item) {
+          var tags = (item.getAttribute('data-topic-tags') || '').split(' ');
+          var show = filter === 'all' || tags.indexOf(filter) !== -1;
+          if (show) visible += 1;
+
+          if (item.classList.contains('article-card')) {
+            if (show) {
+              item.hidden = false;
+              requestAnimationFrame(function () {
+                item.classList.remove('is-collapsed');
+              });
+            } else {
+              item.classList.add('is-collapsed');
+              window.setTimeout(function () {
+                if (item.classList.contains('is-collapsed')) item.hidden = true;
+              }, 320);
+            }
+            item.setAttribute('aria-hidden', String(!show));
+          } else {
+            item.hidden = !show;
+          }
+        });
+
+        if (visibleCount) visibleCount.textContent = String(visible);
+      }
+
+      function selectOption(option) {
+        var filter = option.getAttribute('data-topic-filter') || 'all';
+        var label = filter === 'all' ? 'All topics' : option.childNodes[0].textContent.trim();
+
+        options.forEach(function (o) { o.setAttribute('aria-selected', 'false'); });
+        option.setAttribute('aria-selected', 'true');
+        input.placeholder = label;
+        input.value = '';
+        filterOptions('');
+        closeDropdown();
+        filterResults(filter);
+      }
+
+      function filterOptions(query) {
+        var lower = query.toLowerCase();
+        options.forEach(function (o) {
+          var text = (o.childNodes[0].textContent || '').trim().toLowerCase();
+          o.classList.toggle('is-hidden', lower && text.indexOf(lower) === -1);
+        });
+      }
+
+      function openDropdown() {
+        isOpen = true;
+        list.classList.add('is-open');
+      }
+
+      function closeDropdown() {
+        isOpen = false;
+        list.classList.remove('is-open');
+      }
+
+      input.addEventListener('focus', function () {
+        openDropdown();
+        filterOptions(input.value);
+      });
+
+      input.addEventListener('input', function () {
+        openDropdown();
+        filterOptions(this.value);
+      });
+
+      input.addEventListener('blur', function () {
+        window.setTimeout(closeDropdown, 150);
+      });
+
+      list.addEventListener('mousedown', function (e) {
+        var li = e.target.closest('[data-topic-filter]');
+        if (li) {
+          e.preventDefault();
+          selectOption(li);
+        }
+      });
+
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeDropdown();
+        if (e.key === 'Enter' && isOpen) {
+          var visible = options.filter(function (o) { return !o.classList.contains('is-hidden'); });
+          if (visible.length === 1) selectOption(visible[0]);
+        }
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          var visible = options.filter(function (o) { return !o.classList.contains('is-hidden'); });
+          var idx = visible.indexOf(list.querySelector('.is-highlighted'));
+          if (e.key === 'ArrowDown') idx = Math.min(idx + 1, visible.length - 1);
+          else idx = Math.max(idx - 1, 0);
+          options.forEach(function (o) { o.classList.remove('is-highlighted'); });
+          if (visible[idx]) visible[idx].classList.add('is-highlighted');
+        }
+      });
+
+      // view toggle
+      var viewButtons = document.querySelectorAll('.page-header-row .view-toggle [role="radio"]');
+      var viewStorageKey = 'view-mode-tag';
 
       function setView(view) {
         if (!container) return;
         container.setAttribute('data-view', view);
-        buttons.forEach(function (b) {
+        viewButtons.forEach(function (b) {
           var active = b.getAttribute('data-view') === view;
           b.setAttribute('aria-checked', String(active));
         });
-        try { localStorage.setItem(storageKey, view); } catch (_) {}
+        try { localStorage.setItem(viewStorageKey, view); } catch (_) {}
       }
 
-      buttons.forEach(function (b) {
+      viewButtons.forEach(function (b) {
         b.addEventListener('click', function () {
           setView(b.getAttribute('data-view') || 'grid');
         });
       });
 
+      // pre-select the current tag, restore saved view
       try {
-        var saved = localStorage.getItem(storageKey);
-        if (saved === 'list' || saved === 'grid') setView(saved);
+        var savedView = localStorage.getItem(viewStorageKey);
+        if (savedView === 'list' || savedView === 'grid') setView(savedView);
       } catch (_) {}
+
+      if (tagFilter && tagFilter !== 'all') {
+        var match = options.find(function (o) { return o.getAttribute('data-topic-filter') === tagFilter; });
+        if (match) selectOption(match);
+      }
     })();
   </script>
 </Layout>
