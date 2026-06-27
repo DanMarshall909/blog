@@ -4,7 +4,6 @@ author: Dan Marshall
 date: "2026-04-06"
 tags: ["AI", "LLM", "local AI", "BitNet", "Bonsai", "llama.cpp", "Windows", "CUDA"]
 description: "An 8B LLM running at 180+ tokens/sec on a laptop GPU using just 1.1 GB of VRAM — complete walkthrough for Bonsai 8B on Windows with CUDA."
-template: article.pug
 heroImage: /articles/1bit-llm/cartoon.png
 ---
 

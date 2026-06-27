@@ -10,7 +10,6 @@ const articles = defineCollection({
     tags: z.array(z.string()).default([]),
     heroImage: z.string().optional(),
     description: z.string().min(70, 'description too short — Lighthouse requires a meaningful meta description (aim for 120-160 chars)'),
-    template: z.string().optional(), // ignored, kept for compatibility
   }),
 });
 

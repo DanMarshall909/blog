@@ -27,9 +27,6 @@
       "type": "string",
       "minLength": 70
     },
-    "template": {
-      "type": "string"
-    },
     "$schema": {
       "type": "string"
     }

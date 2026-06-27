@@ -2,11 +2,11 @@
 
 ## Stack
 
-- **Static site generator**: Wintersmith 2.5.0
-- **Templates**: Pug (`templates/`)
-- **Content**: Markdown (`contents/articles/`)
-- **CSS**: Single file (`contents/css/main.css`) with CSS custom properties and `oklch()` colour tokens
-- **Syntax highlighting**: highlight.js 11.x via CDN (client-side only)
+- **Static site generator**: Astro
+- **Layouts/pages**: Astro components in `src/layouts/`, `src/pages/`, and `src/components/`
+- **Content**: Markdown content collection in `src/content/articles/`
+- **CSS**: Single file (`public/styles/main.css`) with CSS custom properties and `oklch()` colour tokens
+- **Syntax highlighting**: Astro/Shiki at build time
 - **Build output**: `docs/` (served by GitHub Pages, gitignored — CI handles deployment)
 - **CI/CD**: GitHub Actions (`.github/workflows/publish.yml`) builds and deploys to `gh-pages`
 - **Deployment**: GitHub Pages from `gh-pages` branch, `/docs` folder
@@ -23,7 +23,7 @@ npm run preview
 
 ## Article format
 
-Articles live at `contents/articles/<slug>/index.md`.
+Articles live at `src/content/articles/<slug>/index.md`.
 
 Required frontmatter:
 
@@ -33,8 +33,8 @@ title: "Article Title"
 author: Dan Marshall
 date: "YYYY-MM-DD"
 tags: ["tag1", "tag2"]
-template: article.pug
 heroImage: /articles/<slug>/<image.ext>   # optional
+description: "A meaningful meta description, ideally 120-160 characters."
 ---
 ```
 
@@ -42,30 +42,18 @@ Rules:
 - `title` must be a quoted string
 - `date` must be `"YYYY-MM-DD"` format
 - `tags` must be a JSON array
-- `template` is always `article.pug`
+- `description` is required and must be meaningful enough for Lighthouse
 - Use `##` for top-level sections, `###` for subsections — never `#` in the body
-- Code fences must use a language tag — never `powershell` (not in the highlight.js CDN build); use `bash` instead
+- Code fences must use a language tag
 - Em dashes (—) not double hyphens (--)
-
-## Skills
-
-- `/new-article` — guided workflow to create, format, proofread, and publish a new article
 
 ## CSS conventions
 
-- Theming via `data-theme="dark"` on `<html>` — default is **dark**
+- Theming via `data-theme="dark"` on `<html>`
 - Colour tokens defined as CSS custom properties at `:root` and `[data-theme="dark"]`
 - `oklch()` relative colour syntax used for gradient and derived colours
 - Breakpoint: `@media (max-width: 900px)` for mobile
-- Desktop TOC: sticky sidebar via `.article-with-toc` flex layout
-- Mobile TOC: injected into `.drawer-body` via JavaScript on DOMContentLoaded
-
-## highlight.js notes
-
-- Version 9 (via CDN) — EOL but functional
-- Theme switches between `atom-one-light` / `atom-one-dark` on toggle
-- Re-highlighting on theme change: always `delete block.dataset.highlighted` before calling `hljs.highlightElement()`
-- Do NOT call `hljs.highlightAll()` — `updateHljsTheme()` handles initial highlighting
+- Desktop TOC and long-code disclosure are injected by inline layout JavaScript on article pages
 
 ## Stale branches (safe to delete)
 

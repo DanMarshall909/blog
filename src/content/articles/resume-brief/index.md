@@ -3,7 +3,6 @@ title: "One-page Resume"
 description: "A concise one-page resume for Dan Marshall, covering senior full-stack engineering, AI-assisted delivery, .NET, cloud, testing, and developer tooling."
 date: 2026-06-19
 author: "Dan Marshall"
-template: article.pug
 tags: [resume, career, fullstack, dotnet, ai]
 heroImage: /articles/resume/profile-alpha-trimmed.png
 ---

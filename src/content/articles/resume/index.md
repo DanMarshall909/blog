@@ -3,7 +3,6 @@ title: "Resume"
 description: "Senior full-stack engineer with 11+ years of experience in .NET, JVM, microservices, production AI systems, AI-assisted delivery, and developer tooling."
 date: 2026-06-19
 author: "Dan Marshall"
-template: article.pug
 tags: [resume, career, fullstack, dotnet, csharp, azure, ai, testing, microservices]
 heroImage: /articles/resume/profile-alpha-trimmed.png
 ---

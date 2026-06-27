@@ -36,8 +36,8 @@ title: "Article Title"
 author: Dan Marshall
 date: "YYYY-MM-DD"
 tags: ["tag1", "tag2"]
-template: article.pug
 heroImage: /articles/<slug>/<image.ext>
+description: "A meaningful meta description, ideally 120-160 characters."
 ---
 ```
 
