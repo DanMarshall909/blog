@@ -1,5 +1,7 @@
 {
 	"scripts": {
+		"sync-article-assets": "node scripts/sync-article-assets.mjs",
+		"prebuild": "npm run sync-article-assets",
 		"dev": "astro dev --port 3000",
 		"build": "astro build",
 		"preview": "astro preview",
