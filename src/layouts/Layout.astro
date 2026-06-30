@@ -391,6 +391,32 @@ const backgroundImages = [
     </script>
     <script is:inline>
       (function () {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (prefersReducedMotion.matches) return;
+
+        const cards = document.querySelectorAll('.featured-card, .article-card');
+
+        cards.forEach(function (card) {
+          if (!(card instanceof HTMLElement)) return;
+
+          card.addEventListener('pointermove', function (event) {
+            const rect = card.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width - 0.5;
+            const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+            card.style.setProperty('--card-rotate-x', (y * -5).toFixed(2) + 'deg');
+            card.style.setProperty('--card-rotate-y', (x * 5).toFixed(2) + 'deg');
+          });
+
+          card.addEventListener('pointerleave', function () {
+            card.style.setProperty('--card-rotate-x', '0deg');
+            card.style.setProperty('--card-rotate-y', '0deg');
+          });
+        });
+      })();
+    </script>
+    <script is:inline>
+      (function () {
         const root = document.querySelector('.site-background-slideshow');
         if (!(root instanceof HTMLElement)) return;
 
