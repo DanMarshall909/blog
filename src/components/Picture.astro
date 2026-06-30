@@ -11,8 +11,9 @@ interface Props {
   loading?: 'lazy' | 'eager';
   fetchpriority?: 'high' | 'low' | 'auto';
   sizes?: string;
+  widths?: number[];
 }
-const { src, alt, class: className, loading, fetchpriority, sizes } = Astro.props;
+const { src, alt, class: className, loading, fetchpriority, sizes, widths } = Astro.props;
 const pictureClass = className ? `${className}-picture` : undefined;
 const assetPath = src.startsWith('/articles/') ? `../content${src}` : src;
 const imageModules = import.meta.glob('../content/articles/**/*.{png,jpg,jpeg,webp,avif}', {
@@ -38,4 +39,5 @@ const imageDimensions = publicImagePath && existsSync(publicImagePath)
   loading={loading}
   fetchpriority={fetchpriority}
   sizes={sizes}
+  widths={widths}
 />

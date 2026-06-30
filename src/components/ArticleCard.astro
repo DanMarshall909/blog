@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import { tagHref } from "../utils/tags";
 
 interface Props {
@@ -40,11 +41,25 @@ const articleClass = isFeatured ? "article-card featured-card" : "article-card";
 const articleClassList = collapsible
   ? `${articleClass} collapsible`
   : articleClass;
+const imageModules = import.meta.glob("../content/articles/**/*.{png,jpg,jpeg,webp,avif}", {
+  eager: true,
+  import: "default",
+});
+const assetPath = cardImage.startsWith("/articles/") ? `../content${cardImage}` : undefined;
+const image = assetPath ? imageModules[assetPath] : undefined;
+const optimizedCardImage = image
+  ? (await getImage({
+      src: image,
+      width: isFeatured ? 900 : 640,
+      format: "avif",
+      quality: 62,
+    })).src
+  : cardImage;
 ---
 
 <article
   class={articleClassList}
-  data-card-image={cardImage}
+  data-card-image={optimizedCardImage}
   data-card-image-position={cardImagePosition}
   data-card-image-scale={cardImageScale}
   data-topic-tags={topicTags}
@@ -58,7 +73,7 @@ const articleClassList = collapsible
       <div class="featured-card-copy">
         <h3>
           <>
-            <a href={href}>{title}</a>
+            <span class="card-title">{title}</span>
             <div class="article-card-meta">
               <time datetime={dateTime}>{dateLabel}</time>
             </div>
@@ -70,7 +85,7 @@ const articleClassList = collapsible
       <>
         <h3>
           <>
-            <a href={href}>{title}</a>
+            <span class="card-title">{title}</span>
             <div class="article-card-meta">
               <time datetime={dateTime}>{dateLabel}</time>
             </div>
