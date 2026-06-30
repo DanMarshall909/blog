@@ -24,9 +24,21 @@ git pull --rebase --autostash origin main
 git push origin main
 
 echo "Publishing docs/ to gh-pages..."
-deploy_branch="deploy-gh-pages-$(date '+%Y%m%d%H%M%S')"
-git subtree split --prefix docs -b "$deploy_branch"
-git push origin "$deploy_branch:gh-pages" --force
-git branch -D "$deploy_branch"
+deploy_worktree="$(mktemp -d)"
+git worktree add --detach "$deploy_worktree" origin/gh-pages
+rm -rf "$deploy_worktree/docs"
+mkdir -p "$deploy_worktree/docs"
+cp -a docs/. "$deploy_worktree/docs/"
+(
+  cd "$deploy_worktree"
+  git add -A docs
+  if [[ -n "$(git status --porcelain)" ]]; then
+    git commit -m "Deploy built site $(date '+%Y-%m-%d %H:%M:%S')"
+    git push origin HEAD:gh-pages --force
+  else
+    echo "No gh-pages changes to deploy."
+  fi
+)
+git worktree remove "$deploy_worktree"
 
 echo "Done! Your site should be live at https://blog.danmarshall.dev shortly."

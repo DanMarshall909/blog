@@ -157,7 +157,7 @@ const backgroundImages = [
       </div>
     </aside>
 
-    <header class="header">
+    <header class="header" data-home-link="/">
       <div
         class="site-background-slideshow"
         aria-hidden="true"
@@ -373,6 +373,21 @@ const backgroundImages = [
         localStorage.setItem('theme', next);
         document.documentElement.setAttribute('data-theme', next);
       }
+    </script>
+    <script is:inline>
+      (function () {
+        const header = document.querySelector('.header[data-home-link]');
+        if (!(header instanceof HTMLElement)) return;
+
+        header.addEventListener('click', function (event) {
+          if (!(event.target instanceof Element)) return;
+          if (event.target.closest('a, button, input, select, textarea, summary, [role="button"]')) return;
+
+          const href = header.dataset.homeLink || '/';
+          if (window.location.pathname === href) return;
+          window.location.href = href;
+        });
+      })();
     </script>
     <script is:inline>
       (function () {

@@ -283,6 +283,11 @@ hr {
     overflow: hidden;
     padding: var(--space-2xl) 0 var(--space-xl);
     background: linear-gradient(135deg, var(--color-header-start), var(--color-header-end));
+    cursor: pointer;
+}
+
+.header :is(a, button, input, select, textarea, summary, [role="button"]) {
+    cursor: auto;
 }
 
 .site-background-slideshow {
@@ -314,6 +319,13 @@ hr {
 .site-background-slide.is-active {
     opacity: 0.3;
     transform: scale(var(--site-bg-scale-active, 1.09));
+}
+
+@media (min-width: 1400px) {
+    .site-background-slide {
+        inset: 0;
+        background-size: min(100vw, 110rem) auto;
+    }
 }
 
 .site-background-slideshow::after {
