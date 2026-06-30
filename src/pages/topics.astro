@@ -81,6 +81,8 @@ function formatDate(date: Date): string {
               dateTime={article.data.date.toISOString()}
               dateLabel={formatDate(article.data.date)}
               cardImage={image}
+              cardImagePosition={article.data.cardImagePosition}
+              cardImageScale={article.data.cardImageScale}
               primaryTag={article.data.tags[0]}
               tags={article.data.tags}
               topicTags={articleTags.join(' ')}

@@ -6,8 +6,10 @@ interface Props {
   bodyClass?: string;
   description?: string;
   heroImage?: string;
+  headerImagePosition?: string;
+  headerImageScale?: number;
 }
-const { title, bodyClass, description, heroImage } = Astro.props;
+const { title, bodyClass, description, heroImage, headerImagePosition = 'center', headerImageScale = 1 } = Astro.props;
 const siteTitle = 'Technical Scratches';
 const siteDescription = 'Thoughts on software engineering and life as a developer';
 const siteUrl = 'https://blog.danmarshall.dev';
@@ -19,10 +21,16 @@ const navArticles = (await getCollection('articles'))
 const isArticlePage = bodyClass?.split(/\s+/).includes('article-detail') ?? false;
 
 const backgroundImages = [
-  heroImage,
-  ...navArticles.map((article) => article.data.heroImage),
+  heroImage ? { src: heroImage, position: headerImagePosition, scale: headerImageScale } : undefined,
+  ...navArticles.map((article) => article.data.heroImage
+    ? {
+        src: article.data.heroImage,
+        position: article.data.headerImagePosition ?? article.data.heroImagePosition,
+        scale: article.data.headerImageScale ?? article.data.heroImageScale,
+      }
+    : undefined),
 ]
-  .filter((image): image is string => Boolean(image))
+  .filter((image): image is { src: string; position: string; scale: number } => Boolean(image?.src))
   .slice(0, 12);
 ---
 <!doctype html>
@@ -382,7 +390,17 @@ const backgroundImages = [
           return;
         }
 
-        images = images.filter((image) => typeof image === 'string' && image.trim() !== '');
+        images = images
+          .map((image) => {
+            if (typeof image === 'string') return { src: image, position: 'center' };
+            if (!image || typeof image.src !== 'string') return null;
+            return {
+              src: image.src,
+              position: typeof image.position === 'string' ? image.position : 'center',
+              scale: typeof image.scale === 'number' ? image.scale : 1,
+            };
+          })
+          .filter((image) => image && image.src.trim() !== '');
 
         if (images.length === 0) return;
 
@@ -398,7 +416,10 @@ const backgroundImages = [
         let activeSlideIndex = 0;
 
         function setSlideImage(slide, image) {
-          slide.style.backgroundImage = `url("${image}")`;
+          slide.style.backgroundImage = `url("${image.src}")`;
+          slide.style.backgroundPosition = image.position || 'center';
+          slide.style.setProperty('--site-bg-scale-idle', String(1.04 * image.scale));
+          slide.style.setProperty('--site-bg-scale-active', String(1.09 * image.scale));
         }
 
         function showNextImage() {

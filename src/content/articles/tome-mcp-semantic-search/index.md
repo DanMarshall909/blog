@@ -4,6 +4,7 @@ author: Dan Marshall
 date: "2026-06-24"
 tags: ["AI", "MCP", "semantic search", "local AI", "Python", "developer tools"]
 heroImage: /articles/tome-mcp-semantic-search/cartoon.png
+cardImagePosition: "50% 50%"
 description: "Tome is a Python MCP server for local semantic search over books, long-form documents, and C# source files using Ollama embeddings and LanceDB."
 ---
 

@@ -7,6 +7,8 @@ interface Props {
   dateTime: string;
   dateLabel: string;
   cardImage: string;
+  cardImagePosition?: string;
+  cardImageScale?: number;
   variant?: "default" | "featured";
   primaryTag?: string;
   tags?: string[];
@@ -22,6 +24,8 @@ const {
   dateTime,
   dateLabel,
   cardImage,
+  cardImagePosition = "center",
+  cardImageScale = 1,
   variant = "default",
   primaryTag,
   tags = [],
@@ -41,6 +45,8 @@ const articleClassList = collapsible
 <article
   class={articleClassList}
   data-card-image={cardImage}
+  data-card-image-position={cardImagePosition}
+  data-card-image-scale={cardImageScale}
   data-topic-tags={topicTags}
 >
   <a class="card-link" href={href} aria-label={`Read ${title}`}>
@@ -91,6 +97,14 @@ const articleClassList = collapsible
     card.style.setProperty(
       "--card-bg-image",
       `url("${card.dataset.cardImage}")`,
+    );
+    card.style.setProperty(
+      "--card-bg-position",
+      card.dataset.cardImagePosition || "center",
+    );
+    card.style.setProperty(
+      "--card-bg-scale",
+      card.dataset.cardImageScale || "1",
     );
   });
 

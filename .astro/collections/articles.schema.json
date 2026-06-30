@@ -23,6 +23,28 @@
     "heroImage": {
       "type": "string"
     },
+    "heroImagePosition": {
+      "default": "center",
+      "type": "string"
+    },
+    "heroImageScale": {
+      "default": 1,
+      "type": "number"
+    },
+    "headerImagePosition": {
+      "type": "string"
+    },
+    "headerImageScale": {
+      "type": "number"
+    },
+    "cardImagePosition": {
+      "default": "center",
+      "type": "string"
+    },
+    "cardImageScale": {
+      "default": 1,
+      "type": "number"
+    },
     "description": {
       "type": "string",
       "minLength": 70

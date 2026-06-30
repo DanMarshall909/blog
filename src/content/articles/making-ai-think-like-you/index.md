@@ -5,6 +5,7 @@ date: "2026-04-23"
 tags: ["Claude Code", "AI", "productivity", "developer tools", "meta"]
 description: "How I use Claude Code to keep myself on track — PRDs for scope, pomodoros for pace, rules files so I don't have to hold everything in my head."
 heroImage: /articles/making-ai-think-like-you/cartoon.png
+cardImagePosition: "50% 50%"
 ---
 
 My brain is a drift machine. I start a task, notice something tangential, chase it, come back an hour later unsure what I was doing. PRDs help. Pomodoro helps. Continual feedback helps more.

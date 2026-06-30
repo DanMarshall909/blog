@@ -5,6 +5,7 @@ date: "2026-06-19"
 tags: ["Astro", "resume", "CSS", "Playwright", "developer tools", "static sites"]
 description: "I turned my resume into a versioned, printable, mobile-friendly page that is easier to share and keep current."
 heroImage: /articles/my-resume-is-now-a-static-site-feature/cartoon.png
+cardImagePosition: "50% 50%"
 ---
 
 I did not set out to build resume infrastructure. I just wanted a clean resume link.

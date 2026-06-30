@@ -302,7 +302,7 @@ hr {
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0;
-    transform: scale(1.04);
+    transform: scale(var(--site-bg-scale-idle, 1.04));
     mix-blend-mode: multiply;
     filter:
         grayscale(0.35) saturate(0.55) contrast(1.05) brightness(0.82) blur(0.5px);
@@ -313,7 +313,7 @@ hr {
 
 .site-background-slide.is-active {
     opacity: 0.3;
-    transform: scale(1.09);
+    transform: scale(var(--site-bg-scale-active, 1.09));
 }
 
 .site-background-slideshow::after {
@@ -887,10 +887,12 @@ hr {
     inset: 0;
     z-index: -2;
     background-image: var(--card-bg-image);
-    background-position: center;
+    background-position: var(--card-bg-position, center);
     background-size: cover;
     content: "";
     opacity: var(--card-bg-opacity);
+    transform: scale(var(--card-bg-scale, 1));
+    transform-origin: var(--card-bg-position, center);
 }
 
 .resume-callout::after,
@@ -1399,6 +1401,9 @@ hr {
     height: auto;
     border-radius: var(--border-radius);
     object-fit: contain;
+    object-position: var(--hero-image-position, center);
+    transform: scale(var(--hero-image-scale, 1));
+    transform-origin: var(--hero-image-position, center);
 }
 
 /* For square cropped article images */
@@ -1432,7 +1437,7 @@ body:is(.article-resume, .article-resume-brief) :is(.hero-image-picture, .hero-l
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    object-position: center top;
+    object-position: var(--hero-image-position, center top);
 }
 
 .article .date {

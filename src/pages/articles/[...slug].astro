@@ -42,6 +42,8 @@ const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-')
   bodyClass={pageClass}
   description={article.data.description}
   heroImage={article.data.heroImage}
+  headerImagePosition={article.data.headerImagePosition ?? article.data.heroImagePosition}
+  headerImageScale={article.data.headerImageScale ?? article.data.heroImageScale}
 >
   <Fragment slot="header">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -65,7 +67,11 @@ const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-')
     </div>
   </Fragment>
 
-  <article id="article-start" class={`article${article.data.heroImage ? ' has-hero' : ''}`}>
+  <article
+    id="article-start"
+    class={`article${article.data.heroImage ? ' has-hero' : ''}`}
+    style={`--hero-image-position: ${article.data.heroImagePosition}; --hero-image-scale: ${article.data.heroImageScale};`}
+  >
     <section class="content">
       {article.data.heroImage && (
         <Picture

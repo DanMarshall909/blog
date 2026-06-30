@@ -144,6 +144,8 @@ function getIntroHtml(description: string | undefined, body: string): string {
                 dateTime={featuredArticle.data.date.toISOString()}
                 dateLabel={formatDate(featuredArticle.data.date)}
                 cardImage={image}
+                cardImagePosition={featuredArticle.data.cardImagePosition}
+                cardImageScale={featuredArticle.data.cardImageScale}
                 primaryTag={primaryTag}
                 summary={intro}
               />
@@ -162,6 +164,8 @@ function getIntroHtml(description: string | undefined, body: string): string {
                     dateTime={resumeArticle.data.date.toISOString()}
                     dateLabel={formatDate(resumeArticle.data.date)}
                     cardImage={resumeImage}
+                    cardImagePosition={resumeArticle.data.cardImagePosition}
+                    cardImageScale={resumeArticle.data.cardImageScale}
                     primaryTag={resumeArticle.data.tags[0]}
                     tags={resumeArticle.data.tags}
                     summary={resumeIntro}
@@ -208,6 +212,8 @@ function getIntroHtml(description: string | undefined, body: string): string {
                 dateTime={article.data.date.toISOString()}
                 dateLabel={formatDate(article.data.date)}
                 cardImage={image}
+                cardImagePosition={article.data.cardImagePosition}
+                cardImageScale={article.data.cardImageScale}
                 primaryTag={primaryTag}
                 tags={article.data.tags}
                 summary={intro}

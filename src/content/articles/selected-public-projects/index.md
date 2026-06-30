@@ -4,6 +4,7 @@ author: Dan Marshall
 date: "2026-06-24"
 tags: ["portfolio", "AI", "developer tools", "C#", "Python", "Rust", "frontend", "Godot", "VR"]
 heroImage: /articles/selected-public-projects/cartoon.png
+cardImagePosition: "50% 50%"
 description: "A short portfolio of public projects covering AI tooling, semantic search, C# engineering, frontend work, VR, Rust, and local-LLM experiments."
 ---
 

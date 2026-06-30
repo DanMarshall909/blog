@@ -5,6 +5,7 @@ date: "2026-04-21"
 tags: ["Claude Code", "AI", "Cloudflare", "automation", "developer tools", "LinkedIn"]
 description: "One /blogpost command: Claude drafts the article, generates cartoon illustrations with Cloudflare's free AI tier, previews in the browser, publishes to GitHub Pages, and fires off a LinkedIn post — all without leaving the terminal."
 heroImage: /articles/ai-blog-pipeline/cartoon.png
+cardImagePosition: "50% 50%"
 ---
 
 Today I built a `/blogpost` skill for Claude Code that takes an idea and handles everything through to a live post with a cartoon illustration and a LinkedIn update.

@@ -6,6 +6,7 @@ tags: ["software-development", "maintainability", "teamwork"]
 description: "Boring code is not a failure of imagination. It is often the most maintainable choice, with cleverness reserved for experiments that earn their cost."
 template: article.pug
 heroImage: /articles/boring-as-a-feature/hero.png
+cardImagePosition: "50% 38%"
 ---
 
 Sometimes the cleverest thing you can do in a codebase is choose the boring option.
