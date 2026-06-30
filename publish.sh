@@ -23,7 +23,10 @@ echo "Pushing main..."
 git pull --rebase --autostash origin main
 git push origin main
 
-echo "Syncing gh-pages to main..."
-git push origin main:gh-pages --force
+echo "Publishing docs/ to gh-pages..."
+deploy_branch="deploy-gh-pages-$(date '+%Y%m%d%H%M%S')"
+git subtree split --prefix docs -b "$deploy_branch"
+git push origin "$deploy_branch:gh-pages" --force
+git branch -D "$deploy_branch"
 
 echo "Done! Your site should be live at https://blog.danmarshall.dev shortly."
