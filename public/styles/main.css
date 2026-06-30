@@ -2288,7 +2288,7 @@ footer .copy {
         float: none;
         width: min(54vw, 13rem);
         aspect-ratio: 1 / 1;
-        margin: 0 auto var(--space-lg);
+        margin: var(--space-md) auto var(--space-lg);
         border-radius: 50%;
         shape-outside: none;
     }
@@ -2372,7 +2372,7 @@ footer .copy {
     body:is(.article-resume, .article-resume-brief) :is(.hero-image-picture, .hero-link) {
         width: min(75vw, 18rem);
         aspect-ratio: 1 / 1;
-        margin: 0 auto var(--space-lg);
+        margin: var(--space-md) auto var(--space-lg);
         border-radius: 50%;
         shape-outside: none;
     }
