@@ -5,7 +5,7 @@ date: 2026-06-19
 author: "Dan Marshall"
 tags: [resume, career, fullstack, dotnet, csharp, azure, ai, testing, microservices]
 heroImage: /articles/resume/profile-alpha-trimmed.png
-heroImagePosition: "center top"
+heroImagePosition: "0.5rem 0.5rem"
 heroImageScale: 1
 headerImagePosition: "50% 15%"
 headerImageScale: 1.12

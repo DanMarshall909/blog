@@ -5,7 +5,7 @@ date: 2026-06-19
 author: "Dan Marshall"
 tags: [resume, career, fullstack, dotnet, ai]
 heroImage: /articles/resume/profile-alpha-trimmed.png
-heroImagePosition: "center top"
+heroImagePosition: "58% top"
 heroImageScale: 1
 headerImagePosition: "50% 15%"
 headerImageScale: 1.12

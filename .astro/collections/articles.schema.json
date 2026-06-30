@@ -23,6 +23,10 @@
     "heroImage": {
       "type": "string"
     },
+    "heroImageCrop": {
+      "default": false,
+      "type": "boolean"
+    },
     "heroImagePosition": {
       "default": "center",
       "type": "string"

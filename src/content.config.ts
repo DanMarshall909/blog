@@ -9,6 +9,7 @@ const articles = defineCollection({
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
     heroImage: z.string().optional(),
+    heroImageCrop: z.boolean().default(false),
     heroImagePosition: z.string().default('center'),
     heroImageScale: z.number().default(1),
     headerImagePosition: z.string().optional(),

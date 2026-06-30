@@ -69,7 +69,7 @@ const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-')
 
   <article
     id="article-start"
-    class={`article${article.data.heroImage ? ' has-hero' : ''}`}
+    class={`article${article.data.heroImage ? ' has-hero' : ''}${article.data.heroImageCrop ? ' hero-image-cropped' : ''}`}
     style={`--hero-image-position: ${article.data.heroImagePosition}; --hero-image-scale: ${article.data.heroImageScale};`}
   >
     <section class="content">
