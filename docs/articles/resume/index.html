@@ -1,0 +1,556 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Resume - Technical Scratches</title><meta name="description" content="Senior full-stack engineer with 11+ years of experience in .NET, JVM, microservices, production AI systems, AI-assisted delivery, and developer tooling."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript><link rel="stylesheet" href="/styles/main.css"><script>
+      (function() {
+        const getTheme = () => localStorage.getItem('theme') || 'light';
+        const setTheme = (theme) => {
+          localStorage.setItem('theme', theme);
+          document.documentElement.setAttribute('data-theme', theme);
+        };
+        setTheme(getTheme());
+      })();
+    </script></head> <body class="article-detail article-resume"> <aside class="contact-topbar" aria-label="Contact Dan Marshall"> <a class="utility-icon" href="mailto:danmarshall909@gmail.com" aria-label="Email Dan Marshall" data-tooltip="Send me an email"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <rect x="3" y="5" width="18" height="14" rx="2"></rect> <path d="m3 7 9 6 9-6"></path> </svg> </a> <a class="utility-icon" href="https://www.linkedin.com/in/developerdan/" aria-label="Open Dan Marshall on LinkedIn" data-tooltip="View my LinkedIn profile"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"> <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 8h4V23h-4V8Zm7.5 0h3.83v2.05h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.14V23h-4v-7.85c0-1.87-.03-4.28-2.61-4.28-2.61 0-3.01 2.04-3.01 4.15V23h-4V8Z"></path> </svg> </a> <a class="utility-icon" href="https://github.com/DanMarshall909" aria-label="Open Dan Marshall on GitHub" data-tooltip="View my GitHub profile"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"> <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18A10.99 10.99 0 0 1 12 6.06c.98 0 1.96.13 2.88.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.14c0 .31.21.67.8.56A11.52 11.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"></path> </svg> </a> </aside> <!-- Desktop top bar: back link only — hidden on mobile --> <div class="desktop-topbar"> <a class="desktop-back" href="/" aria-label="Back to home" data-tooltip="Back to the homepage"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> </a> <button class="pdf-button" type="button" onclick="window.print()" aria-label="Create PDF from this article" data-tooltip="Print or save this page as PDF"> <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <polyline points="6 9 6 2 18 2 18 9"></polyline> <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path> <rect x="6" y="14" width="12" height="8"></rect> </svg> </button> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" data-tooltip="Switch light or dark theme"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> </div> <!-- Mobile hamburger — hidden on desktop --> <button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu" data-tooltip="Open site menu"> <span></span> <span></span> <span></span> </button> <!-- Mobile drawer --> <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div> <aside class="drawer" id="drawer"> <div class="drawer-header"> <a class="drawer-home" href="/" data-tooltip="Back to the homepage"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+Home
+</a> <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme" data-tooltip="Switch light or dark theme"> <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg> <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg> </button> <button class="drawer-close" onclick="closeDrawer()" aria-label="Close" data-tooltip="Close the menu">✕</button> </div> <div class="drawer-body" id="drawer-body"> <nav class="drawer-primary-nav" aria-label="Primary navigation"> <a href="/" data-tooltip="Latest writing and featured posts">Writing</a> <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a> <a href="/archive/" data-tooltip="Browse every article">Archive</a> <a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a> <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Email Dan</a> <a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile">LinkedIn</a> <a href="https://github.com/DanMarshall909" data-tooltip="View my GitHub profile">GitHub</a> <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a> </nav>  </div> </aside> <header class="header"> <div class="site-background-slideshow" aria-hidden="true" data-background-images="[{&quot;src&quot;:&quot;/articles/resume/profile-alpha-trimmed.png&quot;,&quot;position&quot;:&quot;50% 15%&quot;,&quot;scale&quot;:1.12},{&quot;src&quot;:&quot;/articles/boring-as-a-feature/hero.png&quot;,&quot;position&quot;:&quot;center&quot;,&quot;scale&quot;:1},{&quot;src&quot;:&quot;/articles/astro-and-how-ive-customised-it/astro.png&quot;,&quot;position&quot;:&quot;center&quot;,&quot;scale&quot;:1},{&quot;src&quot;:&quot;/articles/selected-public-projects/cartoon.png&quot;,&quot;position&quot;:&quot;center&quot;,&quot;scale&quot;:1},{&quot;src&quot;:&quot;/articles/tome-mcp-semantic-search/cartoon.png&quot;,&quot;position&quot;:&quot;center&quot;,&quot;scale&quot;:1},{&quot;src&quot;:&quot;/articles/ai-assisted-job-search/cartoon.jpg&quot;,&quot;position&quot;:&quot;center&quot;,&quot;scale&quot;:1},{&quot;src&quot;:&quot;/articles/ai-needs-guardrails-not-rubber-stamps/rubber_stamp.png&quot;,&quot;position&quot;:&quot;center&quot;,&quot;scale&quot;:1},{&quot;src&quot;:&quot;/articles/my-resume-is-now-a-static-site-feature/cartoon.png&quot;,&quot;position&quot;:&quot;center&quot;,&quot;scale&quot;:1},{&quot;src&quot;:&quot;/articles/resume/profile-alpha-trimmed.png&quot;,&quot;position&quot;:&quot;50% 15%&quot;,&quot;scale&quot;:1.12},{&quot;src&quot;:&quot;/articles/resume/profile-alpha-trimmed.png&quot;,&quot;position&quot;:&quot;50% 15%&quot;,&quot;scale&quot;:1.12},{&quot;src&quot;:&quot;/articles/making-ai-think-like-you/cartoon.png&quot;,&quot;position&quot;:&quot;center&quot;,&quot;scale&quot;:1},{&quot;src&quot;:&quot;/articles/ai-blog-pipeline/cartoon.png&quot;,&quot;position&quot;:&quot;center&quot;,&quot;scale&quot;:1}]"> <div class="site-background-slide site-background-slide-a"></div> <div class="site-background-slide site-background-slide-b"></div> </div> <div class="content-wrap"> <nav class="site-nav" aria-label="Primary navigation"> <a href="/" data-tooltip="Latest writing and featured posts">Writing</a> <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a> <a href="/archive/" data-tooltip="Browse every article">Archive</a> <a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a> <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a> <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Contact</a> </nav>  <nav class="breadcrumb" aria-label="Breadcrumb"> <a href="/">Writing</a> <span aria-hidden="true">/</span> <span>Resume</span> </nav> <div class="title-with-image"> <h1>Resume</h1> </div> <div class="article-meta"> <p class="publish-date">19 June 2026</p> <p class="reading-time">8 min read</p> <ul class="tags" aria-label="Article topics"> <li><a class="tag" href="/topics/?tag=resume">resume</a></li><li><a class="tag" href="/topics/?tag=career">career</a></li><li><a class="tag" href="/topics/?tag=fullstack">fullstack</a></li><li><a class="tag" href="/topics/?tag=dotnet">dotnet</a></li><li><a class="tag" href="/topics/?tag=csharp">csharp</a></li><li><a class="tag" href="/topics/?tag=azure">azure</a></li><li><a class="tag" href="/topics/?tag=ai">ai</a></li><li><a class="tag" href="/topics/?tag=testing">testing</a></li><li><a class="tag" href="/topics/?tag=microservices">microservices</a></li> </ul> </div>  </div> </header> <div id="content"> <div class="content-wrap">   <article id="article-start" class="article has-hero" style="--hero-image-position: center top; --hero-image-scale: 1;"> <section class="content"> <picture class="hero-image-picture"> <source srcset="/_astro/profile-alpha-trimmed.DCsq1__4_Z1QA5kE.avif" type="image/avif" sizes="(max-width: 768px) 100vw, 33vw"><source srcset="/_astro/profile-alpha-trimmed.DCsq1__4_1AFtzK.webp" type="image/webp" sizes="(max-width: 768px) 100vw, 33vw">  <img src="/_astro/profile-alpha-trimmed.DCsq1__4_Z1CohwJ.png" alt="Resume" loading="eager" fetchpriority="high" sizes="(max-width: 768px) 100vw, 33vw" decoding="async" width="1141" height="1247" class="hero-image"> </picture> <h1 id="dan-marshall">Dan Marshall</h1>
+<p>Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, production AI integration, AI-assisted delivery systems, and developer tooling. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.</p>
+<p><strong>B.Sc. Mathematics and Computer Science</strong> — University of South Africa (UNISA)</p>
+<p><a href="mailto:danmarshall909@gmail.com">danmarshall909@gmail.com</a> · <a href="https://github.com/DanMarshall909">github.com/DanMarshall909</a> · <a href="https://www.linkedin.com/in/developerdan">linkedin.com/in/developerdan</a></p>
+<p><a href="/articles/resume-brief/">One-page resume</a> available for a concise PDF-friendly version.</p>
+<p><a href="/articles/selected-public-projects/">Selected public projects</a> are available as a short portfolio reference for technical reviewers.</p>
+<hr>
+<h2 id="skills">Skills</h2>
+<h3 id="back-end-development">Back-end Development</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">Area</th><th align="left">Details</th></tr></thead><tbody><tr><td align="left"><strong>C# / .NET</strong></td><td align="left">Expert knowledge, .NET Framework 3.5 through .NET Core 9</td></tr><tr><td align="left"><strong>JVM Stack</strong></td><td align="left">Spring Boot, Kotlin, Java</td></tr><tr><td align="left"><strong>Architecture</strong></td><td align="left">Microservices, event-driven architecture, DI, CQRS, DDD, Clean Architecture</td></tr><tr><td align="left"><strong>Azure</strong></td><td align="left">App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra</td></tr><tr><td align="left"><strong>AWS</strong></td><td align="left">Bedrock, ECS, SQS, S3</td></tr><tr><td align="left"><strong>Testing</strong></td><td align="left">NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, TDD, mutation and integration testing</td></tr><tr><td align="left"><strong>API Development</strong></td><td align="left">ASP.NET WebAPI, FastEndpoints, GraphQL, Spring Boot</td></tr><tr><td align="left"><strong>Messaging</strong></td><td align="left">MassTransit with Azure Service Bus and event streaming</td></tr><tr><td align="left"><strong>Data Access</strong></td><td align="left">Entity Framework Core, Dapper, raw SQL</td></tr><tr><td align="left"><strong>Databases</strong></td><td align="left">SQL Server, PostgreSQL, MySQL</td></tr><tr><td align="left"><strong>Security</strong></td><td align="left">ASP.NET Identity, OAuth2, JWT, Microsoft.Identity, Azure AD / Entra ID</td></tr><tr><td align="left"><strong>Libraries</strong></td><td align="left">MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.NET, OpenAPI</td></tr><tr><td align="left"><strong>DevOps</strong></td><td align="left">CI/CD with Azure DevOps, TeamCity, Octopus Deploy, GitHub Pages, PowerShell, Docker</td></tr><tr><td align="left"><strong>Observability</strong></td><td align="left">OpenTelemetry, Seq, OpenSearch, Application Insights SDK, Serilog Sinks</td></tr><tr><td align="left"><strong>Static Sites</strong></td><td align="left">Astro, content collections, RSS, metadata validation, image optimisation</td></tr><tr><td align="left"><strong>Developer Tooling</strong></td><td align="left">Roslyn semantic analysis/refactoring, CLI design, backlog automation, scripted workflows</td></tr></tbody></table>
+<h3 id="aiml-integration">AI/ML Integration</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">Area</th><th align="left">Details</th></tr></thead><tbody><tr><td align="left"><strong>Production AI Systems</strong></td><td align="left">OpenAI Platform, Claude API, LangChain4j, AWS Bedrock, prompt engineering</td></tr><tr><td align="left"><strong>Applications</strong></td><td align="left">Automation, multimodal analysis, guardrails, agentic coding workflows, technical content pipelines</td></tr><tr><td align="left"><strong>Platforms</strong></td><td align="left">AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers, llama.cpp-compatible runtimes</td></tr><tr><td align="left"><strong>Developer Tooling</strong></td><td align="left">Claude Code skills, MCP integration, Codex workflows, PRD backlog automation, prompt and workflow optimisation</td></tr><tr><td align="left"><strong>Media Generation</strong></td><td align="left">ComfyUI, Flux-based image generation, local AI asset pipelines</td></tr></tbody></table>
+<h3 id="front-end-development">Front-end Development</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">Area</th><th align="left">Details</th></tr></thead><tbody><tr><td align="left"><strong>Frameworks</strong></td><td align="left">TypeScript/JavaScript with React, Angular, Astro, Vite, Vitest, and ASP.NET MVC</td></tr><tr><td align="left"><strong>UI Design</strong></td><td align="left">CSS, Tailwind CSS, Material UI</td></tr></tbody></table>
+<h3 id="general">General</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">Area</th><th align="left">Details</th></tr></thead><tbody><tr><td align="left"><strong>Version Control</strong></td><td align="left">Git, GitHub, Bitbucket, Azure Repos</td></tr><tr><td align="left"><strong>Agile Tools</strong></td><td align="left">Jira, Confluence, Azure DevOps Boards, Teams, Slack</td></tr><tr><td align="left"><strong>Practices</strong></td><td align="left">TDD, pair/mob programming, code review, mentorship</td></tr><tr><td align="left"><strong>Operating Systems</strong></td><td align="left">macOS, Windows, Linux, iOS, Android</td></tr></tbody></table>
+<hr>
+<h2 id="recent-projects-and-achievements">Recent Projects and Achievements</h2>
+<ul>
+<li>Built an AI-assisted delivery system around Claude Code/Codex: reusable skills, project memory, PRD backlog management, TDD execution, mutation testing, Jira/Bitbucket workflow automation, and post-session reflection.</li>
+<li>Built a Roslyn-based C# refactoring CLI for semantic solution-wide rename, move, reference lookup, dependency analysis, duplicate detection, and safe refactoring across legacy ProjectX solutions.</li>
+<li>Drove technical analysis for a pre-launch tour booking platform, including Hero API source-of-truth decisions, PII minimisation, Stripe/Hero payment flow diagnosis, EF migration constraints, and Jira/PR delivery workflow.</li>
+<li>Built an AI-assisted publishing workflow for this Astro blog that drafts articles, generates local illustrations, opens browser previews, publishes to GitHub Pages, and prepares LinkedIn posts from a single command.</li>
+<li>Published technical write-ups on local LLM inference, Claude Code/MCP context optimisation, AI workflow design, and financial rounding correctness.</li>
+<li>Created a Windows setup guide and installer script for running a Bonsai 8B 1-bit LLM locally with CUDA and an OpenAI-compatible API.</li>
+<li>Improved this site with AVIF/WebP image generation, deferred font loading, Shiki syntax highlighting, RSS support, and Playwright coverage for meta descriptions.</li>
+</ul>
+<hr>
+<h2 id="employment">Employment</h2>
+<h3 id="independent--contract--ai-assisted-software-delivery-and-platform-engineering">Independent / Contract — AI-assisted software delivery and platform engineering</h3>
+<p><strong>Senior Software Engineer / AI Workflow Engineer</strong> | March 2026 – Present</p>
+<ul>
+<li>Built and maintained a personal AI engineering system using Claude Code and Codex skills, project memory, reusable agents, and scripted workflows to keep delivery scoped, test-led, and auditable.</li>
+<li>Created PRD backlog automation for story intake, acceptance criteria expansion, execution tracking, completion, parking, and visualisation.</li>
+<li>Developed a Roslyn-powered C# refactoring CLI to support semantic rename, move, reference lookup, structural analysis, and safe cross-project refactoring in complex .NET solutions.</li>
+<li>Led technical delivery and risk reduction for a pre-launch tour booking platform, including Hero API integration strategy, PII minimisation, Stripe payment reconciliation, Azure image storage decisions, and Jira/Bitbucket workflow.</li>
+<li>Formalised TDD, mutation testing, code review, and refactoring workflows into reusable skills and agents for consistent AI-assisted engineering.</li>
+</ul>
+<hr>
+<h3 id="reapit--reapitcom">Reapit — <a href="https://www.reapit.com">reapit.com</a></h3>
+<p><strong>Senior AI Engineer</strong> | September 2025 – February 2026</p>
+<ul>
+<li>Workshopped, built, and deployed an AI-driven property inspection system using AWS Bedrock, generating structured assessment reports constrained by business rules.</li>
+<li>Forked the LangChain4j framework to add Bedrock guardrail support when unavailable upstream. Modular architecture enabled a seamless swap to the official implementation within one day when released.</li>
+<li>Optimised LLM costs through strategic model selection balancing accuracy, features, performance, and token usage.</li>
+<li>Advised cross-functional teams on practical AI use cases.</li>
+<li>Self-directed adoption of the Kotlin/Spring Boot/AWS ecosystem, delivering production features while supporting the team with JVM implementation patterns.</li>
+</ul>
+<hr>
+<h3 id="ract-royal-automobile-club-of-tasmania--ractcomau">RACT (Royal Automobile Club of Tasmania) — <a href="https://www.ract.com.au">ract.com.au</a></h3>
+<p><strong>Senior Software Engineer – Back-end</strong> | June 2024 – July 2025</p>
+<ul>
+<li>Applied Clean Architecture and DDD to enhance testability, scalability, and code clarity.</li>
+<li>Involved in pilot program to develop AI coding rulesets and best practices.</li>
+<li>Migrated and modernised core components from .NET Framework 4.7.2 to .NET 9.</li>
+<li>Built resilient microservices using MassTransit, WebAPI, GraphQL, and SQL Server.</li>
+<li>Collaborated with cross-functional teams to deliver scalable, well-tested features aligned with business requirements.</li>
+</ul>
+<hr>
+<h3 id="national-grower-register--ngrcomau">National Grower Register — <a href="https://www.ngr.com.au">ngr.com.au</a></h3>
+<p><strong>Senior Full-Stack Engineer</strong> | November 2023 – May 2024</p>
+<ul>
+<li>Co-developed a modular online form solution (Flexidocs) using Clean Architecture and DDD, replacing an outdated system.</li>
+<li>Designed modern functional React 18 components with TypeScript and Tailwind CSS.</li>
+<li>Provided guidance on C# programming, OOP, AI tools, and testing best practices.</li>
+<li>Researched and selected sustainable technologies to support long-term goals.</li>
+<li>Improved legacy code with unit test coverage, enabling safe refactoring.</li>
+<li>Contributed to technical documentation and Agile processes.</li>
+<li>Mentored junior staff.</li>
+</ul>
+<hr>
+<h3 id="cloudmonitor--cloudmonitorai">CloudMonitor — <a href="https://www.cloudmonitor.ai">cloudmonitor.ai</a></h3>
+<p><strong>Lead Azure / Back-end Engineer</strong> | June 2023 – November 2023</p>
+<ul>
+<li>Conceptualised, developed, and maintained features running on a serverless platform.</li>
+<li>Promoted TDD, SOLID principles, Clean Architecture, and peer programming.</li>
+<li>Introduced Agile processes, leading morning standups and mentoring junior developers.</li>
+<li>Azure DevOps pipeline maintenance and troubleshooting.</li>
+<li>Introduced Entity Framework, OpenAPI, xUnit, and JetBrains Rider.</li>
+<li>Presented company-wide tech talks and engaged with external stakeholders.</li>
+</ul>
+<hr>
+<h3 id="vald--valdcom">VALD — <a href="https://www.vald.com">vald.com</a></h3>
+<p><strong>Software Engineer – Back-end</strong> | January 2023 – May 2023</p>
+<ul>
+<li>Maintained, refactored, and contributed to various legacy REST APIs and microservices.</li>
+<li>Contributed to the integration testing framework.</li>
+<li>Promoted TDD and peer programming.</li>
+<li>Chaired and contributed to various Agile ceremonies.</li>
+</ul>
+<hr>
+<h3 id="situ-systems--situsystemscom">Situ Systems — <a href="https://www.situsystems.com">situsystems.com</a></h3>
+<p><strong>Senior Software Engineer – Full-Stack</strong> | November 2021 – October 2022</p>
+<ul>
+<li>Authored numerous front-end and back-end features.</li>
+<li>Substantially increased test coverage and improved testing methodologies.</li>
+<li>Tuned SQL queries, dramatically improving performance in critical reports.</li>
+<li>Used Pulumi to automate deployment of infrastructure.</li>
+<li>Implemented CI workflows in Azure DevOps.</li>
+<li>Contributed to internal development tools.</li>
+</ul>
+<hr>
+<h3 id="hub24-limited--hub24comau">HUB24 Limited — <a href="https://www.hub24.com.au">hub24.com.au</a></h3>
+<p><strong>Data and Full-Stack Engineer</strong> | December 2019 – November 2021</p>
+<ul>
+<li>Authored a sophisticated and successful system for cleaning, transforming, and validating fund transfers between superannuation funds.</li>
+<li>Maintained strong working relationships with DBAs, architects, BAs, clients (e.g. Bank of New York), and senior management.</li>
+<li>Provided emergency on-call support across the organisation and managed client infrastructure, triaging and fixing or escalating issues to meet strict SLAs.</li>
+<li>Updated legacy web applications to deploy using Azure Pipelines.</li>
+<li>Championed TDD and automated integration testing.</li>
+<li>Authored, maintained, and supported numerous APIs and ETL projects.</li>
+</ul>
+<hr>
+<h3 id="chandler-personalised-communications--chandlercomau">Chandler Personalised Communications — <a href="https://www.chandler.com.au">chandler.com.au</a></h3>
+<p><strong>Data and Full-Stack Engineer</strong> | March 2016 – December 2019</p>
+<ul>
+<li>Worked within an ISO 27001 certified organisation meeting strict security standards.</li>
+<li>Built and maintained web applications servicing government, public utility, and financial sectors.</li>
+<li>Web design using ASP.NET, Bootstrap, CSS, jQuery, and JavaScript.</li>
+<li>Database design in Azure SQL Server.</li>
+<li>Authored SSIS ETL packages to cleanse and process superannuation member data for web, print, and email campaigns.</li>
+<li>Liaised with technical and non-technical stakeholders to develop bespoke solutions.</li>
+</ul>
+<hr>
+<h3 id="worldsmart-pos-solutions--worldsmartcomau">WorldSmart POS Solutions — <a href="https://www.worldsmart.com.au">worldsmart.com.au</a></h3>
+<p><strong>Software Engineer, QA and Support</strong> | February 2011 – February 2016</p>
+<ul>
+<li>Developed and maintained enterprise software for retail groups.</li>
+<li>Integrated financial, CRM, and stock modules with MYOB.</li>
+<li>Provided QA via automated scripting and manual testing.</li>
+<li>Authored technical and end-user documentation and provided internal training.</li>
+<li>Maintained internal support utilities and automated scripts.</li>
+<li>Installed and supported Point of Sale hardware and software.</li>
+</ul>
+<hr>
+<h2 id="references">References</h2>
+<p>Available on request.</p>
+<blockquote>
+<p><em>“Dan is an absolute pleasure to work with and I would highly recommend him for any full-stack web development position. We worked together for just under a year and during that time Dan was always friendly, professional and went above and beyond when implementing code and designing systems. He has a keen eye for where things can be improved and is always looking to find the optimal solution to any problem he faces. He writes clean, well-structured code that is easy to maintain. He takes advice and constructive criticism well and brings a positive attitude to every meeting. Dan would be an invaluable addition to any software team.”</em></p>
+<p>— <strong>Alistair Doulin</strong>, CTO, Situ Systems Pty Ltd</p>
+</blockquote> </section> </article>  <script>
+    (function () {
+      if (window.location.hash) return;
+      if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+      var navigationEntry = performance.getEntriesByType('navigation')[0];
+      if (navigationEntry && navigationEntry.type === 'back_forward') return;
+
+      function scrollToArticleStart() {
+        var articleStart = document.getElementById('article-start');
+        if (!articleStart) return;
+        articleStart.scrollIntoView({ block: 'start', inline: 'nearest' });
+      }
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(scrollToArticleStart);
+      });
+
+      window.addEventListener('load', scrollToArticleStart, { once: true });
+    })();
+  </script>  </div> </div> <footer> <div class="content-wrap">  <div class="nav"> <a href="/">&laquo; Full blog</a> </div>  <section class="about"> <p>Dan Marshall's blog</p> </section> <section class="copy"> <p>&copy; 2026 Dan Marshall</p> </section> </div> </footer> <script>
+      // Drawer
+      function openDrawer() {
+        document.getElementById('drawer').classList.add('drawer-open');
+        document.getElementById('drawer-overlay').classList.add('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+      }
+
+      function closeDrawer() {
+        document.getElementById('drawer').classList.remove('drawer-open');
+        document.getElementById('drawer-overlay').classList.remove('drawer-overlay-visible');
+        document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+      }
+
+      // Table of contents — article pages only
+      // Script is is:inline at bottom of body — DOM is already available, no need for DOMContentLoaded
+      (function() {
+        if (!document.body.classList.contains('article-detail')) return;
+
+        var content = document.querySelector('section.content');
+        if (!content) return;
+
+        var longCodeBlocks = [];
+        var longCodeThreshold = 14;
+
+        function getCodeLineCount(pre) {
+          var shikiLines = pre.querySelectorAll('.line');
+          if (shikiLines.length) return shikiLines.length;
+
+          var text = pre.textContent || '';
+          var lines = text.split(/\r\n|\r|\n/);
+          if (lines.length > 1 && lines[lines.length - 1] === '') lines.pop();
+          return lines.length;
+        }
+
+        function setCodeToggleLabel(summary, details) {
+          var lines = details.getAttribute('data-code-lines');
+          summary.textContent = (details.open ? 'Hide code' : 'Show code') + ' (' + lines + ' lines)';
+        }
+
+        content.querySelectorAll('pre').forEach(function(pre) {
+          if (pre.closest('.code-disclosure')) return;
+
+          var lineCount = getCodeLineCount(pre);
+          if (lineCount <= longCodeThreshold) return;
+
+          var details = document.createElement('details');
+          details.className = 'code-disclosure';
+          details.setAttribute('data-code-lines', String(lineCount));
+
+          var summary = document.createElement('summary');
+          summary.className = 'code-disclosure-summary';
+          details.appendChild(summary);
+
+          pre.parentNode.insertBefore(details, pre);
+          details.appendChild(pre);
+          setCodeToggleLabel(summary, details);
+
+          details.addEventListener('toggle', function() {
+            setCodeToggleLabel(summary, details);
+          });
+
+          longCodeBlocks.push(details);
+        });
+
+        if (longCodeBlocks.length) {
+          var printOpenedBlocks = [];
+          window.addEventListener('beforeprint', function() {
+            printOpenedBlocks = longCodeBlocks.filter(function(details) { return !details.open; });
+            printOpenedBlocks.forEach(function(details) { details.open = true; });
+          });
+          window.addEventListener('afterprint', function() {
+            printOpenedBlocks.forEach(function(details) { details.open = false; });
+            printOpenedBlocks = [];
+          });
+        }
+
+        var headings = content.querySelectorAll('h2, h3');
+        if (headings.length < 2) return;
+
+        function slugify(text) {
+          return text.trim()
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-{2,}/g, '-');
+        }
+
+        var usedIds = {};
+        headings.forEach(function(h) {
+          if (!h.id) {
+            var base = slugify(h.textContent);
+            var id = base;
+            var n = 2;
+            while (usedIds[id]) { id = base + '-' + n++; }
+            h.id = id;
+          }
+          usedIds[h.id] = true;
+        });
+
+        var nav = document.createElement('nav');
+        nav.className = 'toc';
+        nav.setAttribute('aria-label', 'Table of contents');
+
+        var titleEl = document.createElement('div');
+        titleEl.className = 'toc-title';
+        titleEl.innerHTML = '<span>On this page</span>';
+        nav.appendChild(titleEl);
+
+        var list = document.createElement('ul');
+        list.className = 'toc-list';
+
+        headings.forEach(function(h) {
+          var li = document.createElement('li');
+          li.className = 'toc-item toc-' + h.tagName.toLowerCase();
+          var a = document.createElement('a');
+          a.href = '#' + h.id;
+          a.className = 'toc-link';
+          a.textContent = h.textContent;
+          a.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById(h.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.pushState(null, null, '#' + h.id);
+            closeDrawer();
+          });
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+
+        nav.appendChild(list);
+
+        var hamburger = document.getElementById('hamburger');
+        var isMobile = hamburger && window.getComputedStyle(hamburger).display !== 'none';
+
+        if (isMobile) {
+          // Mobile: put TOC inside the drawer
+          var drawerBody = document.getElementById('drawer-body');
+          if (drawerBody) drawerBody.appendChild(nav);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector('article.article');
+          if (!article) return;
+          article.parentElement.classList.add('article-with-toc');
+          article.parentElement.insertBefore(nav, article);
+        }
+
+        // Highlight active heading via IntersectionObserver
+        var tocLinks = [].slice.call(nav.querySelectorAll('.toc-link'));
+        var activeLink = null;
+
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var href = '#' + entry.target.id;
+              if (activeLink) activeLink.classList.remove('toc-active');
+              activeLink = tocLinks.find(function(l) { return l.getAttribute('href') === href; }) || null;
+              if (activeLink) activeLink.classList.add('toc-active');
+            }
+          });
+        }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+        headings.forEach(function(h) { observer.observe(h); });
+      })();
+    </script> <script>
+      function toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        document.documentElement.setAttribute('data-theme', next);
+      }
+    </script> <script>
+      (function () {
+        const root = document.querySelector('.site-background-slideshow');
+        if (!(root instanceof HTMLElement)) return;
+
+        const rawImages = root.dataset.backgroundImages;
+        if (!rawImages) return;
+
+        let images = [];
+
+        try {
+          images = JSON.parse(rawImages);
+        } catch {
+          return;
+        }
+
+        images = images
+          .map((image) => {
+            if (typeof image === 'string') return { src: image, position: 'center' };
+            if (!image || typeof image.src !== 'string') return null;
+            return {
+              src: image.src,
+              position: typeof image.position === 'string' ? image.position : 'center',
+              scale: typeof image.scale === 'number' ? image.scale : 1,
+            };
+          })
+          .filter((image) => image && image.src.trim() !== '');
+
+        if (images.length === 0) return;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const slides = [
+          root.querySelector('.site-background-slide-a'),
+          root.querySelector('.site-background-slide-b'),
+        ].filter((slide) => slide instanceof HTMLElement);
+
+        if (slides.length < 2) return;
+
+        let imageIndex = 0;
+        let activeSlideIndex = 0;
+
+        function setSlideImage(slide, image) {
+          slide.style.backgroundImage = `url("${image.src}")`;
+          slide.style.backgroundPosition = image.position || 'center';
+          slide.style.setProperty('--site-bg-scale-idle', String(1.04 * image.scale));
+          slide.style.setProperty('--site-bg-scale-active', String(1.09 * image.scale));
+        }
+
+        function showNextImage() {
+          const activeSlide = slides[activeSlideIndex];
+          const inactiveSlide = slides[1 - activeSlideIndex];
+          const nextImage = images[imageIndex % images.length];
+
+          setSlideImage(inactiveSlide, nextImage);
+
+          inactiveSlide.classList.add('is-active');
+          activeSlide.classList.remove('is-active');
+
+          activeSlideIndex = 1 - activeSlideIndex;
+          imageIndex += 1;
+        }
+
+        setSlideImage(slides[0], images[0]);
+        slides[0].classList.add('is-active');
+        imageIndex = 1;
+
+        if (prefersReducedMotion || images.length === 1) return;
+
+        window.setInterval(showNextImage, 9000);
+      })();
+    </script> </body> </html>
