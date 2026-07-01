@@ -23,6 +23,8 @@ jobs:
 
       - run: npm ci
 
+      - run: npx playwright install chromium
+
       - run: npm run build
 
       - uses: peaceiris/actions-gh-pages@v4
