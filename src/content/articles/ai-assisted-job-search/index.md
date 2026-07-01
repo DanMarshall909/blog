@@ -328,17 +328,8 @@ The workflow keeps reusable verification questions ready:
 
 ```text
 Before I spend time on the process, can you confirm the end client or product domain?
-```
-
-```text
 Can you confirm the compensation range, expected office days, and whether the role is hands-on engineering?
-```
-
-```text
 How does the team approach automated testing, code review, refactoring, and maintainability?
-```
-
-```text
 Are engineers encouraged to use AI-assisted development tools in normal delivery work?
 ```
 

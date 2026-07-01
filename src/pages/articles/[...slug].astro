@@ -3,7 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import Picture from '../../components/Picture.astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import { tagHref } from '../../utils/tags';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
@@ -51,25 +50,6 @@ const heroImageWidths = urlSlug === 'resume' || urlSlug === 'resume-brief'
   headerImagePosition={article.data.headerImagePosition ?? article.data.heroImagePosition}
   headerImageScale={article.data.headerImageScale ?? article.data.heroImageScale}
 >
-  <Fragment slot="header">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Writing</a>
-      <span aria-hidden="true">/</span>
-      <span>{article.data.title}</span>
-    </nav>
-    <div class="article-meta">
-      {article.data.date && <p class="publish-date">{formattedDate}</p>}
-      <p class="reading-time">{readingMinutes} min read</p>
-      {article.data.tags.length > 0 && (
-        <ul class="tags" aria-label="Article topics">
-          {article.data.tags.map(tag => (
-            <li><a class="tag" href={tagHref(tag)}>{tag}</a></li>
-          ))}
-        </ul>
-      )}
-    </div>
-  </Fragment>
-
   <article
     id="article-start"
     class={`article${article.data.heroImage ? ' has-hero' : ''}${article.data.heroImageCrop ? ' hero-image-cropped' : ''}`}
@@ -77,9 +57,10 @@ const heroImageWidths = urlSlug === 'resume' || urlSlug === 'resume-brief'
   >
     <section class="content">
       <div class="title-with-image">
-        <h1>{article.data.title}
+        <div class="article-title-actions">
+          <h1>{article.data.title}</h1>
           <a
-            class="pdf-button"
+            class="pdf-button article-pdf-button"
             href={`/articles/${urlSlug}/article.pdf`}
             download={`${article.data.title}.pdf`}
             aria-label="Download this article as a PDF"
@@ -100,7 +81,11 @@ const heroImageWidths = urlSlug === 'resume' || urlSlug === 'resume-brief'
             </svg>
             <span>PDF</span>
           </a>
-        </h1>
+        </div>
+        <div class="article-meta">
+          {article.data.date && <p class="publish-date">{formattedDate}</p>}
+          <p class="reading-time">{readingMinutes} min read</p>
+        </div>
       </div>
       {article.data.heroImage && (
         <Picture
