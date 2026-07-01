@@ -15,7 +15,7 @@
 	},
 	"private": false,
 	"devDependencies": {
-		"@playwright/test": "^1.59.1",
+		"@playwright/test": "^1.61.1",
 		"esbuild": "0.28.1"
 	},
 	"overrides": {
