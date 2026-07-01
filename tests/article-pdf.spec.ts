@@ -4,9 +4,9 @@ test.describe('Article PDF action', () => {
   test('article pages expose a PDF button that is hidden in print output', async ({ page }) => {
     await page.goto('/articles/resume/');
 
-    const pdfButton = page.getByRole('button', { name: 'Download this article as a PDF' });
+    const pdfButton = page.getByRole('link', { name: 'Download this article as a PDF' });
     await expect(pdfButton).toBeVisible();
-    await expect(pdfButton).toHaveAttribute('onclick', 'window.print()');
+    await expect(pdfButton).toHaveAttribute('download');
 
     await page.emulateMedia({ media: 'print' });
     await expect(pdfButton).toBeHidden();
@@ -19,7 +19,7 @@ test.describe('Article PDF action', () => {
 
     await expect(page.getByRole('link', { name: 'blog.danmarshall.dev/articles/resume' })).toHaveAttribute(
       'href',
-      'https://blog.danmarshall.dev/articles/resume/'
+      '/articles/resume/'
     );
 
     const pdf = await page.pdf({ format: 'A4', printBackground: true });

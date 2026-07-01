@@ -4,14 +4,6 @@ import { join, relative, sep } from 'node:path';
 
 const DOCS = join(__dirname, '..', 'docs');
 
-type PictureAsset = {
-  pageUrl: string;
-  pictureHtml: string;
-  fallbackSrc: string;
-  avifSrc: string;
-  webpSrc: string;
-};
-
 function walkHtml(dir: string): string[] {
   const out: string[] = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
@@ -46,8 +38,21 @@ function fileKind(file: string): 'avif' | 'webp' | 'png' | 'jpeg' | 'unknown' {
   return 'unknown';
 }
 
-function collectPictureAssets(): PictureAsset[] {
-  const assets: PictureAsset[] = [];
+function parseSrcset(value: string): string[] {
+  return value
+    .split(',')
+    .map((entry) => entry.trim().split(/\s+/)[0])
+    .filter(Boolean);
+}
+
+type PictureVariant = {
+  pageUrl: string;
+  fallbackSrc: string;
+  variantUrls: { url: string; kind: 'avif' | 'webp' }[];
+};
+
+function collectVariants(): PictureVariant[] {
+  const variants: PictureVariant[] = [];
 
   for (const htmlFile of walkHtml(DOCS)) {
     const html = readFileSync(htmlFile, 'utf8');
@@ -61,50 +66,52 @@ function collectPictureAssets(): PictureAsset[] {
 
       if (!imgTag || sourceTags.length === 0) continue;
 
+      const fallbackSrc = attr(imgTag, 'src');
+      expect(fallbackSrc, `${pageUrl} has a <picture> without an <img src>`).toBeTruthy();
+
       const avifSource = sourceTags.find((source) => attr(source, 'type') === 'image/avif');
       const webpSource = sourceTags.find((source) => attr(source, 'type') === 'image/webp');
-      const fallbackSrc = attr(imgTag, 'src');
-      const avifSrc = avifSource ? attr(avifSource, 'srcset') : undefined;
-      const webpSrc = webpSource ? attr(webpSource, 'srcset') : undefined;
+      const avifSrcset = avifSource ? attr(avifSource, 'srcset') : undefined;
+      const webpSrcset = webpSource ? attr(webpSource, 'srcset') : undefined;
+      const fallbackSrcset = attr(imgTag, 'srcset');
 
-      expect(fallbackSrc, `${pageUrl} has a <picture> without an <img src>`).toBeTruthy();
-      expect(avifSrc, `${pageUrl} picture for ${fallbackSrc} is missing image/avif source`).toBeTruthy();
-      expect(webpSrc, `${pageUrl} picture for ${fallbackSrc} is missing image/webp source`).toBeTruthy();
+      const avifUrls = avifSrcset ? parseSrcset(avifSrcset) : [];
+      const webpUrls = webpSrcset ? parseSrcset(webpSrcset) : [];
+      const fallbackUrls = fallbackSrcset ? parseSrcset(fallbackSrcset) : [];
 
-      assets.push({
-        pageUrl,
-        pictureHtml,
-        fallbackSrc: fallbackSrc!,
-        avifSrc: avifSrc!,
-        webpSrc: webpSrc!,
-      });
+      expect(avifUrls.length, `${pageUrl} picture for ${fallbackSrc} is missing image/avif source`).toBeGreaterThan(0);
+      expect(webpUrls.length, `${pageUrl} picture for ${fallbackSrc} is missing image/webp source`).toBeGreaterThan(0);
+
+      const variantUrls: PictureVariant['variantUrls'] = [
+        ...avifUrls.map((url) => ({ url, kind: 'avif' as const })),
+        ...webpUrls.map((url) => ({ url, kind: 'webp' as const })),
+        ...fallbackUrls.map((url) => ({ url, kind: 'png' as const })),
+      ];
+
+      variants.push({ pageUrl, fallbackSrc: fallbackSrc!, variantUrls });
     }
   }
 
-  return assets;
+  return variants;
 }
 
 test.describe('optimized image variants', () => {
-  for (const [index, asset] of collectPictureAssets().entries()) {
-    test(`${asset.pageUrl} picture ${index + 1} serves valid optimized variants for ${asset.fallbackSrc}`, () => {
-      const fallbackFile = docsPath(asset.fallbackSrc);
-      const avifFile = docsPath(asset.avifSrc);
-      const webpFile = docsPath(asset.webpSrc);
-
-      expect(existsSync(fallbackFile), `${asset.fallbackSrc} is missing from docs`).toBe(true);
-      expect(existsSync(avifFile), `${asset.avifSrc} is missing from docs`).toBe(true);
-      expect(existsSync(webpFile), `${asset.webpSrc} is missing from docs`).toBe(true);
-
-      expect(fileKind(avifFile), `${asset.avifSrc} is not an AVIF file`).toBe('avif');
-      expect(fileKind(webpFile), `${asset.webpSrc} is not a WebP file`).toBe('webp');
-      expect(fileKind(fallbackFile), `${asset.fallbackSrc} must be a PNG or JPEG fallback`).toMatch(/^(png|jpeg)$/);
-
+  for (const variant of collectVariants()) {
+    test(`${variant.pageUrl} all optimized variants exist and are valid for ${variant.fallbackSrc}`, () => {
+      const fallbackFile = docsPath(variant.fallbackSrc);
       const fallbackSize = statSync(fallbackFile).size;
-      const avifSize = statSync(avifFile).size;
-      const webpSize = statSync(webpFile).size;
+      expect(fileKind(fallbackFile), `${variant.fallbackSrc} must be a PNG or JPEG fallback`).toMatch(/^(png|jpeg)$/);
 
-      expect(avifSize, `${asset.avifSrc} should be smaller than ${asset.fallbackSrc}`).toBeLessThan(fallbackSize);
-      expect(webpSize, `${asset.webpSrc} should be smaller than ${asset.fallbackSrc}`).toBeLessThan(fallbackSize);
+      for (const { url, kind } of variant.variantUrls) {
+        const file = docsPath(url);
+        expect(existsSync(file), `${url} is missing from docs`).toBe(true);
+        expect(fileKind(file), `${url} is not a ${kind.toUpperCase()} file`).toBe(kind);
+
+        if (kind !== 'png' && kind !== 'jpeg') {
+          const size = statSync(file).size;
+          expect(size, `${url} (${size}B) should be smaller than fallback ${variant.fallbackSrc} (${fallbackSize}B)`).toBeLessThan(fallbackSize);
+        }
+      }
     });
   }
 });
