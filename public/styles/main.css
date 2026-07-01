@@ -521,19 +521,15 @@ hr {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    gap: 1px;
-    flex-shrink: 0;
+    line-height: 1;
+    gap: 0;
+    vertical-align: middle;
     border: 0;
     background: none;
     cursor: pointer;
-    padding: var(--space-xs) var(--space-sm);
-    color: var(--burnt-wood-text);
-    border-radius: var(--border-radius);
+    padding: 0;
+    color: inherit;
     font: inherit;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    line-height: 1;
-    margin-bottom: var(--space-lg);
     transition: opacity var(--transition-fast);
 }
 
@@ -543,8 +539,14 @@ hr {
 }
 
 .pdf-button svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
+}
+
+.pdf-button span {
+    font-size: 7px;
+    font-weight: 700;
+    line-height: 1;
 }
 
 .desktop-topbar [data-tooltip]::after,
@@ -1838,8 +1840,6 @@ body.article-detail .article .title-with-image {
 
 body.article-detail .article .title-with-image h1 {
     font-size: var(--text-3xl);
-    flex: none;
-    margin-bottom: 0;
 }
 
 body.article-detail .article {
@@ -2543,14 +2543,10 @@ footer .copy {
     .title-with-image {
         border: 0;
         box-shadow: none;
-        flex-direction: column;
-        gap: var(--space-xs);
-        align-items: center;
-        text-align: center;
     }
 
     .title-with-image h1 {
-        margin: var(--space-sm) 0 0;
+        margin: var(--space-sm) 0 var(--space-sm) var(--space-sm);
     }
 
     .hero-image-picture,
