@@ -10,7 +10,7 @@
 		"test": "playwright test"
 	},
 	"dependencies": {
-		"@astrojs/rss": "^4.0.18",
+		"@astrojs/rss": "^4.0.19",
 		"astro": "^6.4.8"
 	},
 	"private": false,
