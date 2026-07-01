@@ -10,7 +10,7 @@ description: "A short portfolio of public projects covering AI tooling, semantic
 
 This page is a concise reference for public projects I am comfortable sharing with recruiters, hiring managers, and technical reviewers. It covers a mix of AI tooling, C# engineering, frontend publishing, creative coding, and local-AI experiments.
 
-My GitHub profile is [github.com/DanMarshall909](https://github.com/DanMarshall909).
+For more of my work see [github.com/DanMarshall909](https://github.com/DanMarshall909).
 
 | Project | Topics | Description |
 | --- | --- | --- |

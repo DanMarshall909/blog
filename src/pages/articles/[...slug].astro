@@ -57,9 +57,6 @@ const heroImageWidths = urlSlug === 'resume' || urlSlug === 'resume-brief'
       <span aria-hidden="true">/</span>
       <span>{article.data.title}</span>
     </nav>
-    <div class="title-with-image">
-      <h1>{article.data.title}</h1>
-    </div>
     <div class="article-meta">
       {article.data.date && <p class="publish-date">{formattedDate}</p>}
       <p class="reading-time">{readingMinutes} min read</p>
@@ -79,6 +76,31 @@ const heroImageWidths = urlSlug === 'resume' || urlSlug === 'resume-brief'
     style={`--hero-image-position: ${article.data.heroImagePosition}; --hero-image-scale: ${article.data.heroImageScale};`}
   >
     <section class="content">
+      <div class="title-with-image">
+        <h1>{article.data.title}</h1>
+        <button
+          class="pdf-button"
+          type="button"
+          onclick="window.print()"
+          aria-label="Download this article as a PDF"
+        >
+          <svg
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          <span>Save</span>
+        </button>
+      </div>
       {article.data.heroImage && (
         <Picture
           class="hero-image"

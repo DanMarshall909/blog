@@ -4,7 +4,7 @@ test.describe('Article PDF action', () => {
   test('article pages expose a PDF button that is hidden in print output', async ({ page }) => {
     await page.goto('/articles/resume/');
 
-    const pdfButton = page.getByRole('button', { name: 'Create PDF from this article' });
+    const pdfButton = page.getByRole('button', { name: 'Download this article as a PDF' });
     await expect(pdfButton).toBeVisible();
     await expect(pdfButton).toHaveAttribute('onclick', 'window.print()');
 

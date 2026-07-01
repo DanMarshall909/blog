@@ -3,7 +3,7 @@
 		"sync-article-assets": "node scripts/sync-article-assets.mjs",
 		"prebuild": "npm run sync-article-assets",
 		"dev": "astro dev --port 3000",
-		"build": "astro build",
+		"build": "astro build && node scripts/generate-pdfs.mjs",
 		"preview": "astro preview",
 		"test": "playwright test"
 	},

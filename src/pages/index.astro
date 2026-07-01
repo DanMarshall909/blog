@@ -232,11 +232,6 @@ function getIntroHtml(description: string | undefined, body: string): string {
               <div class="list-item">
                 <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
                 <a href={`/articles/${slug}/`}>{article.data.title}</a>
-                <span class="list-tags">
-                  {article.data.tags.slice(0, 3).map((tag) => (
-                    <a href={tagHref(tag)}>{tag}</a>
-                  ))}
-                </span>
               </div>
             );
           })

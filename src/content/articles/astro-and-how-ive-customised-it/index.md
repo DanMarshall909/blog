@@ -5,6 +5,7 @@ date: "2026-06-25"
 tags: ["Astro", "static sites", "GitHub Pages", "frontend", "developer tools"]
 description: "A practical beginner-friendly guide to building a polished personal website cheaply with Astro, GitHub Pages, and a custom domain."
 heroImage: /articles/astro-and-how-ive-customised-it/astro.png
+heroImageCrop: true
 cardImagePosition: "50% 50%"
 ---
 

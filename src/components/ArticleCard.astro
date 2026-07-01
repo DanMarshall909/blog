@@ -1,5 +1,4 @@
 ---
-import { getImage } from "astro:assets";
 import { tagHref } from "../utils/tags";
 
 interface Props {
@@ -24,9 +23,6 @@ const {
   href,
   dateTime,
   dateLabel,
-  cardImage,
-  cardImagePosition = "center",
-  cardImageScale = 1,
   variant = "default",
   primaryTag,
   tags = [],
@@ -41,27 +37,10 @@ const articleClass = isFeatured ? "article-card featured-card" : "article-card";
 const articleClassList = collapsible
   ? `${articleClass} collapsible`
   : articleClass;
-const imageModules = import.meta.glob("../content/articles/**/*.{png,jpg,jpeg,webp,avif}", {
-  eager: true,
-  import: "default",
-});
-const assetPath = cardImage.startsWith("/articles/") ? `../content${cardImage}` : undefined;
-const image = assetPath ? imageModules[assetPath] : undefined;
-const optimizedCardImage = image
-  ? (await getImage({
-      src: image,
-      width: isFeatured ? 900 : 640,
-      format: "avif",
-      quality: 62,
-    })).src
-  : cardImage;
 ---
 
 <article
   class={articleClassList}
-  data-card-image={optimizedCardImage}
-  data-card-image-position={cardImagePosition}
-  data-card-image-scale={cardImageScale}
   data-topic-tags={topicTags}
 >
   <a class="card-link" href={href} aria-label={`Read ${title}`}>
@@ -107,22 +86,6 @@ const optimizedCardImage = image
 </article>
 
 <script>
-  document.querySelectorAll("[data-card-image]").forEach((card) => {
-    if (!(card instanceof HTMLElement)) return;
-    card.style.setProperty(
-      "--card-bg-image",
-      `url("${card.dataset.cardImage}")`,
-    );
-    card.style.setProperty(
-      "--card-bg-position",
-      card.dataset.cardImagePosition || "center",
-    );
-    card.style.setProperty(
-      "--card-bg-scale",
-      card.dataset.cardImageScale || "1",
-    );
-  });
-
   document.addEventListener("click", (event) => {
     if (!(event.target instanceof Element)) return;
     if (event.target.closest("a, button")) return;
