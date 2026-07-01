@@ -37,10 +37,10 @@ const urlSlug = article.id.replace(/\/index$/, '');
 const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-').toLowerCase()}`;
 const heroImageSizes = urlSlug === 'resume' || urlSlug === 'resume-brief'
   ? '(max-width: 768px) min(54vw, 13rem), 12.5rem'
-  : '(max-width: 768px) 100vw, 33vw';
+  : '(max-width: 768px) min(calc(100vw - 3rem), 24rem), 16rem';
 const heroImageWidths = urlSlug === 'resume' || urlSlug === 'resume-brief'
   ? [208, 416]
-  : [360, 720, 1080];
+  : [320, 480, 720];
 ---
 <Layout
   title={`${article.data.title} - Technical Scratches`}

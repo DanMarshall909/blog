@@ -1533,7 +1533,7 @@ body.article-detail .contact-topbar {
 .hero-link {
     float: right;
     display: block;
-    width: min(36%, 18rem);
+    width: min(32%, 16rem);
     margin: 0 0 var(--space-lg) var(--space-xl);
     padding: 0.45rem;
     overflow: hidden;
@@ -2032,12 +2032,24 @@ code.hljs,
 /* ── Article detail styles ───────────────────────────────────────────────── */
 
 body.article-detail .header {
-    padding-block: var(--space-lg);
+    padding-block: var(--space-md);
 }
 
 body.article-detail .header h1 {
     margin-bottom: var(--space-sm);
     font-size: var(--text-3xl);
+}
+
+body.article-detail .site-brand {
+    margin-bottom: var(--space-sm);
+}
+
+body.article-detail .site-nav {
+    margin-bottom: var(--space-md);
+}
+
+body.article-detail .header .description {
+    margin-top: var(--space-xs);
 }
 
 body.article-detail .article .title-with-image {
@@ -2069,8 +2081,8 @@ body.article-detail .article .title-with-image h1 {
 .article-pdf-button {
     flex: 0 0 auto;
     margin-top: 0.3em;
-    padding: 0.35rem 0.5rem;
-    border: 1px solid rgb(83 45 18 / 0.28);
+    padding: 0.3rem 0.45rem;
+    border: 1px solid rgb(83 45 18 / 0.2);
     border-radius: calc(var(--border-radius) * 0.75);
     color: #2f170c;
     text-decoration: none;
@@ -2082,7 +2094,7 @@ body.article-detail .article .title-with-image h1 {
 
 .article-pdf-button:hover,
 .article-pdf-button:focus-visible {
-    background: rgb(83 45 18 / 0.08);
+    background: rgb(83 45 18 / 0.06);
     color: #1f0d05;
     opacity: 1;
     text-decoration: none;
@@ -2179,7 +2191,7 @@ body.article-detail .article .title-with-image > .article-meta {
         inset 0 -22px 34px rgb(52 26 10 / 0.26),
         inset 0 0 58px rgb(28 14 7 / 0.36),
         0 2px 0 rgb(255 226 170 / 0.1),
-        0 22px 42px rgb(0 0 0 / 0.42);
+        0 28px 52px rgb(0 0 0 / 0.48);
 }
 
 [data-theme="dark"] body.article-detail .article::after {
@@ -2681,9 +2693,9 @@ body.article-detail .article .title-with-image > .article-meta {
 }
 
 .toc-link.toc-active {
-    border-left-color: var(--color-accent);
-    background: rgb(from var(--color-accent) r g b / 0.08);
-    color: var(--color-accent);
+    border-left-color: rgb(194 150 78 / 0.86);
+    background: rgb(151 104 46 / 0.12);
+    color: rgb(213 177 111 / 0.94);
     font-weight: 500;
 }
 
@@ -2867,7 +2879,7 @@ footer .copy {
     }
 
     .header {
-        padding-block: var(--space-2xl);
+        padding-block: var(--space-xl);
     }
 
     .header h1 {

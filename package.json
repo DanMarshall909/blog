@@ -3,7 +3,8 @@
 		"sync-article-assets": "node scripts/sync-article-assets.mjs",
 		"prebuild": "npm run sync-article-assets",
 		"dev": "astro dev --port 3000",
-		"build": "astro build",
+		"build": "astro build && npm run minify-built-css",
+		"minify-built-css": "node scripts/minify-built-css.mjs",
 		"pdfs": "node scripts/generate-pdfs.mjs",
 		"preview": "astro preview",
 		"test": "playwright test"
@@ -14,7 +15,8 @@
 	},
 	"private": false,
 	"devDependencies": {
-		"@playwright/test": "^1.59.1"
+		"@playwright/test": "^1.59.1",
+		"esbuild": "0.28.1"
 	},
 	"overrides": {
 		"esbuild": "0.28.1"
