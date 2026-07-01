@@ -81,7 +81,7 @@ const heroImageWidths = urlSlug === 'resume' || urlSlug === 'resume-brief'
           <a
             class="pdf-button"
             href={`/articles/${urlSlug}/article.pdf`}
-            download
+            download={`${article.data.title}.pdf`}
             aria-label="Download this article as a PDF"
           >
             <svg
