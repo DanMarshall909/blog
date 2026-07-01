@@ -78,28 +78,28 @@ const heroImageWidths = urlSlug === 'resume' || urlSlug === 'resume-brief'
     <section class="content">
       <div class="title-with-image">
         <h1>{article.data.title}
-          <button
+          <a
             class="pdf-button"
-            type="button"
-            onclick="window.print()"
+            href={`/articles/${urlSlug}/article.pdf`}
+            download
             aria-label="Download this article as a PDF"
           >
-          <svg
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
-          <span>PDF</span>
-          </button>
+            <svg
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span>PDF</span>
+          </a>
         </h1>
       </div>
       {article.data.heroImage && (
