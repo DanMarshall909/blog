@@ -1,17 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+import ArticleListView from '../components/ArticleListView.astro';
 import { getCollection } from 'astro:content';
 import { tagHref } from '../utils/tags';
-
-const heroImageOverrides = new Map<string, string>();
-
-const articleFallbackImages = [
-  '/articles/ai-blog-pipeline/cartoon.png',
-  '/articles/1bit-llm/cartoon.png',
-  '/articles/claude-code-mcp-token-waste/cartoon.png',
-  '/articles/bankers-rounding/cartoon.png',
-];
+import { getArticleSlug, getArticleCardImage, formatDate, getIntroHtml } from '../utils/article';
 
 const topicGroups = [
   'AI',
@@ -43,75 +36,7 @@ const articles = allArticles
 
 const [featuredArticle, ...recentArticles] = articles;
 
-function getArticleSlug(articleId: string): string {
-  return articleId.replace(/\/index$/, '');
-}
 
-function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-AU', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'UTC',
-  });
-}
-
-function getArticleCardImage(
-  articleId: string,
-  heroImage: string | undefined,
-  fallbackIndex = 0,
-): string {
-  return (
-    heroImageOverrides.get(articleId) ??
-    heroImage ??
-    articleFallbackImages[fallbackIndex % articleFallbackImages.length]
-  );
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#039;');
-}
-
-function markdownInlineToHtml(value: string): string {
-  return escapeHtml(value)
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-    .replace(/_([^_]+)_/g, '<em>$1</em>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-}
-
-// Extract the first prose paragraph from raw markdown body.
-// Skips headings, image lines, and thematic breaks.
-function getIntroHtml(description: string | undefined, body: string): string {
-  if (description?.trim()) {
-    return `<p>${escapeHtml(description.trim())}</p>`;
-  }
-
-  const paragraphLines: string[] = [];
-
-  for (const line of body.split('\n')) {
-    const trimmed = line.trim();
-
-    if (/^#{1,6}\s/.test(trimmed)) continue;
-    if (trimmed === '---') continue;
-    if (/^!\[/.test(trimmed)) continue;
-
-    if (trimmed === '' && paragraphLines.length > 0) break;
-    if (trimmed !== '') paragraphLines.push(trimmed);
-  }
-
-  if (paragraphLines.length === 0) {
-    return '';
-  }
-
-  return `<p>${markdownInlineToHtml(paragraphLines.join(' '))}</p>`;
-}
 ---
 
 <Layout title="Technical Scratches" bodyClass="home-page">
@@ -211,89 +136,15 @@ function getIntroHtml(description: string | undefined, body: string): string {
             <h2 id="recent-title">Notes from the workbench</h2>
           </div>
 
-          <div class="view-toggle" role="radiogroup" aria-label="View mode">
-            <button role="radio" aria-checked="true" data-view="grid" aria-label="Grid view">
-              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            </button>
-            <button role="radio" aria-checked="false" data-view="list" aria-label="List view">
-              <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <div id="view-container" data-view="grid">
-          <div class="article-grid">
-            {
-              recentArticles.map((article, index) => {
-                const slug = getArticleSlug(article.id);
-                const intro = getIntroHtml(article.data.description, article.body ?? '');
-                const primaryTag = article.data.tags[0];
-                const image = getArticleCardImage(article.id, article.data.heroImage, index);
-
-                return (
-                  <ArticleCard
-                    title={article.data.title}
-                    href={`/articles/${slug}/`}
-                    dateTime={article.data.date.toISOString()}
-                    dateLabel={formatDate(article.data.date)}
-                    cardImage={image}
-                    cardImagePosition={article.data.cardImagePosition}
-                    cardImageScale={article.data.cardImageScale}
-                    primaryTag={primaryTag}
-                    tags={article.data.tags}
-                    summary={intro}
-                  />
-                );
-              })
-            }
-          </div>
-
-          <div class="article-list">
-            {
-              recentArticles.map((article) => {
-                const slug = getArticleSlug(article.id);
-                return (
-                  <div class="list-item">
-                    <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
-                    <a href={`/articles/${slug}/`}>{article.data.title}</a>
-                  </div>
-                );
-              })
-            }
-          </div>
+          <ArticleListView
+            articles={recentArticles}
+            storageKey="view-mode-home"
+            listStyle="wood"
+          />
         </div>
       </section>
     </div>
   </div>
-
-  <script is:inline>
-    (function () {
-      var container = document.getElementById('view-container');
-      if (!container) return;
-      var buttons = container.parentElement.querySelectorAll('.view-toggle [role="radio"]');
-      var storageKey = 'view-mode-home';
-
-      function setView(view) {
-        container.setAttribute('data-view', view);
-        buttons.forEach(function (b) {
-          var active = b.getAttribute('data-view') === view;
-          b.setAttribute('aria-checked', String(active));
-        });
-        try { localStorage.setItem(storageKey, view); } catch (_) {}
-      }
-
-      buttons.forEach(function (b) {
-        b.addEventListener('click', function () {
-          setView(b.getAttribute('data-view') || 'grid');
-        });
-      });
-
-      try {
-        var saved = localStorage.getItem(storageKey);
-        if (saved === 'list' || saved === 'grid') setView(saved);
-      } catch (_) {}
-    })();
-  </script>
 
   <section class="topic-cloud" aria-labelledby="topics-title">
     <div class="section-heading">

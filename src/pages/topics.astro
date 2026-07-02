@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ArticleCard from '../components/ArticleCard.astro';
+import ArticleListView from '../components/ArticleListView.astro';
 import { getCollection } from 'astro:content';
 import { tagHref, tagSlug } from '../utils/tags';
 
@@ -25,15 +25,6 @@ const topics = [...tagMap.values()].sort((a, b) => {
   if (b.count !== a.count) return b.count - a.count;
   return a.label.localeCompare(b.label);
 });
-
-function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-AU', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'UTC',
-  });
-}
 ---
 <Layout
   title="Topics - Technical Scratches"
@@ -48,14 +39,6 @@ function formatDate(date: Date): string {
         <p class="section-description">Choose a tag to filter related articles and trace the threads running through the site.</p>
       </div>
 
-      <div class="view-toggle" role="radiogroup" aria-label="View mode">
-        <button role="radio" aria-checked="true" data-view="grid" aria-label="Grid view">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        </button>
-        <button role="radio" aria-checked="false" data-view="list" aria-label="List view">
-          <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-      </div>
     </div>
 
     <div class="topic-filter-wrap">
@@ -72,49 +55,11 @@ function formatDate(date: Date): string {
       Showing <span id="topics-visible-count">{articles.length}</span> {articles.length === 1 ? 'article' : 'articles'}.
     </p>
 
-    <div id="view-container" data-view="grid">
-      <div class="topics-results">
-        {articles.map((article) => {
-          const articleSlug = article.id.replace(/\/index$/, '');
-          const articleTags = article.data.tags.map(tagSlug);
-          const image = article.data.heroImage ?? '/articles/ai-blog-pipeline/cartoon.png';
-          return (
-            <ArticleCard
-              title={article.data.title}
-              href={`/articles/${articleSlug}/`}
-              dateTime={article.data.date.toISOString()}
-              dateLabel={formatDate(article.data.date)}
-              cardImage={image}
-              cardImagePosition={article.data.cardImagePosition}
-              cardImageScale={article.data.cardImageScale}
-              primaryTag={article.data.tags[0]}
-              tags={article.data.tags}
-              topicTags={articleTags.join(' ')}
-              summary={article.data.description ? `<p>${article.data.description}</p>` : undefined}
-              collapsible
-            />
-          );
-        })}
-      </div>
-
-      <div class="article-list">
-        {articles.map((article) => {
-          const articleSlug = article.id.replace(/\/index$/, '');
-          const articleTags = article.data.tags.map(tagSlug);
-          return (
-            <div class="list-item" data-topic-tags={articleTags.join(' ')}>
-              <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
-              <a href={`/articles/${articleSlug}/`}>{article.data.title}</a>
-              <span class="list-tags">
-                {article.data.tags.slice(0, 3).map((t) => (
-                  <a href={tagHref(t)}>{t}</a>
-                ))}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <ArticleListView
+      articles={articles}
+      storageKey="view-mode-topics"
+      filterable={true}
+    />
   </section>
 
   <script is:inline>
@@ -124,9 +69,9 @@ function formatDate(date: Date): string {
       var options = Array.from(list.querySelectorAll('[data-topic-filter]'));
       var visibleCount = document.getElementById('topics-visible-count');
 
-      var gridItems = Array.from(document.querySelectorAll('.topics-results > .article-card'));
-      var listItems = Array.from(document.querySelectorAll('#view-container > .article-list > .list-item'));
       var container = document.getElementById('view-container');
+      var gridItems = container ? Array.from(container.querySelectorAll(':scope > .article-grid > .article-card')) : [];
+      var listItems = container ? Array.from(container.querySelectorAll(':scope > .article-list > .list-item')) : [];
 
       var currentFilter = 'all';
       var isOpen = false;
@@ -238,31 +183,6 @@ function formatDate(date: Date): string {
           if (visible[idx]) visible[idx].classList.add('is-highlighted');
         }
       });
-
-      // view toggle
-      var viewButtons = document.querySelectorAll('.page-header-row .view-toggle [role="radio"]');
-      var viewStorageKey = 'view-mode-topics';
-
-      function setView(view) {
-        if (!container) return;
-        container.setAttribute('data-view', view);
-        viewButtons.forEach(function(b) {
-          var active = b.getAttribute('data-view') === view;
-          b.setAttribute('aria-checked', String(active));
-        });
-        try { localStorage.setItem(viewStorageKey, view); } catch (_) {}
-      }
-
-      viewButtons.forEach(function(b) {
-        b.addEventListener('click', function() {
-          setView(b.getAttribute('data-view') || 'grid');
-        });
-      });
-
-      try {
-        var savedView = localStorage.getItem(viewStorageKey);
-        if (savedView === 'list' || savedView === 'grid') setView(savedView);
-      } catch (_) {}
 
       var urlTag = (window.location.search || '').match(/[?&]tag=([^&]+)/);
       var initialFilter = urlTag ? urlTag[1] : null;

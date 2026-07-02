@@ -1,21 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ArticleCard from '../components/ArticleCard.astro';
+import ArticleListView from '../components/ArticleListView.astro';
 import { getCollection } from 'astro:content';
-import { tagHref } from '../utils/tags';
 
 const articles = (await getCollection('articles')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
-
-function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-AU', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'UTC',
-  });
-}
 ---
 <Layout
   title="Archive - Technical Scratches"
@@ -28,84 +18,11 @@ function formatDate(date: Date): string {
         <h1>All writing in one place</h1>
         <p class="section-description">A full index of posts, sketches, and experiments from the workbench.</p>
       </div>
-
-      <div class="view-toggle" role="radiogroup" aria-label="View mode">
-        <button role="radio" aria-checked="true" data-view="grid" aria-label="Grid view">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        </button>
-        <button role="radio" aria-checked="false" data-view="list" aria-label="List view">
-          <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-      </div>
     </div>
 
-    <div id="view-container" data-view="grid">
-      <div class="article-grid">
-        {articles.map((article) => {
-          const slug = article.id.replace(/\/index$/, '');
-          const image = article.data.heroImage ?? '/articles/ai-blog-pipeline/cartoon.png';
-          return (
-            <ArticleCard
-              title={article.data.title}
-              href={`/articles/${slug}/`}
-              dateTime={article.data.date.toISOString()}
-              dateLabel={formatDate(article.data.date)}
-              cardImage={image}
-              cardImagePosition={article.data.cardImagePosition}
-              cardImageScale={article.data.cardImageScale}
-              primaryTag={article.data.tags[0]}
-              tags={article.data.tags}
-              summary={article.data.description ? `<p>${article.data.description}</p>` : undefined}
-            />
-          );
-        })}
-      </div>
-
-      <div class="article-list">
-        {articles.map((article) => {
-          const slug = article.id.replace(/\/index$/, '');
-          return (
-            <div class="list-item">
-              <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
-              <a href={`/articles/${slug}/`}>{article.data.title}</a>
-              <span class="list-tags">
-                {article.data.tags.slice(0, 3).map((tag) => (
-                  <a href={tagHref(tag)}>{tag}</a>
-                ))}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <ArticleListView
+      articles={articles}
+      storageKey="view-mode-archive"
+    />
   </section>
-
-  <script is:inline>
-    (function () {
-      var container = document.getElementById('view-container');
-      var buttons = document.querySelectorAll('.view-toggle [role="radio"]');
-      var storageKey = 'view-mode-archive';
-
-      function setView(view) {
-        if (!container) return;
-        container.setAttribute('data-view', view);
-        buttons.forEach(function (b) {
-          var active = b.getAttribute('data-view') === view;
-          b.setAttribute('aria-checked', String(active));
-        });
-        try { localStorage.setItem(storageKey, view); } catch (_) {}
-      }
-
-      buttons.forEach(function (b) {
-        b.addEventListener('click', function () {
-          setView(b.getAttribute('data-view') || 'grid');
-        });
-      });
-
-      try {
-        var saved = localStorage.getItem(storageKey);
-        if (saved === 'list' || saved === 'grid') setView(saved);
-      } catch (_) {}
-    })();
-  </script>
 </Layout>
