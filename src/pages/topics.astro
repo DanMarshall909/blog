@@ -35,13 +35,17 @@ function formatDate(date: Date): string {
   });
 }
 ---
-<Layout title="Topics - Technical Scratches" description="Browse Technical Scratches articles by topic and tag.">
+<Layout
+  title="Topics - Technical Scratches"
+  description="Browse Technical Scratches articles by topic and tag."
+  headerVariant="section"
+>
   <section class="topics-page">
     <div class="page-header-row">
-      <div>
+      <div class="section-heading">
         <p class="eyebrow">Topics</p>
         <h1>Browse by topic</h1>
-        <p>Choose a tag to filter related articles.</p>
+        <p class="section-description">Choose a tag to filter related articles and trace the threads running through the site.</p>
       </div>
 
       <div class="view-toggle" role="radiogroup" aria-label="View mode">

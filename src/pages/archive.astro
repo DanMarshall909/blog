@@ -17,10 +17,17 @@ function formatDate(date: Date): string {
   });
 }
 ---
-<Layout title="Archive - Technical Scratches">
+<Layout
+  title="Archive - Technical Scratches"
+  headerVariant="section"
+>
   <section class="archive">
     <div class="page-header-row">
-      <h2>Archive</h2>
+      <div class="section-heading">
+        <p class="eyebrow">Archive</p>
+        <h1>All writing in one place</h1>
+        <p class="section-description">A full index of posts, sketches, and experiments from the workbench.</p>
+      </div>
 
       <div class="view-toggle" role="radiogroup" aria-label="View mode">
         <button role="radio" aria-checked="true" data-view="grid" aria-label="Grid view">

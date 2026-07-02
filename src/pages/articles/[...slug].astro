@@ -55,7 +55,7 @@ const heroImageWidths = urlSlug === 'resume' || urlSlug === 'resume-brief'
     class={`article${article.data.heroImage ? ' has-hero' : ''}${article.data.heroImageCrop ? ' hero-image-cropped' : ''}`}
     style={`--hero-image-position: ${article.data.heroImagePosition}; --hero-image-scale: ${article.data.heroImageScale};`}
   >
-    <section class="content">
+    <section class="content prose">
       <div class="title-with-image">
         <div class="article-title-actions">
           <h1>{article.data.title}</h1>
