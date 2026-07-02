@@ -21,15 +21,13 @@ interface Props {
   articles: ArticleEntry[];
   storageKey: string;
   filterable?: boolean;
-  listStyle?: 'default' | 'wood';
   filterVisibleCountSelector?: string;
 }
 
-const { articles, storageKey, filterable, listStyle = 'default', filterVisibleCountSelector } = Astro.props;
+const { articles, storageKey, filterable, filterVisibleCountSelector } = Astro.props;
 
 const wrapperClass = [
   'article-list-view',
-  listStyle === 'wood' ? 'article-list-view--wood' : '',
   filterable ? 'article-list-view--filterable' : '',
 ].filter(Boolean).join(' ');
 
@@ -88,13 +86,11 @@ function mapArticle(article: ArticleEntry, index: number) {
           <div class="list-item" data-topic-tags={filterable ? articleTags.join(' ') : undefined}>
             <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
             <a href={`/articles/${slug}/`}>{article.data.title}</a>
-            {listStyle !== 'wood' && (
               <span class="list-tags">
                 {article.data.tags.slice(0, 3).map((tag) => (
                   <a href={tagHref(tag)}>{tag}</a>
                 ))}
               </span>
-            )}
           </div>
         );
       })}
@@ -235,11 +231,37 @@ function mapArticle(article: ArticleEntry, index: number) {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
     perspective: 1200px;
+    padding: var(--space-md);
+    border: 1px solid rgb(83 45 18 / 0.28);
+    border-radius: var(--border-radius);
+    background-color: #d6b47e;
+    background-image: var(--texture-light-wood);
+    background-repeat: repeat;
+    background-size: var(--texture-size-lg);
+    box-shadow:
+      inset 0 1px 0 rgb(255 247 220 / 0.42),
+      inset 0 -1px 0 rgb(79 38 13 / 0.16),
+      0 2px 0 rgb(255 237 190 / 0.18),
+      0 16px 30px rgb(50 30 14 / 0.18),
+      0 34px 64px rgb(50 30 14 / 0.12);
   }
 
   .article-list-view .article-list {
     display: flex;
     flex-direction: column;
+    padding: var(--space-md);
+    border: 1px solid rgb(83 45 18 / 0.28);
+    border-radius: var(--border-radius);
+    background-color: #d6b47e;
+    background-image: var(--texture-light-wood);
+    background-repeat: repeat;
+    background-size: var(--texture-size-lg);
+    box-shadow:
+      inset 0 1px 0 rgb(255 247 220 / 0.42),
+      inset 0 -1px 0 rgb(79 38 13 / 0.16),
+      0 2px 0 rgb(255 237 190 / 0.18),
+      0 16px 30px rgb(50 30 14 / 0.18),
+      0 34px 64px rgb(50 30 14 / 0.12);
   }
 
   .article-list-view [data-view="grid"] .article-list {
@@ -256,30 +278,33 @@ function mapArticle(article: ArticleEntry, index: number) {
     gap: var(--space-md);
     align-items: baseline;
     padding: var(--space-sm) var(--space-md);
-    border-radius: var(--border-radius);
+    border-radius: calc(var(--border-radius) * 0.75);
     transition: background var(--transition-fast);
   }
 
   .article-list-view .list-item:hover {
-    background: rgb(from var(--color-primary) r g b / 0.04);
+    background: rgb(83 45 18 / 0.08);
   }
 
   .article-list-view .list-item time {
-    color: var(--color-muted);
+    color: #5a341d;
     font-size: var(--text-sm);
     font-weight: 700;
     white-space: nowrap;
+    text-shadow: 0 1px 0 rgb(255 235 184 / 0.24);
   }
 
   .article-list-view .list-item a {
-    color: var(--color-primary);
+    color: #2f170c;
     font-family: var(--font-heading);
     font-weight: 700;
     text-decoration: none;
+    text-shadow: 0 1px 0 rgb(255 235 184 / 0.28);
   }
 
-  .article-list-view .list-item a:hover {
-    color: var(--color-accent);
+  .article-list-view .list-item a:hover,
+  .article-list-view .list-item a:focus-visible {
+    color: var(--color-accent-hover);
   }
 
   .list-tags {
@@ -306,51 +331,6 @@ function mapArticle(article: ArticleEntry, index: number) {
   .list-tags a:hover {
     border-color: rgb(from var(--color-pill-border) r g b / 0.9);
     background: rgb(from var(--color-pill-bg) r g b / 0.8);
-  }
-
-  /* ── Wood list style (home page) ─────────────────────── */
-
-  .article-list-view--wood .article-list {
-    padding: var(--space-md);
-    border: 1px solid rgb(83 45 18 / 0.28);
-    border-radius: var(--border-radius);
-    background-color: #d6b47e;
-    background-image: var(--texture-light-wood);
-    background-repeat: repeat;
-    background-size: var(--texture-size-lg);
-    box-shadow:
-      inset 0 1px 0 rgb(255 247 220 / 0.42),
-      inset 0 -1px 0 rgb(79 38 13 / 0.16),
-      0 2px 0 rgb(255 237 190 / 0.18),
-      0 16px 30px rgb(50 30 14 / 0.18),
-      0 34px 64px rgb(50 30 14 / 0.12);
-  }
-
-  .article-list-view--wood .list-item {
-    grid-template-columns: 8rem 1fr;
-  }
-
-  .article-list-view--wood .article-list .list-item {
-    border-radius: calc(var(--border-radius) * 0.75);
-  }
-
-  .article-list-view--wood .article-list .list-item:hover {
-    background: rgb(83 45 18 / 0.08);
-  }
-
-  .article-list-view--wood .article-list .list-item time {
-    color: #5a341d;
-    text-shadow: 0 1px 0 rgb(255 235 184 / 0.24);
-  }
-
-  .article-list-view--wood .article-list .list-item > a {
-    color: #2f170c;
-    text-shadow: 0 1px 0 rgb(255 235 184 / 0.28);
-  }
-
-  .article-list-view--wood .article-list .list-item > a:hover,
-  .article-list-view--wood .article-list .list-item > a:focus-visible {
-    color: var(--color-accent-hover);
   }
 
   /* ── Filterable mode (topics page) ──────────────────── */
@@ -395,10 +375,6 @@ function mapArticle(article: ArticleEntry, index: number) {
       grid-template-columns: 1fr;
       gap: var(--space-xs);
       padding: var(--space-sm) var(--space-xs);
-    }
-
-    .article-list-view--wood .list-item {
-      grid-template-columns: 1fr;
     }
 
     .list-tags {

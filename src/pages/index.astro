@@ -65,7 +65,9 @@ const [featuredArticle, ...recentArticles] = articles;
       <div class="toc-title"><span>On this page</span></div>
       <ul class="toc-list">
         <li class="toc-item"><a class="toc-link toc-active" href="#featured-title">Featured article</a></li>
+        <li class="toc-item"><a class="toc-link" href="#resume-card">Resume</a></li>
         <li class="toc-item"><a class="toc-link" href="#recent-title">Notes from the workbench</a></li>
+        <li class="toc-item"><a class="toc-link" href="#topics-title">Topics</a></li>
       </ul>
     </nav>
 
@@ -101,7 +103,7 @@ const [featuredArticle, ...recentArticles] = articles;
                   />
                 </div>
 
-                <div class="featured-card-column">
+                <div class="featured-card-column" id="resume-card">
                   {resumeArticle && (() => {
                     const resumeSlug = getArticleSlug(resumeArticle.id);
                     const resumeIntro = getIntroHtml(resumeArticle.data.description, resumeArticle.body ?? '');
@@ -135,13 +137,12 @@ const [featuredArticle, ...recentArticles] = articles;
             <p class="eyebrow">Recent writing</p>
             <h2 id="recent-title">Notes from the workbench</h2>
           </div>
-
-          <ArticleListView
-            articles={recentArticles}
-            storageKey="view-mode-home"
-            listStyle="wood"
-          />
         </div>
+
+        <ArticleListView
+          articles={recentArticles}
+          storageKey="view-mode-home"
+        />
       </section>
     </div>
   </div>
