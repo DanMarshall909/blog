@@ -4,6 +4,7 @@
 		"prebuild": "npm run sync-article-assets",
 		"dev": "astro dev --port 3000",
 		"build": "astro build && npm run minify-built-css",
+		"postbuild": "node scripts/generate-pdfs.mjs",
 		"minify-built-css": "node scripts/minify-built-css.mjs",
 		"pdfs": "node scripts/generate-pdfs.mjs",
 		"preview": "astro preview",

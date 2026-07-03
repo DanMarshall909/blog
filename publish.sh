@@ -8,9 +8,6 @@ set -euo pipefail
 echo "Building site with Astro..."
 npm run build
 
-echo "Generating PDFs..."
-npm run pdfs
-
 echo "Adding changes to git..."
 git add . ':(exclude).astro/data-store.json'
 
