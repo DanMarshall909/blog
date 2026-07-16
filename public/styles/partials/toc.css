@@ -1,0 +1,179 @@
+/* ── Table of contents ───────────────────────────────────────────────────── */
+
+.article-with-toc {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, var(--article-max-width));
+    gap: 2rem;
+    justify-content: center;
+    align-items: start;
+}
+
+.page-with-toc {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+.home-main-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.toc {
+    position: sticky;
+    top: 1.5rem;
+    flex-shrink: 0;
+    width: var(--sidebar-width);
+    padding: var(--space-md);
+    border: 1px solid var(--paper-border);
+    border-radius: var(--radius-md);
+    background-image: var(--texture-light-wood);
+    background-repeat: repeat;
+    background-size: var(--texture-size-lg);
+    box-shadow:
+        inset 0 0 0 1px rgb(255 235 184 / 0.12),
+        0 18px 28px rgb(10 5 2 / 0.18);
+}
+
+.article-with-toc > .toc,
+.page-with-toc > .toc {
+    margin-top: var(--space-xl);
+}
+
+.toc::before {
+    display: block;
+    height: 3px;
+    margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    background: linear-gradient(90deg, rgb(124 82 39 / 0.72), rgb(215 176 108 / 0.68));
+    content: "";
+}
+
+.toc-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: var(--space-sm);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #4f2d16;
+    cursor: default;
+    font-family: var(--font-heading);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.toc-chevron {
+    display: none;
+    font-size: 0.6em;
+    opacity: 0.5;
+}
+
+.toc-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.toc-item {
+    margin: 0;
+}
+
+.toc-link {
+    display: block;
+    padding: 0.3rem var(--space-sm);
+    border-left: 2px solid transparent;
+    border-radius: 0 4px 4px 0;
+    color: #5c3820;
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    text-decoration: none;
+    transition:
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        background-color var(--transition-fast);
+}
+
+.toc-link:hover {
+    border-left-color: rgb(124 82 39 / 0.46);
+    background: rgb(83 45 18 / 0.06);
+    color: #3e200f;
+    text-decoration: none;
+}
+
+.toc-link.toc-active {
+    border-left-color: rgb(124 82 39 / 0.82);
+    background: rgb(83 45 18 / 0.12);
+    color: #2f170c;
+    font-weight: 700;
+}
+
+.toc-h3 .toc-link {
+    padding-left: calc(var(--space-sm) + var(--space-md));
+    font-size: var(--text-xs);
+}
+
+.drawer-body .toc {
+    position: static;
+    display: block;
+    width: auto;
+    max-height: none;
+    margin-bottom: var(--space-md);
+    padding: var(--space-md);
+}
+
+.drawer-body .toc::before {
+    margin-bottom: var(--space-md);
+}
+
+/* ── TOC social links (burnt wood) ───────────────────────────────────────── */
+
+.toc-socials {
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.toc-socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    color: rgb(160 110 55 / 0.85);
+    text-decoration: none;
+    transition:
+        color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.toc-socials a:hover,
+.toc-socials a:focus-visible {
+    color: rgb(210 148 68);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.toc-socials a:focus-visible {
+    outline: 2px solid rgb(230 153 67 / 0.4);
+    outline-offset: 2px;
+}
+
+.toc-socials svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 1px 2px rgb(40 16 5 / 0.35));
+}
+
+.toc-socials a:hover svg {
+    filter: drop-shadow(0 0 6px rgb(230 153 67 / 0.25));
+}

@@ -10,9 +10,27 @@ if (!existsSync(stylesPath)) {
   process.exit(0);
 }
 
-const cssFiles = (await readdir(stylesPath))
-  .filter((file) => file.endsWith('.css'))
-  .map((file) => join(stylesPath, file));
+async function findCssFiles(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const cssFiles = [];
+
+  for (const entry of entries) {
+    const entryPath = join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      cssFiles.push(...await findCssFiles(entryPath));
+      continue;
+    }
+
+    if (entry.isFile() && entry.name.endsWith('.css')) {
+      cssFiles.push(entryPath);
+    }
+  }
+
+  return cssFiles;
+}
+
+const cssFiles = await findCssFiles(stylesPath);
 
 for (const cssPath of cssFiles) {
   const before = statSync(cssPath).size;
