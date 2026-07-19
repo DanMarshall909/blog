@@ -40,6 +40,10 @@
         box-shadow: none !important;
         text-shadow: none !important;
         transition: none !important;
+        /* Print media renders CSS animations at frame 0. The code disclosure's
+           open animation starts at opacity:0/max-height:0, so leaving it on
+           blanks out every expanded code block. Disable animations outright. */
+        animation: none !important;
     }
 
     html {
@@ -190,6 +194,22 @@
         box-shadow: none !important;
     }
 
+    /* The dark theme paints code blocks with a wood/ebony texture from
+       high-specificity selectors carrying !important. Plain `pre {…}` print
+       rules lose that specificity tie and the texture survives into print as
+       unreadable dark-on-dark. Match the dark selectors exactly so the flat
+       light background wins regardless of the theme active when printing. */
+    [data-theme="dark"] body.article-detail .article .content :is(pre, pre.astro-code, .astro-code, .code-disclosure),
+    [data-theme="dark"] body.article-detail .article .content .code-disclosure pre {
+        background-color: var(--color-code-bg) !important;
+        background-image: none !important;
+        box-shadow: none !important;
+    }
+
+    [data-theme="dark"] body.article-detail .article .content pre code {
+        color: var(--color-print) !important;
+    }
+
     .code-disclosure {
         display: block !important;
         margin: var(--space-lg) 0 !important;
@@ -202,7 +222,36 @@
         display: block !important;
     }
 
+    /* Modern Chromium collapses closed <details> via the ::details-content
+       pseudo-element with content-visibility:hidden, which display:block on the
+       child cannot override. Reveal it so collapsed code isn't an empty box.
+       The generator also force-opens these before printing as a belt-and-braces
+       measure for engines that ignore this pseudo-element. */
+    .code-disclosure::details-content {
+        content-visibility: visible !important;
+    }
+
     .code-disclosure-summary {
+        display: none !important;
+    }
+
+    /* On screen, long code is clipped to a max-height with a fade and a toggle
+       button. Nothing can be toggled in print, so un-clip it, drop the
+       decorative fade, and hide the toggle controls. */
+    pre.code-truncated,
+    pre.code-expanded {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    pre.code-truncated::after {
+        display: none !important;
+        content: none !important;
+    }
+
+    .code-toggle,
+    .code-expand-toggle,
+    .code-wrap-toggle {
         display: none !important;
     }
 

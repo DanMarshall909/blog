@@ -92,6 +92,18 @@ async function generatePdfs() {
       const page = await context.newPage();
       await page.goto(url, { waitUntil: 'networkidle' });
 
+      // Expand every collapsible/truncated code block so the full source
+      // prints instead of a clipped box. The print stylesheet styles these,
+      // but a closed <details> is collapsed by the browser's UA layer, so it
+      // must be opened in the DOM rather than via CSS alone.
+      await page.evaluate(() => {
+        document.querySelectorAll('details').forEach((d) => { d.open = true; });
+        document.querySelectorAll('pre.code-truncated').forEach((pre) => {
+          pre.classList.remove('code-truncated');
+          pre.classList.add('code-expanded');
+        });
+      });
+
       await page.pdf({
         path: outPath,
         format: 'A4',
