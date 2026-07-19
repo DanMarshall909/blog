@@ -79,9 +79,11 @@ jobs:
             done < <(find previous-pages/docs/articles -name article.pdf -print0)
           fi
 
-      - name: Install Chromium for PDF generation
+      - name: Install WeasyPrint
         if: steps.pdf_changes.outputs.required == 'true'
-        run: npx playwright install --with-deps chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes weasyprint
 
       - name: Generate article PDFs
         if: steps.pdf_changes.outputs.required == 'true'
