@@ -32,7 +32,8 @@ jobs:
           fi
 
           if git diff --quiet "$BEFORE_SHA" "$AFTER_SHA" -- \
-            'src/content/articles/**' \
+            'src/content/articles/resume/**' \
+            'src/content/articles/resume-brief/**' \
             'src/components/**' \
             'src/layouts/**' \
             'src/pages/articles/**' \
@@ -71,13 +72,13 @@ jobs:
         if: steps.pdf_changes.outputs.required == 'false'
         shell: bash
         run: |
-          if [ -d previous-pages/docs/articles ]; then
-            while IFS= read -r -d '' pdf; do
-              relative_path="${pdf#previous-pages/docs/}"
-              mkdir -p "docs/$(dirname "$relative_path")"
-              cp "$pdf" "docs/$relative_path"
-            done < <(find previous-pages/docs/articles -name article.pdf -print0)
-          fi
+          for slug in resume resume-brief; do
+            pdf="previous-pages/docs/articles/$slug/article.pdf"
+            if [ -f "$pdf" ]; then
+              mkdir -p "docs/articles/$slug"
+              cp "$pdf" "docs/articles/$slug/article.pdf"
+            fi
+          done
 
       - name: Install Chromium for PDF generation
         if: steps.pdf_changes.outputs.required == 'true'

@@ -9,7 +9,7 @@ echo "Building site with Astro..."
 npm run build
 
 echo "Adding changes to git..."
-git add . ':(exclude).astro/data-store.json'
+git add . ':(exclude).astro/data-store.json' ':(exclude).astro/settings.json'
 
 status="$(git status --porcelain)"
 if [[ -n "$status" ]]; then
