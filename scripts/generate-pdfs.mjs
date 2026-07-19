@@ -1,129 +1,118 @@
-import { chromium } from 'playwright';
-import { readFileSync, existsSync, mkdirSync } from 'fs';
-import { readdir, writeFile } from 'fs/promises';
-import { resolve, join } from 'path';
-import { spawn } from 'child_process';
+import { existsSync, mkdirSync, statSync } from 'node:fs';
+import { readdir } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
+import { spawn } from 'node:child_process';
 
-const SITE_URL = 'http://localhost:4321';
+const SITE_URL = 'http://127.0.0.1:4321';
 const ARTICLES_SRC = resolve('src/content/articles');
 const OUTPUT_DIR = resolve('docs');
 
 async function getArticleSlugs() {
   const entries = await readdir(ARTICLES_SRC, { withFileTypes: true });
   return entries
-    .filter(e => e.isDirectory())
-    .map(e => e.name);
+    .filter(entry => entry.isDirectory())
+    .map(entry => entry.name)
+    .sort();
 }
 
-function startPreview() {
+function startStaticServer() {
+  const process = spawn(
+    'python3',
+    ['-m', 'http.server', '4321', '--bind', '127.0.0.1', '--directory', OUTPUT_DIR],
+    { stdio: ['ignore', 'pipe', 'pipe'] },
+  );
+
+  process.stdout.on('data', data => process.stdout.write(data));
+  process.stderr.on('data', data => process.stderr.write(data));
+
+  return process;
+}
+
+async function waitForServer(process, timeoutMs = 30_000) {
+  const startedAt = Date.now();
+
+  while (Date.now() - startedAt < timeoutMs) {
+    if (process.exitCode !== null) {
+      throw new Error(`Static server exited with code ${process.exitCode}`);
+    }
+
+    try {
+      const response = await fetch(SITE_URL);
+      if (response.ok) {
+        return;
+      }
+    } catch {
+      // The server is still starting.
+    }
+
+    await new Promise(resolvePromise => setTimeout(resolvePromise, 250));
+  }
+
+  throw new Error(`Static server timed out after ${timeoutMs / 1000} seconds`);
+}
+
+function renderPdf(url, outputPath) {
   return new Promise((resolvePromise, reject) => {
-    const proc = spawn('npx', ['astro', 'preview'], {
-      stdio: ['ignore', 'pipe', 'pipe'],
-      shell: true,
+    const process = spawn('weasyprint', [url, outputPath], {
+      stdio: 'inherit',
     });
 
-    let started = false;
-    const timeout = setTimeout(() => {
-      if (!started) {
-        proc.kill();
-        reject(new Error('Preview server timed out after 30s'));
-      }
-    }, 30_000);
-
-    proc.stdout.on('data', (data) => {
-      const text = data.toString();
-      if (!started && text.includes('Local')) {
-        started = true;
-        clearTimeout(timeout);
-        // Give it a moment for the server to be fully ready
-        setTimeout(() => resolvePromise(proc), 1000);
-      }
-    });
-
-    proc.stderr.on('data', (data) => {
-      const text = data.toString();
-      if (!started && text.includes('Local')) {
-        started = true;
-        clearTimeout(timeout);
-        setTimeout(() => resolvePromise(proc), 1000);
-      }
-    });
-
-    proc.on('error', reject);
-    proc.on('exit', (code) => {
-      if (!started) {
-        clearTimeout(timeout);
-        reject(new Error(`Preview server exited with code ${code}`));
+    process.on('error', reject);
+    process.on('exit', code => {
+      if (code === 0) {
+        resolvePromise();
+      } else {
+        reject(new Error(`WeasyPrint exited with code ${code}`));
       }
     });
   });
 }
 
 async function generatePdfs() {
-  console.log('Starting preview server...');
-  let server;
+  console.log('Starting static site server...');
+  const server = startStaticServer();
+
   try {
-    server = await startPreview();
-  } catch (err) {
-    console.error('Failed to start preview server:', err.message);
-    process.exit(1);
-  }
+    await waitForServer(server);
 
-  const slugs = await getArticleSlugs();
-  console.log(`Found ${slugs.length} articles to generate PDFs for...`);
+    const slugs = await getArticleSlugs();
+    console.log(`Found ${slugs.length} articles to generate PDFs for...`);
 
-  const browser = await chromium.launch();
-  const context = await browser.newContext({
-    viewport: { width: 1280, height: 900 },
-    deviceScaleFactor: 1,
-  });
+    const results = [];
 
-  const results = [];
-  for (const slug of slugs) {
-    const url = `${SITE_URL}/articles/${slug}/`;
-    const outDir = join(OUTPUT_DIR, 'articles', slug);
-    const outPath = join(outDir, 'article.pdf');
+    for (const slug of slugs) {
+      const url = `${SITE_URL}/articles/${slug}/`;
+      const outputDirectory = join(OUTPUT_DIR, 'articles', slug);
+      const outputPath = join(outputDirectory, 'article.pdf');
 
-    if (!existsSync(outDir)) {
-      mkdirSync(outDir, { recursive: true });
+      if (!existsSync(outputDirectory)) {
+        mkdirSync(outputDirectory, { recursive: true });
+      }
+
+      try {
+        await renderPdf(url, outputPath);
+        const sizeKb = (statSync(outputPath).size / 1024).toFixed(1);
+        console.log(`  ✓ ${slug} (${sizeKb} KB)`);
+        results.push({ slug, success: true });
+      } catch (error) {
+        console.error(`  ✗ ${slug}: ${error.message}`);
+        results.push({ slug, success: false, error: error.message });
+      }
     }
 
-    try {
-      const page = await context.newPage();
-      await page.goto(url, { waitUntil: 'networkidle' });
+    const succeeded = results.filter(result => result.success).length;
+    const failed = results.length - succeeded;
+    console.log(`\nDone — ${succeeded} succeeded, ${failed} failed`);
 
-      await page.pdf({
-        path: outPath,
-        format: 'A4',
-        printBackground: true,
-        margin: { top: '10mm', bottom: '10mm', left: '12mm', right: '12mm' },
-      });
-
-      const stats = readFileSync(outPath);
-      const sizeKb = (stats.length / 1024).toFixed(1);
-      console.log(`  ✓ ${slug} (${sizeKb} KB)`);
-      results.push({ slug, success: true, path: outPath });
-      await page.close();
-    } catch (err) {
-      console.error(`  ✗ ${slug}: ${err.message}`);
-      results.push({ slug, success: false, error: err.message });
+    if (failed > 0) {
+      throw new Error('Some PDFs failed to generate');
     }
-  }
-
-  await browser.close();
-
-  if (server) {
-    server.kill();
-  }
-
-  const succeeded = results.filter(r => r.success).length;
-  const failed = results.filter(r => !r.success).length;
-  console.log(`\nDone — ${succeeded} succeeded, ${failed} failed`);
-
-  if (failed > 0) {
-    console.error('Some PDFs failed to generate');
-    process.exit(1);
+  } finally {
+    server.kill('SIGTERM');
   }
 }
 
-generatePdfs();
+generatePdfs().catch(error => {
+  console.error(error.message);
+  process.exit(1);
+});
