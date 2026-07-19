@@ -16,13 +16,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Determine whether PDFs need regenerating
         id: pdf_changes
         shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
         run: |
-          if git diff --quiet HEAD^ HEAD -- \
+          if [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ] || \
+             ! git cat-file -e "$BEFORE_SHA^{commit}"; then
+            echo "required=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if git diff --quiet "$BEFORE_SHA" "$AFTER_SHA" -- \
             'src/content/articles/**' \
             'src/components/**' \
             'src/layouts/**' \
@@ -51,6 +60,9 @@ jobs:
           cache: npm
 
       - run: npm ci
+
+      - name: Sync article assets
+        run: npm run sync-article-assets
 
       - name: Build site without automatically generating PDFs
         run: npm --ignore-scripts run build
