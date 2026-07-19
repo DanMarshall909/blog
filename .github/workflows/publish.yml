@@ -15,6 +15,44 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine whether PDFs need regenerating
+        id: pdf_changes
+        shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+        run: |
+          if [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ] || \
+             ! git cat-file -e "$BEFORE_SHA^{commit}"; then
+            echo "required=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if git diff --quiet "$BEFORE_SHA" "$AFTER_SHA" -- \
+            'src/content/articles/**' \
+            'src/components/**' \
+            'src/layouts/**' \
+            'src/pages/articles/**' \
+            'src/styles/**' \
+            'public/**' \
+            'scripts/generate-pdfs.mjs' \
+            'astro.config.*' \
+            'package.json' \
+            'package-lock.json'; then
+            echo "required=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "required=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out previously published files
+        if: steps.pdf_changes.outputs.required == 'false'
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: previous-pages
 
       - uses: actions/setup-node@v4
         with:
@@ -23,7 +61,31 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build
+      - name: Sync article assets
+        run: npm run sync-article-assets
+
+      - name: Build site without automatically generating PDFs
+        run: npm --ignore-scripts run build
+
+      - name: Restore existing PDFs
+        if: steps.pdf_changes.outputs.required == 'false'
+        shell: bash
+        run: |
+          if [ -d previous-pages/docs/articles ]; then
+            while IFS= read -r -d '' pdf; do
+              relative_path="${pdf#previous-pages/docs/}"
+              mkdir -p "docs/$(dirname "$relative_path")"
+              cp "$pdf" "docs/$relative_path"
+            done < <(find previous-pages/docs/articles -name article.pdf -print0)
+          fi
+
+      - name: Install Chromium for PDF generation
+        if: steps.pdf_changes.outputs.required == 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Generate article PDFs
+        if: steps.pdf_changes.outputs.required == 'true'
+        run: npm run pdfs
 
       - uses: peaceiris/actions-gh-pages@v4
         with:
