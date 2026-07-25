@@ -43,7 +43,8 @@ try {
     }
 
     New-Item -ItemType Directory -Path $deployDocs | Out-Null
-    Copy-Item -Path (Join-Path $PSScriptRoot 'docs' '*') `
+    $sourceDocs = Join-Path (Join-Path $PSScriptRoot 'docs') '*'
+    Copy-Item -Path $sourceDocs `
         -Destination $deployDocs -Recurse -Force
 
     Push-Location $deployWorktree
