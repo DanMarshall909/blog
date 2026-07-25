@@ -31,7 +31,7 @@ mkdir -p "$deploy_worktree/docs"
 cp -a docs/. "$deploy_worktree/docs/"
 (
   cd "$deploy_worktree"
-  git add -A docs
+  git add -f -A docs
   if [[ -n "$(git status --porcelain)" ]]; then
     git commit -m "Deploy built site $(date '+%Y-%m-%d %H:%M:%S')"
     git push origin HEAD:gh-pages --force

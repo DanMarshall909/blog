@@ -49,7 +49,7 @@ try {
 
     Push-Location $deployWorktree
     try {
-        git add -A docs
+        git add -f -A docs
         $deployStatus = git status --porcelain
 
         if ($deployStatus) {
