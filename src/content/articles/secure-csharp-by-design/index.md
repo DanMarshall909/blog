@@ -4,6 +4,11 @@ author: Dan Marshall
 date: "2026-07-25"
 tags: ["C#", "security", "software-design", "dependency-management"]
 description: "Secure C# begins with system boundaries and disciplined use of the language: narrow APIs, immutable state, short-lived secrets and deliberate dependencies."
+heroImage: /articles/secure-csharp-by-design/hero.png
+heroImageCrop: true
+heroImagePosition: "62% 50%"
+headerImagePosition: "62% 48%"
+cardImagePosition: "62% 50%"
 ---
 
 Secure software involves more than using secure methods or ticking items off the OWASP Top 10. It depends on the design of the system as a whole.

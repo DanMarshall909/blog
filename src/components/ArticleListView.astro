@@ -55,6 +55,8 @@ function mapArticle(article: ArticleEntry, index: number) {
     </button>
   </div>
 
+  <slot name="header" />
+
   <div id="view-container" data-view="grid">
     <div class={gridClass}>
       {articles.map((article, index) => {

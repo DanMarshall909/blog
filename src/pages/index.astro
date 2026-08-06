@@ -132,17 +132,17 @@ const [featuredArticle, ...recentArticles] = articles;
       }
 
       <section class="recent-writing" aria-labelledby="recent-title">
-        <div class="page-header-row">
-          <div class="section-heading">
-            <p class="eyebrow">Recent writing</p>
-            <h2 id="recent-title">Notes from the workbench</h2>
-          </div>
-        </div>
-
         <ArticleListView
           articles={recentArticles}
           storageKey="view-mode-home"
-        />
+        >
+          <div slot="header" class="page-header-row">
+            <div class="section-heading">
+              <p class="eyebrow">Recent writing</p>
+              <h2 id="recent-title">Notes from the workbench</h2>
+            </div>
+          </div>
+        </ArticleListView>
       </section>
     </div>
   </div>

@@ -54,6 +54,10 @@
     padding: 0;
 }
 
+.recent-writing .view-toggle {
+    margin-bottom: var(--space-lg);
+}
+
 .recent-writing #view-container[data-view="list"] {
     --color-accent: #4a1b0b;
     --color-accent-hover: #261006;
