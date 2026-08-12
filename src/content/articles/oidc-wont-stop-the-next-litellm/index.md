@@ -1,5 +1,5 @@
 ---
-title: "OIDC Won’t Stop the Next LiteLLM type attack, but it Will Limit the Blast Radius"
+title: "OIDC Won’t Stop the Next LiteLLM-Type Attack, but It Will Limit the Blast Radius"
 author: Dan Marshall
 date: "2026-08-13"
 tags: ["security", "oidc", "github-actions", "supply-chain", "devops"]
@@ -23,6 +23,8 @@ OIDC does not stop malicious code from running inside a trusted build. What it c
 
 On 24 March 2026, malicious versions `1.82.7` and `1.82.8` of the LiteLLM Python package were published after an attacker obtained access to a maintainer’s PyPI account.
 
+LiteLLM was not the beginning of the story. [JFrog’s incident analysis](https://research.jfrog.com/post/litellm-compromised-teampcp/) traces the path through a compromised Trivy GitHub Action: credentials harvested from a privileged CI/CD pipeline were then used to reach LiteLLM’s publishing process. That is the supply-chain pattern worth paying attention to — compromise a trusted tool upstream, steal pipeline credentials, then use those credentials to compromise something downstream that other organisations trust.
+
 According to the [LiteLLM security incident](https://github.com/BerriAI/litellm/issues/24518), the malicious package attempted to collect credentials including:
 
 - environment variables
@@ -37,6 +39,10 @@ Version `1.82.7` embedded the payload in `litellm/proxy/proxy_server.py` and tri
 
 Version `1.82.8` was nastier. It added a Python `.pth` file that could execute during interpreter startup. The application did not even have to deliberately import LiteLLM for the malicious code to run.
 
+Later reporting made the potential scale harder to dismiss. Researchers analysing an alleged attacker archive reported 153 GB of material: 433,909 files, including 118,829 CI/CD runner dumps attributed to 2,488 organisations. Those figures and any company names associated with them should be treated as exposure indicators, not as independently confirmed breaches of every named organisation. But the data is a useful illustration of the risk: CI runners often contain signing material, cloud credentials and AI-provider API keys in one very attractive place.
+
+The campaign was also broader than one Python package. [CloudSEK’s analysis](https://www.cloudsek.com/blog/the-scanner-was-the-weapon-36-months-of-precision-supply-chain-attacks-against-devsecops-infrastructure) describes the use of a `.pth` startup hook and the collection of cloud, Kubernetes and database credentials. In other words, the attack path was not merely “someone installed a bad library”; it was an upstream CI compromise that could create a downstream credential-harvesting event across many environments.
+
 If that happened inside a CI runner full of long-lived credentials, the attacker could exfiltrate secrets that remained useful long after the job finished.
 
 That is the part OIDC changes.
@@ -47,14 +53,11 @@ That is the part OIDC changes.
 
 The traditional deployment model looks something like this:
 
-```text
-GitHub Actions
-    |
-    | AZURE_CLIENT_SECRET
-    | AWS_SECRET_ACCESS_KEY
-    | REGISTRY_PASSWORD
-    v
-Cloud / registry / deployment target
+```mermaid
+flowchart LR
+    GHA["GitHub Actions"] -->|"AZURE_CLIENT_SECRET<br/>AWS_SECRET_ACCESS_KEY<br/>REGISTRY_PASSWORD"| Target["Cloud / registry / deployment target"]
+    Attacker["Compromised dependency"] -.->|"Steals reusable credentials"| GHA
+    Attacker -.->|"Credentials remain useful later"| Target
 ```
 
 The credentials are created ahead of time, stored as GitHub secrets and injected into the job when required.
@@ -84,16 +87,12 @@ GitHub describes the model as replacing long-lived cloud secrets with tokens tha
 
 Conceptually:
 
-```text
-GitHub Actions
-    |
-    | signed OIDC identity
-    v
-Cloud identity provider
-    |
-    | short-lived access token
-    v
-Deployment target
+```mermaid
+flowchart LR
+    GHA["GitHub Actions"] -->|"Signed OIDC identity"| IdP["Cloud identity provider"]
+    IdP -->|"Short-lived access token"| Target["Deployment target"]
+    Attacker["Compromised dependency"] -.->|"Can abuse current job"| GHA
+    Expiry["Token expires"] -.-> Target
 ```
 
 There is no reusable Azure client secret or AWS access key sitting in the repository secrets waiting to be copied.
@@ -123,6 +122,22 @@ jobs:
 
       - run: az webapp deploy ...
 ```
+
+Under the covers, the `id-token: write` permission allows the job to ask GitHub for a signed OIDC token. Actions such as `azure/login` handle this exchange for you, but the underlying request is roughly:
+
+```yaml
+- name: Request a GitHub OIDC token
+  shell: bash
+  run: |
+    oidc_token="$(curl -sS \
+      -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+      "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=api://AzureADTokenExchange" \
+      | jq -r .value)"
+
+    # Exchange $oidc_token with the cloud provider. Never print it.
+```
+
+GitHub signs that token with claims about the repository, branch and environment. The cloud provider validates those claims against its federated-identity policy, then issues the short-lived credential. The workflow normally uses `azure/login` rather than implementing this request itself.
 
 The identifiers above are not equivalent to a reusable client secret. The useful credential is obtained dynamically after GitHub proves the identity of the workflow.
 
@@ -258,6 +273,26 @@ A better architecture separates those responsibilities and passes immutable arti
 The build job should not need production credentials at all.
 
 The production deployment job should ideally consume an already-built artifact and contain as little arbitrary third-party execution as possible.
+
+```mermaid
+flowchart LR
+    Source["Source"] --> Build["Build"]
+    Build --> Test["Test"]
+    Test --> Artifact["Immutable artifact"]
+    Artifact --> Deploy["Production deploy"]
+    OIDC["OIDC"] --> Deploy
+    Deploy --> Production["Production"]
+    Dependencies["Third-party dependencies"] --> Build
+
+    subgraph Untrusted["Build trust boundary"]
+        Build
+        Test
+    end
+
+    subgraph Privileged["Privileged trust boundary"]
+        Deploy
+    end
+```
 
 That does not eliminate supply-chain attacks, but it dramatically reduces what a compromised build dependency can reach.
 

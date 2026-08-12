@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Picture from '../../components/Picture.astro';
+import MermaidDiagrams from '../../components/MermaidDiagrams.astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
@@ -101,6 +102,7 @@ const isResumeArticle = urlSlug === 'resume' || urlSlug === 'resume-brief';
         />
       )}
       <Content />
+      <MermaidDiagrams />
     </section>
   </article>
 
