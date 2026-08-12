@@ -12,7 +12,22 @@
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: 'strict',
-      theme: 'dark',
+      theme: 'base',
+      themeVariables: {
+        background: 'transparent',
+        primaryColor: 'transparent',
+        primaryBorderColor: '#4b5563',
+        primaryTextColor: '#1f2937',
+        secondaryColor: 'transparent',
+        secondaryBorderColor: '#4b5563',
+        tertiaryColor: 'transparent',
+        tertiaryBorderColor: '#4b5563',
+        clusterBkg: 'transparent',
+        clusterBorder: '#6b7280',
+        lineColor: '#4b5563',
+        edgeLabelBackground: 'transparent',
+        fontFamily: 'inherit',
+      },
       flowchart: { useMaxWidth: true, htmlLabels: true },
     });
 
@@ -44,6 +59,23 @@
     min-width: 38rem;
     max-width: 100%;
     margin: 0 auto;
+  }
+
+  .mermaid-diagram svg .node rect,
+  .mermaid-diagram svg .node polygon,
+  .mermaid-diagram svg .node circle,
+  .mermaid-diagram svg .cluster rect {
+    fill: transparent !important;
+  }
+
+  .mermaid-diagram svg .nodeLabel,
+  .mermaid-diagram svg .edgeLabel {
+    color: #1f2937;
+  }
+
+  .mermaid-diagram svg .labelBkg,
+  .mermaid-diagram svg .edgeLabel p {
+    background: transparent !important;
   }
 
   @media (max-width: 48rem) {
