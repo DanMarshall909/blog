@@ -1,5 +1,5 @@
 ---
-title: "OIDC Won’t Stop the Next LiteLLM. It Will Limit the Blast Radius"
+title: "OIDC Won’t Stop the Next LiteLLM type attack, but it Will Limit the Blast Radius"
 author: Dan Marshall
 date: "2026-08-13"
 tags: ["security", "oidc", "github-actions", "supply-chain", "devops"]
@@ -13,7 +13,7 @@ A build runner can have access to source control, package registries, cloud subs
 
 That raises an interesting question: **would OpenID Connect have protected organisations affected by the LiteLLM attack?**
 
-The answer is yes, substantially — but not completely.
+The answer is yes, substantially, but not completely.
 
 OIDC does not stop malicious code from running inside a trusted build. What it changes is the value and lifetime of the credentials that code can steal.
 
