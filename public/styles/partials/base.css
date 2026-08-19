@@ -34,11 +34,13 @@ html {
 
 body {
     overflow-x: clip;
+    /* Now that backgrounds are translucent (theme.css) and the page has a
+       fixed animated canvas behind everything, body must cover the full
+       viewport even on short pages — otherwise the canvas shows raw below
+       body's bottom edge but blended-with-body-tint above it, a visible
+       seam where the animated background reads as a different colour. */
+    min-height: 100vh;
     background-color: var(--color-background);
-    background-image: var(--texture-light-wood);
-    background-repeat: repeat;
-    background-size: var(--texture-size-lg);
-    background-attachment: scroll;
     color: var(--color-primary);
     font-family: var(--font-primary);
     font-size: var(--text-base);
@@ -46,10 +48,6 @@ body {
     transition:
         background-color var(--transition-smooth),
         color var(--transition-smooth);
-}
-
-[data-theme="dark"] body {
-    background-image: var(--texture-ebony);
 }
 
 /* ── Typography ───────────────────────────────────────────────────────────── */
@@ -63,8 +61,8 @@ h6 {
     margin-bottom: var(--space-md);
     color: var(--color-primary);
     font-family: var(--font-heading);
-    font-weight: 700;
-    line-height: 1.2;
+    font-weight: 400;
+    line-height: 1.15;
 }
 
 h1 {
@@ -159,9 +157,7 @@ td {
 blockquote {
     margin: var(--space-lg) 0;
     padding: var(--space-md) var(--space-lg);
-    border-left: 4px solid var(--color-accent);
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    background: linear-gradient(135deg, var(--color-code-bg), transparent);
+    border-left: 2px solid var(--color-border);
     color: var(--color-muted);
     font-style: italic;
 }

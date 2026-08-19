@@ -1,42 +1,47 @@
 /* ── Theme tokens ─────────────────────────────────────────────────────────── */
 
 :root {
-    /* Base colors — only these need changing to retheme */
-    --color-primary: #7e6435;
-    --color-secondary: #43582b;
-    --color-primary-dark: #9bb39d;
-    --color-secondary-dark: #b79c73;
-    --color-background-dark: #1c1814;
-    --color-header-start: #8fa874;
-    --color-header-end: #4d5f3e;
-    --color-pill-bg: #e6f0d8;
-    --color-pill-border: #bed09d;
-    --color-pill-text: #31520f;
+    /* Palette primitives — retheming starts here. */
+--palette-neutral-hue: 250;
+/* Amber + neutral blue-grey */
+    --palette-neutral-hue: 245;
+    --palette-accent-hue: 75;
+    --palette-ink: oklch(0.24 0.014 var(--palette-neutral-hue));
+    --palette-ink-dark: oklch(0.93 0.007 var(--palette-neutral-hue));
+    --palette-canvas: oklch(0.975 0.005 var(--palette-neutral-hue));
+    --palette-canvas-dark: oklch(0.185 0.012 var(--palette-neutral-hue));
+    --palette-accent: oklch(0.5 0.11 var(--palette-accent-hue));
+    --palette-accent-dark: oklch(0.74 0.1 var(--palette-accent-hue));
 
-    /* Base overlay colors */
-    --color-light: rgb(223 222 222);
-    --color-dark: black;
+    /* Semantic colors derived from the palette primitives. */
+    --color-primary: var(--palette-ink);
+    --color-secondary: oklch(from var(--palette-ink) calc(l + 0.13) c h);
+    --color-primary-dark: var(--palette-ink-dark);
+    --color-secondary-dark: oklch(from var(--palette-ink-dark) calc(l - 0.13) c h);
+    --color-background-dark: oklch(from var(--palette-canvas-dark) l c h / 0.88);
+    --color-line-tint: oklch(from var(--palette-canvas) calc(l - 0.125) c h);
+    --color-line-tint-dark: oklch(from var(--palette-canvas-dark) calc(l + 0.155) c h);
 
-    /* Derived overlay colors */
-    --color-on-gradient: var(--color-light);
-    --color-on-gradient-soft: rgb(from var(--color-light) r g b / 0.95);
-    --color-on-gradient-muted: rgb(from var(--color-light) r g b / 0.78);
-    --color-print: var(--color-dark);
+    /* Print */
+    --color-print: black;
 
     /* Derived palette */
-    --color-muted: oklch(from var(--color-secondary) calc(l + 0.17) calc(c + 0.02) h);
-    --color-accent: oklch(from var(--color-secondary) calc(l + 0.19) calc(c + 0.065) h);
-    --color-accent-hover: oklch(from var(--color-accent) calc(l - 0.07) c h);
-    --color-background: oklch(from var(--color-primary) 0.97 0.008 h);
-    --color-surface: oklch(from var(--color-primary) 1 0 h);
-    --color-border: oklch(from var(--color-primary) 0.885 0.015 h);
-    --color-code-bg: oklch(from var(--color-primary) 0.953 0.010 h);
-    --color-gradient-start: oklch(from var(--color-primary) calc(l + 0.1) calc(c + 0.02) h);
-    --color-gradient-end: oklch(from var(--color-primary) calc(l + 0.35) calc(c - 0.04) h);
+    --color-muted: oklch(from var(--color-secondary) calc(l + 0.17) calc(c + 0.005) h);
+    --color-accent: var(--palette-accent);
+    --color-accent-hover: oklch(from var(--palette-accent) calc(l - 0.08) c h);
+    --color-background: oklch(from var(--palette-canvas) l c h / 0.88);
+    --color-surface: oklch(from var(--palette-canvas) calc(l + 0.015) c h / 0.8);
+    --color-border: var(--color-line-tint);
+    --color-code-bg: oklch(from var(--palette-canvas) calc(l - 0.02) c h / 0.85);
+    --color-code-border: oklch(from var(--palette-canvas-dark) calc(l + 0.115) c h);
+    --color-code-surface: oklch(from var(--palette-canvas-dark) calc(l + 0.005) c h / 0.85);
+    --color-code-scrollbar: oklch(from var(--palette-canvas-dark) calc(l + 0.215) c h);
+    --color-code-control: oklch(from var(--palette-canvas-dark) calc(l + 0.435) c h);
+    --color-code-control-hover: var(--palette-ink-dark);
 
     /* Typography */
-    --font-primary: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-heading: "Fraunces", var(--font-primary);
+    --font-primary: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-heading: "Instrument Serif", Georgia, "Times New Roman", serif;
     --font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
 
     /* Spacing */
@@ -48,7 +53,7 @@
     --space-2xl: 3rem;
     --space-3xl: 4rem;
     --space-4xl: 5rem;
-    
+
     /* Typography scale */
     --text-xs: 0.75rem;
     --text-sm: 0.875rem;
@@ -67,32 +72,19 @@
     --article-max-width: 51.25rem;
     --sidebar-width: 13.75rem;
     --page-gutter: clamp(1rem, 4vw, 4rem);
-    --border-radius: 0.5rem;
-    --radius-md: 0.65rem;
+    --border-radius: 3px;
+    --radius-md: 3px;
     --space-card: clamp(1.25rem, 2.4vw, 2.25rem);
-    --shadow-card: 0 18px 38px rgb(0 0 0 / 0.22);
-    --texture-light-wood: url("/backgrounds/light-wood.webp");
-    --texture-wood: url("/backgrounds/wood.webp");
-    --texture-ebony: url("/backgrounds/ebony.webp");
-    --texture-size-lg: 28rem 28rem;
-    --texture-size-md: 24rem 24rem;
-    --texture-size-sm: 18rem 18rem;
-    --paper-surface:
-        linear-gradient(rgb(255 238 199 / 0.32), rgb(245 213 154 / 0.32)),
-        var(--texture-light-wood);
-    --paper-border: rgb(15 9 5 / 0.48);
 
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-header-text: 0 2px 8px rgb(0 0 0 / 0.24);
+    /* Shadows — kept minimal; hairline borders carry most separation */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+    --shadow-md: 0 2px 8px 0 rgb(0 0 0 / 0.06);
+    --shadow-lg: 0 4px 16px 0 rgb(0 0 0 / 0.08);
 
     /* Shared interaction values */
-    --interactive-hover-bg: rgb(from var(--color-accent) r g b / 0.08);
-    --interactive-soft-bg: rgb(from var(--color-accent) r g b / 0.06);
-    --interactive-hover-border: rgb(from var(--color-accent) r g b / 0.45);
-    --on-gradient-hover-bg: rgb(255 255 255 / 0.16);
+    --interactive-hover-bg: rgb(from var(--color-accent) r g b / 0.06);
+    --interactive-soft-bg: rgb(from var(--color-accent) r g b / 0.05);
+    --interactive-hover-border: rgb(from var(--color-accent) r g b / 0.5);
 
     /* Transitions */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -104,14 +96,9 @@
     --color-secondary: var(--color-secondary-dark);
     --color-background: var(--color-background-dark);
     --color-muted: oklch(from var(--color-secondary) calc(l - 0.14) c h);
-    --color-surface: oklch(from var(--color-background) calc(l + 0.05) c h);
-    --color-border: oklch(from var(--color-background) calc(l + 0.12) c h);
-    --color-code-bg: oklch(from var(--color-background) calc(l + 0.02) c h);
-    --color-gradient-start: oklch(from var(--color-background) calc(l + 0.45) calc(c + 0.07) h);
-    --color-gradient-end: oklch(from var(--color-background) calc(l + 0.15) calc(c + 0.05) h);
-    --color-header-start: oklch(from var(--color-background) calc(l + 0.45) calc(c + 0.07) h);
-    --color-header-end: oklch(from var(--color-background) calc(l + 0.1) calc(c + 0.02) h);
-    --color-pill-bg: #4b3824;
-    --color-pill-border: #9c7f55;
-    --color-pill-text: #f4e3c7;
+    --color-accent: var(--palette-accent-dark);
+    --color-accent-hover: oklch(from var(--palette-accent-dark) calc(l + 0.08) c h);
+    --color-surface: oklch(from var(--color-background) calc(l + 0.035) c h / 0.8);
+    --color-border: var(--color-line-tint-dark);
+    --color-code-bg: oklch(from var(--color-background) calc(l + 0.02) c h / 0.85);
 }

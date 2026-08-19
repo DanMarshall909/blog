@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import GlassDodecahedron from "../components/GlassDodecahedron.astro";
 
 interface Props {
   title: string;
@@ -51,6 +52,10 @@ const resolvedHeaderVariant = Astro.props.headerVariant ??
     <link rel="stylesheet" href="/styles/main.css" />
   </head>
   <body class={bodyClass}>
+    <div class="page-scene" aria-hidden="true">
+      <GlassDodecahedron />
+    </div>
+
     <!-- Mobile hamburger — hidden on desktop -->
     <button
       class="hamburger"
@@ -158,31 +163,32 @@ const resolvedHeaderVariant = Astro.props.headerVariant ??
     </aside>
 
     <header class={`header header-${resolvedHeaderVariant}`} data-home-link="/">
-      <div class="site-background-slideshow" aria-hidden="true"></div>
       <div class="content-wrap site-shell">
-        <div class="site-brand">
-          <a href="/">{siteTitle}</a>
-        </div>
-        <nav class="site-nav" aria-label="Primary navigation">
-          <a href="/" data-tooltip="Latest writing and featured posts"
-            >Writing</a
-          >
-          <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a>
-          <a href="/archive/" data-tooltip="Browse every article">Archive</a>
-          <a href="/articles/resume/" data-tooltip="Read my current resume"
-            >Resume</a
-          >
-          <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a>
-          <a
-            href="mailto:danmarshall909@gmail.com"
-            data-tooltip="Send me an email">Contact</a
-          >
-        </nav>
-        <slot name="header">
-          <div class="header-copy">
-            <p class="description">{siteDescription}</p>
+        <div class="header-content-group">
+          <div class="site-brand">
+            <a href="/">{siteTitle}</a>
           </div>
-        </slot>
+          <nav class="site-nav" aria-label="Primary navigation">
+            <a href="/" data-tooltip="Latest writing and featured posts"
+              >Writing</a
+            >
+            <a href="/topics/" data-tooltip="Browse articles by topic">Topics</a>
+            <a href="/archive/" data-tooltip="Browse every article">Archive</a>
+            <a href="/articles/resume/" data-tooltip="Read my current resume"
+              >Resume</a
+            >
+            <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a>
+            <a
+              href="mailto:danmarshall909@gmail.com"
+              data-tooltip="Send me an email">Contact</a
+            >
+          </nav>
+          <slot name="header">
+            <div class="header-copy">
+              <p class="description">{siteDescription}</p>
+            </div>
+          </slot>
+        </div>
       </div>
     </header>
 

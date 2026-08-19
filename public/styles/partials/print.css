@@ -56,7 +56,7 @@
         line-height: 1.45;
     }
 
-    .site-background-slideshow,
+    .gd-canvas,
     .desktop-topbar,
     .hamburger,
     .drawer,
@@ -187,26 +187,16 @@
 
     pre,
     pre.astro-code,
-    .astro-code {
+    .astro-code,
+    .code-disclosure,
+    .code-disclosure pre {
         border: 1px solid var(--color-border) !important;
         background: var(--color-code-bg) !important;
         background-image: none !important;
         box-shadow: none !important;
     }
 
-    /* The dark theme paints code blocks with a wood/ebony texture from
-       high-specificity selectors carrying !important. Plain `pre {…}` print
-       rules lose that specificity tie and the texture survives into print as
-       unreadable dark-on-dark. Match the dark selectors exactly so the flat
-       light background wins regardless of the theme active when printing. */
-    [data-theme="dark"] body.article-detail .article .content :is(pre, pre.astro-code, .astro-code, .code-disclosure),
-    [data-theme="dark"] body.article-detail .article .content .code-disclosure pre {
-        background-color: var(--color-code-bg) !important;
-        background-image: none !important;
-        box-shadow: none !important;
-    }
-
-    [data-theme="dark"] body.article-detail .article .content pre code {
+    pre code {
         color: var(--color-print) !important;
     }
 
@@ -300,7 +290,7 @@
     /* Resume print layout */
     body:is(.article-resume, .article-resume-brief) {
         color: #555 !important;
-        font-family: "Source Sans 3", "Trebuchet MS", Arial, sans-serif;
+        font-family: var(--font-primary), "Trebuchet MS", Arial, sans-serif;
         font-size: 9.2pt;
         line-height: 1.2;
     }
@@ -341,7 +331,7 @@
         padding-bottom: 3mm;
         border-bottom: 1px solid #f05a28;
         color: #111 !important;
-        font-family: "Source Sans 3", "Trebuchet MS", Arial, sans-serif;
+        font-family: var(--font-primary), "Trebuchet MS", Arial, sans-serif;
         font-size: 23pt !important;
         font-weight: 400;
         letter-spacing: -0.02em;
