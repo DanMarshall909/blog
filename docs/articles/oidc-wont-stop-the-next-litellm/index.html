@@ -1,0 +1,655 @@
+<!DOCTYPE html><html lang="en" data-theme="jetbrains"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>OIDC Won’t Stop the Next LiteLLM-Type Attack, but It Will Limit the Blast Radius - Technical Scratches</title><meta name="description" content="The LiteLLM compromise shows why CI/CD secrets are dangerous. OIDC cannot stop malicious code, but it can dramatically reduce what attackers keep."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer"><link rel="stylesheet" href="/styles/fonts.css"><link rel="stylesheet" href="/styles/main.css"><style>.gd-canvas[data-astro-cid-4ef23wdl]{pointer-events:none;width:100%;max-width:none;height:100%;max-height:none;display:block;position:absolute;inset:0}
+.mermaid-diagram{margin:1.75rem 0;overflow-x:auto}.mermaid-diagram svg{min-width:38rem;max-width:100%;margin:0 auto;display:block}.mermaid-diagram svg .node rect,.mermaid-diagram svg .node polygon,.mermaid-diagram svg .node circle,.mermaid-diagram svg .cluster rect{fill:#0000!important}.mermaid-diagram svg .nodeLabel,.mermaid-diagram svg .edgeLabel{color:#1f2937}.mermaid-diagram svg .labelBkg,.mermaid-diagram svg .edgeLabel p{background:0 0!important}@media (width<=48rem){.mermaid-diagram svg{min-width:32rem}}
+</style></head><body class="article-detail article-oidc-wont-stop-the-next-litellm"><div class="page-scene" aria-hidden="true"><canvas id="gd-canvas" class="gd-canvas" aria-hidden="true" data-astro-cid-4ef23wdl></canvas><script type="module" src="/_astro/GlassDodecahedron.astro_astro_type_script_index_0_lang.DmFvVFEo.js"></script></div><!-- Mobile hamburger — hidden on desktop --><button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu" data-tooltip="Open site menu"><span></span><span></span><span></span></button><!-- Mobile drawer --><div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div><aside class="drawer" id="drawer"><div class="drawer-header"><button class="drawer-close" onclick="closeDrawer()" aria-label="Close" data-tooltip="Close the menu">✕</button></div><div class="drawer-body" id="drawer-body"><nav class="drawer-primary-nav" aria-label="Primary navigation"><div class="drawer-nav-title">Elsewhere</div><a href="/" data-tooltip="Back to the homepage"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 9 12 2l9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"></path><path d="M9 22V12h6v10"></path></svg><span>Home</span></a><a href="/" data-tooltip="Latest writing and featured posts"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 1 4 18.5"></path><path d="M8 7h8"></path><path d="M8 11h7"></path></svg><span>Writing</span></a><a href="/topics/" data-tooltip="Browse articles by topic"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.59 13.41 12 22l-8.59-8.59A2 2 0 0 1 3 12V4a1 1 0 0 1 1-1h8a2 2 0 0 1 1.41.59l7.18 7.18a2 2 0 0 1 0 2.64Z"></path><path d="M7.5 7.5h.01"></path></svg><span>Topics</span></a><a href="/archive/" data-tooltip="Browse every article"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="1"></rect><path d="M5 9v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"></path><path d="M10 13h4"></path></svg><span>Archive</span></a><a href="/articles/resume/" data-tooltip="Read my current resume"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 3H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path><path d="M9 8h6"></path><path d="M9 12h6"></path><path d="M9 16h3"></path></svg><span>Resume</span></a><a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><span>Email Dan</span></a><a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span>LinkedIn</span></a><a href="https://github.com/DanMarshall909" data-tooltip="View my GitHub profile"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.5 2-5-2-7-2"></path></svg><span>GitHub</span></a><a href="/feed.xml" data-tooltip="Subscribe to the RSS feed"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg><span>RSS</span></a><button class="drawer-print-button" type="button" onclick="window.print()"><svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>Save PDF</span></button></nav></div></aside><header class="header header-article" data-home-link="/"><div class="content-wrap site-shell"><div class="header-content-group"><div class="site-brand"><a href="/">Technical Scratches</a></div><nav class="site-nav" aria-label="Primary navigation"><a href="/" data-tooltip="Latest writing and featured posts">Writing</a><a href="/topics/" data-tooltip="Browse articles by topic">Topics</a><a href="/archive/" data-tooltip="Browse every article">Archive</a><a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a><a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a><a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Contact</a></nav><div class="header-copy"><p class="description">Thoughts on software engineering and life as a developer</p></div></div></div></header><main id="content"><div class="content-wrap site-shell"><article id="article-start" class="article" style="--hero-image-position: center; --hero-image-scale: 1;"><section class="content prose"><div class="title-with-image"><div class="article-title-actions"><h1>OIDC Won’t Stop the Next LiteLLM-Type Attack, but It Will Limit the Blast Radius</h1><a class="pdf-button article-pdf-button" href="#article-start" onclick="event.preventDefault(); window.print();" aria-label="Print or save this article as a PDF"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Print / Save PDF</span></a></div><div class="article-meta"><p class="publish-date">13 August 2026</p><p class="reading-time">9 min read</p></div></div><p>The LiteLLM supply-chain compromise is a useful reminder that the most dangerous place to steal credentials is often not a developer laptop. It is the CI/CD runner.</p>
+<p>A build runner can have access to source control, package registries, cloud subscriptions, deployment environments, signing infrastructure and API keys. Compromise a dependency that executes there and you may not need to attack any of those systems directly. The pipeline already has permission to reach them.</p>
+<p>That raises an interesting question: <strong>would OpenID Connect have protected organisations affected by the LiteLLM attack?</strong></p>
+<p>The answer is yes, substantially, but not completely.</p>
+<p>OIDC does not stop malicious code from running inside a trusted build. What it changes is the value and lifetime of the credentials that code can steal.</p>
+<hr>
+<h2 id="what-happened-with-litellm">What Happened With LiteLLM</h2>
+<p>On 24 March 2026, malicious versions <code>1.82.7</code> and <code>1.82.8</code> of the LiteLLM Python package were published after an attacker obtained access to a maintainer’s PyPI account.</p>
+<p>LiteLLM was not the beginning of the story. <a href="https://research.jfrog.com/post/litellm-compromised-teampcp/">JFrog’s incident analysis</a> traces the path through a compromised Trivy GitHub Action: credentials harvested from a privileged CI/CD pipeline were then used to reach LiteLLM’s publishing process. That is the supply-chain pattern worth paying attention to — compromise a trusted tool upstream, steal pipeline credentials, then use those credentials to compromise something downstream that other organisations trust.</p>
+<p>According to the <a href="https://github.com/BerriAI/litellm/issues/24518">LiteLLM security incident</a>, the malicious package attempted to collect credentials including:</p>
+<ul>
+<li>environment variables</li>
+<li>AWS, Azure and GCP credentials</li>
+<li>Kubernetes credentials</li>
+<li>SSH keys</li>
+<li>database passwords</li>
+<li>SSL private keys</li>
+<li>CI/CD configuration</li>
+</ul>
+<p>Version <code>1.82.7</code> embedded the payload in <code>litellm/proxy/proxy_server.py</code> and triggered when <code>litellm.proxy</code> was imported.</p>
+<p>Version <code>1.82.8</code> was nastier. It added a Python <code>.pth</code> file that could execute during interpreter startup. The application did not even have to deliberately import LiteLLM for the malicious code to run.</p>
+<p>Later reporting made the potential scale harder to dismiss. Researchers analysing an alleged attacker archive reported 153 GB of material: 433,909 files, including 118,829 CI/CD runner dumps attributed to 2,488 organisations. Those figures and any company names associated with them should be treated as exposure indicators, not as independently confirmed breaches of every named organisation. But the data is a useful illustration of the risk: CI runners often contain signing material, cloud credentials and AI-provider API keys in one very attractive place.</p>
+<p>The campaign was also broader than one Python package. <a href="https://www.cloudsek.com/blog/the-scanner-was-the-weapon-36-months-of-precision-supply-chain-attacks-against-devsecops-infrastructure">CloudSEK’s analysis</a> describes the use of a <code>.pth</code> startup hook and the collection of cloud, Kubernetes and database credentials. In other words, the attack path was not merely “someone installed a bad library”; it was an upstream CI compromise that could create a downstream credential-harvesting event across many environments.</p>
+<p>If that happened inside a CI runner full of long-lived credentials, the attacker could exfiltrate secrets that remained useful long after the job finished.</p>
+<p>That is the part OIDC changes.</p>
+<hr>
+<h2 id="the-problem-with-long-lived-ci-secrets">The Problem With Long-Lived CI Secrets</h2>
+<p>The traditional deployment model looks something like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#E1E4E8">flowchart LR</span></span>
+<span class="line"><span style="color:#E1E4E8">    GHA["GitHub Actions"] --&gt;|"AZURE_CLIENT_SECRET&lt;br/&gt;AWS_SECRET_ACCESS_KEY&lt;br/&gt;REGISTRY_PASSWORD"| Target["Cloud / registry / deployment target"]</span></span>
+<span class="line"><span style="color:#E1E4E8">    Attacker["Compromised dependency"] -.-&gt;|"Steals reusable credentials"| GHA</span></span>
+<span class="line"><span style="color:#E1E4E8">    Attacker -.-&gt;|"Credentials remain useful later"| Target</span></span></code></pre>
+<p>The credentials are created ahead of time, stored as GitHub secrets and injected into the job when required.</p>
+<p>This works, but it creates a valuable object for malware to steal.</p>
+<p>If a dependency executes:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> os</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(os.environ)</span></span></code></pre>
+<p>and the runner contains a reusable cloud credential, the attacker does not necessarily need to do anything immediately. They can take the secret away and use it later from somewhere else.</p>
+<p>Its useful lifetime might be weeks, months or years.</p>
+<p>The incident response then becomes a race to discover which secrets were exposed and rotate all of them before they are abused.</p>
+<hr>
+<h2 id="oidc-removes-the-permanent-cloud-secret">OIDC Removes the Permanent Cloud Secret</h2>
+<p>With OIDC, the workflow proves its identity to the cloud provider and exchanges that identity for a short-lived access token.</p>
+<p>GitHub describes the model as replacing long-lived cloud secrets with tokens that are issued for a job and then expire automatically. See the <a href="https://docs.github.com/en/actions/concepts/security/openid-connect">GitHub Actions OIDC documentation</a>.</p>
+<p>Conceptually:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#E1E4E8">flowchart LR</span></span>
+<span class="line"><span style="color:#E1E4E8">    GHA["GitHub Actions"] --&gt;|"Signed OIDC identity"| IdP["Cloud identity provider"]</span></span>
+<span class="line"><span style="color:#E1E4E8">    IdP --&gt;|"Short-lived access token"| Target["Deployment target"]</span></span>
+<span class="line"><span style="color:#E1E4E8">    Attacker["Compromised dependency"] -.-&gt;|"Can abuse current job"| GHA</span></span>
+<span class="line"><span style="color:#E1E4E8">    Expiry["Token expires"] -.-&gt; Target</span></span></code></pre>
+<p>There is no reusable Azure client secret or AWS access key sitting in the repository secrets waiting to be copied.</p>
+<p>For Azure, for example, GitHub Actions can authenticate through a federated identity credential associated with a Microsoft Entra application or managed identity. Microsoft documents this pattern for <a href="https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-openid-connect"><code>azure/login</code></a>.</p>
+<p>A simplified workflow might look like this:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">permissions</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  contents</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">read</span></span>
+<span class="line"><span style="color:#85E89D">  id-token</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">write</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">jobs</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  deploy</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    environment</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">production</span></span>
+<span class="line"><span style="color:#85E89D">    runs-on</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">ubuntu-latest</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">    steps</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#85E89D">uses</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">actions/checkout@v4</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#85E89D">uses</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">azure/login@v2</span></span>
+<span class="line"><span style="color:#85E89D">        with</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">          client-id</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">${{ vars.AZURE_CLIENT_ID }}</span></span>
+<span class="line"><span style="color:#85E89D">          tenant-id</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">${{ vars.AZURE_TENANT_ID }}</span></span>
+<span class="line"><span style="color:#85E89D">          subscription-id</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">${{ vars.AZURE_SUBSCRIPTION_ID }}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#85E89D">run</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">az webapp deploy ...</span></span></code></pre>
+<p>Under the covers, the <code>id-token: write</code> permission allows the job to ask GitHub for a signed OIDC token. Actions such as <code>azure/login</code> handle this exchange for you, but the underlying request is roughly:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#E1E4E8">- </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Request a GitHub OIDC token</span></span>
+<span class="line"><span style="color:#85E89D">  shell</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">bash</span></span>
+<span class="line"><span style="color:#85E89D">  run</span><span style="color:#E1E4E8">: </span><span style="color:#F97583">|</span></span>
+<span class="line"><span style="color:#9ECBFF">    oidc_token="$(curl -sS \</span></span>
+<span class="line"><span style="color:#9ECBFF">      -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \</span></span>
+<span class="line"><span style="color:#9ECBFF">      "${ACTIONS_ID_TOKEN_REQUEST_URL}&amp;audience=api://AzureADTokenExchange" \</span></span>
+<span class="line"><span style="color:#9ECBFF">      | jq -r .value)"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">    # Exchange $oidc_token with the cloud provider. Never print it.</span></span></code></pre>
+<p>GitHub signs that token with claims about the repository, branch and environment. The cloud provider validates those claims against its federated-identity policy, then issues the short-lived credential. The workflow normally uses <code>azure/login</code> rather than implementing this request itself.</p>
+<p>The identifiers above are not equivalent to a reusable client secret. The useful credential is obtained dynamically after GitHub proves the identity of the workflow.</p>
+<p>If malicious code dumps the environment, there is no permanent Azure password to take home.</p>
+<p>That is a major improvement.</p>
+<hr>
+<h2 id="but-the-attacker-is-already-inside-the-job">But the Attacker Is Already Inside the Job</h2>
+<p>This is where the security story becomes more subtle.</p>
+<p>OIDC protects against <strong>credential persistence</strong>, not against <strong>execution inside the trusted workload</strong>.</p>
+<p>If malicious code is already running in a job that is allowed to request an OIDC token, that code may be able to obtain or use the same short-lived credentials as the legitimate deployment process.</p>
+<p>In other words, the attacker may not be able to steal a key that works next month, but they may still be able to act as the deployment job <em>right now</em>.</p>
+<p>The difference looks roughly like this:</p>
+<table>
+<thead>
+<tr>
+<th>Attack capability</th>
+<th style="text-align: right">Long-lived secret</th>
+<th style="text-align: right">OIDC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Steal a reusable cloud credential</td>
+<td style="text-align: right">Yes</td>
+<td style="text-align: right">Usually no</td>
+</tr>
+<tr>
+<td>Use the job’s cloud permissions while it runs</td>
+<td style="text-align: right">Yes</td>
+<td style="text-align: right">Yes</td>
+</tr>
+<tr>
+<td>Continue using the same credential later</td>
+<td style="text-align: right">Yes</td>
+<td style="text-align: right">Limited by token lifetime</td>
+</tr>
+<tr>
+<td>Require emergency rotation of a permanent cloud password</td>
+<td style="text-align: right">Usually</td>
+<td style="text-align: right">Usually not</td>
+</tr>
+<tr>
+<td>Protect unrelated API keys present in the job</td>
+<td style="text-align: right">No</td>
+<td style="text-align: right">No</td>
+</tr>
+</tbody>
+</table>
+<p>That last row matters.</p>
+<p>If your build still contains an OpenAI API key, Anthropic API key, database password, signing key or some other bearer credential that does not support workload federation, malicious code may still copy it.</p>
+<p>OIDC is not magic secret-be-gone dust.</p>
+<p>It simply removes a large and particularly dangerous class of secrets from the runner.</p>
+<hr>
+<h2 id="oidc-turns-credential-theft-into-temporary-capability-theft">OIDC Turns Credential Theft Into Temporary Capability Theft</h2>
+<p>This is the useful mental model.</p>
+<p>With long-lived credentials, a compromised build can give an attacker a durable identity.</p>
+<p>With OIDC, a compromised build is more likely to give the attacker a temporary capability.</p>
+<p>That capability can still be dangerous. A production deployment identity with <code>Owner</code> over an Azure subscription is dangerous whether its token lasts ten minutes or ten years.</p>
+<p>But the response problem is fundamentally different.</p>
+<p>A stolen permanent credential means:</p>
+<ol>
+<li>identify the exposed key</li>
+<li>revoke it</li>
+<li>create another one</li>
+<li>distribute it safely</li>
+<li>update every consumer</li>
+<li>hope the attacker has not created persistence elsewhere</li>
+</ol>
+<p>A stolen short-lived token means its direct usefulness expires automatically.</p>
+<p>You still need to investigate what the attacker did while it was valid, but you are no longer depending entirely on your detection speed to make the credential useless.</p>
+<hr>
+<h2 id="least-privilege-matters-more-not-less">Least Privilege Matters More, Not Less</h2>
+<p>OIDC works best when combined with narrow identities.</p>
+<p>A deployment job should not authenticate as a general-purpose automation account with permissions across the whole organisation.</p>
+<p>Instead, split responsibilities:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>build</span></span>
+<span class="line"><span>  -&gt; no production access</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>test</span></span>
+<span class="line"><span>  -&gt; no production access</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>publish-package</span></span>
+<span class="line"><span>  -&gt; package registry only</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>deploy-dev</span></span>
+<span class="line"><span>  -&gt; development resources only</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>deploy-production</span></span>
+<span class="line"><span>  -&gt; production deployment permissions only</span></span></code></pre>
+<p>The OIDC trust relationship can also restrict <em>which</em> repository, branch or environment may obtain a role. GitHub’s <a href="https://docs.github.com/en/actions/reference/security/oidc">OIDC reference</a> documents subject claims that can identify repositories, branches and environments.</p>
+<p>A production identity should ideally require something closer to:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>repository = payments-api</span></span>
+<span class="line"><span>environment = production</span></span>
+<span class="line"><span>role = deployment-only</span></span></code></pre>
+<p>rather than:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>anything in the organisation = Contributor</span></span></code></pre>
+<p>GitHub also recommends using environment protection rules when environments participate in OIDC policies. That gives you another boundary before a workflow can reach a sensitive identity.</p>
+<hr>
+<h2 id="separate-jobs-so-malicious-code-sees-less">Separate Jobs So Malicious Code Sees Less</h2>
+<p>One of the easiest mistakes in CI/CD is putting everything into one enormous job.</p>
+<p>For example:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="text"><code><span class="line"><span>restore dependencies</span></span>
+<span class="line"><span>build</span></span>
+<span class="line"><span>test</span></span>
+<span class="line"><span>package</span></span>
+<span class="line"><span>authenticate to Azure</span></span>
+<span class="line"><span>authenticate to NuGet</span></span>
+<span class="line"><span>sign binaries</span></span>
+<span class="line"><span>deploy production</span></span></code></pre>
+<p>Now every dependency executed near the beginning potentially shares a trust boundary with every credential introduced later.</p>
+<p>A better architecture separates those responsibilities and passes immutable artifacts between them.</p>
+<p>The build job should not need production credentials at all.</p>
+<p>The production deployment job should ideally consume an already-built artifact and contain as little arbitrary third-party execution as possible.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="mermaid"><code><span class="line"><span style="color:#E1E4E8">flowchart LR</span></span>
+<span class="line"><span style="color:#E1E4E8">    Source["Source"] --&gt; Build["Build"]</span></span>
+<span class="line"><span style="color:#E1E4E8">    Build --&gt; Test["Test"]</span></span>
+<span class="line"><span style="color:#E1E4E8">    Test --&gt; Artifact["Immutable artifact"]</span></span>
+<span class="line"><span style="color:#E1E4E8">    Artifact --&gt; Deploy["Production deploy"]</span></span>
+<span class="line"><span style="color:#E1E4E8">    OIDC["OIDC"] --&gt; Deploy</span></span>
+<span class="line"><span style="color:#E1E4E8">    Deploy --&gt; Production["Production"]</span></span>
+<span class="line"><span style="color:#E1E4E8">    Dependencies["Third-party dependencies"] --&gt; Build</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    subgraph Untrusted["Build trust boundary"]</span></span>
+<span class="line"><span style="color:#E1E4E8">        Build</span></span>
+<span class="line"><span style="color:#E1E4E8">        Test</span></span>
+<span class="line"><span style="color:#E1E4E8">    end</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    subgraph Privileged["Privileged trust boundary"]</span></span>
+<span class="line"><span style="color:#E1E4E8">        Deploy</span></span>
+<span class="line"><span style="color:#E1E4E8">    end</span></span></code></pre>
+<p>That does not eliminate supply-chain attacks, but it dramatically reduces what a compromised build dependency can reach.</p>
+<hr>
+<h2 id="oidc-is-one-layer-of-the-supply-chain-defence">OIDC Is One Layer of the Supply-Chain Defence</h2>
+<p>The broader lesson from LiteLLM is not simply “use OIDC”.</p>
+<p>A resilient pipeline stacks controls:</p>
+<ol>
+<li><strong>Use OIDC or workload identity federation wherever possible.</strong> Remove permanent cloud credentials from CI.</li>
+<li><strong>Apply least privilege.</strong> A temporary <code>Owner</code> token is still an <code>Owner</code> token.</li>
+<li><strong>Separate build and deployment jobs.</strong> Do not expose production identity to dependency installation unless necessary.</li>
+<li><strong>Protect production environments.</strong> Restrict branches, tags and approvals that can reach them.</li>
+<li><strong>Pin and verify dependencies and actions.</strong> Reduce surprise changes in executable build inputs.</li>
+<li><strong>Minimise remaining bearer secrets.</strong> If an API still requires a static key, expose it only to the specific job that needs it.</li>
+<li><strong>Prefer ephemeral runners.</strong> A compromised build machine should not become persistent infrastructure.</li>
+<li><strong>Use provenance and attestations where practical.</strong> GitHub’s <a href="https://docs.github.com/en/actions/concepts/security/artifact-attestations">artifact attestations</a> can establish where and how an artifact was built, although provenance does not prove the artifact itself is safe.</li>
+</ol>
+<p>No single item solves the problem.</p>
+<p>Together they turn a CI compromise from “the attacker now owns a bag of permanent keys” into something much more constrained.</p>
+<hr>
+<h2 id="the-goal-is-not-to-make-compromise-impossible">The Goal Is Not to Make Compromise Impossible</h2>
+<p>That is not a realistic target for a modern software supply chain.</p>
+<p>Your build executes code from package managers, build tools, GitHub Actions, container images and internal scripts. Somewhere in that graph, eventually, something will be compromised.</p>
+<p>The more useful question is:</p>
+<blockquote>
+<p>If malicious code executes in my pipeline, what can it take with it when the process ends?</p>
+</blockquote>
+<p>With long-lived deployment credentials, the answer may be your cloud identity.</p>
+<p>With well-designed OIDC federation, least privilege and isolated deployment jobs, the answer can be much smaller:</p>
+<blockquote>
+<p>It temporarily had the permissions of this specific job.</p>
+</blockquote>
+<p>That is still an incident.</p>
+<p>But it is a dramatically better incident to have.</p>
+<script>
+  (async function () {
+    const diagrams = document.querySelectorAll(
+      'article.article pre[data-language="mermaid"] > code',
+    );
+    if (!diagrams.length) return;
+
+    const { default: mermaid } = await import(
+      'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs'
+    );
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: 'base',
+      themeVariables: {
+        background: 'transparent',
+        primaryColor: 'transparent',
+        primaryBorderColor: '#4b5563',
+        primaryTextColor: '#1f2937',
+        secondaryColor: 'transparent',
+        secondaryBorderColor: '#4b5563',
+        tertiaryColor: 'transparent',
+        tertiaryBorderColor: '#4b5563',
+        clusterBkg: 'transparent',
+        clusterBorder: '#6b7280',
+        lineColor: '#4b5563',
+        edgeLabelBackground: 'transparent',
+        fontFamily: 'inherit',
+      },
+      flowchart: { useMaxWidth: true, htmlLabels: true },
+    });
+
+    const containers = [];
+    diagrams.forEach(function (code) {
+      const container = document.createElement('div');
+      container.className = 'mermaid-diagram';
+      container.textContent = code.textContent || '';
+      code.parentElement.replaceWith(container);
+      containers.push(container);
+    });
+
+    await mermaid.run({ nodes: containers });
+  })();
+</script></section></article><script>
+    (function () {
+      if (window.location.hash) return;
+      if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+      var navigationEntry = performance.getEntriesByType('navigation')[0];
+      if (navigationEntry && navigationEntry.type === 'back_forward') return;
+
+      function scrollToArticleStart() {
+        var articleStart = document.getElementById('article-start');
+        if (!articleStart) return;
+        articleStart.scrollIntoView({ block: 'start', inline: 'nearest' });
+      }
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(scrollToArticleStart);
+      });
+
+      window.addEventListener('load', scrollToArticleStart, { once: true });
+    })();
+  </script></div></main><footer class="site-footer"><div class="content-wrap site-shell"><section class="copy"><p>&copy; 2026 Dan Marshall</p></section></div></footer><script>
+      // Drawer
+      function openDrawer() {
+        document.getElementById("drawer").classList.add("drawer-open");
+        document
+          .getElementById("drawer-overlay")
+          .classList.add("drawer-overlay-visible");
+        var hamburger = document.getElementById("hamburger");
+        hamburger.classList.remove("hamburger-idle");
+        hamburger.setAttribute("aria-expanded", "true");
+      }
+
+      function closeDrawer() {
+        document.getElementById("drawer").classList.remove("drawer-open");
+        document
+          .getElementById("drawer-overlay")
+          .classList.remove("drawer-overlay-visible");
+        var hamburger = document.getElementById("hamburger");
+        hamburger.setAttribute("aria-expanded", "false");
+        window.dispatchEvent(new Event("hamburger-active"));
+      }
+
+      (function () {
+        var hamburger = document.getElementById("hamburger");
+        if (!hamburger) return;
+
+        var idleTimer;
+        var idleDelay = 1800;
+
+        function isDrawerOpen() {
+          return hamburger.getAttribute("aria-expanded") === "true";
+        }
+
+        function showHamburger() {
+          hamburger.classList.remove("hamburger-idle");
+          window.clearTimeout(idleTimer);
+          if (isDrawerOpen()) return;
+          idleTimer = window.setTimeout(function () {
+            if (!isDrawerOpen()) hamburger.classList.add("hamburger-idle");
+          }, idleDelay);
+        }
+
+        ["scroll", "resize", "pointermove", "touchstart", "keydown", "hamburger-active"].forEach(
+          function (eventName) {
+            window.addEventListener(eventName, showHamburger, { passive: true });
+          },
+        );
+
+        hamburger.addEventListener("focus", showHamburger);
+        hamburger.addEventListener("mouseenter", showHamburger);
+        showHamburger();
+      })();
+
+      // Table of contents — article pages only
+      // Script is is:inline at bottom of body — DOM is already available, no need for DOMContentLoaded
+      (function () {
+        if (!document.body.classList.contains("article-detail")) return;
+
+        var content = document.querySelector("section.content");
+        if (!content) return;
+
+        var longCodeBlocks = [];
+        var longCodeThreshold = 14;
+
+        function getCodeLineCount(pre) {
+          var shikiLines = pre.querySelectorAll(".line");
+          if (shikiLines.length) return shikiLines.length;
+
+          var text = pre.textContent || "";
+          var lines = text.split(/\r\n|\r|\n/);
+          if (lines.length > 1 && lines[lines.length - 1] === "") lines.pop();
+          return lines.length;
+        }
+
+        function setCodeToggleLabel(summary, details) {
+          var lines = details.getAttribute("data-code-lines");
+          summary.textContent =
+            (details.open ? "Hide code" : "Show code") +
+            " (" +
+            lines +
+            " lines)";
+        }
+
+        content.querySelectorAll("pre").forEach(function (pre) {
+          if (pre.closest(".code-disclosure")) return;
+
+          var lineCount = getCodeLineCount(pre);
+          if (lineCount <= longCodeThreshold) return;
+
+          var details = document.createElement("details");
+          details.className = "code-disclosure";
+          details.setAttribute("data-code-lines", String(lineCount));
+
+          var summary = document.createElement("summary");
+          summary.className = "code-disclosure-summary";
+          details.appendChild(summary);
+
+          pre.parentNode.insertBefore(details, pre);
+          details.appendChild(pre);
+          setCodeToggleLabel(summary, details);
+
+          details.addEventListener("toggle", function () {
+            setCodeToggleLabel(summary, details);
+          });
+
+          longCodeBlocks.push(details);
+        });
+
+        if (longCodeBlocks.length) {
+          var printOpenedBlocks = [];
+          window.addEventListener("beforeprint", function () {
+            printOpenedBlocks = longCodeBlocks.filter(function (details) {
+              return !details.open;
+            });
+            printOpenedBlocks.forEach(function (details) {
+              details.open = true;
+            });
+          });
+          window.addEventListener("afterprint", function () {
+            printOpenedBlocks.forEach(function (details) {
+              details.open = false;
+            });
+            printOpenedBlocks = [];
+          });
+        }
+
+        var headings = content.querySelectorAll("h2, h3");
+        if (headings.length < 2) return;
+
+        function slugify(text) {
+          return text
+            .trim()
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, "")
+            .replace(/\s+/g, "-")
+            .replace(/-{2,}/g, "-");
+        }
+
+        var usedIds = {};
+        headings.forEach(function (h) {
+          if (!h.id) {
+            var base = slugify(h.textContent);
+            var id = base;
+            var n = 2;
+            while (usedIds[id]) {
+              id = base + "-" + n++;
+            }
+            h.id = id;
+          }
+          usedIds[h.id] = true;
+        });
+
+        var nav = document.createElement("nav");
+        nav.className = "toc";
+        nav.setAttribute("aria-label", "Table of contents");
+
+        var socialsEl = document.createElement("div");
+        socialsEl.className = "toc-socials";
+        socialsEl.innerHTML =
+          '<a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email" aria-label="Email">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>' +
+          '</a>' +
+          '<a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile" aria-label="LinkedIn">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>' +
+          '</a>' +
+          '<a href="https://github.com/DanMarshall909" data-tooltip="View my GitHub profile" aria-label="GitHub">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.5 2-5-2-7-2"/></svg>' +
+          '</a>' +
+          '<a href="/feed.xml" data-tooltip="Subscribe to the RSS feed" aria-label="RSS">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>' +
+          '</a>';
+        nav.appendChild(socialsEl);
+
+        var titleEl = document.createElement("div");
+        titleEl.className = "toc-title";
+        titleEl.innerHTML = "<span>On this page</span>";
+        nav.appendChild(titleEl);
+
+        var list = document.createElement("ul");
+        list.className = "toc-list";
+
+        headings.forEach(function (h) {
+          var li = document.createElement("li");
+          li.className = "toc-item toc-" + h.tagName.toLowerCase();
+          var a = document.createElement("a");
+          a.href = "#" + h.id;
+          a.className = "toc-link";
+          a.textContent = h.textContent;
+          a.addEventListener("click", function (e) {
+            e.preventDefault();
+            document
+              .getElementById(h.id)
+              .scrollIntoView({ behavior: "smooth", block: "start" });
+            history.pushState(null, null, "#" + h.id);
+            closeDrawer();
+          });
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+
+        nav.appendChild(list);
+
+        var hamburger = document.getElementById("hamburger");
+        var isMobile =
+          hamburger && window.getComputedStyle(hamburger).display !== "none";
+
+        if (isMobile) {
+          // Mobile: put TOC at the top of the drawer.
+          var drawerBody = document.getElementById("drawer-body");
+          if (drawerBody) drawerBody.insertBefore(nav, drawerBody.firstChild);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector("article.article");
+          if (!article) return;
+          article.parentElement.classList.add("article-with-toc");
+          article.parentElement.insertBefore(nav, article);
+        }
+
+        // Highlight active heading via IntersectionObserver
+        var tocLinks = [].slice.call(nav.querySelectorAll(".toc-link"));
+        var activeLink = null;
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                var href = "#" + entry.target.id;
+                if (activeLink) activeLink.classList.remove("toc-active");
+                activeLink =
+                  tocLinks.find(function (l) {
+                    return l.getAttribute("href") === href;
+                  }) || null;
+                if (activeLink) activeLink.classList.add("toc-active");
+              }
+            });
+          },
+          { rootMargin: "-15% 0px -75% 0px", threshold: 0 },
+        );
+
+        headings.forEach(function (h) {
+          observer.observe(h);
+        });
+      })();
+    </script><script>
+      (function () {
+        const header = document.querySelector(".header[data-home-link]");
+        if (!(header instanceof HTMLElement)) return;
+
+        header.addEventListener("click", function (event) {
+          if (!(event.target instanceof Element)) return;
+          if (
+            event.target.closest(
+              'a, button, input, select, textarea, summary, [role="button"]',
+            )
+          )
+            return;
+
+          const href = header.dataset.homeLink || "/";
+          if (window.location.pathname === href) return;
+          window.location.href = href;
+        });
+      })();
+    </script><script>
+      (function () {
+        function createToggleButton(pre, className, label, icon) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `code-toggle ${className}`;
+          button.setAttribute("aria-label", label);
+          button.innerHTML = icon;
+          return button;
+        }
+
+        function createWrapToggle(pre) {
+          const iconMarkup = `
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+              <path d="M5 7h14" />
+              <path d="M5 12h11c1 0 3 .5 3 2.5S17.333 17 16.5 17H12" />
+              <path d="M5 17h4" />
+              <path d="M15 17l2-2" />
+              <path d="M15 17l2 2" />
+            </svg>
+          `;
+          const button = createToggleButton(pre, "code-wrap-toggle", "Toggle code wrapping", iconMarkup);
+          button.addEventListener("click", function () {
+            const isWrapped = pre.classList.toggle("wrap-enabled");
+            button.setAttribute("aria-label", isWrapped ? "Disable code wrapping" : "Enable code wrapping");
+          });
+          pre.appendChild(button);
+        }
+
+        function createExpandToggle(pre) {
+          const iconMarkup = `
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+              <circle cx="7" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="17" cy="12" r="1.5" fill="currentColor" />
+            </svg>
+          `;
+          const button = createToggleButton(pre, "code-expand-toggle", "Toggle code preview", iconMarkup);
+          button.addEventListener("click", function () {
+            const isExpanded = pre.classList.toggle("code-expanded");
+            if (isExpanded) {
+              pre.classList.remove("code-truncated");
+              button.setAttribute("aria-label", "Collapse code block");
+            } else {
+              pre.classList.add("code-truncated");
+              button.setAttribute("aria-label", "Expand code block");
+            }
+          });
+          pre.appendChild(button);
+        }
+
+        function checkCodeOverflow(pre) {
+          return pre.scrollWidth > pre.clientWidth + 1;
+        }
+
+        function codeLineCount(pre) {
+          const code = pre.querySelector("code");
+          if (!code) return 0;
+          return code.textContent.split(/\r?\n/).length;
+        }
+
+        function initCodeWrapToggles() {
+          const codeBlocks = document.querySelectorAll("article.article pre");
+          codeBlocks.forEach(function (pre) {
+            const overflowed = checkCodeOverflow(pre);
+            const lines = codeLineCount(pre);
+
+            if (overflowed) {
+              createWrapToggle(pre);
+            }
+            if (lines > 5) {
+              pre.classList.add("code-truncated");
+              createExpandToggle(pre);
+            }
+          });
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initCodeWrapToggles);
+        } else {
+          initCodeWrapToggles();
+        }
+      })();
+    </script></body></html>

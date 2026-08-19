@@ -1,0 +1,571 @@
+<!DOCTYPE html><html lang="en" data-theme="jetbrains"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Secure C# Starts with System Design - Technical Scratches</title><meta name="description" content="Secure C# begins with system boundaries and disciplined use of the language: narrow APIs, immutable state, short-lived secrets and deliberate dependencies."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer"><link rel="stylesheet" href="/styles/fonts.css"><link rel="stylesheet" href="/styles/main.css"><style>.gd-canvas[data-astro-cid-4ef23wdl]{pointer-events:none;width:100%;max-width:none;height:100%;max-height:none;display:block;position:absolute;inset:0}
+.mermaid-diagram{margin:1.75rem 0;overflow-x:auto}.mermaid-diagram svg{min-width:38rem;max-width:100%;margin:0 auto;display:block}.mermaid-diagram svg .node rect,.mermaid-diagram svg .node polygon,.mermaid-diagram svg .node circle,.mermaid-diagram svg .cluster rect{fill:#0000!important}.mermaid-diagram svg .nodeLabel,.mermaid-diagram svg .edgeLabel{color:#1f2937}.mermaid-diagram svg .labelBkg,.mermaid-diagram svg .edgeLabel p{background:0 0!important}@media (width<=48rem){.mermaid-diagram svg{min-width:32rem}}
+</style></head><body class="article-detail article-secure-csharp-by-design"><div class="page-scene" aria-hidden="true"><canvas id="gd-canvas" class="gd-canvas" aria-hidden="true" data-astro-cid-4ef23wdl></canvas><script type="module" src="/_astro/GlassDodecahedron.astro_astro_type_script_index_0_lang.DmFvVFEo.js"></script></div><!-- Mobile hamburger — hidden on desktop --><button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu" data-tooltip="Open site menu"><span></span><span></span><span></span></button><!-- Mobile drawer --><div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div><aside class="drawer" id="drawer"><div class="drawer-header"><button class="drawer-close" onclick="closeDrawer()" aria-label="Close" data-tooltip="Close the menu">✕</button></div><div class="drawer-body" id="drawer-body"><nav class="drawer-primary-nav" aria-label="Primary navigation"><div class="drawer-nav-title">Elsewhere</div><a href="/" data-tooltip="Back to the homepage"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 9 12 2l9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"></path><path d="M9 22V12h6v10"></path></svg><span>Home</span></a><a href="/" data-tooltip="Latest writing and featured posts"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 1 4 18.5"></path><path d="M8 7h8"></path><path d="M8 11h7"></path></svg><span>Writing</span></a><a href="/topics/" data-tooltip="Browse articles by topic"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.59 13.41 12 22l-8.59-8.59A2 2 0 0 1 3 12V4a1 1 0 0 1 1-1h8a2 2 0 0 1 1.41.59l7.18 7.18a2 2 0 0 1 0 2.64Z"></path><path d="M7.5 7.5h.01"></path></svg><span>Topics</span></a><a href="/archive/" data-tooltip="Browse every article"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="1"></rect><path d="M5 9v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"></path><path d="M10 13h4"></path></svg><span>Archive</span></a><a href="/articles/resume/" data-tooltip="Read my current resume"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 3H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path><path d="M9 8h6"></path><path d="M9 12h6"></path><path d="M9 16h3"></path></svg><span>Resume</span></a><a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><span>Email Dan</span></a><a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span>LinkedIn</span></a><a href="https://github.com/DanMarshall909" data-tooltip="View my GitHub profile"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.5 2-5-2-7-2"></path></svg><span>GitHub</span></a><a href="/feed.xml" data-tooltip="Subscribe to the RSS feed"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg><span>RSS</span></a><button class="drawer-print-button" type="button" onclick="window.print()"><svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>Save PDF</span></button></nav></div></aside><header class="header header-article" data-home-link="/"><div class="content-wrap site-shell"><div class="header-content-group"><div class="site-brand"><a href="/">Technical Scratches</a></div><nav class="site-nav" aria-label="Primary navigation"><a href="/" data-tooltip="Latest writing and featured posts">Writing</a><a href="/topics/" data-tooltip="Browse articles by topic">Topics</a><a href="/archive/" data-tooltip="Browse every article">Archive</a><a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a><a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a><a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Contact</a></nav><div class="header-copy"><p class="description">Thoughts on software engineering and life as a developer</p></div></div></div></header><main id="content"><div class="content-wrap site-shell"><article id="article-start" class="article" style="--hero-image-position: center; --hero-image-scale: 1;"><section class="content prose"><div class="title-with-image"><div class="article-title-actions"><h1>Secure C# Starts with System Design</h1><a class="pdf-button article-pdf-button" href="#article-start" onclick="event.preventDefault(); window.print();" aria-label="Print or save this article as a PDF"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Print / Save PDF</span></a></div><div class="article-meta"><p class="publish-date">25 July 2026</p><p class="reading-time">7 min read</p></div></div><p>Secure software involves more than using secure methods or ticking items off the OWASP Top 10. It depends on the design of the system as a whole.</p>
+<p>C# lets us enforce that design through access modifiers, immutable types, narrow interfaces, spans and explicit ownership. These features control where security decisions are made, how far sensitive data travels and who can modify trusted state.</p>
+<p>Cryptographic choices still matter, but good primitives can be used badly. The goal is to make the secure path the easy path: keep security responsibilities cohesive, expose intent rather than machinery, protect trusted state and minimise the lifetime of secrets. This helps developers <a href="https://blog.codinghorror.com/falling-into-the-pit-of-success/">fall into the pit of success</a>.</p>
+<hr>
+<h2 id="keep-security-responsibilities-cohesive">Keep Security Responsibilities Cohesive</h2>
+<p>Security-related behaviour should have an obvious home: perhaps a dedicated project containing encryption, signing, token handling and secret-management integrations. This should be a small boundary with a clear responsibility and narrow API, not a miscellaneous <code>Security</code> project containing every authentication check.</p>
+<p>Code outside that boundary should ask for an outcome:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">var</span><span style="color:#B392F0"> protectedValue</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> customerDataProtector.</span><span style="color:#B392F0">Protect</span><span style="color:#E1E4E8">(customerReference);</span></span></code></pre>
+<p>It should not assemble that outcome from primitives:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">var</span><span style="color:#B392F0"> nonce</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> RandomNumberGenerator.</span><span style="color:#B392F0">GetBytes</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">12</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#B392F0"> key</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> keyStore.</span><span style="color:#B392F0">GetKey</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"customer-data"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#B392F0"> ciphertext</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> Encrypt</span><span style="color:#E1E4E8">(plaintext, key, nonce);</span></span>
+<span class="line"><span style="color:#F97583">var</span><span style="color:#B392F0"> result</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> Combine</span><span style="color:#E1E4E8">(nonce, ciphertext);</span></span></code></pre>
+<p>The second version lets every caller omit a step, choose the wrong key, reuse a nonce or invent a payload format. A cohesive project instead gives reviewers one place to inspect policy, makes dependency changes visible and allows the complete operation to be tested.</p>
+<hr>
+<h2 id="expose-intent-not-primitives">Expose Intent, Not Primitives</h2>
+<p>Most of that project’s implementation should be <code>internal</code> (the most underused keyword in C#). Cipher implementations, key resolvers, nonce generators and serialisation helpers rarely need to be called by the rest of the application. The public surface should describe only the permitted operations:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> interface</span><span style="color:#B392F0"> ICustomerDataProtector</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#B392F0">    ProtectedCustomerData</span><span style="color:#B392F0"> Protect</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">CustomerReference</span><span style="color:#B392F0"> value</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">    CustomerData</span><span style="color:#B392F0"> Unprotect</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">ProtectedCustomerData</span><span style="color:#B392F0"> value</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">internal</span><span style="color:#F97583"> sealed</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> AesGcmCustomerDataProtector</span><span style="color:#E1E4E8"> : </span><span style="color:#B392F0">ICustomerDataProtector</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#6A737D">    // Algorithm selection, key lookup and payload formatting stay here.</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><code>internal</code> is not a security boundary against malicious code in the same process, and reflection can bypass it. It is a design boundary that reduces accidental misuse. Prefer operations such as <code>ProtectCustomerData</code> or <code>SignPaymentInstruction</code> over general methods accepting arbitrary algorithms, keys and byte arrays. Do not make every dangerous choice configurable merely because it can be. This is one place where tight coupling is arguably a good thing.</p>
+<hr>
+<h2 id="avoid-primitive-obsession-with-immutable-types">Avoid Primitive Obsession with Immutable Types</h2>
+<p>To paraphrase Martin Fowler, <strong>Primitive Obsession</strong> is the use of basic types such as <code>string</code>, <code>int</code> or <code>decimal</code> to represent specific concepts. This weakens expressiveness and type safety for example, by making unrelated identifiers interchangeable. In security-sensitive code, it also wastes an opportunity to guide consumers towards safe usage.</p>
+<p>A <code>string</code> can represent a customer reference, password, access token or encrypted payload. A <code>byte[]</code> can contain plaintext, ciphertext, a key or a nonce. When an API accepts primitives, the compiler cannot stop callers from passing the wrong value.</p>
+<p>Give security-sensitive values their own immutable types instead. The type should validate its complete state when created and expose only the operations consumers need:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> sealed</span><span style="color:#F97583"> record</span><span style="color:#B392F0"> CustomerReference</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    private</span><span style="color:#B392F0"> CustomerReference</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> value</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Value </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> value;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#F97583"> static</span><span style="color:#B392F0"> CustomerReference</span><span style="color:#B392F0"> Create</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">string</span><span style="color:#B392F0"> value</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">IsNullOrWhiteSpace</span><span style="color:#E1E4E8">(value))</span></span>
+<span class="line"><span style="color:#F97583">            throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ArgumentException</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#9ECBFF">                "A customer reference is required."</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#F97583">                nameof</span><span style="color:#E1E4E8">(value));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> CustomerReference</span><span style="color:#E1E4E8">(value);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    internal</span><span style="color:#F97583"> string</span><span style="color:#B392F0"> Value</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">get</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>The security API can now require a <code>CustomerReference</code> and return <code>ProtectedCustomerData</code>. A consumer cannot accidentally pass an access token or unvalidated string just because both happen to share the same underlying representation:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#B392F0">ProtectedCustomerData</span><span style="color:#B392F0"> Protect</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">CustomerReference</span><span style="color:#B392F0"> customerReference</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<p>This moves validation and representation rules into the type that owns them, forcing consumers onto a path designed with security in mind. Immutability ensures the value cannot become invalid after construction.</p>
+<p>Avoid public setters, partial initialisation and collections callers can modify after validation. A read-only view does not make its underlying collection immutable:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#E1E4E8"> IReadOnlyList</span><span style="color:#F97583">&lt;</span><span style="color:#F97583">string</span><span style="color:#F97583">&gt;</span><span style="color:#E1E4E8"> Roles { get; }</span></span></code></pre>
+<p>If this wraps a caller-owned <code>List&lt;string&gt;</code>, the caller can still change it. Copy the input instead:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">public</span><span style="color:#F97583"> sealed</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> SecurityPolicy</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> SecurityPolicy</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">IEnumerable</span><span style="color:#E1E4E8">&lt;</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">&gt; </span><span style="color:#B392F0">roles</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#E1E4E8">        Roles </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> roles.</span><span style="color:#B392F0">ToImmutableArray</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    public</span><span style="color:#B392F0"> ImmutableArray</span><span style="color:#E1E4E8">&lt;</span><span style="color:#F97583">string</span><span style="color:#E1E4E8">&gt; </span><span style="color:#B392F0">Roles</span><span style="color:#E1E4E8"> { </span><span style="color:#F97583">get</span><span style="color:#E1E4E8">; }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Useful C# techniques related to security and immutability include:</p>
+<ul>
+<li>use <code>readonly</code> fields so references cannot be reassigned after construction;</li>
+<li>use getter-only properties rather than public setters;</li>
+<li>use <code>readonly record struct</code> for small value types;</li>
+<li>seal security-sensitive types so subclasses cannot change their behaviour;</li>
+<li>use <code>ImmutableArray&lt;T&gt;</code>, <code>ImmutableDictionary&lt;TKey, TValue&gt;</code> and other immutable collections;</li>
+<li>use frozen collections for lookup data constructed once and then shared;</li>
+<li>accept <code>ReadOnlySpan&lt;T&gt;</code> or <code>ReadOnlyMemory&lt;T&gt;</code> when a method only needs to read a caller-owned buffer;</li>
+<li>make defensive copies at ownership boundaries;</li>
+<li>validate the complete value in a constructor or factory before exposing it.</li>
+</ul>
+<p>These mechanisms have different strengths. <code>init</code> restricts assignment but does not make referenced objects immutable. Read-only interfaces, spans and memory prevent mutation only through that API. Frozen collections prevent structural changes, but their contents may still be mutable.</p>
+<p>There is one deliberate exception: temporary buffers that contain plaintext secrets may need to be mutable so they can be overwritten. Those buffers should not become general-purpose domain objects. Keep them locally owned, expose them only as spans where possible, and clear them immediately after use.</p>
+<p>Across trust boundaries, add other controls. Database constraints can reject invalid state, and concurrency tokens can reject stale updates. Hashes detect accidental changes; keyed MACs and digital signatures detect tampering and establish authenticity.</p>
+<hr>
+<h2 id="keep-plaintext-alive-for-as-little-time-as-possible">Keep Plaintext Alive for as Little Time as Possible</h2>
+<p>Decrypt sensitive data as late as possible, use it for one purpose and discard it as soon as possible.</p>
+<p>Avoid putting plaintext into:</p>
+<ul>
+<li>logs, exceptions or tracing tags;</li>
+<li>long-lived domain objects;</li>
+<li>caches;</li>
+<li>queues and events;</li>
+<li>temporary files;</li>
+<li>diagnostic snapshots;</li>
+<li>strings created only for formatting or conversion.</li>
+</ul>
+<p>This reduces obvious leaks and limits copies in memory, crash dumps, telemetry and debugging tools. C# makes strict memory lifetime difficult: a <code>string</code> may be copied and cannot reliably be erased on demand. For sensitive binary data, prefer a short-lived mutable buffer and clear it in a <code>finally</code> block:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#F97583">byte</span><span style="color:#E1E4E8">[] </span><span style="color:#B392F0">plaintext</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ArrayPool&lt;</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">&gt;.Shared.</span><span style="color:#B392F0">Rent</span><span style="color:#E1E4E8">(requiredLength);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">try</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">    var</span><span style="color:#B392F0"> written</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> decryptor.</span><span style="color:#B392F0">Unprotect</span><span style="color:#E1E4E8">(protectedValue, plaintext);</span></span>
+<span class="line"><span style="color:#B392F0">    ProcessPlaintext</span><span style="color:#E1E4E8">(plaintext.</span><span style="color:#B392F0">AsSpan</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, written));</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#F97583">finally</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">    CryptographicOperations.</span><span style="color:#B392F0">ZeroMemory</span><span style="color:#E1E4E8">(plaintext);</span></span>
+<span class="line"><span style="color:#E1E4E8">    ArrayPool&lt;</span><span style="color:#F97583">byte</span><span style="color:#E1E4E8">&gt;.Shared.</span><span style="color:#B392F0">Return</span><span style="color:#E1E4E8">(plaintext);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>This cannot guarantee a secret was never copied, but it is stronger than waiting for garbage collection. Do not return spans over sensitive buffers or leave their contents in pooled memory. Ownership and lifetime should be obvious.</p>
+<hr>
+<h2 id="minimise-dependencies-not-proven-safety">Minimise Dependencies, Not Proven Safety</h2>
+<p>Every dependency adds code to understand, update and monitor. It can introduce vulnerable transitive packages, unsafe defaults or more capability than the security boundary requires.</p>
+<p>Keep the security project’s dependency graph small. Prefer .NET cryptography APIs and platform facilities where they meet the requirement. Do not add packages for minor conveniences or bring in an application framework without a specific reason.</p>
+<p>But “fewer libraries” should not become “rewrite everything”.</p>
+<p>LINQ is part of .NET and is not automatically a meaningful security risk. Entity Framework adds substantial behaviour and dependencies, but replacing it with hand-built SQL can increase the risk of injection and incorrect data handling. Mature, maintained libraries and parameterised queries are generally safer than bespoke replacements.</p>
+<p>The useful questions are:</p>
+<ul>
+<li>Does this dependency need to exist inside the trusted boundary?</li>
+<li>Which transitive dependencies does it introduce?</li>
+<li>Is it maintained and patched?</li>
+<li>Does the team understand its security-relevant behaviour?</li>
+<li>Can a smaller, established API meet the same requirement?</li>
+<li>Are we removing it for a measurable reason or only for aesthetic purity?</li>
+</ul>
+<p>Minimise unnecessary capability and complexity, not well-tested safety mechanisms.</p>
+<hr>
+<h2 id="do-not-build-your-own-cryptography">Do Not Build Your Own Cryptography</h2>
+<p>Keeping security code together does not mean implementing cryptographic algorithms yourself. Use established primitives and protocols, while centralising algorithm selection, key identifiers, payload versions, associated data, rotation and failure handling.</p>
+<p>The public API should avoid choices callers are not required to make. They generally should not select an encryption algorithm:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#6A737D">// Too much authority at every call site.</span></span>
+<span class="line"><span style="color:#B392F0">Encrypt</span><span style="color:#E1E4E8">(data, algorithm, mode, padding, key, nonce);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// The operation owns its security policy.</span></span>
+<span class="line"><span style="color:#E1E4E8">customerDataProtector.</span><span style="color:#B392F0">Protect</span><span style="color:#E1E4E8">(data);</span></span></code></pre>
+<p>The implementation and versioned payload format can then change without editing every caller. Authentication failures must not return partial plaintext, and errors should not reveal whether a key, account or field was valid.</p>
+<hr>
+<h2 id="treat-the-project-boundary-as-a-review-boundary">Treat the Project Boundary as a Review Boundary</h2>
+<p>A cohesive project is valuable only if its changes receive appropriate scrutiny:</p>
+<ul>
+<li>requiring review from people familiar with the security model;</li>
+<li>testing invalid, truncated and tampered payloads;</li>
+<li>checking that secrets never enter logs or telemetry;</li>
+<li>scanning direct and transitive dependencies;</li>
+<li>recording why an algorithm or protocol was selected;</li>
+<li>designing and testing key rotation before it is urgent;</li>
+<li>keeping payload formats versioned;</li>
+<li>rejecting insecure defaults rather than silently recovering.</li>
+</ul>
+<p>Tests should exercise the permitted public operations. Internal primitives may have focused tests, but the important question is whether ordinary application code can use the boundary safely.</p>
+<hr>
+<h2 id="conclusion---security-is-also-an-api-design-problem">Conclusion - Security Is Also an API Design Problem</h2>
+<p>Amoungst other things secure code comes from reducing the number of places that make security decisions.</p>
+<ul>
+<li>Keep the implementation cohesive and mostly internal.</li>
+<li>Expose narrow operations named after intent.</li>
+<li>Use immutable security state, minimise plaintext lifetimes and keep dependencies deliberate.</li>
+<li>Use proven primitives without exposing their sharp edges throughout the application.</li>
+</ul>
+<p>None of these measures is a complete security boundary alone. Together, they make the system easier to reason about, review and use safely and will go a long way to preventing you from making mistakes that could cost you an awful lot of heartache.</p>
+<script>
+  (async function () {
+    const diagrams = document.querySelectorAll(
+      'article.article pre[data-language="mermaid"] > code',
+    );
+    if (!diagrams.length) return;
+
+    const { default: mermaid } = await import(
+      'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs'
+    );
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: 'base',
+      themeVariables: {
+        background: 'transparent',
+        primaryColor: 'transparent',
+        primaryBorderColor: '#4b5563',
+        primaryTextColor: '#1f2937',
+        secondaryColor: 'transparent',
+        secondaryBorderColor: '#4b5563',
+        tertiaryColor: 'transparent',
+        tertiaryBorderColor: '#4b5563',
+        clusterBkg: 'transparent',
+        clusterBorder: '#6b7280',
+        lineColor: '#4b5563',
+        edgeLabelBackground: 'transparent',
+        fontFamily: 'inherit',
+      },
+      flowchart: { useMaxWidth: true, htmlLabels: true },
+    });
+
+    const containers = [];
+    diagrams.forEach(function (code) {
+      const container = document.createElement('div');
+      container.className = 'mermaid-diagram';
+      container.textContent = code.textContent || '';
+      code.parentElement.replaceWith(container);
+      containers.push(container);
+    });
+
+    await mermaid.run({ nodes: containers });
+  })();
+</script></section></article><script>
+    (function () {
+      if (window.location.hash) return;
+      if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+      var navigationEntry = performance.getEntriesByType('navigation')[0];
+      if (navigationEntry && navigationEntry.type === 'back_forward') return;
+
+      function scrollToArticleStart() {
+        var articleStart = document.getElementById('article-start');
+        if (!articleStart) return;
+        articleStart.scrollIntoView({ block: 'start', inline: 'nearest' });
+      }
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(scrollToArticleStart);
+      });
+
+      window.addEventListener('load', scrollToArticleStart, { once: true });
+    })();
+  </script></div></main><footer class="site-footer"><div class="content-wrap site-shell"><section class="copy"><p>&copy; 2026 Dan Marshall</p></section></div></footer><script>
+      // Drawer
+      function openDrawer() {
+        document.getElementById("drawer").classList.add("drawer-open");
+        document
+          .getElementById("drawer-overlay")
+          .classList.add("drawer-overlay-visible");
+        var hamburger = document.getElementById("hamburger");
+        hamburger.classList.remove("hamburger-idle");
+        hamburger.setAttribute("aria-expanded", "true");
+      }
+
+      function closeDrawer() {
+        document.getElementById("drawer").classList.remove("drawer-open");
+        document
+          .getElementById("drawer-overlay")
+          .classList.remove("drawer-overlay-visible");
+        var hamburger = document.getElementById("hamburger");
+        hamburger.setAttribute("aria-expanded", "false");
+        window.dispatchEvent(new Event("hamburger-active"));
+      }
+
+      (function () {
+        var hamburger = document.getElementById("hamburger");
+        if (!hamburger) return;
+
+        var idleTimer;
+        var idleDelay = 1800;
+
+        function isDrawerOpen() {
+          return hamburger.getAttribute("aria-expanded") === "true";
+        }
+
+        function showHamburger() {
+          hamburger.classList.remove("hamburger-idle");
+          window.clearTimeout(idleTimer);
+          if (isDrawerOpen()) return;
+          idleTimer = window.setTimeout(function () {
+            if (!isDrawerOpen()) hamburger.classList.add("hamburger-idle");
+          }, idleDelay);
+        }
+
+        ["scroll", "resize", "pointermove", "touchstart", "keydown", "hamburger-active"].forEach(
+          function (eventName) {
+            window.addEventListener(eventName, showHamburger, { passive: true });
+          },
+        );
+
+        hamburger.addEventListener("focus", showHamburger);
+        hamburger.addEventListener("mouseenter", showHamburger);
+        showHamburger();
+      })();
+
+      // Table of contents — article pages only
+      // Script is is:inline at bottom of body — DOM is already available, no need for DOMContentLoaded
+      (function () {
+        if (!document.body.classList.contains("article-detail")) return;
+
+        var content = document.querySelector("section.content");
+        if (!content) return;
+
+        var longCodeBlocks = [];
+        var longCodeThreshold = 14;
+
+        function getCodeLineCount(pre) {
+          var shikiLines = pre.querySelectorAll(".line");
+          if (shikiLines.length) return shikiLines.length;
+
+          var text = pre.textContent || "";
+          var lines = text.split(/\r\n|\r|\n/);
+          if (lines.length > 1 && lines[lines.length - 1] === "") lines.pop();
+          return lines.length;
+        }
+
+        function setCodeToggleLabel(summary, details) {
+          var lines = details.getAttribute("data-code-lines");
+          summary.textContent =
+            (details.open ? "Hide code" : "Show code") +
+            " (" +
+            lines +
+            " lines)";
+        }
+
+        content.querySelectorAll("pre").forEach(function (pre) {
+          if (pre.closest(".code-disclosure")) return;
+
+          var lineCount = getCodeLineCount(pre);
+          if (lineCount <= longCodeThreshold) return;
+
+          var details = document.createElement("details");
+          details.className = "code-disclosure";
+          details.setAttribute("data-code-lines", String(lineCount));
+
+          var summary = document.createElement("summary");
+          summary.className = "code-disclosure-summary";
+          details.appendChild(summary);
+
+          pre.parentNode.insertBefore(details, pre);
+          details.appendChild(pre);
+          setCodeToggleLabel(summary, details);
+
+          details.addEventListener("toggle", function () {
+            setCodeToggleLabel(summary, details);
+          });
+
+          longCodeBlocks.push(details);
+        });
+
+        if (longCodeBlocks.length) {
+          var printOpenedBlocks = [];
+          window.addEventListener("beforeprint", function () {
+            printOpenedBlocks = longCodeBlocks.filter(function (details) {
+              return !details.open;
+            });
+            printOpenedBlocks.forEach(function (details) {
+              details.open = true;
+            });
+          });
+          window.addEventListener("afterprint", function () {
+            printOpenedBlocks.forEach(function (details) {
+              details.open = false;
+            });
+            printOpenedBlocks = [];
+          });
+        }
+
+        var headings = content.querySelectorAll("h2, h3");
+        if (headings.length < 2) return;
+
+        function slugify(text) {
+          return text
+            .trim()
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, "")
+            .replace(/\s+/g, "-")
+            .replace(/-{2,}/g, "-");
+        }
+
+        var usedIds = {};
+        headings.forEach(function (h) {
+          if (!h.id) {
+            var base = slugify(h.textContent);
+            var id = base;
+            var n = 2;
+            while (usedIds[id]) {
+              id = base + "-" + n++;
+            }
+            h.id = id;
+          }
+          usedIds[h.id] = true;
+        });
+
+        var nav = document.createElement("nav");
+        nav.className = "toc";
+        nav.setAttribute("aria-label", "Table of contents");
+
+        var socialsEl = document.createElement("div");
+        socialsEl.className = "toc-socials";
+        socialsEl.innerHTML =
+          '<a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email" aria-label="Email">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>' +
+          '</a>' +
+          '<a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile" aria-label="LinkedIn">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>' +
+          '</a>' +
+          '<a href="https://github.com/DanMarshall909" data-tooltip="View my GitHub profile" aria-label="GitHub">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.5 2-5-2-7-2"/></svg>' +
+          '</a>' +
+          '<a href="/feed.xml" data-tooltip="Subscribe to the RSS feed" aria-label="RSS">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>' +
+          '</a>';
+        nav.appendChild(socialsEl);
+
+        var titleEl = document.createElement("div");
+        titleEl.className = "toc-title";
+        titleEl.innerHTML = "<span>On this page</span>";
+        nav.appendChild(titleEl);
+
+        var list = document.createElement("ul");
+        list.className = "toc-list";
+
+        headings.forEach(function (h) {
+          var li = document.createElement("li");
+          li.className = "toc-item toc-" + h.tagName.toLowerCase();
+          var a = document.createElement("a");
+          a.href = "#" + h.id;
+          a.className = "toc-link";
+          a.textContent = h.textContent;
+          a.addEventListener("click", function (e) {
+            e.preventDefault();
+            document
+              .getElementById(h.id)
+              .scrollIntoView({ behavior: "smooth", block: "start" });
+            history.pushState(null, null, "#" + h.id);
+            closeDrawer();
+          });
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+
+        nav.appendChild(list);
+
+        var hamburger = document.getElementById("hamburger");
+        var isMobile =
+          hamburger && window.getComputedStyle(hamburger).display !== "none";
+
+        if (isMobile) {
+          // Mobile: put TOC at the top of the drawer.
+          var drawerBody = document.getElementById("drawer-body");
+          if (drawerBody) drawerBody.insertBefore(nav, drawerBody.firstChild);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector("article.article");
+          if (!article) return;
+          article.parentElement.classList.add("article-with-toc");
+          article.parentElement.insertBefore(nav, article);
+        }
+
+        // Highlight active heading via IntersectionObserver
+        var tocLinks = [].slice.call(nav.querySelectorAll(".toc-link"));
+        var activeLink = null;
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                var href = "#" + entry.target.id;
+                if (activeLink) activeLink.classList.remove("toc-active");
+                activeLink =
+                  tocLinks.find(function (l) {
+                    return l.getAttribute("href") === href;
+                  }) || null;
+                if (activeLink) activeLink.classList.add("toc-active");
+              }
+            });
+          },
+          { rootMargin: "-15% 0px -75% 0px", threshold: 0 },
+        );
+
+        headings.forEach(function (h) {
+          observer.observe(h);
+        });
+      })();
+    </script><script>
+      (function () {
+        const header = document.querySelector(".header[data-home-link]");
+        if (!(header instanceof HTMLElement)) return;
+
+        header.addEventListener("click", function (event) {
+          if (!(event.target instanceof Element)) return;
+          if (
+            event.target.closest(
+              'a, button, input, select, textarea, summary, [role="button"]',
+            )
+          )
+            return;
+
+          const href = header.dataset.homeLink || "/";
+          if (window.location.pathname === href) return;
+          window.location.href = href;
+        });
+      })();
+    </script><script>
+      (function () {
+        function createToggleButton(pre, className, label, icon) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `code-toggle ${className}`;
+          button.setAttribute("aria-label", label);
+          button.innerHTML = icon;
+          return button;
+        }
+
+        function createWrapToggle(pre) {
+          const iconMarkup = `
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+              <path d="M5 7h14" />
+              <path d="M5 12h11c1 0 3 .5 3 2.5S17.333 17 16.5 17H12" />
+              <path d="M5 17h4" />
+              <path d="M15 17l2-2" />
+              <path d="M15 17l2 2" />
+            </svg>
+          `;
+          const button = createToggleButton(pre, "code-wrap-toggle", "Toggle code wrapping", iconMarkup);
+          button.addEventListener("click", function () {
+            const isWrapped = pre.classList.toggle("wrap-enabled");
+            button.setAttribute("aria-label", isWrapped ? "Disable code wrapping" : "Enable code wrapping");
+          });
+          pre.appendChild(button);
+        }
+
+        function createExpandToggle(pre) {
+          const iconMarkup = `
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+              <circle cx="7" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="17" cy="12" r="1.5" fill="currentColor" />
+            </svg>
+          `;
+          const button = createToggleButton(pre, "code-expand-toggle", "Toggle code preview", iconMarkup);
+          button.addEventListener("click", function () {
+            const isExpanded = pre.classList.toggle("code-expanded");
+            if (isExpanded) {
+              pre.classList.remove("code-truncated");
+              button.setAttribute("aria-label", "Collapse code block");
+            } else {
+              pre.classList.add("code-truncated");
+              button.setAttribute("aria-label", "Expand code block");
+            }
+          });
+          pre.appendChild(button);
+        }
+
+        function checkCodeOverflow(pre) {
+          return pre.scrollWidth > pre.clientWidth + 1;
+        }
+
+        function codeLineCount(pre) {
+          const code = pre.querySelector("code");
+          if (!code) return 0;
+          return code.textContent.split(/\r?\n/).length;
+        }
+
+        function initCodeWrapToggles() {
+          const codeBlocks = document.querySelectorAll("article.article pre");
+          codeBlocks.forEach(function (pre) {
+            const overflowed = checkCodeOverflow(pre);
+            const lines = codeLineCount(pre);
+
+            if (overflowed) {
+              createWrapToggle(pre);
+            }
+            if (lines > 5) {
+              pre.classList.add("code-truncated");
+              createExpandToggle(pre);
+            }
+          });
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initCodeWrapToggles);
+        } else {
+          initCodeWrapToggles();
+        }
+      })();
+    </script></body></html>

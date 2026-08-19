@@ -1,0 +1,435 @@
+<!DOCTYPE html><html lang="en" data-theme="jetbrains"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Boring as a Feature - Technical Scratches</title><meta name="description" content="Boring code is not a failure of imagination. It is often the most maintainable choice, with cleverness reserved for experiments that earn their cost."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer"><link rel="stylesheet" href="/styles/fonts.css"><link rel="stylesheet" href="/styles/main.css"><style>.gd-canvas[data-astro-cid-4ef23wdl]{pointer-events:none;width:100%;max-width:none;height:100%;max-height:none;display:block;position:absolute;inset:0}
+.mermaid-diagram{margin:1.75rem 0;overflow-x:auto}.mermaid-diagram svg{min-width:38rem;max-width:100%;margin:0 auto;display:block}.mermaid-diagram svg .node rect,.mermaid-diagram svg .node polygon,.mermaid-diagram svg .node circle,.mermaid-diagram svg .cluster rect{fill:#0000!important}.mermaid-diagram svg .nodeLabel,.mermaid-diagram svg .edgeLabel{color:#1f2937}.mermaid-diagram svg .labelBkg,.mermaid-diagram svg .edgeLabel p{background:0 0!important}@media (width<=48rem){.mermaid-diagram svg{min-width:32rem}}
+</style></head><body class="article-detail article-boring-as-a-feature"><div class="page-scene" aria-hidden="true"><canvas id="gd-canvas" class="gd-canvas" aria-hidden="true" data-astro-cid-4ef23wdl></canvas><script type="module" src="/_astro/GlassDodecahedron.astro_astro_type_script_index_0_lang.DmFvVFEo.js"></script></div><!-- Mobile hamburger — hidden on desktop --><button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu" data-tooltip="Open site menu"><span></span><span></span><span></span></button><!-- Mobile drawer --><div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div><aside class="drawer" id="drawer"><div class="drawer-header"><button class="drawer-close" onclick="closeDrawer()" aria-label="Close" data-tooltip="Close the menu">✕</button></div><div class="drawer-body" id="drawer-body"><nav class="drawer-primary-nav" aria-label="Primary navigation"><div class="drawer-nav-title">Elsewhere</div><a href="/" data-tooltip="Back to the homepage"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 9 12 2l9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"></path><path d="M9 22V12h6v10"></path></svg><span>Home</span></a><a href="/" data-tooltip="Latest writing and featured posts"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 1 4 18.5"></path><path d="M8 7h8"></path><path d="M8 11h7"></path></svg><span>Writing</span></a><a href="/topics/" data-tooltip="Browse articles by topic"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.59 13.41 12 22l-8.59-8.59A2 2 0 0 1 3 12V4a1 1 0 0 1 1-1h8a2 2 0 0 1 1.41.59l7.18 7.18a2 2 0 0 1 0 2.64Z"></path><path d="M7.5 7.5h.01"></path></svg><span>Topics</span></a><a href="/archive/" data-tooltip="Browse every article"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="1"></rect><path d="M5 9v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"></path><path d="M10 13h4"></path></svg><span>Archive</span></a><a href="/articles/resume/" data-tooltip="Read my current resume"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 3H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path><path d="M9 8h6"></path><path d="M9 12h6"></path><path d="M9 16h3"></path></svg><span>Resume</span></a><a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><span>Email Dan</span></a><a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span>LinkedIn</span></a><a href="https://github.com/DanMarshall909" data-tooltip="View my GitHub profile"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.5 2-5-2-7-2"></path></svg><span>GitHub</span></a><a href="/feed.xml" data-tooltip="Subscribe to the RSS feed"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg><span>RSS</span></a><button class="drawer-print-button" type="button" onclick="window.print()"><svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>Save PDF</span></button></nav></div></aside><header class="header header-article" data-home-link="/"><div class="content-wrap site-shell"><div class="header-content-group"><div class="site-brand"><a href="/">Technical Scratches</a></div><nav class="site-nav" aria-label="Primary navigation"><a href="/" data-tooltip="Latest writing and featured posts">Writing</a><a href="/topics/" data-tooltip="Browse articles by topic">Topics</a><a href="/archive/" data-tooltip="Browse every article">Archive</a><a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a><a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a><a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Contact</a></nav><div class="header-copy"><p class="description">Thoughts on software engineering and life as a developer</p></div></div></div></header><main id="content"><div class="content-wrap site-shell"><article id="article-start" class="article has-hero hero-image-cropped" style="--hero-image-position: center; --hero-image-scale: 1;"><section class="content prose"><div class="title-with-image"><div class="article-title-actions"><h1>Boring as a Feature</h1><a class="pdf-button article-pdf-button" href="#article-start" onclick="event.preventDefault(); window.print();" aria-label="Print or save this article as a PDF"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Print / Save PDF</span></a></div><div class="article-meta"><p class="publish-date">30 June 2026</p><p class="reading-time">1 min read</p></div></div><picture class="hero-image-picture"><source srcset="/_astro/hero.BTl2Uf16_1v8VVJ.avif 320w, /_astro/hero.BTl2Uf16_Z2lwAJ4.avif 480w, /_astro/hero.BTl2Uf16_cG2D0.avif 720w" type="image/avif" sizes="(max-width: 768px) min(calc(100vw - 3rem), 24rem), 16rem"><source srcset="/_astro/hero.BTl2Uf16_1uzim3.webp 320w, /_astro/hero.BTl2Uf16_Z2m6fjK.webp 480w, /_astro/hero.BTl2Uf16_c7o3j.webp 720w" type="image/webp" sizes="(max-width: 768px) min(calc(100vw - 3rem), 24rem), 16rem"><img src="/_astro/hero.BTl2Uf16_rB3Of.png" srcset="/_astro/hero.BTl2Uf16_Z8Amjj.png 320w, /_astro/hero.BTl2Uf16_14UdNO.png 480w, /_astro/hero.BTl2Uf16_Z1r3gC3.png 720w" alt="Boring as a Feature" loading="eager" fetchpriority="high" sizes="(max-width: 768px) min(calc(100vw - 3rem), 24rem), 16rem" decoding="async" width="1672" height="941" class="hero-image"></picture><p>Sometimes the cleverest thing you can do in a codebase is choose the boring option.</p>
+<p>Not because cleverness is bad. Clever solutions can have huge payoffs. They can simplify a messy system, remove whole classes of bugs, or make an awkward problem feel obvious in hindsight.</p>
+<p>But clever code has carrying costs.</p>
+<p>It can be harder for the next person to understand. It can hide the shape of the problem behind an abstraction. It can make future changes feel risky because the idea behind the implementation is not immediately visible.</p>
+<p>And sometimes that next person is you, six months later, wondering what past-you was so pleased about.</p>
+<hr>
+<h2 id="boring-is-not-lazy">Boring Is Not Lazy</h2>
+<p>Doing things the boring way can look less impressive.</p>
+<p>It might mean writing the explicit branch, using the familiar pattern, or accepting a little repetition instead of introducing a new abstraction.</p>
+<p>That is not wasted effort. It is energy spent on readability.</p>
+<p>Boring code is easier to debug, easier to review, and easier to change under pressure. It leaves fewer puzzles behind for the team.</p>
+<hr>
+<h2 id="clever-on-purpose">Clever on Purpose</h2>
+<p>The answer is not to avoid clever ideas.</p>
+<p>Some experiments are worth it. Sometimes the clever solution really does pay for itself. But if you are going to take that path, make the trade visible.</p>
+<p>Time-box the experiment. Explain what you are trying to prove. Talk to the wider team about the upside, the risk, and what will happen if it does not work out.</p>
+<p>Cleverness is much easier to accept when it comes with context.</p>
+<hr>
+<h2 id="the-default-matters">The Default Matters</h2>
+<p>A useful question is not “is this clever?”</p>
+<p>It is: “what does this cleverness buy us?”</p>
+<p>If the answer is meaningful, go explore it. If the answer is mostly that the code feels elegant to write, the boring version may be the better feature.</p>
+<p>Boring by default. Clever on purpose.</p>
+<script>
+  (async function () {
+    const diagrams = document.querySelectorAll(
+      'article.article pre[data-language="mermaid"] > code',
+    );
+    if (!diagrams.length) return;
+
+    const { default: mermaid } = await import(
+      'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs'
+    );
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: 'base',
+      themeVariables: {
+        background: 'transparent',
+        primaryColor: 'transparent',
+        primaryBorderColor: '#4b5563',
+        primaryTextColor: '#1f2937',
+        secondaryColor: 'transparent',
+        secondaryBorderColor: '#4b5563',
+        tertiaryColor: 'transparent',
+        tertiaryBorderColor: '#4b5563',
+        clusterBkg: 'transparent',
+        clusterBorder: '#6b7280',
+        lineColor: '#4b5563',
+        edgeLabelBackground: 'transparent',
+        fontFamily: 'inherit',
+      },
+      flowchart: { useMaxWidth: true, htmlLabels: true },
+    });
+
+    const containers = [];
+    diagrams.forEach(function (code) {
+      const container = document.createElement('div');
+      container.className = 'mermaid-diagram';
+      container.textContent = code.textContent || '';
+      code.parentElement.replaceWith(container);
+      containers.push(container);
+    });
+
+    await mermaid.run({ nodes: containers });
+  })();
+</script></section></article><script>
+    (function () {
+      if (window.location.hash) return;
+      if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+      var navigationEntry = performance.getEntriesByType('navigation')[0];
+      if (navigationEntry && navigationEntry.type === 'back_forward') return;
+
+      function scrollToArticleStart() {
+        var articleStart = document.getElementById('article-start');
+        if (!articleStart) return;
+        articleStart.scrollIntoView({ block: 'start', inline: 'nearest' });
+      }
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(scrollToArticleStart);
+      });
+
+      window.addEventListener('load', scrollToArticleStart, { once: true });
+    })();
+  </script></div></main><footer class="site-footer"><div class="content-wrap site-shell"><section class="copy"><p>&copy; 2026 Dan Marshall</p></section></div></footer><script>
+      // Drawer
+      function openDrawer() {
+        document.getElementById("drawer").classList.add("drawer-open");
+        document
+          .getElementById("drawer-overlay")
+          .classList.add("drawer-overlay-visible");
+        var hamburger = document.getElementById("hamburger");
+        hamburger.classList.remove("hamburger-idle");
+        hamburger.setAttribute("aria-expanded", "true");
+      }
+
+      function closeDrawer() {
+        document.getElementById("drawer").classList.remove("drawer-open");
+        document
+          .getElementById("drawer-overlay")
+          .classList.remove("drawer-overlay-visible");
+        var hamburger = document.getElementById("hamburger");
+        hamburger.setAttribute("aria-expanded", "false");
+        window.dispatchEvent(new Event("hamburger-active"));
+      }
+
+      (function () {
+        var hamburger = document.getElementById("hamburger");
+        if (!hamburger) return;
+
+        var idleTimer;
+        var idleDelay = 1800;
+
+        function isDrawerOpen() {
+          return hamburger.getAttribute("aria-expanded") === "true";
+        }
+
+        function showHamburger() {
+          hamburger.classList.remove("hamburger-idle");
+          window.clearTimeout(idleTimer);
+          if (isDrawerOpen()) return;
+          idleTimer = window.setTimeout(function () {
+            if (!isDrawerOpen()) hamburger.classList.add("hamburger-idle");
+          }, idleDelay);
+        }
+
+        ["scroll", "resize", "pointermove", "touchstart", "keydown", "hamburger-active"].forEach(
+          function (eventName) {
+            window.addEventListener(eventName, showHamburger, { passive: true });
+          },
+        );
+
+        hamburger.addEventListener("focus", showHamburger);
+        hamburger.addEventListener("mouseenter", showHamburger);
+        showHamburger();
+      })();
+
+      // Table of contents — article pages only
+      // Script is is:inline at bottom of body — DOM is already available, no need for DOMContentLoaded
+      (function () {
+        if (!document.body.classList.contains("article-detail")) return;
+
+        var content = document.querySelector("section.content");
+        if (!content) return;
+
+        var longCodeBlocks = [];
+        var longCodeThreshold = 14;
+
+        function getCodeLineCount(pre) {
+          var shikiLines = pre.querySelectorAll(".line");
+          if (shikiLines.length) return shikiLines.length;
+
+          var text = pre.textContent || "";
+          var lines = text.split(/\r\n|\r|\n/);
+          if (lines.length > 1 && lines[lines.length - 1] === "") lines.pop();
+          return lines.length;
+        }
+
+        function setCodeToggleLabel(summary, details) {
+          var lines = details.getAttribute("data-code-lines");
+          summary.textContent =
+            (details.open ? "Hide code" : "Show code") +
+            " (" +
+            lines +
+            " lines)";
+        }
+
+        content.querySelectorAll("pre").forEach(function (pre) {
+          if (pre.closest(".code-disclosure")) return;
+
+          var lineCount = getCodeLineCount(pre);
+          if (lineCount <= longCodeThreshold) return;
+
+          var details = document.createElement("details");
+          details.className = "code-disclosure";
+          details.setAttribute("data-code-lines", String(lineCount));
+
+          var summary = document.createElement("summary");
+          summary.className = "code-disclosure-summary";
+          details.appendChild(summary);
+
+          pre.parentNode.insertBefore(details, pre);
+          details.appendChild(pre);
+          setCodeToggleLabel(summary, details);
+
+          details.addEventListener("toggle", function () {
+            setCodeToggleLabel(summary, details);
+          });
+
+          longCodeBlocks.push(details);
+        });
+
+        if (longCodeBlocks.length) {
+          var printOpenedBlocks = [];
+          window.addEventListener("beforeprint", function () {
+            printOpenedBlocks = longCodeBlocks.filter(function (details) {
+              return !details.open;
+            });
+            printOpenedBlocks.forEach(function (details) {
+              details.open = true;
+            });
+          });
+          window.addEventListener("afterprint", function () {
+            printOpenedBlocks.forEach(function (details) {
+              details.open = false;
+            });
+            printOpenedBlocks = [];
+          });
+        }
+
+        var headings = content.querySelectorAll("h2, h3");
+        if (headings.length < 2) return;
+
+        function slugify(text) {
+          return text
+            .trim()
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, "")
+            .replace(/\s+/g, "-")
+            .replace(/-{2,}/g, "-");
+        }
+
+        var usedIds = {};
+        headings.forEach(function (h) {
+          if (!h.id) {
+            var base = slugify(h.textContent);
+            var id = base;
+            var n = 2;
+            while (usedIds[id]) {
+              id = base + "-" + n++;
+            }
+            h.id = id;
+          }
+          usedIds[h.id] = true;
+        });
+
+        var nav = document.createElement("nav");
+        nav.className = "toc";
+        nav.setAttribute("aria-label", "Table of contents");
+
+        var socialsEl = document.createElement("div");
+        socialsEl.className = "toc-socials";
+        socialsEl.innerHTML =
+          '<a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email" aria-label="Email">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>' +
+          '</a>' +
+          '<a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile" aria-label="LinkedIn">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>' +
+          '</a>' +
+          '<a href="https://github.com/DanMarshall909" data-tooltip="View my GitHub profile" aria-label="GitHub">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.5 2-5-2-7-2"/></svg>' +
+          '</a>' +
+          '<a href="/feed.xml" data-tooltip="Subscribe to the RSS feed" aria-label="RSS">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>' +
+          '</a>';
+        nav.appendChild(socialsEl);
+
+        var titleEl = document.createElement("div");
+        titleEl.className = "toc-title";
+        titleEl.innerHTML = "<span>On this page</span>";
+        nav.appendChild(titleEl);
+
+        var list = document.createElement("ul");
+        list.className = "toc-list";
+
+        headings.forEach(function (h) {
+          var li = document.createElement("li");
+          li.className = "toc-item toc-" + h.tagName.toLowerCase();
+          var a = document.createElement("a");
+          a.href = "#" + h.id;
+          a.className = "toc-link";
+          a.textContent = h.textContent;
+          a.addEventListener("click", function (e) {
+            e.preventDefault();
+            document
+              .getElementById(h.id)
+              .scrollIntoView({ behavior: "smooth", block: "start" });
+            history.pushState(null, null, "#" + h.id);
+            closeDrawer();
+          });
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+
+        nav.appendChild(list);
+
+        var hamburger = document.getElementById("hamburger");
+        var isMobile =
+          hamburger && window.getComputedStyle(hamburger).display !== "none";
+
+        if (isMobile) {
+          // Mobile: put TOC at the top of the drawer.
+          var drawerBody = document.getElementById("drawer-body");
+          if (drawerBody) drawerBody.insertBefore(nav, drawerBody.firstChild);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector("article.article");
+          if (!article) return;
+          article.parentElement.classList.add("article-with-toc");
+          article.parentElement.insertBefore(nav, article);
+        }
+
+        // Highlight active heading via IntersectionObserver
+        var tocLinks = [].slice.call(nav.querySelectorAll(".toc-link"));
+        var activeLink = null;
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                var href = "#" + entry.target.id;
+                if (activeLink) activeLink.classList.remove("toc-active");
+                activeLink =
+                  tocLinks.find(function (l) {
+                    return l.getAttribute("href") === href;
+                  }) || null;
+                if (activeLink) activeLink.classList.add("toc-active");
+              }
+            });
+          },
+          { rootMargin: "-15% 0px -75% 0px", threshold: 0 },
+        );
+
+        headings.forEach(function (h) {
+          observer.observe(h);
+        });
+      })();
+    </script><script>
+      (function () {
+        const header = document.querySelector(".header[data-home-link]");
+        if (!(header instanceof HTMLElement)) return;
+
+        header.addEventListener("click", function (event) {
+          if (!(event.target instanceof Element)) return;
+          if (
+            event.target.closest(
+              'a, button, input, select, textarea, summary, [role="button"]',
+            )
+          )
+            return;
+
+          const href = header.dataset.homeLink || "/";
+          if (window.location.pathname === href) return;
+          window.location.href = href;
+        });
+      })();
+    </script><script>
+      (function () {
+        function createToggleButton(pre, className, label, icon) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `code-toggle ${className}`;
+          button.setAttribute("aria-label", label);
+          button.innerHTML = icon;
+          return button;
+        }
+
+        function createWrapToggle(pre) {
+          const iconMarkup = `
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+              <path d="M5 7h14" />
+              <path d="M5 12h11c1 0 3 .5 3 2.5S17.333 17 16.5 17H12" />
+              <path d="M5 17h4" />
+              <path d="M15 17l2-2" />
+              <path d="M15 17l2 2" />
+            </svg>
+          `;
+          const button = createToggleButton(pre, "code-wrap-toggle", "Toggle code wrapping", iconMarkup);
+          button.addEventListener("click", function () {
+            const isWrapped = pre.classList.toggle("wrap-enabled");
+            button.setAttribute("aria-label", isWrapped ? "Disable code wrapping" : "Enable code wrapping");
+          });
+          pre.appendChild(button);
+        }
+
+        function createExpandToggle(pre) {
+          const iconMarkup = `
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+              <circle cx="7" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="17" cy="12" r="1.5" fill="currentColor" />
+            </svg>
+          `;
+          const button = createToggleButton(pre, "code-expand-toggle", "Toggle code preview", iconMarkup);
+          button.addEventListener("click", function () {
+            const isExpanded = pre.classList.toggle("code-expanded");
+            if (isExpanded) {
+              pre.classList.remove("code-truncated");
+              button.setAttribute("aria-label", "Collapse code block");
+            } else {
+              pre.classList.add("code-truncated");
+              button.setAttribute("aria-label", "Expand code block");
+            }
+          });
+          pre.appendChild(button);
+        }
+
+        function checkCodeOverflow(pre) {
+          return pre.scrollWidth > pre.clientWidth + 1;
+        }
+
+        function codeLineCount(pre) {
+          const code = pre.querySelector("code");
+          if (!code) return 0;
+          return code.textContent.split(/\r?\n/).length;
+        }
+
+        function initCodeWrapToggles() {
+          const codeBlocks = document.querySelectorAll("article.article pre");
+          codeBlocks.forEach(function (pre) {
+            const overflowed = checkCodeOverflow(pre);
+            const lines = codeLineCount(pre);
+
+            if (overflowed) {
+              createWrapToggle(pre);
+            }
+            if (lines > 5) {
+              pre.classList.add("code-truncated");
+              createExpandToggle(pre);
+            }
+          });
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initCodeWrapToggles);
+        } else {
+          initCodeWrapToggles();
+        }
+      })();
+    </script></body></html>

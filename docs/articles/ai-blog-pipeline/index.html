@@ -1,0 +1,472 @@
+<!DOCTYPE html><html lang="en" data-theme="jetbrains"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>I built a /blogpost command that writes, illustrates, and publishes for me - Technical Scratches</title><meta name="description" content="One /blogpost command: Claude drafts the article, generates cartoon illustrations with Cloudflare's free AI tier, previews in the browser, publishes to GitHub Pages, and fires off a LinkedIn post — all without leaving the terminal."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="alternate" href="https://blog.danmarshall.dev/feed.xml" type="application/rss+xml" title="Thoughts on software engineering and life as a developer"><link rel="stylesheet" href="/styles/fonts.css"><link rel="stylesheet" href="/styles/main.css"><style>.gd-canvas[data-astro-cid-4ef23wdl]{pointer-events:none;width:100%;max-width:none;height:100%;max-height:none;display:block;position:absolute;inset:0}
+.mermaid-diagram{margin:1.75rem 0;overflow-x:auto}.mermaid-diagram svg{min-width:38rem;max-width:100%;margin:0 auto;display:block}.mermaid-diagram svg .node rect,.mermaid-diagram svg .node polygon,.mermaid-diagram svg .node circle,.mermaid-diagram svg .cluster rect{fill:#0000!important}.mermaid-diagram svg .nodeLabel,.mermaid-diagram svg .edgeLabel{color:#1f2937}.mermaid-diagram svg .labelBkg,.mermaid-diagram svg .edgeLabel p{background:0 0!important}@media (width<=48rem){.mermaid-diagram svg{min-width:32rem}}
+</style></head><body class="article-detail article-ai-blog-pipeline"><div class="page-scene" aria-hidden="true"><canvas id="gd-canvas" class="gd-canvas" aria-hidden="true" data-astro-cid-4ef23wdl></canvas><script type="module" src="/_astro/GlassDodecahedron.astro_astro_type_script_index_0_lang.DmFvVFEo.js"></script></div><!-- Mobile hamburger — hidden on desktop --><button class="hamburger" id="hamburger" onclick="openDrawer()" aria-label="Open menu" data-tooltip="Open site menu"><span></span><span></span><span></span></button><!-- Mobile drawer --><div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div><aside class="drawer" id="drawer"><div class="drawer-header"><button class="drawer-close" onclick="closeDrawer()" aria-label="Close" data-tooltip="Close the menu">✕</button></div><div class="drawer-body" id="drawer-body"><nav class="drawer-primary-nav" aria-label="Primary navigation"><div class="drawer-nav-title">Elsewhere</div><a href="/" data-tooltip="Back to the homepage"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 9 12 2l9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"></path><path d="M9 22V12h6v10"></path></svg><span>Home</span></a><a href="/" data-tooltip="Latest writing and featured posts"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5V5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 1 4 18.5"></path><path d="M8 7h8"></path><path d="M8 11h7"></path></svg><span>Writing</span></a><a href="/topics/" data-tooltip="Browse articles by topic"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.59 13.41 12 22l-8.59-8.59A2 2 0 0 1 3 12V4a1 1 0 0 1 1-1h8a2 2 0 0 1 1.41.59l7.18 7.18a2 2 0 0 1 0 2.64Z"></path><path d="M7.5 7.5h.01"></path></svg><span>Topics</span></a><a href="/archive/" data-tooltip="Browse every article"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="1"></rect><path d="M5 9v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"></path><path d="M10 13h4"></path></svg><span>Archive</span></a><a href="/articles/resume/" data-tooltip="Read my current resume"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 3H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"></path><path d="M9 8h6"></path><path d="M9 12h6"></path><path d="M9 16h3"></path></svg><span>Resume</span></a><a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg><span>Email Dan</span></a><a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg><span>LinkedIn</span></a><a href="https://github.com/DanMarshall909" data-tooltip="View my GitHub profile"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.5 2-5-2-7-2"></path></svg><span>GitHub</span></a><a href="/feed.xml" data-tooltip="Subscribe to the RSS feed"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg><span>RSS</span></a><button class="drawer-print-button" type="button" onclick="window.print()"><svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg><span>Save PDF</span></button></nav></div></aside><header class="header header-article" data-home-link="/"><div class="content-wrap site-shell"><div class="header-content-group"><div class="site-brand"><a href="/">Technical Scratches</a></div><nav class="site-nav" aria-label="Primary navigation"><a href="/" data-tooltip="Latest writing and featured posts">Writing</a><a href="/topics/" data-tooltip="Browse articles by topic">Topics</a><a href="/archive/" data-tooltip="Browse every article">Archive</a><a href="/articles/resume/" data-tooltip="Read my current resume">Resume</a><a href="/feed.xml" data-tooltip="Subscribe to the RSS feed">RSS</a><a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email">Contact</a></nav><div class="header-copy"><p class="description">Thoughts on software engineering and life as a developer</p></div></div></div></header><main id="content"><div class="content-wrap site-shell"><article id="article-start" class="article has-hero" style="--hero-image-position: center; --hero-image-scale: 1;"><section class="content prose"><div class="title-with-image"><div class="article-title-actions"><h1>I built a /blogpost command that writes, illustrates, and publishes for me</h1><a class="pdf-button article-pdf-button" href="#article-start" onclick="event.preventDefault(); window.print();" aria-label="Print or save this article as a PDF"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Print / Save PDF</span></a></div><div class="article-meta"><p class="publish-date">21 April 2026</p><p class="reading-time">3 min read</p></div></div><picture class="hero-image-picture"><source srcset="/_astro/cartoon.BjfnHoka_1son2Y.avif 320w, /_astro/cartoon.BjfnHoka_9iqCr.avif 480w, /_astro/cartoon.BjfnHoka_1seXa2.avif 720w" type="image/avif" sizes="(max-width: 768px) min(calc(100vw - 3rem), 24rem), 16rem"><source srcset="/_astro/cartoon.BjfnHoka_10Xo9b.webp 320w, /_astro/cartoon.BjfnHoka_Zi7xgm.webp 480w, /_astro/cartoon.BjfnHoka_10NYge.webp 720w" type="image/webp" sizes="(max-width: 768px) min(calc(100vw - 3rem), 24rem), 16rem"><img src="/_astro/cartoon.BjfnHoka_1TDLuR.png" srcset="/_astro/cartoon.BjfnHoka_Z134VGC.png 320w, /_astro/cartoon.BjfnHoka_Z2maS7a.png 480w, /_astro/cartoon.BjfnHoka_Z13elzz.png 720w" alt="I built a /blogpost command that writes, illustrates, and publishes for me" loading="eager" fetchpriority="high" sizes="(max-width: 768px) min(calc(100vw - 3rem), 24rem), 16rem" decoding="async" width="1254" height="1254" class="hero-image"></picture><p>Today I built a <code>/blogpost</code> skill for Claude Code that takes an idea and handles everything through to a live post with a cartoon illustration and a LinkedIn update.</p>
+<p>Here’s what happens when I type <code>/blogpost</code>:</p>
+<ol>
+<li>Claude drafts the article in my Astro blog</li>
+<li>A small script calls Cloudflare’s free image generation tier and generates 3 cartoon hero images — one character-focused, one metaphor, one scene</li>
+<li>I pick the best image</li>
+<li>Claude opens a browser preview via the chrome-devtools MCP</li>
+<li>I say <strong>publish</strong> — it builds, commits, and pushes to GitHub Pages</li>
+<li>The LinkedIn post gets drafted and posted via a Python CLI tool</li>
+</ol>
+<p>The whole thing is a Claude Code skill — a markdown file that Claude reads and executes step by step.</p>
+<hr>
+<h2 id="how-the-image-generation-works">How the image generation works</h2>
+<p>The images are now generated with Cloudflare’s free AI image generation tier using a small script. It is quick, requires no local GPU, and keeps the workflow simple.</p>
+<p>Claude sends a prompt to Cloudflare’s image model, saves the returned image to disk, and then picks the best result for the post:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> requests</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">resp </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> requests.post(</span></span>
+<span class="line"><span style="color:#9ECBFF">    "https://api.cloudflare.com/client/v4/accounts/</span><span style="color:#79B8FF">{account_id}</span><span style="color:#9ECBFF">/ai/run/@cf/black-forest-labs/flux-2-dev"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">    headers</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{</span><span style="color:#9ECBFF">"Authorization"</span><span style="color:#E1E4E8">: </span><span style="color:#F97583">f</span><span style="color:#9ECBFF">"Bearer </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">token</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">"</span><span style="color:#E1E4E8">},</span></span>
+<span class="line"><span style="color:#FFAB70">    data</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{</span><span style="color:#9ECBFF">"prompt"</span><span style="color:#E1E4E8">: prompt, </span><span style="color:#9ECBFF">"width"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1024</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"height"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">1024</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"steps"</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">25</span><span style="color:#E1E4E8">},</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">image_bytes </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resp.json()[</span><span style="color:#9ECBFF">"result"</span><span style="color:#E1E4E8">][</span><span style="color:#9ECBFF">"image"</span><span style="color:#E1E4E8">]</span></span></code></pre>
+<p>Rather than waiting on a long-running local process, the skill watches the output folder directly:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">output_dir </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "./generated"</span></span>
+<span class="line"><span style="color:#E1E4E8">expected </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#9ECBFF">"blog_v1.png"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"blog_v2.png"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"blog_v3.png"</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> range</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">200</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#E1E4E8">    time.sleep(</span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> fname </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> expected:</span></span>
+<span class="line"><span style="color:#E1E4E8">        fpath </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> os.path.join(output_dir, fname)</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> os.path.exists(fpath):</span></span>
+<span class="line"><span style="color:#E1E4E8">            shutil.copy2(fpath, dest)</span></span>
+<span class="line"><span style="color:#E1E4E8">            found.add(fname)</span></span></code></pre>
+<p>This runs in the background — Claude gets notified when all 3 are ready and proceeds automatically.</p>
+<p>The 3 distinct angles matter. Early versions generated 5 variations of the same prompt and the results were nearly identical. Giving each image a different brief (character / object / environment) means you actually have something to choose between.</p>
+<hr>
+<h2 id="the-linkedin-integration">The LinkedIn integration</h2>
+<p>LinkedIn posting uses the official API with OAuth2. The flow:</p>
+<ol>
+<li>One-time setup: <code>python linkedin_post.py --auth</code> — opens the browser, saves tokens to <code>~/.linkedin_token.json</code></li>
+<li>Posting: <code>python linkedin_post.py "post text"</code> — checks token expiry, refreshes if needed, posts</li>
+</ol>
+<p>A few things that weren’t obvious from the docs:</p>
+<p><strong>Use <code>/rest/posts</code>, not <code>/ugcPosts</code></strong> — the older endpoint is deprecated. The new one requires a <code>LinkedIn-Version: YYYYMM</code> header.</p>
+<p><strong>You need two LinkedIn products provisioned</strong>, not one. <code>w_member_social</code> alone gives you posting rights but no way to get the author’s person ID. You also need “Sign In with LinkedIn using OpenID Connect” for the <code>openid profile</code> scopes. The person ID comes from <code>/v2/userinfo</code> as the <code>sub</code> field:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">resp </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> requests.get(</span><span style="color:#9ECBFF">"https://api.linkedin.com/v2/userinfo"</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">headers</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">auth_headers(tokens))</span></span>
+<span class="line"><span style="color:#E1E4E8">person_id </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> resp.json()[</span><span style="color:#9ECBFF">"sub"</span><span style="color:#E1E4E8">]</span></span></code></pre>
+<p><strong>Windows encoding</strong> — if you’re on Windows and post text contains emoji, force UTF-8 on stdout:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">sys.stdout </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> io.TextIOWrapper(sys.stdout.buffer, </span><span style="color:#FFAB70">encoding</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"utf-8"</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">errors</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"replace"</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<hr>
+<h2 id="the-skill-itself">The skill itself</h2>
+<p>The whole pipeline is a markdown file that Claude reads as instructions. No framework, no config — just a description of what to do and in what order.</p>
+<p>Skills live in <code>~/.claude/skills/&lt;name&gt;/SKILL.md</code>. They’re loaded into context when invoked and Claude follows them step by step. The blogpost skill is about 250 lines and covers every edge case we hit building it: Cloudflare image generation, port detection for the dev server, where to save images so Astro can serve them, when to add <code>heroImage</code> to frontmatter (after the image exists, not before).</p>
+<p>The LinkedIn poster is a separate <code>linkedin-post</code> skill that wraps the Python CLI — so it can be called from <code>/blogpost</code> or standalone from anything else.</p>
+<p>I also added a line to my <code>CLAUDE.md</code> so Claude proactively suggests a LinkedIn post at the end of any session where something interesting gets built. It’s easy to forget to share things publicly — having the suggestion baked into the workflow means it actually happens.</p>
+<hr>
+<h2 id="what-it-looks-like-in-practice">What it looks like in practice</h2>
+<p>This post was written and published through the pipeline. The cartoon above was generated with Cloudflare’s free AI image tier, picked from 3 options, and placed automatically.</p>
+<p>Total time from “make a blogpost about this” to live: about 10 minutes, most of which was image generation.</p>
+<script>
+  (async function () {
+    const diagrams = document.querySelectorAll(
+      'article.article pre[data-language="mermaid"] > code',
+    );
+    if (!diagrams.length) return;
+
+    const { default: mermaid } = await import(
+      'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs'
+    );
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: 'base',
+      themeVariables: {
+        background: 'transparent',
+        primaryColor: 'transparent',
+        primaryBorderColor: '#4b5563',
+        primaryTextColor: '#1f2937',
+        secondaryColor: 'transparent',
+        secondaryBorderColor: '#4b5563',
+        tertiaryColor: 'transparent',
+        tertiaryBorderColor: '#4b5563',
+        clusterBkg: 'transparent',
+        clusterBorder: '#6b7280',
+        lineColor: '#4b5563',
+        edgeLabelBackground: 'transparent',
+        fontFamily: 'inherit',
+      },
+      flowchart: { useMaxWidth: true, htmlLabels: true },
+    });
+
+    const containers = [];
+    diagrams.forEach(function (code) {
+      const container = document.createElement('div');
+      container.className = 'mermaid-diagram';
+      container.textContent = code.textContent || '';
+      code.parentElement.replaceWith(container);
+      containers.push(container);
+    });
+
+    await mermaid.run({ nodes: containers });
+  })();
+</script></section></article><script>
+    (function () {
+      if (window.location.hash) return;
+      if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+      var navigationEntry = performance.getEntriesByType('navigation')[0];
+      if (navigationEntry && navigationEntry.type === 'back_forward') return;
+
+      function scrollToArticleStart() {
+        var articleStart = document.getElementById('article-start');
+        if (!articleStart) return;
+        articleStart.scrollIntoView({ block: 'start', inline: 'nearest' });
+      }
+
+      requestAnimationFrame(function () {
+        requestAnimationFrame(scrollToArticleStart);
+      });
+
+      window.addEventListener('load', scrollToArticleStart, { once: true });
+    })();
+  </script></div></main><footer class="site-footer"><div class="content-wrap site-shell"><section class="copy"><p>&copy; 2026 Dan Marshall</p></section></div></footer><script>
+      // Drawer
+      function openDrawer() {
+        document.getElementById("drawer").classList.add("drawer-open");
+        document
+          .getElementById("drawer-overlay")
+          .classList.add("drawer-overlay-visible");
+        var hamburger = document.getElementById("hamburger");
+        hamburger.classList.remove("hamburger-idle");
+        hamburger.setAttribute("aria-expanded", "true");
+      }
+
+      function closeDrawer() {
+        document.getElementById("drawer").classList.remove("drawer-open");
+        document
+          .getElementById("drawer-overlay")
+          .classList.remove("drawer-overlay-visible");
+        var hamburger = document.getElementById("hamburger");
+        hamburger.setAttribute("aria-expanded", "false");
+        window.dispatchEvent(new Event("hamburger-active"));
+      }
+
+      (function () {
+        var hamburger = document.getElementById("hamburger");
+        if (!hamburger) return;
+
+        var idleTimer;
+        var idleDelay = 1800;
+
+        function isDrawerOpen() {
+          return hamburger.getAttribute("aria-expanded") === "true";
+        }
+
+        function showHamburger() {
+          hamburger.classList.remove("hamburger-idle");
+          window.clearTimeout(idleTimer);
+          if (isDrawerOpen()) return;
+          idleTimer = window.setTimeout(function () {
+            if (!isDrawerOpen()) hamburger.classList.add("hamburger-idle");
+          }, idleDelay);
+        }
+
+        ["scroll", "resize", "pointermove", "touchstart", "keydown", "hamburger-active"].forEach(
+          function (eventName) {
+            window.addEventListener(eventName, showHamburger, { passive: true });
+          },
+        );
+
+        hamburger.addEventListener("focus", showHamburger);
+        hamburger.addEventListener("mouseenter", showHamburger);
+        showHamburger();
+      })();
+
+      // Table of contents — article pages only
+      // Script is is:inline at bottom of body — DOM is already available, no need for DOMContentLoaded
+      (function () {
+        if (!document.body.classList.contains("article-detail")) return;
+
+        var content = document.querySelector("section.content");
+        if (!content) return;
+
+        var longCodeBlocks = [];
+        var longCodeThreshold = 14;
+
+        function getCodeLineCount(pre) {
+          var shikiLines = pre.querySelectorAll(".line");
+          if (shikiLines.length) return shikiLines.length;
+
+          var text = pre.textContent || "";
+          var lines = text.split(/\r\n|\r|\n/);
+          if (lines.length > 1 && lines[lines.length - 1] === "") lines.pop();
+          return lines.length;
+        }
+
+        function setCodeToggleLabel(summary, details) {
+          var lines = details.getAttribute("data-code-lines");
+          summary.textContent =
+            (details.open ? "Hide code" : "Show code") +
+            " (" +
+            lines +
+            " lines)";
+        }
+
+        content.querySelectorAll("pre").forEach(function (pre) {
+          if (pre.closest(".code-disclosure")) return;
+
+          var lineCount = getCodeLineCount(pre);
+          if (lineCount <= longCodeThreshold) return;
+
+          var details = document.createElement("details");
+          details.className = "code-disclosure";
+          details.setAttribute("data-code-lines", String(lineCount));
+
+          var summary = document.createElement("summary");
+          summary.className = "code-disclosure-summary";
+          details.appendChild(summary);
+
+          pre.parentNode.insertBefore(details, pre);
+          details.appendChild(pre);
+          setCodeToggleLabel(summary, details);
+
+          details.addEventListener("toggle", function () {
+            setCodeToggleLabel(summary, details);
+          });
+
+          longCodeBlocks.push(details);
+        });
+
+        if (longCodeBlocks.length) {
+          var printOpenedBlocks = [];
+          window.addEventListener("beforeprint", function () {
+            printOpenedBlocks = longCodeBlocks.filter(function (details) {
+              return !details.open;
+            });
+            printOpenedBlocks.forEach(function (details) {
+              details.open = true;
+            });
+          });
+          window.addEventListener("afterprint", function () {
+            printOpenedBlocks.forEach(function (details) {
+              details.open = false;
+            });
+            printOpenedBlocks = [];
+          });
+        }
+
+        var headings = content.querySelectorAll("h2, h3");
+        if (headings.length < 2) return;
+
+        function slugify(text) {
+          return text
+            .trim()
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, "")
+            .replace(/\s+/g, "-")
+            .replace(/-{2,}/g, "-");
+        }
+
+        var usedIds = {};
+        headings.forEach(function (h) {
+          if (!h.id) {
+            var base = slugify(h.textContent);
+            var id = base;
+            var n = 2;
+            while (usedIds[id]) {
+              id = base + "-" + n++;
+            }
+            h.id = id;
+          }
+          usedIds[h.id] = true;
+        });
+
+        var nav = document.createElement("nav");
+        nav.className = "toc";
+        nav.setAttribute("aria-label", "Table of contents");
+
+        var socialsEl = document.createElement("div");
+        socialsEl.className = "toc-socials";
+        socialsEl.innerHTML =
+          '<a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email" aria-label="Email">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>' +
+          '</a>' +
+          '<a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile" aria-label="LinkedIn">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>' +
+          '</a>' +
+          '<a href="https://github.com/DanMarshall909" data-tooltip="View my GitHub profile" aria-label="GitHub">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.5 2-5-2-7-2"/></svg>' +
+          '</a>' +
+          '<a href="/feed.xml" data-tooltip="Subscribe to the RSS feed" aria-label="RSS">' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>' +
+          '</a>';
+        nav.appendChild(socialsEl);
+
+        var titleEl = document.createElement("div");
+        titleEl.className = "toc-title";
+        titleEl.innerHTML = "<span>On this page</span>";
+        nav.appendChild(titleEl);
+
+        var list = document.createElement("ul");
+        list.className = "toc-list";
+
+        headings.forEach(function (h) {
+          var li = document.createElement("li");
+          li.className = "toc-item toc-" + h.tagName.toLowerCase();
+          var a = document.createElement("a");
+          a.href = "#" + h.id;
+          a.className = "toc-link";
+          a.textContent = h.textContent;
+          a.addEventListener("click", function (e) {
+            e.preventDefault();
+            document
+              .getElementById(h.id)
+              .scrollIntoView({ behavior: "smooth", block: "start" });
+            history.pushState(null, null, "#" + h.id);
+            closeDrawer();
+          });
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+
+        nav.appendChild(list);
+
+        var hamburger = document.getElementById("hamburger");
+        var isMobile =
+          hamburger && window.getComputedStyle(hamburger).display !== "none";
+
+        if (isMobile) {
+          // Mobile: put TOC at the top of the drawer.
+          var drawerBody = document.getElementById("drawer-body");
+          if (drawerBody) drawerBody.insertBefore(nav, drawerBody.firstChild);
+        } else {
+          // Desktop: insert as sticky sidebar
+          var article = document.querySelector("article.article");
+          if (!article) return;
+          article.parentElement.classList.add("article-with-toc");
+          article.parentElement.insertBefore(nav, article);
+        }
+
+        // Highlight active heading via IntersectionObserver
+        var tocLinks = [].slice.call(nav.querySelectorAll(".toc-link"));
+        var activeLink = null;
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                var href = "#" + entry.target.id;
+                if (activeLink) activeLink.classList.remove("toc-active");
+                activeLink =
+                  tocLinks.find(function (l) {
+                    return l.getAttribute("href") === href;
+                  }) || null;
+                if (activeLink) activeLink.classList.add("toc-active");
+              }
+            });
+          },
+          { rootMargin: "-15% 0px -75% 0px", threshold: 0 },
+        );
+
+        headings.forEach(function (h) {
+          observer.observe(h);
+        });
+      })();
+    </script><script>
+      (function () {
+        const header = document.querySelector(".header[data-home-link]");
+        if (!(header instanceof HTMLElement)) return;
+
+        header.addEventListener("click", function (event) {
+          if (!(event.target instanceof Element)) return;
+          if (
+            event.target.closest(
+              'a, button, input, select, textarea, summary, [role="button"]',
+            )
+          )
+            return;
+
+          const href = header.dataset.homeLink || "/";
+          if (window.location.pathname === href) return;
+          window.location.href = href;
+        });
+      })();
+    </script><script>
+      (function () {
+        function createToggleButton(pre, className, label, icon) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = `code-toggle ${className}`;
+          button.setAttribute("aria-label", label);
+          button.innerHTML = icon;
+          return button;
+        }
+
+        function createWrapToggle(pre) {
+          const iconMarkup = `
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+              <path d="M5 7h14" />
+              <path d="M5 12h11c1 0 3 .5 3 2.5S17.333 17 16.5 17H12" />
+              <path d="M5 17h4" />
+              <path d="M15 17l2-2" />
+              <path d="M15 17l2 2" />
+            </svg>
+          `;
+          const button = createToggleButton(pre, "code-wrap-toggle", "Toggle code wrapping", iconMarkup);
+          button.addEventListener("click", function () {
+            const isWrapped = pre.classList.toggle("wrap-enabled");
+            button.setAttribute("aria-label", isWrapped ? "Disable code wrapping" : "Enable code wrapping");
+          });
+          pre.appendChild(button);
+        }
+
+        function createExpandToggle(pre) {
+          const iconMarkup = `
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
+              <circle cx="7" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="17" cy="12" r="1.5" fill="currentColor" />
+            </svg>
+          `;
+          const button = createToggleButton(pre, "code-expand-toggle", "Toggle code preview", iconMarkup);
+          button.addEventListener("click", function () {
+            const isExpanded = pre.classList.toggle("code-expanded");
+            if (isExpanded) {
+              pre.classList.remove("code-truncated");
+              button.setAttribute("aria-label", "Collapse code block");
+            } else {
+              pre.classList.add("code-truncated");
+              button.setAttribute("aria-label", "Expand code block");
+            }
+          });
+          pre.appendChild(button);
+        }
+
+        function checkCodeOverflow(pre) {
+          return pre.scrollWidth > pre.clientWidth + 1;
+        }
+
+        function codeLineCount(pre) {
+          const code = pre.querySelector("code");
+          if (!code) return 0;
+          return code.textContent.split(/\r?\n/).length;
+        }
+
+        function initCodeWrapToggles() {
+          const codeBlocks = document.querySelectorAll("article.article pre");
+          codeBlocks.forEach(function (pre) {
+            const overflowed = checkCodeOverflow(pre);
+            const lines = codeLineCount(pre);
+
+            if (overflowed) {
+              createWrapToggle(pre);
+            }
+            if (lines > 5) {
+              pre.classList.add("code-truncated");
+              createExpandToggle(pre);
+            }
+          });
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initCodeWrapToggles);
+        } else {
+          initCodeWrapToggles();
+        }
+      })();
+    </script></body></html>
