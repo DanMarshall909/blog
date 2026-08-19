@@ -108,8 +108,8 @@
     --palette-ink-dark: oklch(0.94 0.018 265);
     --palette-canvas: oklch(0.19 0.025 265);
     --palette-canvas-dark: oklch(0.19 0.025 265);
-    --palette-accent: oklch(0.68 0.2 45);
-    --palette-accent-dark: oklch(0.74 0.19 45);
+    --palette-accent: oklch(0.68 0.14 45);
+    --palette-accent-dark: oklch(0.74 0.13 45);
 
     --color-primary: var(--palette-ink);
     --color-secondary: oklch(0.78 0.025 265);
@@ -130,7 +130,7 @@
     --color-code-scrollbar: oklch(0.48 0.08 305);
     --color-code-control: oklch(0.78 0.03 265);
     --color-code-control-hover: oklch(0.95 0.02 265);
-    --jetbrains-violet: oklch(0.68 0.2 305);
-    --jetbrains-orange: oklch(0.8 0.18 45);
-    --jetbrains-cyan: oklch(0.75 0.13 195);
+    --jetbrains-violet: oklch(0.68 0.14 305);
+    --jetbrains-orange: oklch(0.8 0.12 45);
+    --jetbrains-cyan: oklch(0.75 0.09 195);
 }

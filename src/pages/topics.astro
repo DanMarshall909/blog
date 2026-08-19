@@ -70,8 +70,8 @@ const topics = [...tagMap.values()].sort((a, b) => {
       var visibleCount = document.getElementById('topics-visible-count');
 
       var container = document.getElementById('view-container');
-      var gridItems = container ? Array.from(container.querySelectorAll(':scope > .article-grid > .article-card')) : [];
-      var listItems = container ? Array.from(container.querySelectorAll(':scope > .article-list > .list-item')) : [];
+      var gridItems = container ? Array.from(container.querySelectorAll('.article-list-frame > .article-grid > .article-card')) : [];
+      var listItems = container ? Array.from(container.querySelectorAll('.article-list-frame > .article-list > .list-item')) : [];
 
       var currentFilter = 'all';
       var isOpen = false;

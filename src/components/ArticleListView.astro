@@ -132,8 +132,8 @@ function mapArticle(article: ArticleEntry, index: number) {
 
     if (wrapper.classList.contains('article-list-view--filterable')) {
       container.filterBy = function (filter) {
-        var gridItems = container.querySelectorAll(':scope > .article-grid > .article-card');
-        var listItems = container.querySelectorAll(':scope > .article-list > .list-item');
+        var gridItems = container.querySelectorAll('.article-list-frame > .article-grid > .article-card');
+        var listItems = container.querySelectorAll('.article-list-frame > .article-list > .list-item');
         var visible = 0;
 
         gridItems.forEach(function (card) {
