@@ -32,6 +32,20 @@
   var fillVertices = resolveWithAlpha("--color-accent", 0.5, "rgba(120, 150, 255, 0.9)");
   var strokePlane = resolveWithAlpha("--color-border", 0.28, "rgba(120, 130, 155, 0.28)");
   var fillPlane = resolveWithAlpha("--color-surface", 0.2, "rgba(30, 35, 48, 0.2)");
+  var solidStrokes = [
+    resolveWithAlpha("--jetbrains-violet", 0.58, strokeWire),
+    resolveWithAlpha("--jetbrains-orange", 0.58, strokeWire),
+    resolveWithAlpha("--jetbrains-cyan", 0.58, strokeWire),
+    strokeWire,
+    resolveWithAlpha("--jetbrains-violet", 0.42, strokeWire),
+  ];
+  var solidFills = [
+    resolveWithAlpha("--jetbrains-violet", 0.46, fillVertices),
+    resolveWithAlpha("--jetbrains-orange", 0.46, fillVertices),
+    resolveWithAlpha("--jetbrains-cyan", 0.46, fillVertices),
+    fillVertices,
+    resolveWithAlpha("--jetbrains-violet", 0.34, fillVertices),
+  ];
 
   var phi = (1 + Math.sqrt(5)) / 2;
 
@@ -55,6 +69,51 @@
     });
   }
 
+  function createFaces(vertices) {
+    var planes = {};
+    var epsilon = 0.0001;
+    for (var i = 0; i < vertices.length; i++) {
+      for (var j = i + 1; j < vertices.length; j++) {
+        for (var k = j + 1; k < vertices.length; k++) {
+          var a = vertices[i], b = vertices[j], c = vertices[k];
+          var normal = normalize(cross([
+            b[0] - a[0], b[1] - a[1], b[2] - a[2],
+          ], [
+            c[0] - a[0], c[1] - a[1], c[2] - a[2],
+          ]));
+          if (dot(normal, normal) < epsilon) continue;
+          var firstSign = normal.find(function (value) { return Math.abs(value) > epsilon; });
+          if (firstSign < 0) normal = normal.map(function (value) { return -value; });
+          var distance = dot(normal, a);
+          var isHull = vertices.every(function (vertex) {
+            return dot(normal, vertex) <= distance + epsilon;
+          });
+          if (!isHull) continue;
+          var indices = vertices.map(function (vertex, index) {
+            return Math.abs(dot(normal, vertex) - distance) < epsilon ? index : -1;
+          }).filter(function (index) { return index >= 0; });
+          var key = normal.map(function (value) { return value.toFixed(4); }).join(",") + ":" + distance.toFixed(4);
+          planes[key] = { normal: normal, indices: indices };
+        }
+      }
+    }
+
+    return Object.keys(planes).map(function (key) {
+      var face = planes[key];
+      var center = face.indices.reduce(function (sum, index) {
+        return [sum[0] + vertices[index][0], sum[1] + vertices[index][1], sum[2] + vertices[index][2]];
+      }, [0, 0, 0]).map(function (value) { return value / face.indices.length; });
+      var axis = Math.abs(face.normal[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0];
+      var right = normalize(cross(axis, face.normal));
+      var up = cross(face.normal, right);
+      return face.indices.sort(function (left, rightIndex) {
+        var leftVector = [vertices[left][0] - center[0], vertices[left][1] - center[1], vertices[left][2] - center[2]];
+        var rightVector = [vertices[rightIndex][0] - center[0], vertices[rightIndex][1] - center[1], vertices[rightIndex][2] - center[2]];
+        return Math.atan2(dot(leftVector, up), dot(leftVector, right)) - Math.atan2(dot(rightVector, up), dot(rightVector, right));
+      });
+    });
+  }
+
   function createSolid(name, raw) {
     var radius = Math.sqrt(raw.reduce(function (sum, vertex) {
       return Math.max(sum, vertex[0] * vertex[0] + vertex[1] * vertex[1] + vertex[2] * vertex[2]);
@@ -62,7 +121,7 @@
     var vertices = raw.map(function (vertex) {
       return [vertex[0] / radius, vertex[1] / radius, vertex[2] / radius];
     });
-    return { name: name, vertices: vertices, edges: createEdges(vertices) };
+    return { name: name, vertices: vertices, edges: createEdges(vertices), faces: createFaces(vertices) };
   }
 
   var tetrahedron = [
@@ -110,11 +169,11 @@
   ];
 
   var sceneObjects = [
-    { solid: solids[0], position: [-5, -1.1, 0.8], phase: 0.2, speed: 0.82, motion: [0.8, 0.5, 0.6], seed: 11 },
-    { solid: solids[1], position: [-2.5, 0.4, 0.35], phase: 1.7, speed: 1.16, motion: [0.7, 0.65, 0.8], seed: 23 },
-    { solid: solids[2], position: [0, 1.1, 0], phase: 3.1, speed: 0.94, motion: [0.75, 0.55, 0.7], seed: 37 },
-    { solid: solids[3], position: [2.5, 0.4, 0.35], phase: 4.4, speed: 1.28, motion: [0.65, 0.6, 0.75], seed: 41 },
-    { solid: solids[4], position: [5, -1.1, 0.8], phase: 5.6, speed: 0.72, motion: [0.85, 0.5, 0.65], seed: 59 },
+    { solid: solids[0], position: [-6, -1.5, 1.6], phase: 0.2, speed: 0.82, motion: [1.8, 1.2, 1.5], seed: 11 },
+    { solid: solids[1], position: [-2.8, 1.4, -1.1], phase: 1.7, speed: 1.16, motion: [1.4, 1.7, 1.2], seed: 23 },
+    { solid: solids[2], position: [0.2, -0.4, 1.4], phase: 3.1, speed: 0.94, motion: [1.6, 1.1, 1.8], seed: 37 },
+    { solid: solids[3], position: [3.2, 1.2, -1.3], phase: 4.4, speed: 1.28, motion: [1.3, 1.5, 1.6], seed: 41 },
+    { solid: solids[4], position: [6.2, -1.2, 0.4], phase: 5.6, speed: 0.72, motion: [1.9, 1.3, 1.4], seed: 59 },
   ];
 
   var cameraPath = [
@@ -122,8 +181,8 @@
     [3, 0.6, 2], [6, -1, 3], [9, -0.4, 6],
   ];
   var targetPath = [
-    [-7, -0.7, 0.8], [-5, -1.1, 0.8], [-2.5, 0.4, 0.35], [0, 1.1, 0],
-    [2.5, 0.4, 0.35], [5, -1.1, 0.8], [7, -0.7, 0.8],
+    [-8, -1.2, 1.6], [-6, -1.5, 1.6], [-2.8, 1.4, -1.1], [0.2, -0.4, 1.4],
+    [3.2, 1.2, -1.3], [6.2, -1.2, 0.4], [8, -0.8, 0.5],
   ];
 
   function rotX(v, angle) {
@@ -143,6 +202,7 @@
   var FREQ_Y = 2 * Math.PI / 53000;
   var FREQ_Z = 2 * Math.PI / 71000;
   var AMP = Math.PI;
+  var ANIMATION_SPEED = 2.2;
   var FRAME_INTERVAL_MS = 1000 / 30;
   var DOT_RADIUS = 1.25;
 
@@ -249,7 +309,34 @@
     return [
       cx + dot(relative, view.right) * focalLength / depth,
       cy + dot(relative, view.up) * focalLength / depth,
+      depth,
     ];
+  }
+
+  function depthVisibility(depth) {
+    return Math.max(0.08, Math.min(1, 1.08 - depth / 13));
+  }
+
+  function lightAt(t) {
+    var phase = t * 0.00032;
+    return [
+      Math.sin(phase) * 7,
+      4 + Math.sin(phase * 1.7) * 2,
+      4 + Math.cos(phase * 0.8) * 4,
+    ];
+  }
+
+  function vertexLight(normalPoint, worldPoint, light) {
+    var normal = normalize(normalPoint);
+    var toLight = [
+      light[0] - worldPoint[0],
+      light[1] - worldPoint[1],
+      light[2] - worldPoint[2],
+    ];
+    var distance = Math.sqrt(dot(toLight, toLight)) || 1;
+    var diffuse = Math.max(0, dot(normal, normalize(toLight)));
+    var attenuation = Math.max(0.25, 1 - distance / 13);
+    return Math.min(1, 0.2 + diffuse * attenuation * 1.1);
   }
 
   function pseudoRandom(seed) {
@@ -286,6 +373,7 @@
     var angleY = Math.sin(t * FREQ_Y * speed + phase * 1.3) * AMP;
     var angleZ = Math.sin(t * FREQ_Z * speed + phase * 0.7) * AMP;
     var randomOffset = randomOffsetAt(t, sceneObject);
+    var light = lightAt(t);
     var position = [
       sceneObject.position[0] + randomOffset[0],
       sceneObject.position[1] + randomOffset[1],
@@ -300,24 +388,38 @@
         point[1] + position[1],
         point[2] + position[2],
       ];
-      return project(point, view);
+      var projected = project(point, view);
+      if (!projected) return null;
+      projected[3] = vertexLight([
+        point[0] - position[0],
+        point[1] - position[1],
+        point[2] - position[2],
+      ], point, light);
+      return projected;
     });
   }
 
   function drawFloor(view) {
-    var floorY = -1.25;
-    var floorCorners = [
-      [-14, floorY, -5],
-      [14, floorY, -5],
-      [14, floorY, 18],
-      [-14, floorY, 18],
-    ].map(function (point) { return project(point, view); });
+    [-10.25, -3.3, -5.35].forEach(function (floorY, planeIndex) {
+      drawGridPlane(view, floorY, -5, 18, planeIndex === 0 ? 0.9 : 0.45, false);
+    });
+    drawGridPlane(view, 2.8, -5, 18, 0.28, true);
+  }
 
-    if (floorCorners.every(function (point) { return point; })) {
+  function drawGridPlane(view, planeY, farZ, nearZ, planeOpacity, vertical) {
+    var corners = vertical ? [
+      [-14, -4, farZ], [14, -4, farZ], [14, 4, farZ], [-14, 4, farZ],
+    ] : [
+      [-14, planeY, farZ], [14, planeY, farZ], [14, planeY, nearZ], [-14, planeY, nearZ],
+    ];
+    var projectedCorners = corners.map(function (point) { return project(point, view); });
+
+    if (projectedCorners.every(function (point) { return point; })) {
       ctx.fillStyle = fillPlane;
+      ctx.globalAlpha = planeOpacity;
       ctx.beginPath();
-      ctx.moveTo(floorCorners[0][0], floorCorners[0][1]);
-      floorCorners.slice(1).forEach(function (point) {
+      ctx.moveTo(projectedCorners[0][0], projectedCorners[0][1]);
+      projectedCorners.slice(1).forEach(function (point) {
         ctx.lineTo(point[0], point[1]);
       });
       ctx.closePath();
@@ -327,17 +429,19 @@
     ctx.strokeStyle = strokePlane;
     ctx.lineWidth = 1;
     for (var x = -14; x <= 14; x += 1) {
-      drawFloorLine(view, [x, floorY, -5], [x, floorY, 18]);
+      drawFloorLine(view, vertical ? [x, -4, farZ] : [x, planeY, farZ], vertical ? [x, 4, farZ] : [x, planeY, nearZ], planeOpacity);
     }
-    for (var z = -5; z <= 18; z += 1) {
-      drawFloorLine(view, [-14, floorY, z], [14, floorY, z]);
+    for (var z = vertical ? -4 : -5; z <= (vertical ? 4 : 18); z += 1) {
+      drawFloorLine(view, vertical ? [-14, z, farZ] : [-14, planeY, z], vertical ? [14, z, farZ] : [14, planeY, z], planeOpacity);
     }
+    ctx.globalAlpha = 1;
   }
 
-  function drawFloorLine(view, start, end) {
+  function drawFloorLine(view, start, end, planeOpacity) {
     var startPoint = project(start, view);
     var endPoint = project(end, view);
     if (!startPoint || !endPoint) return;
+    ctx.globalAlpha = planeOpacity * Math.min(depthVisibility(startPoint[2]), depthVisibility(endPoint[2]));
     ctx.beginPath();
     ctx.moveTo(startPoint[0], startPoint[1]);
     ctx.lineTo(endPoint[0], endPoint[1]);
@@ -349,32 +453,63 @@
     ctx.clearRect(0, 0, w, h);
 
     drawFloor(view);
-    sceneObjects.forEach(function (sceneObject) {
-      drawSolid(t, view, sceneObject);
+    sceneObjects.forEach(function (sceneObject, objectIndex) {
+      drawSolid(t, view, sceneObject, objectIndex);
     });
   }
 
-  function drawSolid(t, view, sceneObject) {
+  function drawSolid(t, view, sceneObject, objectIndex) {
     var positions = currentPositions(t, view, sceneObject);
+    var visibleFaces = sceneObject.solid.faces.map(function (face) {
+      var points = face.map(function (index) { return positions[index]; });
+      if (points.some(function (point) { return !point; })) return null;
+      return {
+        points: points,
+        depth: points.reduce(function (sum, point) { return sum + point[2]; }, 0) / points.length,
+        light: points.reduce(function (sum, point) { return sum + point[3]; }, 0) / points.length,
+      };
+    }).filter(Boolean).sort(function (left, right) {
+      return right.depth - left.depth;
+    });
+
+    ctx.fillStyle = solidFills[objectIndex];
+    visibleFaces.forEach(function (face) {
+      ctx.globalAlpha = depthVisibility(face.depth) * face.light * 0.75;
+      ctx.beginPath();
+      ctx.moveTo(face.points[0][0], face.points[0][1]);
+      face.points.slice(1).forEach(function (point) {
+        ctx.lineTo(point[0], point[1]);
+      });
+      ctx.closePath();
+      ctx.fill();
+    });
+
     ctx.lineWidth = 1;
     ctx.lineCap = "round";
-    ctx.strokeStyle = strokeWire;
-    ctx.beginPath();
+    ctx.strokeStyle = solidStrokes[objectIndex];
     sceneObject.solid.edges.forEach(function (edge) {
       if (!positions[edge[0]] || !positions[edge[1]]) return;
+      ctx.globalAlpha = Math.min(
+        depthVisibility(positions[edge[0]][2]),
+        depthVisibility(positions[edge[1]][2]),
+        (positions[edge[0]][3] + positions[edge[1]][3]) / 2,
+      );
+      ctx.beginPath();
       ctx.moveTo(positions[edge[0]][0], positions[edge[0]][1]);
       ctx.lineTo(positions[edge[1]][0], positions[edge[1]][1]);
+      ctx.stroke();
     });
-    ctx.stroke();
 
-    ctx.fillStyle = fillVertices;
-    ctx.beginPath();
+    ctx.fillStyle = solidFills[objectIndex];
     positions.forEach(function (point) {
       if (!point) return;
+      ctx.globalAlpha = depthVisibility(point[2]) * point[3];
+      ctx.beginPath();
       ctx.moveTo(point[0] + DOT_RADIUS, point[1]);
       ctx.arc(point[0], point[1], DOT_RADIUS, 0, Math.PI * 2);
+      ctx.fill();
     });
-    ctx.fill();
+    ctx.globalAlpha = 1;
   }
 
   resize();
@@ -393,7 +528,7 @@
     requestAnimationFrame(frame);
     if (t - lastFrameAt < FRAME_INTERVAL_MS) return;
     lastFrameAt = t;
-    render(t);
+    render(t * ANIMATION_SPEED);
   }
   requestAnimationFrame(frame);
 })();

@@ -2,8 +2,6 @@
 
 :root {
     /* Palette primitives — retheming starts here. */
---palette-neutral-hue: 250;
-/* Amber + neutral blue-grey */
     --palette-neutral-hue: 245;
     --palette-accent-hue: 75;
     --palette-ink: oklch(0.24 0.014 var(--palette-neutral-hue));
@@ -101,4 +99,38 @@
     --color-surface: oklch(from var(--color-background) calc(l + 0.035) c h / 0.8);
     --color-border: var(--color-line-tint-dark);
     --color-code-bg: oklch(from var(--color-background) calc(l + 0.02) c h / 0.85);
+}
+
+[data-theme="jetbrains"] {
+    --palette-neutral-hue: 265;
+    --palette-accent-hue: 305;
+    --palette-ink: oklch(0.94 0.018 265);
+    --palette-ink-dark: oklch(0.94 0.018 265);
+    --palette-canvas: oklch(0.19 0.025 265);
+    --palette-canvas-dark: oklch(0.19 0.025 265);
+    --palette-accent: oklch(0.68 0.2 45);
+    --palette-accent-dark: oklch(0.74 0.19 45);
+
+    --color-primary: var(--palette-ink);
+    --color-secondary: oklch(0.78 0.025 265);
+    --color-primary-dark: var(--palette-ink-dark);
+    --color-secondary-dark: var(--color-secondary);
+    --color-background-dark: oklch(0.15 0.025 265);
+    --color-line-tint: oklch(0.34 0.04 265);
+    --color-line-tint-dark: oklch(0.34 0.04 265);
+    --color-muted: oklch(0.68 0.025 265);
+    --color-accent: var(--palette-accent);
+    --color-accent-hover: oklch(0.8 0.18 305);
+    --color-background: oklch(0.15 0.025 265);
+    --color-surface: oklch(0.2 0.03 265 / 0.88);
+    --color-border: var(--color-line-tint);
+    --color-code-bg: oklch(0.13 0.025 265 / 0.92);
+    --color-code-border: oklch(0.34 0.04 265);
+    --color-code-surface: oklch(0.12 0.025 265 / 0.94);
+    --color-code-scrollbar: oklch(0.48 0.08 305);
+    --color-code-control: oklch(0.78 0.03 265);
+    --color-code-control-hover: oklch(0.95 0.02 265);
+    --jetbrains-violet: oklch(0.68 0.2 305);
+    --jetbrains-orange: oklch(0.8 0.18 45);
+    --jetbrains-cyan: oklch(0.75 0.13 195);
 }
