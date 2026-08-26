@@ -1,21 +1,25 @@
 ---
 title: "CAT-Q Just Became Real—but Not Yet Practical"
 author: Dan Marshall
-date: "2026-07-29"
+date: "2026-08-27"
 tags: ["ai", "llm", "ternary", "quantization", "local-ai"]
-description: "Intel’s CAT-Q release is strong evidence that existing language models can be converted to ternary weights without retraining from scratch. It is an important milestone, but the efficient runtime needed to transform local AI is still missing."
+description: "Intel’s CAT-Q release suggests existing language models—even a 235B mixture-of-experts model—can be converted toward ternary weights without retraining from scratch. The model-quality result is increasingly credible; the missing piece is a genuinely packed, ternary-native runtime."
 template: article.pug
 ---
 
-The most interesting development in local language models this month is not another benchmark-leading model.
+The most interesting development in local language models is not another benchmark-leading model.
 
-It is the release of the first usable artefacts for [CAT-Q](https://github.com/IntelChina-AI/BitTern/tree/main/projects/cat-q), Intel’s method for converting existing pretrained language models into ternary models through post-training quantisation.
+It is the release of usable artefacts for [CAT-Q](https://github.com/IntelChina-AI/BitTern/tree/main/projects/cat-q), Intel’s method for converting existing pretrained language models into ternary models through post-training quantisation.
 
-On 22 July 2026, Intel released CAT-Q model checkpoints, inference code and evaluation code. The accompanying model zoo includes Qwen3 models from 1.7B to 32B parameters, as well as mixture-of-experts models up to Qwen3-235B-A22B.
+On 22 July 2026, Intel released CAT-Q model checkpoints, inference code and evaluation code. The accompanying model zoo includes Qwen3 models from 1.7B to 32B parameters, mixture-of-experts models such as Qwen3-30B-A3B, and—most interestingly—Qwen3-235B-A22B.
+
+That last model changes the scale of the conversation.
+
+CAT-Q is no longer merely interesting because it hints that a 30B model might fit on a gaming PC. It raises the possibility that models with *hundreds of billions of total parameters* could eventually fit into machines with tens rather than hundreds of gigabytes of model memory.
 
 That matters because CAT-Q attacks one of the largest obstacles facing ternary language models: the cost of creating them.
 
-However, it is also easy to overstate what has been released. CAT-Q has moved from an interesting paper to something that can be independently evaluated. It has not yet produced a practical, packed runtime that lets us run a 32B model in roughly 6 GB of VRAM.
+However, it is also easy to overstate what has been released. CAT-Q has moved from an interesting paper to something that can be independently evaluated. It has **not** yet produced a practical packed runtime that stores and executes those models at their theoretical ternary size.
 
 Both parts of that statement matter.
 
@@ -25,21 +29,35 @@ Both parts of that statement matter.
 
 Most language models store each weight using 16-bit floating-point values during normal inference, or reduce them to formats such as 8-bit or 4-bit integers for local deployment.
 
-A ternary model restricts each weight to three possible values, commonly represented conceptually as `-1`, `0` and `1`. That requires about 1.58 bits of information per weight in the ideal case.
+A ternary model restricts each weight to three possible values, commonly represented conceptually as `-1`, `0` and `1`. Three states contain about 1.58 bits of information per weight in the ideal information-theoretic case.
 
 For a 32-billion-parameter model, the theoretical raw weight storage is therefore approximately:
 
 ```text
-32 billion × 1.58 bits ≈ 6.32 GB
+32 billion × 1.58 bits ≈ 6.3 GB
 ```
 
-That figure excludes scales, metadata, embeddings, activation memory and the key-value cache. It is not a realistic total VRAM requirement by itself. It does, however, show why ternary models are so interesting.
+For a 235-billion-parameter model:
 
-Compared with FP16, the theoretical weight representation is around ten times smaller. Compared with a 4-bit quantised model, it is still roughly two and a half times smaller.
+```text
+235 billion × 1.58 bits ≈ 46 GB
+```
 
-More importantly, ternary arithmetic has the potential to replace much of the expensive multiplication used during inference with simpler operations. A properly designed runtime could therefore improve memory bandwidth, power consumption and generation speed—not merely reduce the model file size.
+Those figures are theoretical raw information content. Real formats need packing, scales, metadata and sometimes unquantised tensors. A simple two-bit representation of 235B ternary values would already require about 59 GB before overhead.
 
-The problem is that achieving those gains normally requires training the model specifically for ternary weights.
+So I would not claim that Qwen3-235B-A22B is a 46 GB model waiting to be downloaded. A practical packed representation might plausibly land somewhere around the 60–65 GB range depending on how it is encoded, but that is an engineering estimate, not something Intel currently ships.
+
+Even so, compare that with FP16:
+
+```text
+235 billion × 16 bits ≈ 470 GB
+```
+
+That is the attraction. Ternary weights potentially move models whose raw FP16 weights belong in multi-GPU servers into the memory capacity of a single high-memory accelerator or unified-memory workstation.
+
+More importantly, ternary arithmetic has the potential to replace many multiply operations with simpler add, subtract or skip operations. A properly designed runtime could therefore improve memory bandwidth, power consumption and generation speed—not merely reduce the model file size.
+
+The difficult phrase there is **properly designed runtime**.
 
 ---
 
@@ -71,7 +89,7 @@ This changes the economics considerably.
 
 Rather than waiting for a well-funded laboratory to reproduce every interesting architecture as a native ternary model, it may eventually be possible to apply the technique to existing models and fine-tunes.
 
-The released checkpoints also weaken the idea that this approach is useful only for extremely large models. Intel has supplied CAT-Q parameters for:
+Intel has supplied CAT-Q parameters for:
 
 - Qwen3-1.7B
 - Qwen3-4B
@@ -82,9 +100,54 @@ The released checkpoints also weaken the idea that this approach is useful only 
 - Qwen3-235B-A22B
 - Llama 2 7B
 
-The method spans small dense models, larger dense models and large mixture-of-experts architectures.
+The method spans small dense models, larger dense models and very large mixture-of-experts architectures.
 
-That does not mean quality loss is identical at every scale. Larger models may retain capability more gracefully because they begin with greater redundancy. It does mean CAT-Q is not merely a specialised demonstration on one enormous model.
+That does not mean quality loss is identical at every scale. Larger models may retain capability more gracefully because they begin with greater redundancy. It does mean CAT-Q is not merely a specialised demonstration on one convenient model.
+
+The bigger implication is architectural: **ternary may become a deployment target for mainstream pretrained models rather than a property that has to be baked in from the start.**
+
+That is a much more important proposition.
+
+---
+
+## The 235B Example Is Where This Gets Interesting
+
+Qwen3-235B-A22B is a mixture-of-experts model. It has roughly 235B total parameters, but only around 22B are active for a token.
+
+Those two numbers matter for different reasons.
+
+The **235B total parameters** determine how much model state must generally be stored somewhere. The **22B active parameters** reduce the amount of expert computation needed for each token compared with a dense 235B model.
+
+Ternary quantisation attacks the first problem. MoE sparsity attacks the second.
+
+Together, they point toward a very different hardware envelope.
+
+A theoretical 1.58-bit representation of 235B weights is about 46 GB. A more straightforward two-bit packing is about 59 GB before overhead. Allow room for scales, metadata, non-ternary tensors and runtime structures and a practical packed model could plausibly be in the neighbourhood of 60–65 GB.
+
+That is not consumer-GPU territory in the conventional 8–24 GB sense, but it **is** within the capacity of hardware that would normally look absurdly small for a 235B model:
+
+- 80 GB-class accelerators;
+- 96–128 GB unified-memory workstations;
+- sufficiently large CPU memory systems, assuming bandwidth is adequate;
+- potentially multi-device consumer systems with efficient weight placement.
+
+A 128 GB unified-memory machine could, in capacity terms, have enough room for such a packed model plus a meaningful amount of runtime state and KV cache. An 80 GB accelerator might also have enough capacity if the packed representation and runtime overhead are controlled carefully.
+
+That does **not** mean either machine would run it quickly today.
+
+MoE models still need to route tokens to experts and move or access the relevant expert weights efficiently. Memory bandwidth, expert layout, cache behaviour, kernel quality and prompt-processing cost all matter. A model fitting in memory is a necessary condition, not a performance benchmark.
+
+But fitting is the first barrier—and ternary weights could move that barrier dramatically.
+
+This is why the 235B checkpoint is more consequential than the 32B one. It changes the question from:
+
+> Can I squeeze a somewhat larger local model onto a gaming machine?
+
+into:
+
+> Could datacentre-scale model capacity become runnable on a single high-memory workstation?
+
+That is a much more disruptive possibility.
 
 ---
 
@@ -92,17 +155,17 @@ That does not mean quality loss is identical at every scale. Larger models may r
 
 Before this release, CAT-Q was primarily a paper with promising results.
 
-The new release supplies model checkpoints, inference code and evaluation code. Researchers and developers can now reproduce the evaluation process, inspect the implementation and compare the published results against the released artefacts.
+The release supplies model checkpoints, inference code and evaluation code. Researchers and developers can now reproduce the evaluation process, inspect the implementation and compare published results against released artefacts.
 
 That is a meaningful credibility milestone.
 
-The release also covers modern Qwen3 architectures rather than relying only on an older academic baseline. Qwen3-32B is particularly interesting for local inference because its theoretical packed ternary weight size falls within the broad range of consumer GPUs.
+The release also covers modern Qwen3 architectures rather than relying only on an older academic baseline. Qwen3-32B is interesting because its theoretical packed ternary weight size falls into consumer-GPU territory. Qwen3-30B-A3B combines a large total model with only around 3B active parameters per token.
 
-Qwen3-30B-A3B may be even more interesting. As a mixture-of-experts model, it contains approximately 30B total parameters but activates only around 3B parameters for each token. A packed ternary representation could reduce storage and memory bandwidth, while the sparse architecture reduces the amount of computation required per token.
+But Qwen3-235B-A22B is the model that makes the broader thesis difficult to ignore.
 
-Those are exactly the characteristics required for capable local AI: substantial model capacity, lower active compute and dramatically reduced weight storage.
+If a model of that size can retain useful quality after post-training ternarisation, then ternary inference stops being merely a technique for making small models smaller. It begins to look like a possible route for collapsing the memory requirements of genuinely large models.
 
-But the word *could* is doing considerable work here.
+But the word *possible* is doing considerable work here.
 
 ---
 
@@ -114,7 +177,9 @@ The project explicitly states that the exported model is **not a packed ternary 
 
 This means the current export does not realise the theoretical storage advantage of 1.58-bit weights. It also does not automatically provide fast ternary arithmetic on a consumer GPU.
 
-You cannot currently export Qwen3-32B, load a roughly 6 GB file into llama.cpp and receive an order-of-magnitude improvement in performance.
+You cannot currently export Qwen3-235B-A22B, obtain a roughly 60 GB production checkpoint, load it onto an 80 GB GPU and suddenly have a fast 235B local model.
+
+Likewise, you cannot export Qwen3-32B, load a roughly 6 GB file into llama.cpp and receive an order-of-magnitude improvement in performance.
 
 The release is suitable for:
 
@@ -128,7 +193,7 @@ It is not yet a consumer-ready ternary inference stack.
 
 This distinction is important because model compression papers frequently report theoretical bit widths without delivering an end-to-end implementation that stores, loads and executes those weights efficiently.
 
-A 1.58-bit model represented internally using floating-point tensors is a quantisation experiment, not a 1.58-bit deployment.
+A 1.58-bit model represented internally using floating-point tensors is a quantisation result, not a 1.58-bit deployment.
 
 ---
 
@@ -138,11 +203,51 @@ The second major limitation is that Intel has not yet released the CAT-Q trainin
 
 In this context, “training” refers to the calibration and optimisation process used to derive the ternary quantisation parameters. The released repository can evaluate the supplied checkpoints, but it does not yet provide the complete official process for converting an arbitrary model.
 
-That means we cannot currently take a preferred coding model, a specialised fine-tune or a newer GLM-family model and run it through the official CAT-Q pipeline ourselves.
+That means we cannot currently take a preferred coding model, a specialised fine-tune, GLM or whatever strong architecture appears next and run it through the official CAT-Q pipeline ourselves.
 
 The project says that this code is being prepared for release.
 
 Until it arrives, the most strategically important claim—cheap conversion of the wider model ecosystem—cannot be explored independently beyond the models Intel has selected.
+
+---
+
+## The Runtime May Be the Bigger Breakthrough
+
+The model-quality result is starting to look credible. The next question is whether we are thinking about the runtime correctly.
+
+It would be easy to treat ternary as simply another quantisation type: add a new packed format to an existing inference engine, unpack the weights into conventional values, then feed them through roughly the same matrix-multiplication machinery.
+
+That may work, but it risks throwing away much of what makes ternary interesting.
+
+A ternary weight is not merely a very small integer. Conceptually, its operation is:
+
+```text
+-1  -> subtract
+ 0  -> skip
++1  -> add
+```
+
+That suggests an execution model built around the properties of ternary weights themselves: dense packing, zero skipping, add/subtract accumulation, vectorised bit operations, sparse expert activation and carefully fused scaling.
+
+Research directions such as FairyFuse are interesting in this context because they point toward treating low-bit and ternary execution as a systems problem rather than merely a storage format.
+
+The eventual stack could look something like:
+
+```text
+mainstream pretrained model
+        ↓
+CAT-Q-style conversion
+        ↓
+packed ternary representation
+        ↓
+ternary-aware compiler/runtime
+        ↓
+CPU / GPU / unified-memory hardware
+```
+
+The important thing is that the first box does not need to be a specially trained ternary foundation model.
+
+If that proves true, the runtime may become the differentiating technology.
 
 ---
 
@@ -154,28 +259,39 @@ For CAT-Q to transform local inference, the ecosystem still needs:
 
 1. The complete model-conversion code.
 2. A defined packed format for ternary weights and associated scales.
-3. Efficient CPU kernels using bit packing and vector instructions.
-4. Efficient GPU kernels designed for ternary operations.
-5. Integration with practical runtimes such as llama.cpp, vLLM or SGLang.
-6. End-to-end benchmarks covering model size, VRAM usage, prompt processing, generation speed and power consumption.
+3. Efficient CPU kernels using dense packing, bit operations and vector instructions.
+4. Efficient GPU kernels designed specifically around ternary execution.
+5. MoE-aware expert placement and routing that avoids turning sparse compute into a memory-transfer bottleneck.
+6. Integration with practical runtimes such as llama.cpp, vLLM or SGLang—or perhaps a purpose-built ternary runtime.
+7. End-to-end benchmarks covering model size, RAM/VRAM usage, prompt processing, generation speed, bandwidth and power consumption.
 
-The kernels are the difficult part.
+The kernels and memory movement are the difficult parts.
 
 Modern GPUs are extremely good at performing operations in formats such as FP16, BF16, FP8 and INT8 because the hardware is explicitly designed for them. A theoretically simpler representation does not automatically outperform highly optimised tensor cores.
 
-A ternary runtime must pack values densely, unpack them cheaply, apply scaling efficiently and keep the hardware occupied. Otherwise, the cost of translating the representation may consume much of the expected gain.
+A ternary runtime must pack values densely, decode or operate on them cheaply, apply scaling efficiently and keep the hardware occupied. For MoE models, it must also make the right experts available without spending all of its time moving weights around.
 
-CPU inference may initially benefit more clearly because memory bandwidth is often the dominant bottleneck and commodity CPUs already expose useful bitwise and vector operations. GPU inference could ultimately be faster, but it will require specialised kernels rather than a superficial file-format conversion.
+Otherwise, the cost of translating the representation may consume much of the expected gain.
+
+CPU and unified-memory inference may initially be particularly interesting because memory capacity and bandwidth are often the limiting factors, and commodity processors expose useful bitwise and vector operations. GPU inference could ultimately be much faster, but it will require specialised kernels rather than a superficial file-format conversion.
 
 ---
 
 ## What This Could Mean for Local AI
 
-If the remaining engineering work succeeds, CAT-Q could materially change the hardware required to run capable models locally.
+If the remaining engineering work succeeds, CAT-Q could materially change what the phrase *local model* means.
 
-A 30B-class model that currently requires a large GPU, aggressive offloading or slow CPU inference might fit into the memory available on an ordinary gaming system. Models in the 70B range could become practical on high-end consumer hardware rather than workstation-class configurations.
+A 30B-class model that currently requires a large GPU, aggressive offloading or slow CPU inference might fit into the memory available on an ordinary gaming system.
 
-Mixture-of-experts models are particularly compelling. A model can retain a large total parameter count for knowledge capacity while activating only a fraction of those parameters for each token. Combine that with packed ternary weights and local inference begins to look less like a niche hobby and more like a plausible consumer workload.
+A 70B-class model could become practical on high-end consumer or unified-memory hardware.
+
+And a 235B mixture-of-experts model could move from a multi-GPU datacentre workload into the capacity range of a single 80–128 GB machine.
+
+That last claim deserves care: **capacity range is not the same thing as practical performance**. There is still a large gap between “the weights fit” and “this is pleasant to use”.
+
+But that gap is an engineering problem we know how to attack.
+
+The more fundamental problem was whether converting an already capable model to ternary weights would destroy too much of its ability. CAT-Q provides increasingly strong evidence that it may not.
 
 That would have consequences beyond avoiding API fees.
 
@@ -183,7 +299,7 @@ Local models offer better privacy, predictable availability, lower latency for i
 
 The limiting factor has consistently been the gap between models that are small enough to run locally and models that are capable enough to replace cloud services for serious work.
 
-CAT-Q may help close that gap.
+CAT-Q, MoE architectures and ternary-native runtimes could attack that gap from three directions at once.
 
 ---
 
@@ -191,18 +307,36 @@ CAT-Q may help close that gap.
 
 The latest CAT-Q release should be taken seriously.
 
-Intel has published checkpoints and evaluation tooling for real model families ranging from 1.7B dense models to a 235B mixture-of-experts model. The project provides strong evidence that accurate ternarisation can be applied after pretraining using a comparatively tiny calibration dataset.
+Intel has published checkpoints and evaluation tooling for real model families ranging from 1.7B dense models to Qwen3-235B-A22B. The project provides strong evidence that accurate ternarisation can be applied after pretraining using a comparatively tiny calibration dataset.
 
 That is a much more useful result than proving that ternary models work only when trained from scratch.
 
-However, the current release does not yet provide the thing local-AI users actually need: a packed model running through an efficient, accessible inference engine.
+The strategically important idea is not simply that ternary models can be small.
 
-The sensible conclusion is neither dismissal nor hype.
+It is that **ternary may become a post-training deployment target for whichever mainstream models turn out to be good**.
 
-CAT-Q has reduced one of the largest scientific uncertainties around ternary language models. It suggests that existing models can be converted without repeating their full training process, and that the technique can scale across dense and mixture-of-experts architectures.
+If that happens, we do not need to wait for a separate ternary ecosystem to catch up with every new model generation. In principle, the pipeline becomes:
 
-The remaining question is whether the runtime ecosystem can turn those ternary weights into real reductions in memory, cost and latency.
+```text
+Qwen / GLM / DeepSeek / whatever comes next
+                    ↓
+             CAT-Q-style conversion
+                    ↓
+          packed ternary representation
+                    ↓
+            ternary-native runtime
+                    ↓
+              local hardware
+```
 
-If it can, this may be one of the technologies that moves capable local language models into the mainstream.
+The current CAT-Q release proves only part of that chain.
+
+It does not yet provide the packed checkpoint format, the arbitrary-model conversion tooling, or the runtime capable of turning ternary weights into their full memory and compute advantage.
+
+But the 235B result makes the potential payoff much clearer.
+
+If the systems work follows the model research, we may reach a point where machines with tens of gigabytes of memory can run models whose full-precision ancestors required hundreds.
+
+That is the point where ternary inference stops being an interesting quantisation trick and starts looking like a change in the economics of local AI.
 
 For now, CAT-Q is evidence that the destination is plausible—not evidence that we have arrived.
