@@ -101,6 +101,14 @@
     --color-code-bg: oklch(from var(--color-background) calc(l + 0.02) c h / 0.85);
 }
 
+[data-theme="light"] {
+    --color-code-bg: oklch(0.95 0.015 245 / 0.94);
+    --color-code-surface: oklch(0.925 0.025 245 / 0.96);
+    --color-code-scrollbar: oklch(0.68 0.055 245);
+    --color-code-control: oklch(0.43 0.045 245);
+    --color-code-control-hover: var(--color-primary);
+}
+
 [data-theme="jetbrains"] {
     --palette-neutral-hue: 265;
     --palette-accent-hue: 305;

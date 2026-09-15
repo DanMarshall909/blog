@@ -16,7 +16,7 @@ pre {
     margin: var(--space-lg) 0;
     padding: var(--space-lg);
     overflow-x: auto;
-    border: 1px solid var(--color-code-border);
+    border: 0;
     border-radius: var(--border-radius);
     background-color: var(--color-code-surface);
     color: var(--astro-code-foreground);
@@ -139,7 +139,7 @@ pre.code-expanded {
 .code-disclosure {
     margin: var(--space-lg) 0;
     overflow: hidden;
-    border: 1px solid var(--color-code-border);
+    border: 0;
     border-radius: var(--border-radius);
     background-color: var(--color-code-surface);
 }
@@ -173,7 +173,6 @@ pre.code-expanded {
 
 .code-disclosure[open] {
     animation: code-frame-settle 220ms ease-out;
-    border-top: 1px solid var(--color-code-border);
 }
 
 .code-disclosure[open] .code-disclosure-summary::before {
@@ -238,9 +237,31 @@ pre.code-expanded {
     --astro-code-token-operator: oklch(0.76 0.12 262);
 }
 
+[data-theme="light"] {
+    --astro-code-foreground: oklch(0.28 0.025 255);
+    --astro-code-token-constant: oklch(0.42 0.14 245);
+    --astro-code-token-string: oklch(0.38 0.1 145);
+    --astro-code-token-comment: oklch(0.45 0.025 255);
+    --astro-code-token-keyword: oklch(0.42 0.16 295);
+    --astro-code-token-parameter: oklch(0.43 0.12 50);
+    --astro-code-token-function: oklch(0.39 0.12 255);
+    --astro-code-token-string-expression: oklch(0.38 0.1 145);
+    --astro-code-token-punctuation: oklch(0.38 0.02 255);
+    --astro-code-token-link: oklch(0.42 0.14 245);
+    --astro-code-token-number: oklch(0.42 0.14 245);
+    --astro-code-token-boolean: oklch(0.42 0.16 295);
+    --astro-code-token-variable: oklch(0.43 0.12 50);
+    --astro-code-token-builtin: oklch(0.39 0.12 255);
+    --astro-code-token-attribute: oklch(0.43 0.12 50);
+    --astro-code-token-selector: oklch(0.39 0.12 255);
+    --astro-code-token-tag: oklch(0.42 0.14 20);
+    --astro-code-token-property: oklch(0.42 0.14 245);
+    --astro-code-token-operator: oklch(0.42 0.16 295);
+}
+
 .astro-code {
     color: var(--astro-code-foreground) !important;
-    background-color: transparent !important;
+    background-color: var(--color-code-surface) !important;
 }
 
 .astro-code span[style*="color:#E1E4E8"],
