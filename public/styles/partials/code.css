@@ -259,6 +259,15 @@ pre.code-expanded {
     --astro-code-token-operator: oklch(0.42 0.16 295);
 }
 
+/* Ink keeps the page dark, with a subtle translucent white code panel. */
+.ink-site {
+    --color-code-bg: rgb(255 255 255 / 0.1);
+    --color-code-surface: rgb(255 255 255 / 0.15);
+    --color-code-scrollbar: rgb(255 255 255 / 0.45);
+    --color-code-control: rgb(255 255 255 / 0.68);
+    --color-code-control-hover: white;
+}
+
 .astro-code {
     color: var(--astro-code-foreground) !important;
     background-color: var(--color-code-surface) !important;

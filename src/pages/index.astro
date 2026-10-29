@@ -85,10 +85,9 @@ const [featuredArticle, ...recentArticles] = articles;
           return (
             <section class="featured-writing" aria-labelledby="featured-title">
               <h2 id="featured-title" class="sr-only">Featured writing</h2>
+              <p class="eyebrow">Featured article</p>
               <div class="featured-card-row">
                 <div class="featured-card-column">
-                  <p class="eyebrow">Featured article</p>
-
                   <ArticleCard
                     variant="featured"
                     title={featuredArticle.data.title}

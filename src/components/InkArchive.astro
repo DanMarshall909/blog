@@ -1,0 +1,87 @@
+---
+import { getArticleSlug } from '../utils/article';
+import { tagHref } from '../utils/tags';
+
+interface ArticleEntry {
+  id: string;
+  data: {
+    title: string;
+    date: Date;
+    tags: string[];
+  };
+}
+
+interface Props {
+  articles: ArticleEntry[];
+}
+
+const { articles } = Astro.props;
+
+const articlesByYear = Array.from(
+  articles.reduce((groups, article) => {
+    const year = article.data.date.getUTCFullYear();
+    groups.set(year, [...(groups.get(year) ?? []), article]);
+    return groups;
+  }, new Map<number, ArticleEntry[]>()),
+);
+
+const inkTopics = ['AI', 'Developer tools', 'Testing', 'C#', 'Security'];
+
+function shortDate(date: Date) {
+  return date.toLocaleDateString('en-AU', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).toUpperCase();
+}
+---
+
+<section class="ink-archive" aria-labelledby="archive-title">
+  <aside class="ink-archive-rail" aria-label="Archive filters">
+    <section>
+      <p class="ink-archive-label">Years</p>
+      <ul>
+        {articlesByYear.map(([year, yearArticles]) => (
+          <li><a href={`#year-${year}`}>{year} <span>{yearArticles.length}</span></a></li>
+        ))}
+      </ul>
+    </section>
+
+    <section>
+      <p class="ink-archive-label">Topics</p>
+      <ul>
+        {inkTopics.map((topic) => (
+          <li><a href={tagHref(topic)}>{topic}</a></li>
+        ))}
+      </ul>
+    </section>
+  </aside>
+
+  <div class="ink-archive-content">
+    <header class="ink-archive-heading">
+      <p class="ink-archive-label">Archive</p>
+      <h1 id="archive-title">All writing in one place</h1>
+      <p>A full index of posts, sketches, and experiments from the workbench.</p>
+    </header>
+
+    {articlesByYear.map(([year, yearArticles]) => (
+      <section class="ink-archive-year" id={`year-${year}`} aria-labelledby={`year-heading-${year}`}>
+        <h2 id={`year-heading-${year}`}>{year}</h2>
+        {yearArticles.map((article) => (
+          <article class="ink-archive-row">
+            <a class="ink-archive-title" href={`/articles/${getArticleSlug(article.id)}/`}>
+              {article.data.title}
+            </a>
+            <div class="ink-archive-meta">
+              <span class="ink-archive-tags">
+                {article.data.tags.slice(0, 3).join(' · ')}
+              </span>
+              <time datetime={article.data.date.toISOString()}>{shortDate(article.data.date)}</time>
+            </div>
+          </article>
+        ))}
+      </section>
+    ))}
+  </div>
+</section>

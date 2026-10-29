@@ -55,6 +55,7 @@ const articleClassList = collapsible
             <span class="card-title">{title}</span>
             <div class="article-card-meta">
               <time datetime={dateTime}>{dateLabel}</time>
+              {tags.length > 0 && <span>{tags.slice(0, 3).join(' · ')}</span>}
             </div>
           </>
         </h3>
@@ -67,6 +68,7 @@ const articleClassList = collapsible
             <span class="card-title">{title}</span>
             <div class="article-card-meta">
               <time datetime={dateTime}>{dateLabel}</time>
+              {tags.length > 0 && <span>{tags.slice(0, 3).join(' · ')}</span>}
             </div>
           </>
         </h3>
