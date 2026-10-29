@@ -438,8 +438,14 @@ body.archive-ink {
 
 .archive-ink .site-footer .content-wrap {
     width: min(56.25rem, calc(100% - 2.5rem));
-    display: block;
-    margin-left: max(calc((100% - 56.25rem) / 2 + 11.25rem), 12.5rem);
+    grid-template-columns: 11.25rem minmax(0, 1fr);
+    margin-inline: auto;
+    border-top: 0;
+}
+
+.archive-ink .site-footer .copy {
+    grid-column: 2;
+    width: 100%;
     padding-top: 1rem;
     border-top: 1px solid var(--ink-rule);
 }
@@ -457,7 +463,7 @@ body.archive-ink {
 .ink-archive {
     display: grid;
     grid-template-columns: 11.25rem minmax(0, 45rem);
-    width: min(56.25rem, calc(100% - 2.5rem));
+    width: 100%;
     min-height: 36rem;
     margin: 0 auto;
 }
@@ -611,13 +617,15 @@ body.archive-ink {
     }
 
     .archive-ink .site-footer .content-wrap {
-        width: calc(100% - 2rem);
-        margin-inline: auto;
+        grid-template-columns: 1fr;
+    }
+
+    .archive-ink .site-footer .copy {
+        grid-column: 1;
     }
 
     .ink-archive {
         display: block;
-        width: calc(100% - 2rem);
     }
 
     .ink-archive-rail {
