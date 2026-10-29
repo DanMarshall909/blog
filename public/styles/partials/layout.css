@@ -28,7 +28,8 @@ body.article-detail #content {
 
 .header {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    z-index: 2;
     padding: var(--space-lg) 0;
     background: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
@@ -62,7 +63,6 @@ body.article-detail #content {
     opacity: 0.7;
 }
 
-.header,
 #content,
 .site-footer {
     position: relative;

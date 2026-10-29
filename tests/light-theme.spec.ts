@@ -1,27 +1,27 @@
 import { expect, test } from "@playwright/test";
 
-test("the site renders with the light theme", async ({ page }) => {
+test("the site renders with the Ink theme", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
 
   const background = await page.locator("body").evaluate((body) =>
     getComputedStyle(body).backgroundColor,
   );
   if (background.startsWith("oklch(")) {
-    expect(Number(background.match(/[\d.]+/)?.[0])).toBeGreaterThan(0.8);
+    expect(Number(background.match(/[\d.]+/)?.[0])).toBeLessThan(0.3);
   } else {
     const channels = background.match(/[\d.]+/g)?.slice(0, 3).map(Number);
     expect(channels).toHaveLength(3);
 
     const scale = background.startsWith("color(srgb") ? 1 : 255;
-    expect(channels!.reduce((sum, channel) => sum + channel, 0)).toBeGreaterThan(
-      scale * 2.35,
+    expect(channels!.reduce((sum, channel) => sum + channel, 0)).toBeLessThan(
+      scale * 0.75,
     );
   }
 });
 
-test("code blocks use a borderless tinted panel in the light theme", async ({
+test("code blocks use a borderless tinted panel in the Ink theme", async ({
   page,
 }) => {
   await page.goto("/articles/dont-just-plug-holes-in-mutation-tests/");
@@ -44,9 +44,41 @@ test("code blocks use a borderless tinted panel in the light theme", async ({
 
   expect(styles.borderWidth).toBe("0px");
   expect(styles.background).not.toBe(styles.bodyBackground);
-  expect(styles.background).toMatch(/^oklch\(0\.(8|9)|^rgb\(2[1-5]\d/);
-  expect(styles.foreground).toMatch(/^oklch\(0\.[1-4]|^rgb\((?:\d{1,2}|1\d\d)/);
-  expect(styles.tokenForeground).toMatch(
-    /^oklch\(0\.[1-5]|^rgb\((?:\d{1,2}|1\d\d)/,
-  );
+  expect(styles.background).not.toBe("rgba(0, 0, 0, 0)");
+  const panelChannels = styles.background.match(/[\d.]+/g)?.map(Number);
+  expect(panelChannels).toHaveLength(4);
+  expect(panelChannels!.slice(0, 3)).toEqual([255, 255, 255]);
+  expect(panelChannels![3]).toBeCloseTo(0.15, 2);
+  expect(styles.foreground).not.toBe(styles.bodyBackground);
+  expect(styles.tokenForeground).not.toBe(styles.bodyBackground);
+});
+
+test("show-code disclosures do not also add code preview controls", async ({
+  page,
+}) => {
+  await page.goto("/articles/oidc-wont-stop-the-next-litellm/");
+
+  const disclosure = page.locator(".code-disclosure").first();
+  await expect(disclosure).toBeVisible();
+  await expect(disclosure.locator(".code-expand-toggle")).toHaveCount(0);
+  await expect(disclosure.locator(".code-wrap-toggle")).toHaveCount(0);
+});
+
+test("Mermaid diagrams preserve horizontal scrolling without visible scrollbars", async ({
+  page,
+}) => {
+  await page.goto("/articles/oidc-wont-stop-the-next-litellm/");
+
+  const diagram = page.locator(".mermaid-diagram").first();
+  await expect(diagram).toBeVisible();
+
+  const styles = await diagram.evaluate((element) => ({
+    overflowX: getComputedStyle(element).overflowX,
+    scrollbarWidth: getComputedStyle(element).scrollbarWidth,
+    webkitScrollbarDisplay: getComputedStyle(element, "::-webkit-scrollbar").display,
+  }));
+
+  expect(styles.overflowX).toBe("auto");
+  expect(styles.scrollbarWidth).toBe("none");
+  expect(styles.webkitScrollbarDisplay).toBe("none");
 });

@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ArticleListView from '../components/ArticleListView.astro';
+import InkArchive from '../components/InkArchive.astro';
 import { getCollection } from 'astro:content';
 
 const articles = (await getCollection('articles')).sort(
@@ -10,19 +10,8 @@ const articles = (await getCollection('articles')).sort(
 <Layout
   title="Archive - Technical Scratches"
   headerVariant="section"
+  bodyClass="archive-ink"
+  theme="dark"
 >
-  <section class="archive">
-    <div class="page-header-row">
-      <div class="section-heading">
-        <p class="eyebrow">Archive</p>
-        <h1>All writing in one place</h1>
-        <p class="section-description">A full index of posts, sketches, and experiments from the workbench.</p>
-      </div>
-    </div>
-
-    <ArticleListView
-      articles={articles}
-      storageKey="view-mode-archive"
-    />
-  </section>
+  <InkArchive articles={articles} />
 </Layout>
