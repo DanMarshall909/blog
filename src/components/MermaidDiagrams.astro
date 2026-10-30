@@ -16,15 +16,17 @@
       themeVariables: {
         background: 'transparent',
         primaryColor: 'transparent',
-        primaryBorderColor: '#4b5563',
-        primaryTextColor: '#1f2937',
+        primaryBorderColor: '#b8b2ac',
+        primaryTextColor: '#e8e6e3',
         secondaryColor: 'transparent',
-        secondaryBorderColor: '#4b5563',
+        secondaryBorderColor: '#b8b2ac',
+        secondaryTextColor: '#e8e6e3',
         tertiaryColor: 'transparent',
-        tertiaryBorderColor: '#4b5563',
+        tertiaryBorderColor: '#b8b2ac',
+        tertiaryTextColor: '#e8e6e3',
         clusterBkg: 'transparent',
-        clusterBorder: '#6b7280',
-        lineColor: '#4b5563',
+        clusterBorder: '#b8b2ac',
+        lineColor: '#b8b2ac',
         edgeLabelBackground: 'transparent',
         fontFamily: 'inherit',
       },
@@ -71,13 +73,33 @@
   }
 
   .mermaid-diagram svg .nodeLabel,
-  .mermaid-diagram svg .edgeLabel {
-    color: #1f2937;
+  .mermaid-diagram svg .edgeLabel,
+  .mermaid-diagram svg .cluster-label {
+    color: #e8e6e3;
   }
 
   .mermaid-diagram svg .labelBkg,
   .mermaid-diagram svg .edgeLabel p {
     background: transparent !important;
+  }
+
+  @media print {
+    .mermaid-diagram svg .nodeLabel,
+    .mermaid-diagram svg .edgeLabel,
+    .mermaid-diagram svg .cluster-label {
+      color: #1f2937 !important;
+    }
+
+    .mermaid-diagram svg .flowchart-link,
+    .mermaid-diagram svg .node :is(rect, polygon, circle),
+    .mermaid-diagram svg .cluster rect {
+      stroke: #4b5563 !important;
+    }
+
+    .mermaid-diagram svg .marker path {
+      fill: #4b5563 !important;
+      stroke: #4b5563 !important;
+    }
   }
 
   @media (max-width: 48rem) {

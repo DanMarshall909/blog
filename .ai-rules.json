@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "resources": {
+    "memory": {
+      "reserveMiBPerActiveWorktree": 2048,
+      "basis": "estimated",
+      "estimateReason": "Astro build, PDF generation and Playwright browser tests may overlap; replace after a representative process-group measurement."
+    },
+    "disk": {
+      "workloads": {
+        "build": {
+          "reserveMiB": 1024,
+          "outputGrowthMiB": 512,
+          "tempGrowthMiB": 512,
+          "retainedBudgetMiB": 512,
+          "basis": "estimated",
+          "estimateReason": "Current docs output is about 123 MiB; allow room for a full rebuild and generated article PDFs until measured."
+        },
+        "checks": {
+          "reserveMiB": 1024,
+          "outputGrowthMiB": 128,
+          "tempGrowthMiB": 256,
+          "retainedBudgetMiB": 128,
+          "basis": "estimated",
+          "estimateReason": "Playwright test reports are small, with allowance for browser temporary files until measured."
+        }
+      }
+    }
+  }
+}
