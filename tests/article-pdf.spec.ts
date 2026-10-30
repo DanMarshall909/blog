@@ -1,6 +1,21 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Article PDF action', () => {
+  test('printed articles use a light canvas with dark text', async ({ page }) => {
+    await page.goto('/articles/oidc-wont-stop-the-next-litellm/');
+    await page.emulateMedia({ media: 'print' });
+
+    const colors = await page.locator('#content').evaluate((content) => ({
+      content: getComputedStyle(content).backgroundColor,
+      text: getComputedStyle(content).color,
+      scene: getComputedStyle(document.querySelector('.page-scene')!).display,
+    }));
+
+    expect(colors.content).toBe('rgb(255, 255, 255)');
+    expect(colors.text).toBe('rgb(17, 17, 17)');
+    expect(colors.scene).toBe('none');
+  });
+
   test('article pages expose a PDF button that is hidden in print output', async ({ page }) => {
     await page.goto('/articles/resume/');
 

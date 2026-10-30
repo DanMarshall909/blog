@@ -82,3 +82,17 @@ test("Mermaid diagrams preserve horizontal scrolling without visible scrollbars"
   expect(styles.scrollbarWidth).toBe("none");
   expect(styles.webkitScrollbarDisplay).toBe("none");
 });
+
+test("Mermaid diagrams have readable labels and connectors on screen and in print", async ({ page }) => {
+  await page.goto("/articles/oidc-wont-stop-the-next-litellm/");
+  const diagram = page.locator(".mermaid-diagram svg").first();
+  await expect(diagram).toBeVisible();
+  const label = diagram.locator(".nodeLabel").first();
+  const edge = diagram.locator(".flowchart-link").first();
+  await expect(label).toHaveCSS("color", "rgb(232, 230, 227)");
+  await expect(edge).toHaveCSS("stroke", "rgb(184, 178, 172)");
+
+  await page.emulateMedia({ media: "print" });
+  await expect(label).toHaveCSS("color", "rgb(31, 41, 55)");
+  await expect(edge).toHaveCSS("stroke", "rgb(75, 85, 99)");
+});

@@ -56,6 +56,25 @@
         line-height: 1.45;
     }
 
+    body.ink-site {
+        --color-primary: #111;
+        --color-secondary: #222;
+        --color-background: #fff;
+        --color-surface: #fff;
+        --color-border: #ccc;
+        background: #fff !important;
+        color: #111 !important;
+    }
+
+    body.ink-site .page-scene {
+        display: none !important;
+    }
+
+    body.ink-site #content {
+        background: #fff !important;
+        color: #111 !important;
+    }
+
     .gd-canvas,
     .desktop-topbar,
     .hamburger,
