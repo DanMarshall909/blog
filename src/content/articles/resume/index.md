@@ -80,13 +80,13 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ## Recent Projects and Achievements
 
-- Completely rewrote the CFMEU Wage Claims Manager, taking it from proof of concept to a completed system deployed in CFMEU's workspace; remediated security flaws, optimised resource utilisation, achieved 100% test coverage across the domain and application layers, and added extensive front-end end-to-end testing.
+- Completely rewrote a wage-claims management system for CFMEU, taking it from proof of concept to a completed system deployed in CFMEU's workspace; remediated security flaws, optimised resource utilisation, achieved 100% test coverage across the domain and application layers, and added extensive front-end end-to-end testing.
 - Built reusable Claude Code/Codex skills and scripts for project context, backlog management, TDD, mutation testing, code review, and workflow automation.
 - Built a Roslyn-based C# CLI for semantic rename, move, reference lookup, dependency analysis, duplicate detection, and solution-wide refactoring.
 - Performed technical analysis for a pre-launch tour-booking platform, covering API integration, payment flows, data minimisation, and delivery planning.
 - Built an AI-assisted workflow for drafting, illustrating, previewing, and publishing articles to this Astro blog, with accompanying LinkedIn drafts.
 - Published technical write-ups on local LLM inference, Claude Code/MCP context optimisation, AI workflow design, and financial rounding correctness.
-- Created a Windows setup guide and installer script for running a Bonsai 8B 1-bit LLM locally with CUDA and an OpenAI-compatible API.
+- Created a Windows setup guide and installer script for running an 8-billion-parameter 1-bit LLM locally with CUDA and an OpenAI-compatible API.
 - Added AVIF/WebP image generation, Shiki syntax highlighting, RSS support, and Playwright checks for this site's metadata.
 
 ---
@@ -96,10 +96,10 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 ### Rapid Circle — [rapidcircle.com](https://www.rapidcircle.com)
 **Senior Consultant** | July 2026 – November 2026
 
-- Delivered engineering work across CFMEU, Siemens, and TimeMon, spanning application development, automation, and integration.
-- Completely rewrote the CFMEU Wage Claims Manager, taking it from proof of concept to a completed system deployed in CFMEU's workspace; remediated security flaws, optimised resource utilisation, achieved 100% test coverage across the domain and application layers, and added extensive front-end end-to-end testing.
-- Built the Siemens OMVS WMS proof of concept end to end.
-- Built TimeMon from scratch to capture and automatically summarise screen activity, with ConnectWise integration, OCR of screen changes, local LLM support, and encryption at rest.
+- Delivered client and internal engineering projects spanning application development, automation, and integration.
+- Completely rewrote a wage-claims management system for CFMEU, taking it from proof of concept to a completed system deployed in CFMEU's workspace; remediated security flaws, optimised resource utilisation, achieved 100% test coverage across the domain and application layers, and added extensive front-end end-to-end testing.
+- Built an end-to-end proof of concept for Siemens.
+- Built an application from scratch to capture and automatically summarise screen activity, with ConnectWise integration, OCR of screen changes, local LLM support, and encryption at rest.
 - Used AI-assisted tooling, automation, and .NET/Roslyn experiments in internal engineering workflows.
 
 ---
@@ -129,7 +129,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 ### National Grower Register — [ngr.com.au](https://www.ngr.com.au)
 **Senior Full-Stack Engineer** | November 2023 – May 2024
 
-- Co-developed a modular online form solution (Flexidocs) using Clean Architecture and DDD, replacing an outdated system.
+- Co-developed a modular online form solution using Clean Architecture and DDD, replacing an outdated system.
 - Designed modern functional React 18 components with TypeScript and Tailwind CSS.
 - Provided guidance on C# programming, OOP, AI tools, and testing best practices.
 - Researched and selected sustainable technologies to support long-term goals.

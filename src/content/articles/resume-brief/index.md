@@ -39,9 +39,9 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 **Rapid Circle - Senior Consultant**  
 July 2026 - November 2026
 
-- Rewrote CFMEU's Wage Claims Manager from proof of concept to a completed system deployed in its workspace; fixed security flaws, optimised resource use, achieved 100% domain/application test coverage, and added extensive front-end E2E tests.
-- Built the Siemens OMVS WMS proof of concept end to end.
-- Built TimeMon from scratch to capture and automatically summarise screen activity, with ConnectWise integration, OCR of screen changes, local LLM support, and encryption at rest.
+- Rewrote a wage-claims management system for CFMEU from proof of concept to a completed system deployed in its workspace; fixed security flaws, optimised resource use, achieved 100% domain/application test coverage, and added extensive front-end E2E tests.
+- Built an end-to-end proof of concept for Siemens.
+- Built an application from scratch to capture and automatically summarise screen activity, with ConnectWise integration, OCR of screen changes, local LLM support, and encryption at rest.
 
 **Selected independent engineering projects**
 
