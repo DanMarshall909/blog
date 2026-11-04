@@ -39,9 +39,9 @@ Senior full-stack engineer with 11+ years of enterprise .NET and JVM delivery ac
 **Rapid Circle - Senior Consultant**  
 July 2026 - November 2026
 
-- Delivered client engineering work across CFMEU, Siemens, and Blackmores, spanning application development, automation, discovery, and integration.
-- Contributed to the CFMEU Wage Claims Manager, automating wage-claim workflows and validation against enterprise bargaining agreements using Power Platform, SharePoint, Outlook, and Azure integration.
-- Contributed to Siemens OMVS WMS discovery/proof-of-concept work and Blackmores technical discovery and backlog shaping.
+- Rebuilt CFMEU's Wage Claims Manager from proof of concept to production in its workspace; fixed security flaws, cut resource use, achieved 100% domain/application test coverage, and added extensive front-end E2E tests.
+- Built the Siemens OMVS WMS proof of concept end to end from operational requirements.
+- Hardened TimeMon's Windows client, including session monitoring, privacy hotkeys, and test-backed refactoring; shaped Blackmores' technical backlog.
 
 **Selected independent engineering projects**
 

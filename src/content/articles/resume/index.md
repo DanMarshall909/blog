@@ -80,7 +80,7 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 
 ## Recent Projects and Achievements
 
-- Contributed to the CFMEU Wage Claims Manager, automating wage-claim workflows and validation against enterprise bargaining agreements using Power Platform, SharePoint, Outlook, and Azure integration.
+- Rebuilt the CFMEU Wage Claims Manager from a proof of concept into a production system deployed in CFMEU's workspace, remediating security flaws, reducing resource usage, achieving 100% test coverage across the domain and application layers, and adding extensive front-end end-to-end testing.
 - Built an AI-assisted delivery system around Claude Code/Codex: reusable skills, project memory, PRD backlog management, TDD execution, mutation testing, Jira/Bitbucket workflow automation, and post-session reflection.
 - Built a Roslyn-based C# refactoring CLI for semantic solution-wide rename, move, reference lookup, dependency analysis, duplicate detection, and safe refactoring across legacy ProjectX solutions.
 - Drove technical analysis for a pre-launch tour booking platform, including Hero API source-of-truth decisions, PII minimisation, Stripe/Hero payment flow diagnosis, EF migration constraints, and Jira/PR delivery workflow.
@@ -96,10 +96,11 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 ### Rapid Circle — [rapidcircle.com](https://www.rapidcircle.com)
 **Senior Consultant** | July 2026 – November 2026
 
-- Delivered client engineering work across CFMEU, Siemens, and Blackmores in a consulting environment spanning application development, automation, discovery, and integration.
-- Contributed to the CFMEU Wage Claims Manager, automating wage-claim validation against enterprise bargaining agreements using Power Platform, SharePoint, Outlook, and Azure integration.
-- Contributed to Siemens OMVS WMS discovery and proof-of-concept work, translating operational requirements into a working prototype and implementation options.
-- Participated in Blackmores technical discovery, backlog shaping, and engineering analysis.
+- Delivered client engineering work across CFMEU, Siemens, Blackmores, and TimeMon in a consulting environment spanning application development, automation, discovery, and integration.
+- Rebuilt the CFMEU Wage Claims Manager from a proof of concept into a production system deployed in CFMEU's workspace, remediating security flaws, optimising resource usage, achieving 100% test coverage across the domain and application layers, and adding extensive front-end end-to-end testing.
+- Built the Siemens OMVS WMS proof of concept end to end, translating operational requirements into the complete working system and implementation path.
+- Extended and hardened TimeMon's Windows client, including session-event monitoring, privacy-hotkey behaviour, and test-backed semantic refactoring across related C# components.
+- Performed Blackmores technical discovery, backlog shaping, and engineering analysis.
 - Improved internal engineering workflows with AI-assisted tooling, automation, and .NET/Roslyn experiments.
 
 ---
