@@ -271,7 +271,7 @@ const resolvedHeaderVariant = Astro.props.headerVariant ??
         if (!content) return;
 
         var longCodeBlocks = [];
-        var longCodeThreshold = 14;
+        var longCodeThreshold = 50;
 
         function getCodeLineCount(pre) {
           var shikiLines = pre.querySelectorAll(".line");
@@ -475,7 +475,9 @@ const resolvedHeaderVariant = Astro.props.headerVariant ??
     </script>
     <script is:inline>
       (function () {
-        function createToggleButton(pre, className, label, icon) {
+        const preferenceCookie = "code-wrap";
+
+        function createToggleButton(className, label, icon) {
           const button = document.createElement("button");
           button.type = "button";
           button.className = `code-toggle ${className}`;
@@ -484,7 +486,7 @@ const resolvedHeaderVariant = Astro.props.headerVariant ??
           return button;
         }
 
-        function createWrapToggle(pre) {
+        function createWrapToggle(pre, onToggle) {
           const iconMarkup = `
             <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
               <path d="M5 7h14" />
@@ -494,64 +496,62 @@ const resolvedHeaderVariant = Astro.props.headerVariant ??
               <path d="M15 17l2 2" />
             </svg>
           `;
-          const button = createToggleButton(pre, "code-wrap-toggle", "Toggle code wrapping", iconMarkup);
-          button.addEventListener("click", function () {
-            const isWrapped = pre.classList.toggle("wrap-enabled");
-            button.setAttribute("aria-label", isWrapped ? "Disable code wrapping" : "Enable code wrapping");
-          });
+          const button = createToggleButton(
+            "code-wrap-toggle",
+            "Toggle code wrapping",
+            iconMarkup,
+          );
+          button.addEventListener("click", onToggle);
           pre.appendChild(button);
         }
 
-        function createExpandToggle(pre) {
-          const iconMarkup = `
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img">
-              <circle cx="7" cy="12" r="1.5" fill="currentColor" />
-              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
-              <circle cx="17" cy="12" r="1.5" fill="currentColor" />
-            </svg>
-          `;
-          const button = createToggleButton(pre, "code-expand-toggle", "Toggle code preview", iconMarkup);
-          button.addEventListener("click", function () {
-            const isExpanded = pre.classList.toggle("code-expanded");
-            if (isExpanded) {
-              pre.classList.remove("code-truncated");
-              button.setAttribute("aria-label", "Collapse code block");
-            } else {
-              pre.classList.add("code-truncated");
-              button.setAttribute("aria-label", "Expand code block");
+        function readWrapPreference() {
+          const prefix = preferenceCookie + "=";
+          const setting = document.cookie
+            .split("; ")
+            .find(function (cookie) {
+              return cookie.startsWith(prefix);
+            });
+
+          return setting ? setting.slice(prefix.length) !== "off" : true;
+        }
+
+        function saveWrapPreference(isWrapped) {
+          document.cookie =
+            preferenceCookie +
+            "=" +
+            (isWrapped ? "on" : "off") +
+            "; Max-Age=31536000; Path=/; SameSite=Lax";
+        }
+
+        function applyWrapPreference(codeBlocks, isWrapped) {
+          codeBlocks.forEach(function (pre) {
+            pre.classList.toggle("wrap-enabled", isWrapped);
+            const button = pre.querySelector(".code-wrap-toggle");
+            if (button) {
+              button.setAttribute(
+                "aria-label",
+                isWrapped ? "Disable code wrapping" : "Enable code wrapping",
+              );
             }
           });
-          pre.appendChild(button);
-        }
-
-        function checkCodeOverflow(pre) {
-          return pre.scrollWidth > pre.clientWidth + 1;
-        }
-
-        function codeLineCount(pre) {
-          const code = pre.querySelector("code");
-          if (!code) return 0;
-          return code.textContent.split(/\r?\n/).length;
         }
 
         function initCodeWrapToggles() {
-          const codeBlocks = document.querySelectorAll("article.article pre");
+          const codeBlocks = Array.from(
+            document.querySelectorAll("article.article pre"),
+          );
+          let isWrapped = readWrapPreference();
+
           codeBlocks.forEach(function (pre) {
-            // Long snippets already have a single Show/Hide code disclosure.
-            // Do not add a second preview or wrapping control inside it.
-            if (pre.closest(".code-disclosure")) return;
-
-            const overflowed = checkCodeOverflow(pre);
-            const lines = codeLineCount(pre);
-
-            if (overflowed) {
-              createWrapToggle(pre);
-            }
-            if (lines > 5) {
-              pre.classList.add("code-truncated");
-              createExpandToggle(pre);
-            }
+            createWrapToggle(pre, function () {
+              isWrapped = !isWrapped;
+              saveWrapPreference(isWrapped);
+              applyWrapPreference(codeBlocks, isWrapped);
+            });
           });
+
+          applyWrapPreference(codeBlocks, isWrapped);
         }
 
         if (document.readyState === "loading") {

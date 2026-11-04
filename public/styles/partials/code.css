@@ -60,27 +60,6 @@ pre.wrap-enabled code {
     overflow-wrap: anywhere;
 }
 
-pre.code-truncated {
-    max-height: calc(1.6em * 5 + 2rem);
-    overflow: hidden;
-    position: relative;
-}
-
-pre.code-truncated::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 4rem;
-    background: linear-gradient(180deg, transparent, var(--color-code-surface));
-    pointer-events: none;
-}
-
-pre.code-expanded {
-    max-height: none;
-}
-
 .code-toggle {
     position: absolute;
     top: 0.75rem;
@@ -124,16 +103,6 @@ pre.code-expanded {
 
 .code-wrap-toggle {
     right: 0.75rem;
-}
-
-.code-expand-toggle {
-    right: 0.75rem;
-    bottom: 0.75rem;
-    top: auto;
-    padding: 0.3rem;
-    border: none;
-    border-radius: 0.3rem;
-    background: transparent;
 }
 
 .code-disclosure {

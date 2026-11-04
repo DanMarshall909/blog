@@ -163,10 +163,6 @@ async function generatePdfs() {
 
         await page.evaluate(async (publicSiteUrl) => {
           document.querySelectorAll('details').forEach((d) => { d.open = true; });
-          document.querySelectorAll('pre.code-truncated').forEach((pre) => {
-            pre.classList.remove('code-truncated');
-            pre.classList.add('code-expanded');
-          });
 
           document.querySelectorAll('a[href]').forEach((anchor) => {
             const href = anchor.getAttribute('href');

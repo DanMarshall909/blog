@@ -244,23 +244,8 @@
         display: none !important;
     }
 
-    /* On screen, long code is clipped to a max-height with a fade and a toggle
-       button. Nothing can be toggled in print, so un-clip it, drop the
-       decorative fade, and hide the toggle controls. */
-    pre.code-truncated,
-    pre.code-expanded {
-        max-height: none !important;
-        overflow: visible !important;
-    }
-
-    pre.code-truncated::after {
-        display: none !important;
-        content: none !important;
-    }
-
-    .code-toggle,
-    .code-expand-toggle,
-    .code-wrap-toggle {
+    /* The wrapping control is interactive-only. */
+    .code-toggle {
         display: none !important;
     }
 
