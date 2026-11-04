@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
 
 test.describe('Article PDF action', () => {
   test('printed articles use a light canvas with dark text', async ({ page }) => {
@@ -40,6 +41,21 @@ test.describe('Article PDF action', () => {
     const pdf = await page.pdf({ format: 'A4', printBackground: true });
     const pageCount = (pdf.toString('latin1').match(/\/Type\s*\/Page\b/g) ?? []).length;
     expect(pageCount).toBe(1);
+  });
+
+  test('generated resume PDFs use production URLs for internal links', async () => {
+    const [resumePdf, briefResumePdf] = await Promise.all([
+      readFile('docs/articles/resume/article.pdf'),
+      readFile('docs/articles/resume-brief/article.pdf'),
+    ]);
+
+    for (const pdf of [resumePdf, briefResumePdf]) {
+      expect(pdf.toString('latin1')).not.toContain('localhost');
+    }
+
+    const briefPdfText = briefResumePdf.toString('latin1');
+    expect(briefPdfText).toContain('https://blog.danmarshall.dev/articles/resume/');
+    expect(briefPdfText).toContain('https://blog.danmarshall.dev/articles/selected-public-projects/');
   });
 
   test('the printed brief resume omits the article title and includes the resume heading', async ({ page }) => {

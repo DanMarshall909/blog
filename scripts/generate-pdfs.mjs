@@ -5,6 +5,7 @@ import { extname, resolve, join, normalize } from 'path';
 import { createServer } from 'http';
 
 const SITE_URL = 'http://localhost:4321';
+const PUBLIC_SITE_URL = 'https://blog.danmarshall.dev';
 const ARTICLES_SRC = resolve('src/content/articles');
 const OUTPUT_DIR = resolve('docs');
 const PREVIEW_TIMEOUT_MS = 30_000;
@@ -160,11 +161,24 @@ async function generatePdfs() {
         const page = await context.newPage();
         await page.goto(url, { waitUntil: 'domcontentloaded', timeout: NAVIGATION_TIMEOUT_MS });
 
-        await page.evaluate(async () => {
+        await page.evaluate(async (publicSiteUrl) => {
           document.querySelectorAll('details').forEach((d) => { d.open = true; });
           document.querySelectorAll('pre.code-truncated').forEach((pre) => {
             pre.classList.remove('code-truncated');
             pre.classList.add('code-expanded');
+          });
+
+          document.querySelectorAll('a[href]').forEach((anchor) => {
+            const href = anchor.getAttribute('href');
+            if (!href) return;
+
+            const resolvedUrl = new URL(href, document.baseURI);
+            if (resolvedUrl.origin !== window.location.origin) return;
+
+            anchor.setAttribute(
+              'href',
+              new URL(`${resolvedUrl.pathname}${resolvedUrl.search}${resolvedUrl.hash}`, publicSiteUrl).href,
+            );
           });
 
           if (document.fonts?.ready) {
@@ -178,7 +192,7 @@ async function generatePdfs() {
               img.addEventListener('error', resolveImage, { once: true });
             });
           }));
-        });
+        }, PUBLIC_SITE_URL);
 
         await page.pdf({
           path: outPath,
