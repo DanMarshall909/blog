@@ -1,7 +1,7 @@
 ---
 title: "One-page Resume"
 description: "A concise one-page resume for Dan Marshall, covering senior full-stack engineering, AI-assisted delivery, .NET, cloud, testing, and developer tooling."
-date: 2026-06-19
+date: "2026-11-04"
 author: "Dan Marshall"
 tags: [resume, career, fullstack, dotnet, ai]
 heroImage: /articles/resume/profile-alpha-trimmed.png
@@ -28,20 +28,25 @@ Senior full-stack engineer with 11+ years of enterprise .NET and JVM delivery ac
 
 ## Strengths
 
-- Enterprise C#/.NET engineering from .NET Framework 3.5 through modern .NET, with Clean Architecture, DDD, CQRS, WebAPI, GraphQL, MassTransit, EF Core, Dapper, and SQL Server.
-- Production AI and AI-assisted delivery: AWS Bedrock, OpenAI, Claude API, LangChain4j, guardrails, local LLMs, Claude Code/Codex skills, MCP workflows, prompt engineering, and automation.
+- Enterprise C#/.NET engineering from .NET Framework 3.5 through .NET 11, with Clean Architecture, DDD, CQRS, WebAPI, GraphQL, MassTransit, EF Core, Dapper, and SQL Server.
+- Production AI and AI-assisted delivery: AWS Bedrock, OpenAI, Claude API, LangChain4j, guardrails, local LLMs, MCP, agent/evaluation harnesses, Claude Code/Codex skills, prompt engineering, and automation.
 - Delivery discipline: TDD, integration testing, mutation testing, code review, pair/mob programming, mentoring, and pragmatic refactoring.
-- Cloud and DevOps: Azure App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra, AWS ECS/SQS/S3/Bedrock, Docker, PowerShell, Azure DevOps, TeamCity, Octopus Deploy, and GitHub Pages.
-- Front end: TypeScript, React, Angular, Astro, Vite, Vitest, Tailwind CSS, Material UI, responsive UI, and browser automation.
+- Cloud and DevOps: Azure App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra and Power Platform; AWS ECS/SQS/S3/Bedrock, Docker, PowerShell, Azure DevOps, TeamCity, Octopus Deploy, and GitHub Pages.
+- Front end: TypeScript, React, Angular, Astro, Vite, Vitest, Tailwind CSS, Material UI, Storybook, responsive UI, and browser automation.
 
 ## Recent Work
 
-**Independent / Contract - Senior Software Engineer / AI Workflow Engineer**  
-March 2026 - Present
+**Rapid Circle - Senior Consultant**  
+July 2026 - November 2026
 
-- Built a personal AI engineering system around reusable skills, project memory, PRD backlog automation, TDD execution, mutation gates, Jira/Bitbucket workflows, and post-session reflection.
+- Delivered client engineering work across CFMEU, Siemens, and Blackmores, spanning application development, automation, discovery, and integration.
+- Contributed to the CFMEU Wage Claims Manager, automating wage-claim workflows and validation against enterprise bargaining agreements using Power Platform, SharePoint, Outlook, and Azure integration.
+- Contributed to Siemens OMVS WMS discovery/proof-of-concept work and Blackmores technical discovery and backlog shaping.
+
+**Selected independent engineering projects**
+
+- Built an AI engineering system around reusable Claude Code/Codex skills, MCP, agent/evaluation harnesses, project memory, TDD, mutation testing, and workflow automation.
 - Developed a Roslyn-powered C# refactoring CLI for semantic rename, move, reference lookup, dependency analysis, duplicate detection, and safe refactoring across complex .NET solutions.
-- Led technical delivery and risk reduction for a pre-launch tour booking platform, including Hero API source-of-truth decisions, PII minimisation, Stripe payment reconciliation, Azure image storage decisions, and Jira/PR delivery workflow.
 
 **Reapit - Senior AI Engineer**  
 September 2025 - February 2026

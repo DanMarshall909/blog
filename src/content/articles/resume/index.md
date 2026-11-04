@@ -1,7 +1,7 @@
 ---
 title: "Resume"
 description: "Senior full-stack engineer with 11+ years of experience in .NET, JVM, microservices, production AI systems, AI-assisted delivery, and developer tooling."
-date: 2026-06-19
+date: "2026-11-04"
 author: "Dan Marshall"
 tags: [resume, career, fullstack, dotnet, csharp, azure, ai, testing, microservices]
 heroImage: /articles/resume/profile-alpha-trimmed.png
@@ -33,16 +33,16 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 
 | Area | Details |
 | :----- | :------ |
-| **C# / .NET** | Expert knowledge, .NET Framework 3.5 through .NET Core 9 |
+| **C# / .NET** | Expert knowledge, .NET Framework 3.5 through .NET 11 |
 | **JVM Stack** | Spring Boot, Kotlin, Java |
-| **Architecture** | Microservices, event-driven architecture, DI, CQRS, DDD, Clean Architecture |
-| **Azure** | App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra |
+| **Architecture** | Microservices, event-driven architecture, CQRS, DDD, Clean Architecture |
+| **Azure** | App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra, Power Platform |
 | **AWS** | Bedrock, ECS, SQS, S3 |
 | **Testing** | NUnit, xUnit, MSTest 2, JUnit, Selenium, Storybook, TDD, mutation and integration testing |
 | **API Development** | ASP.NET WebAPI, FastEndpoints, GraphQL, Spring Boot |
 | **Messaging** | MassTransit with Azure Service Bus and event streaming |
 | **Data Access** | Entity Framework Core, Dapper, raw SQL |
-| **Databases** | SQL Server, PostgreSQL, MySQL |
+| **Databases** | SQL Server, PostgreSQL, MySQL, Cosmos DB |
 | **Security** | ASP.NET Identity, OAuth2, JWT, Microsoft.Identity, Azure AD / Entra ID |
 | **Libraries** | MediatR, Serilog, Polly, AutoMapper, Refit, Quartz.NET, OpenAPI |
 | **DevOps** | CI/CD with Azure DevOps, TeamCity, Octopus Deploy, GitHub Pages, PowerShell, Docker |
@@ -54,7 +54,7 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 
 | Area | Details |
 | :----- | :------ |
-| **Production AI Systems** | OpenAI Platform, Claude API, LangChain4j, AWS Bedrock, prompt engineering |
+| **Production AI Systems** | OpenAI Platform, Claude API, LangChain4j, AWS Bedrock, MCP, agent/evaluation harnesses, prompt engineering |
 | **Applications** | Automation, multimodal analysis, guardrails, agentic coding workflows, technical content pipelines |
 | **Platforms** | AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers, llama.cpp-compatible runtimes |
 | **Developer Tooling** | Claude Code skills, MCP integration, Codex workflows, PRD backlog automation, prompt and workflow optimisation |
@@ -65,7 +65,7 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 | Area | Details |
 | :----- | :------ |
 | **Frameworks** | TypeScript/JavaScript with React, Angular, Astro, Vite, Vitest, and ASP.NET MVC |
-| **UI Design** | CSS, Tailwind CSS, Material UI |
+| **UI Design** | CSS, Tailwind CSS, Material UI, Storybook |
 
 ### General
 
@@ -74,12 +74,13 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 | **Version Control** | Git, GitHub, Bitbucket, Azure Repos |
 | **Agile Tools** | Jira, Confluence, Azure DevOps Boards, Teams, Slack |
 | **Practices** | TDD, pair/mob programming, code review, mentorship |
-| **Operating Systems** | macOS, Windows, Linux, iOS, Android |
+| **Operating Systems** | Linux, Windows, macOS, iOS, Android |
 
 ---
 
 ## Recent Projects and Achievements
 
+- Contributed to the CFMEU Wage Claims Manager, automating wage-claim workflows and validation against enterprise bargaining agreements using Power Platform, SharePoint, Outlook, and Azure integration.
 - Built an AI-assisted delivery system around Claude Code/Codex: reusable skills, project memory, PRD backlog management, TDD execution, mutation testing, Jira/Bitbucket workflow automation, and post-session reflection.
 - Built a Roslyn-based C# refactoring CLI for semantic solution-wide rename, move, reference lookup, dependency analysis, duplicate detection, and safe refactoring across legacy ProjectX solutions.
 - Drove technical analysis for a pre-launch tour booking platform, including Hero API source-of-truth decisions, PII minimisation, Stripe/Hero payment flow diagnosis, EF migration constraints, and Jira/PR delivery workflow.
@@ -92,14 +93,14 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 
 ## Employment
 
-### Independent / Contract — AI-assisted software delivery and platform engineering
-**Senior Software Engineer / AI Workflow Engineer** | March 2026 – Present
+### Rapid Circle — [rapidcircle.com](https://www.rapidcircle.com)
+**Senior Consultant** | July 2026 – November 2026
 
-- Built and maintained a personal AI engineering system using Claude Code and Codex skills, project memory, reusable agents, and scripted workflows to keep delivery scoped, test-led, and auditable.
-- Created PRD backlog automation for story intake, acceptance criteria expansion, execution tracking, completion, parking, and visualisation.
-- Developed a Roslyn-powered C# refactoring CLI to support semantic rename, move, reference lookup, structural analysis, and safe cross-project refactoring in complex .NET solutions.
-- Led technical delivery and risk reduction for a pre-launch tour booking platform, including Hero API integration strategy, PII minimisation, Stripe payment reconciliation, Azure image storage decisions, and Jira/Bitbucket workflow.
-- Formalised TDD, mutation testing, code review, and refactoring workflows into reusable skills and agents for consistent AI-assisted engineering.
+- Delivered client engineering work across CFMEU, Siemens, and Blackmores in a consulting environment spanning application development, automation, discovery, and integration.
+- Contributed to the CFMEU Wage Claims Manager, automating wage-claim validation against enterprise bargaining agreements using Power Platform, SharePoint, Outlook, and Azure integration.
+- Contributed to Siemens OMVS WMS discovery and proof-of-concept work, translating operational requirements into a working prototype and implementation options.
+- Participated in Blackmores technical discovery, backlog shaping, and engineering analysis.
+- Improved internal engineering workflows with AI-assisted tooling, automation, and .NET/Roslyn experiments.
 
 ---
 
