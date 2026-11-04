@@ -96,11 +96,10 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 ### Rapid Circle — [rapidcircle.com](https://www.rapidcircle.com)
 **Senior Consultant** | July 2026 – November 2026
 
-- Delivered engineering work across CFMEU, Siemens, Blackmores, and TimeMon, spanning application development, automation, discovery, and integration.
+- Delivered engineering work across CFMEU, Siemens, and TimeMon, spanning application development, automation, and integration.
 - Completely rewrote the CFMEU Wage Claims Manager, taking it from proof of concept to a completed system deployed in CFMEU's workspace; remediated security flaws, optimised resource utilisation, achieved 100% test coverage across the domain and application layers, and added extensive front-end end-to-end testing.
 - Built the Siemens OMVS WMS proof of concept end to end.
-- Built TimeMon from scratch, with ConnectWise integration, automatic summarisation, OCR of screen changes, local LLM support, and encryption at rest.
-- Performed Blackmores technical discovery, backlog shaping, and engineering analysis.
+- Built TimeMon from scratch to capture and automatically summarise screen activity, with ConnectWise integration, OCR of screen changes, local LLM support, and encryption at rest.
 - Used AI-assisted tooling, automation, and .NET/Roslyn experiments in internal engineering workflows.
 
 ---
