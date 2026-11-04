@@ -9,7 +9,7 @@
 		"pdfs": "node scripts/generate-pdfs.mjs",
 		"preview": "astro preview",
 		"test": "playwright test",
-		"test:resume-webkit": "playwright test tests/resume-portrait.spec.ts --browser=webkit"
+		"test:resume-webkit": "playwright test --project=resume-webkit"
 	},
 	"dependencies": {
 		"@astrojs/rss": "^4.0.19",

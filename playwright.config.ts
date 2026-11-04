@@ -4,6 +4,14 @@ export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   reporter: 'list',
+  projects: [
+    { name: 'chromium', use: { browserName: 'chromium' } },
+    {
+      name: 'resume-webkit',
+      testMatch: 'resume-portrait.spec.ts',
+      use: { browserName: 'webkit' },
+    },
+  ],
   use: {
     baseURL: 'http://localhost:4321',
   },
