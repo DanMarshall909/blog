@@ -47,7 +47,7 @@ A simple setup looks like this:
 1. **Astro** for the site structure and content.
 2. **GitHub** as the source of truth.
 3. **GitHub Pages** for hosting.
-4. **A custom domain** from a registrar like [VentraIP](https://ventraip.com.au/). This costs me about $70 a year for `danmarshal.dev`
+4. **A custom domain** from a registrar like [VentraIP](https://ventraip.com.au/). This costs me about $70 a year for `danmarshall.dev`
 
 That is enough to get a modern-looking site online without paying for a VPS, shared hosting plan, WordPress hosting, or a managed application platform.
 
