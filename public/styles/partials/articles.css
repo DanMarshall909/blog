@@ -182,7 +182,8 @@ body:is(.article-resume, .article-resume-brief) :is(.hero-image-picture, .hero-l
 
 body:is(.article-resume, .article-resume-brief) :is(.hero-image-picture, .hero-link) .hero-image {
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     background: var(--color-code-bg);
     object-fit: cover;

@@ -1,6 +1,6 @@
 ---
 title: "Resume"
-description: "Senior full-stack engineer with 11+ years of experience in .NET, JVM, microservices, production AI systems, AI-assisted delivery, and developer tooling."
+description: "Senior full-stack engineer with 11+ years in software engineering, specialising in .NET, with experience in Kotlin/Spring Boot, AI integration, and developer tooling."
 date: "2026-11-04"
 author: "Dan Marshall"
 tags: [resume, career, fullstack, dotnet, csharp, azure, ai, testing, microservices]
@@ -15,7 +15,7 @@ cardImageScale: 1.12
 
 # Dan Marshall
 
-Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM systems. Deep expertise in microservices, event-driven architecture, production AI integration, AI-assisted delivery systems, and developer tooling. Strong advocate for TDD, pair programming, and collaborative engineering practices that improve code quality and team velocity.
+Senior full-stack engineer with 11+ years of software engineering experience, specialising in .NET, with experience delivering Kotlin/Spring Boot systems and AI integrations. Work spans microservices, event-driven systems, cloud services, and developer tooling. Practices include TDD, pair programming, and code review.
 
 **B.Sc. Mathematics and Computer Science** — University of South Africa (UNISA)
 
@@ -33,7 +33,7 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 
 | Area | Details |
 | :----- | :------ |
-| **C# / .NET** | Expert knowledge, .NET Framework 3.5 through .NET 11 |
+| **C# / .NET** | C# development across .NET Framework and modern .NET |
 | **JVM Stack** | Spring Boot, Kotlin, Java |
 | **Architecture** | Microservices, event-driven architecture, CQRS, DDD, Clean Architecture |
 | **Azure** | App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra, Power Platform |
@@ -54,7 +54,7 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 
 | Area | Details |
 | :----- | :------ |
-| **Production AI Systems** | OpenAI Platform, Claude API, LangChain4j, AWS Bedrock, MCP, agent/evaluation harnesses, prompt engineering |
+| **AI Integration** | OpenAI Platform, Claude API, LangChain4j, AWS Bedrock, MCP, prompt engineering |
 | **Applications** | Automation, multimodal analysis, guardrails, agentic coding workflows, technical content pipelines |
 | **Platforms** | AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers, llama.cpp-compatible runtimes |
 | **Developer Tooling** | Claude Code skills, MCP integration, Codex workflows, PRD backlog automation, prompt and workflow optimisation |
@@ -80,14 +80,14 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 
 ## Recent Projects and Achievements
 
-- Rebuilt the CFMEU Wage Claims Manager from a proof of concept into a production system deployed in CFMEU's workspace, remediating security flaws, reducing resource usage, achieving 100% test coverage across the domain and application layers, and adding extensive front-end end-to-end testing.
-- Built an AI-assisted delivery system around Claude Code/Codex: reusable skills, project memory, PRD backlog management, TDD execution, mutation testing, Jira/Bitbucket workflow automation, and post-session reflection.
-- Built a Roslyn-based C# refactoring CLI for semantic solution-wide rename, move, reference lookup, dependency analysis, duplicate detection, and safe refactoring across legacy ProjectX solutions.
-- Drove technical analysis for a pre-launch tour booking platform, including Hero API source-of-truth decisions, PII minimisation, Stripe/Hero payment flow diagnosis, EF migration constraints, and Jira/PR delivery workflow.
-- Built an AI-assisted publishing workflow for this Astro blog that drafts articles, generates local illustrations, opens browser previews, publishes to GitHub Pages, and prepares LinkedIn posts from a single command.
+- Completely rewrote the CFMEU Wage Claims Manager, taking it from proof of concept to a completed system deployed in CFMEU's workspace; remediated security flaws, optimised resource utilisation, achieved 100% test coverage across the domain and application layers, and added extensive front-end end-to-end testing.
+- Built reusable Claude Code/Codex skills and scripts for project context, backlog management, TDD, mutation testing, code review, and workflow automation.
+- Built a Roslyn-based C# CLI for semantic rename, move, reference lookup, dependency analysis, duplicate detection, and solution-wide refactoring.
+- Performed technical analysis for a pre-launch tour-booking platform, covering API integration, payment flows, data minimisation, and delivery planning.
+- Built an AI-assisted workflow for drafting, illustrating, previewing, and publishing articles to this Astro blog, with accompanying LinkedIn drafts.
 - Published technical write-ups on local LLM inference, Claude Code/MCP context optimisation, AI workflow design, and financial rounding correctness.
 - Created a Windows setup guide and installer script for running a Bonsai 8B 1-bit LLM locally with CUDA and an OpenAI-compatible API.
-- Improved this site with AVIF/WebP image generation, deferred font loading, Shiki syntax highlighting, RSS support, and Playwright coverage for meta descriptions.
+- Added AVIF/WebP image generation, Shiki syntax highlighting, RSS support, and Playwright checks for this site's metadata.
 
 ---
 
@@ -96,12 +96,12 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 ### Rapid Circle — [rapidcircle.com](https://www.rapidcircle.com)
 **Senior Consultant** | July 2026 – November 2026
 
-- Delivered client engineering work across CFMEU, Siemens, Blackmores, and TimeMon in a consulting environment spanning application development, automation, discovery, and integration.
-- Rebuilt the CFMEU Wage Claims Manager from a proof of concept into a production system deployed in CFMEU's workspace, remediating security flaws, optimising resource usage, achieving 100% test coverage across the domain and application layers, and adding extensive front-end end-to-end testing.
-- Built the Siemens OMVS WMS proof of concept end to end, translating operational requirements into the complete working system and implementation path.
-- Extended and hardened TimeMon's Windows client, including session-event monitoring, privacy-hotkey behaviour, and test-backed semantic refactoring across related C# components.
+- Delivered engineering work across CFMEU, Siemens, Blackmores, and TimeMon, spanning application development, automation, discovery, and integration.
+- Completely rewrote the CFMEU Wage Claims Manager, taking it from proof of concept to a completed system deployed in CFMEU's workspace; remediated security flaws, optimised resource utilisation, achieved 100% test coverage across the domain and application layers, and added extensive front-end end-to-end testing.
+- Built the Siemens OMVS WMS proof of concept end to end.
+- Built TimeMon from scratch, with ConnectWise integration, automatic summarisation, OCR of screen changes, local LLM support, and encryption at rest.
 - Performed Blackmores technical discovery, backlog shaping, and engineering analysis.
-- Improved internal engineering workflows with AI-assisted tooling, automation, and .NET/Roslyn experiments.
+- Used AI-assisted tooling, automation, and .NET/Roslyn experiments in internal engineering workflows.
 
 ---
 
@@ -109,21 +109,21 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 **Senior AI Engineer** | September 2025 – February 2026
 
 - Workshopped, built, and deployed an AI-driven property inspection system using AWS Bedrock, generating structured assessment reports constrained by business rules.
-- Forked the LangChain4j framework to add Bedrock guardrail support when unavailable upstream. Modular architecture enabled a seamless swap to the official implementation within one day when released.
-- Optimised LLM costs through strategic model selection balancing accuracy, features, performance, and token usage.
+- Forked LangChain4j to add Bedrock guardrail support, then migrated to the official implementation when upstream support became available.
+- Selected LLMs to balance cost, accuracy, features, performance, and token usage.
 - Advised cross-functional teams on practical AI use cases.
-- Self-directed adoption of the Kotlin/Spring Boot/AWS ecosystem, delivering production features while supporting the team with JVM implementation patterns.
+- Adopted Kotlin, Spring Boot, and AWS for this work and shared JVM implementation patterns with the team.
 
 ---
 
 ### RACT (Royal Automobile Club of Tasmania) — [ract.com.au](https://www.ract.com.au)
 **Senior Software Engineer – Back-end** | June 2024 – July 2025
 
-- Applied Clean Architecture and DDD to enhance testability, scalability, and code clarity.
+- Applied Clean Architecture and DDD to back-end services.
 - Involved in pilot program to develop AI coding rulesets and best practices.
 - Migrated and modernised core components from .NET Framework 4.7.2 to .NET 9.
-- Built resilient microservices using MassTransit, WebAPI, GraphQL, and SQL Server.
-- Collaborated with cross-functional teams to deliver scalable, well-tested features aligned with business requirements.
+- Built microservices using MassTransit, WebAPI, GraphQL, and SQL Server.
+- Collaborated with cross-functional teams to implement and test features against business requirements.
 
 ---
 
@@ -166,8 +166,8 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 **Senior Software Engineer – Full-Stack** | November 2021 – October 2022
 
 - Authored numerous front-end and back-end features.
-- Substantially increased test coverage and improved testing methodologies.
-- Tuned SQL queries, dramatically improving performance in critical reports.
+- Increased test coverage and improved testing practices.
+- Tuned SQL queries to improve report performance.
 - Used Pulumi to automate deployment of infrastructure.
 - Implemented CI workflows in Azure DevOps.
 - Contributed to internal development tools.
@@ -177,7 +177,7 @@ Senior full-stack engineer with 11+ years of delivering enterprise .NET and JVM 
 ### HUB24 Limited — [hub24.com.au](https://www.hub24.com.au)
 **Data and Full-Stack Engineer** | December 2019 – November 2021
 
-- Authored a sophisticated and successful system for cleaning, transforming, and validating fund transfers between superannuation funds.
+- Built a system for cleaning, transforming, and validating fund transfers between superannuation funds.
 - Maintained strong working relationships with DBAs, architects, BAs, clients (e.g. Bank of New York), and senior management.
 - Provided emergency on-call support across the organisation and managed client infrastructure, triaging and fixing or escalating issues to meet strict SLAs.
 - Updated legacy web applications to deploy using Azure Pipelines.

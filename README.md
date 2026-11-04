@@ -10,7 +10,12 @@ npm run dev        # dev server on http://localhost:3000
 npm run build      # static build output to docs/
 npm run preview    # preview the production build
 npm test           # run Playwright tests
+npm run test:resume-webkit # check portrait geometry in Safari's browser engine
 ```
+
+The WebKit portrait check requires the Playwright WebKit browser and its system
+dependencies (`npx playwright install --with-deps webkit`). Run it after changing
+resume image sizing; Chromium alone does not reproduce the percentage-height issue.
 
 ## Project structure
 

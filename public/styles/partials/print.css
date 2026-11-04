@@ -351,6 +351,11 @@
         line-height: 1.28;
     }
 
+    /* Keep an employer's heading and role line with its first achievement. */
+    body.article-resume .content h3 + p {
+        break-after: avoid;
+    }
+
     /* Keep the concise resume within one A4 page across Chromium hosts by
        using physical print units instead of environment-dependent rem spacing. */
     body.article-resume-brief .article .content {

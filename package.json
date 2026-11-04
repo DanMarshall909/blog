@@ -8,7 +8,8 @@
 		"minify-built-css": "node scripts/minify-built-css.mjs",
 		"pdfs": "node scripts/generate-pdfs.mjs",
 		"preview": "astro preview",
-		"test": "playwright test"
+		"test": "playwright test",
+		"test:resume-webkit": "playwright test tests/resume-portrait.spec.ts --browser=webkit"
 	},
 	"dependencies": {
 		"@astrojs/rss": "^4.0.19",
