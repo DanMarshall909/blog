@@ -10,6 +10,7 @@ npm run dev        # dev server on http://localhost:3000
 npm run build      # static build output to docs/
 npm run preview    # preview the production build
 npm test           # run Chromium suite and WebKit portrait regression checks
+npm run test:publish # fast publishing checks against disposable local Git remotes
 npm run test:resume-webkit # check portrait geometry in Safari's browser engine
 ```
 
@@ -18,6 +19,18 @@ system dependencies (`npx playwright install --with-deps chromium webkit`). The
 normal test command includes the WebKit portrait checks because Chromium alone
 does not reproduce the percentage-height issue. Use `test:resume-webkit` for a
 focused check after changing resume image sizing.
+
+## Publishing
+
+After reviewing and committing changes, fast-forward `main` to the reviewed
+commit, then run `./publish.sh` from a clean working tree. Stop any local preview
+using port 4321 first so the PDF generator can start its temporary server.
+
+The publisher rebuilds and validates the site, pushes the reviewed source, and
+deploys into `gh-pages:/docs`. It does not commit unfinished work, integrate
+unreviewed upstream changes, or force-push. If another deployment wins the race,
+the push fails safely; inspect the current remote before retrying. The automatic
+GitHub Actions publisher also preserves deployment history.
 
 ## Project structure
 

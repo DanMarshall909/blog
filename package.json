@@ -9,6 +9,7 @@
 		"pdfs": "node scripts/generate-pdfs.mjs",
 		"preview": "astro preview",
 		"test": "playwright test",
+		"test:publish": "playwright test tests/publish.spec.ts --project=chromium",
 		"test:resume-webkit": "playwright test --project=resume-webkit"
 	},
 	"dependencies": {
