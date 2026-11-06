@@ -5,10 +5,10 @@ date: "2026-06-24"
 tags: ["portfolio", "AI", "developer tools", "C#", "Python", "Rust", "frontend", "Godot", "VR"]
 heroImage: /articles/selected-public-projects/cartoon.png
 cardImagePosition: "50% 50%"
-description: "A short portfolio of public projects covering AI tooling, semantic search, C# engineering, frontend work, VR, Rust, and local-LLM experiments."
+description: "A short portfolio of public projects covering AI tooling, semantic search, C# engineering, frontend work, VR, Rust, and creative coding."
 ---
 
-This page is a concise reference for public projects I am comfortable sharing with recruiters, hiring managers, and technical reviewers. It covers a mix of AI tooling, C# engineering, frontend publishing, creative coding, and local-AI experiments.
+This page is a concise reference for public projects I am comfortable sharing with recruiters, hiring managers, and technical reviewers. It covers a mix of AI tooling, C# engineering, frontend publishing and creative coding.
 
 For more of my work see [github.com/DanMarshall909](https://github.com/DanMarshall909).
 
@@ -21,7 +21,6 @@ For more of my work see [github.com/DanMarshall909](https://github.com/DanMarsha
 | [vrqf](https://github.com/DanMarshall909/vrqf) | Creative coding, maths, Godot, C#, OpenXR, shaders | Experimental VR quaternion fractal explorer built with Godot, C#, OpenXR, and custom GPU shaders. |
 | [dandrum](https://github.com/DanMarshall909/dandrum) | Creative coding, Rust, modular synth, audio | Modular synth and drum machine project written primarily in Rust. |
 | [midi-keyboard](https://github.com/DanMarshall909/midi-keyboard) | Systems, Rust, MIDI, input handling | MIDI keyboard project written in Rust. |
-| [dndan](https://github.com/DanMarshall909/dndan) | Local AI, TypeScript, local LLMs, containers, Temporal | AI-powered roguelike game with old-school D&D rules, local LLM narration, image generation, containerisation, and Temporal orchestration. |
 
 ## Private work
 

@@ -10,7 +10,7 @@ const ARTICLES_SRC = resolve('src/content/articles');
 const OUTPUT_DIR = resolve('docs');
 const PREVIEW_TIMEOUT_MS = 30_000;
 const NAVIGATION_TIMEOUT_MS = 45_000;
-const PDF_SLUGS = new Set(['resume', 'resume-brief']);
+const PDF_SLUGS = new Set(['resume', 'resume-brief', 'resume-evoke']);
 
 async function getArticleSlugs() {
   const entries = await readdir(ARTICLES_SRC, { withFileTypes: true });

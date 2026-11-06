@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
 
 export async function GET(context: APIContext) {
-  const articles = await getCollection('articles');
+  const articles = await getCollection('articles', ({ data }) => !data.unlisted);
   return rss({
     title: 'Technical Scratches',
     description: 'Thoughts on software engineering and life as a developer',

@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import InkArchive from '../components/InkArchive.astro';
 import { getCollection } from 'astro:content';
 
-const articles = (await getCollection('articles')).sort(
+const articles = (await getCollection('articles', ({ data }) => !data.unlisted)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 ---

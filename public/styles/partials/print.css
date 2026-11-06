@@ -389,3 +389,55 @@
         margin-bottom: 0.7mm;
     }
 }
+
+@media print {
+    body.article-resume-evoke .content h2 {
+        margin: 5mm 0 2.5mm;
+        font-size: 16pt;
+        line-height: 1.1;
+    }
+
+    body.article-resume-evoke .content h3 {
+        margin: 3.5mm 0 1.5mm;
+        font-size: 12pt;
+        line-height: 1.1;
+    }
+
+    body.article-resume-evoke .content :is(p, ul) {
+        margin: 0 0 2.4mm;
+    }
+
+    body.article-resume-evoke .content li {
+        margin-bottom: 1mm;
+    }
+
+    body.article-resume-evoke .resume-portfolio-page {
+        break-before: page;
+        margin: 0;
+    }
+
+    body.article-resume-evoke .resume-portfolio-page > h2:first-child {
+        margin-top: 0;
+    }
+
+    body.article-resume-evoke .resume-gallery {
+        gap: 5mm;
+    }
+
+    body.article-resume-evoke .content figure {
+        margin: 0 0 3mm;
+        break-inside: avoid;
+    }
+
+    body.article-resume-evoke .content figure img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin: 0 0 2mm;
+    }
+
+    body.article-resume-evoke figcaption {
+        font-size: 8.5pt;
+        line-height: 1.25;
+    }
+}

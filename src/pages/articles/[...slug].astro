@@ -35,18 +35,19 @@ const formattedDate = article.data.date.toLocaleDateString('en-AU', {
 
 // Derive URL slug from id
 const urlSlug = article.id.replace(/\/index$/, '');
-const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-').toLowerCase()}`;
-const heroImageSizes = urlSlug === 'resume' || urlSlug === 'resume-brief'
+const isResumeArticle = ['resume', 'resume-brief', 'resume-evoke'].includes(urlSlug);
+const pageClass = `article-detail article-${urlSlug.replace(/[^a-z0-9-]/gi, '-').toLowerCase()}${urlSlug === 'resume-evoke' ? ' article-resume' : ''}`;
+const heroImageSizes = isResumeArticle
   ? '(max-width: 768px) min(54vw, 13rem), 12.5rem'
   : '(max-width: 768px) min(calc(100vw - 3rem), 24rem), 16rem';
-const heroImageWidths = urlSlug === 'resume' || urlSlug === 'resume-brief'
+const heroImageWidths = isResumeArticle
   ? [208, 416]
   : [320, 480, 720];
-const isResumeArticle = urlSlug === 'resume' || urlSlug === 'resume-brief';
 ---
 <Layout
   title={`${article.data.title} - Technical Scratches`}
   bodyClass={pageClass}
+  noIndex={article.data.unlisted}
   description={article.data.description}
   heroImage={article.data.heroImage}
   headerImagePosition={article.data.headerImagePosition ?? article.data.heroImagePosition}

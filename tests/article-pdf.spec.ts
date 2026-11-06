@@ -17,18 +17,23 @@ test.describe('Article PDF action', () => {
     expect(colors.scene).toBe('none');
   });
 
-  test('article pages expose a PDF button that is hidden in print output', async ({ page }) => {
-    await page.goto('/articles/resume/');
+  for (const slug of ['resume', 'resume-brief', 'resume-evoke']) {
+    test(`${slug} offers its generated PDF and prints the resume content`, async ({ page }) => {
+      await page.goto(`/articles/${slug}/`);
 
-    const pdfButton = page.getByRole('link', { name: 'Download this article as a PDF' });
-    await expect(pdfButton).toBeVisible();
-    await expect(pdfButton).toHaveAttribute('download');
+      const pdfButton = page.getByRole('link', { name: 'Download this resume as a PDF' });
+      await expect(pdfButton).toBeVisible();
+      await expect(pdfButton).toHaveAttribute('href', `/articles/${slug}/article.pdf`);
+      await expect(pdfButton).toHaveAttribute('download');
 
-    await page.emulateMedia({ media: 'print' });
-    await expect(pdfButton).toBeHidden();
-    await expect(page.locator('footer')).toBeHidden();
-    await expect(page.locator('.tags')).toBeHidden();
-  });
+      await page.emulateMedia({ media: 'print' });
+      await expect(pdfButton).toBeHidden();
+      await expect(page.locator('.title-with-image')).toBeHidden();
+      await expect(page.getByRole('heading', { name: 'Dan Marshall', exact: true })).toBeVisible();
+      await expect(page.locator('footer')).toBeHidden();
+      await expect(page.locator('.tags')).toBeHidden();
+    });
+  }
 
   test('the brief resume renders as a one-page PDF and links to the full resume', async ({ page }) => {
     await page.goto('/articles/resume-brief/');
@@ -44,12 +49,14 @@ test.describe('Article PDF action', () => {
   });
 
   test('generated resume PDFs use production URLs for internal links', async () => {
-    const [resumePdf, briefResumePdf] = await Promise.all([
+    const [resumePdf, briefResumePdf, evokeResumePdf] = await Promise.all([
       readFile('docs/articles/resume/article.pdf'),
       readFile('docs/articles/resume-brief/article.pdf'),
+      readFile('docs/articles/resume-evoke/article.pdf'),
     ]);
 
-    for (const pdf of [resumePdf, briefResumePdf]) {
+    for (const pdf of [resumePdf, briefResumePdf, evokeResumePdf]) {
+      expect(pdf.subarray(0, 5).toString()).toBe('%PDF-');
       expect(pdf.toString('latin1')).not.toContain('localhost');
     }
 

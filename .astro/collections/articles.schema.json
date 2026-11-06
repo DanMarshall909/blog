@@ -20,6 +20,10 @@
         "type": "string"
       }
     },
+    "unlisted": {
+      "default": false,
+      "type": "boolean"
+    },
     "heroImage": {
       "type": "string"
     },

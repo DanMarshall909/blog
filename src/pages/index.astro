@@ -26,7 +26,7 @@ const excludedArticleIds = new Set([
   'resume-brief/index',
 ]);
 
-const allArticles = await getCollection('articles');
+const allArticles = await getCollection('articles', ({ data }) => !data.unlisted);
 
 const resumeArticle = allArticles.find(a => a.id === 'resume' || a.id === 'resume/index');
 

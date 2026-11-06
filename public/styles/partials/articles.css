@@ -247,3 +247,36 @@ body:is(.article-resume, .article-resume-brief) :is(.hero-image-picture, .hero-l
 .article .more:hover::after {
     transform: translateX(2px);
 }
+
+/* Client-specific portfolio appendix; the core resume uses the shared template. */
+.article-resume-evoke .resume-portfolio-page {
+    clear: both;
+    margin-top: 3rem;
+}
+
+.article-resume-evoke .resume-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.article-resume-evoke .content figure {
+    min-width: 0;
+    margin: 0 0 1.5rem;
+}
+
+.article-resume-evoke .content figure img {
+    display: block;
+    margin: 0 0 0.6rem;
+}
+
+.article-resume-evoke figcaption {
+    font-size: 0.875em;
+    line-height: 1.45;
+}
+
+@media screen and (max-width: 600px) {
+    .article-resume-evoke .resume-gallery {
+        grid-template-columns: 1fr;
+    }
+}

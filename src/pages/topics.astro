@@ -4,7 +4,7 @@ import ArticleListView from '../components/ArticleListView.astro';
 import { getCollection } from 'astro:content';
 import { tagHref, tagSlug } from '../utils/tags';
 
-const articles = (await getCollection('articles')).sort(
+const articles = (await getCollection('articles', ({ data }) => !data.unlisted)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 const tagMap = new Map<string, { label: string; count: number }>();

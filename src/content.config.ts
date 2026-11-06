@@ -8,6 +8,7 @@ const articles = defineCollection({
     author: z.string().default('Dan Marshall'),
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
+    unlisted: z.boolean().default(false),
     heroImage: z.string().optional(),
     heroImageCrop: z.boolean().default(false),
     heroImagePosition: z.string().default('center'),

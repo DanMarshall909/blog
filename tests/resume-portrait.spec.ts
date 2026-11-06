@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-for (const slug of ['resume', 'resume-brief']) {
+for (const slug of ['resume', 'resume-brief', 'resume-evoke']) {
   test(`${slug} keeps the portrait square and centred on phones`, async ({ page }) => {
     for (const width of [319, 390, 430]) {
       await page.setViewportSize({ width, height: 844 });

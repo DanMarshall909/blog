@@ -4,6 +4,7 @@ import GlassDodecahedron from "../components/GlassDodecahedron.astro";
 
 interface Props {
   title: string;
+  noIndex?: boolean;
   bodyClass?: string;
   description?: string;
   heroImage?: string;
@@ -16,6 +17,7 @@ const {
   title,
   bodyClass,
   description,
+  noIndex = false,
   headerVariant,
   theme = "dark",
 } = Astro.props;
@@ -26,7 +28,7 @@ const siteUrl = "https://blog.danmarshall.dev";
 const owner = "Dan Marshall";
 const currentYear = new Date().getFullYear();
 
-const navArticles = (await getCollection("articles")).sort(
+const navArticles = (await getCollection("articles", ({ data }) => !data.unlisted)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 const isArticlePage =
@@ -43,6 +45,7 @@ const resolvedHeaderVariant = Astro.props.headerVariant ??
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description ?? siteDescription} />
+    {noIndex && <meta name="robots" content="noindex, nofollow, noarchive" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       rel="alternate"
