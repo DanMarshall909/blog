@@ -26,8 +26,8 @@ body.ink-site {
     border-radius: 8px;
     background: var(--glass-surface);
     background-image: var(--glass-hatching);
-    -webkit-backdrop-filter: blur(18px) hue-rotate(180deg);
-    backdrop-filter: blur(18px) hue-rotate(180deg);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
 }
 
 .ink-site .header,
