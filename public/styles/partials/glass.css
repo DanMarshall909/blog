@@ -2,6 +2,9 @@
 body.ink-site {
     --glass-surface: oklch(from var(--ink-canvas) l c h / 0.92);
     --glass-border: rgb(255 255 255 / 0.09);
+    --glass-hatching:
+        repeating-linear-gradient(135deg, rgb(255 134 64 / 0.045) 0 1px, transparent 1px 7px),
+        repeating-linear-gradient(45deg, rgb(255 92 52 / 0.025) 0 1px, transparent 1px 14px);
 }
 
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -22,8 +25,9 @@ body.ink-site {
     border: 1px solid var(--glass-border);
     border-radius: 8px;
     background: var(--glass-surface);
-    -webkit-backdrop-filter: blur(18px);
-    backdrop-filter: blur(18px);
+    background-image: var(--glass-hatching);
+    -webkit-backdrop-filter: blur(18px) hue-rotate(180deg);
+    backdrop-filter: blur(18px) hue-rotate(180deg);
 }
 
 .ink-site .header,

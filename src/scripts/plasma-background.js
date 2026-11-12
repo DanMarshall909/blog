@@ -25,12 +25,12 @@
           + Math.sin((px + py) * 1.5 + time * 0.6)
           + Math.sin(Math.hypot(px + Math.sin(time * 0.4), py) * 2.8 - time);
         const phase = wave * 0.85 + time * 0.3;
-        // Near-black troughs rise through deep red into muted orange.
-        const heat = (Math.cos(phase) + 1) * 0.5;
+        // Near-black troughs rise into a muted blue glow.
+        const intensity = (Math.cos(phase) + 1) * 0.5;
         const offset = (y * width + x) * 4;
-        pixels.data[offset] = 6 + 138 * heat;
-        pixels.data[offset + 1] = 2 + 66 * heat ** 3;
-        pixels.data[offset + 2] = 1 + 7 * heat ** 2;
+        pixels.data[offset] = 2 + 10 * intensity ** 2;
+        pixels.data[offset + 1] = 5 + 58 * intensity ** 3;
+        pixels.data[offset + 2] = 10 + 134 * intensity;
         pixels.data[offset + 3] = 255;
       }
     }
