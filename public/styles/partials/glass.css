@@ -1,0 +1,72 @@
+/* Subtle plasma behind the Ink layout and its frosted reading surfaces. */
+body.ink-site {
+    --glass-surface: oklch(from var(--ink-canvas) l c h / 0.92);
+    --glass-border: rgb(255 255 255 / 0.09);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    body.ink-site {
+        --glass-surface: oklch(from var(--ink-canvas) l c h / 0.66);
+    }
+}
+
+.ink-site .page-scene {
+    background: var(--ink-canvas);
+}
+
+.ink-site #content {
+    background: transparent;
+}
+
+.ink-site :is(.header, .site-footer, .toc, .featured-card, .article-card, .resume-callout, .article, .ink-archive, .topic-cloud) {
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    background: var(--glass-surface);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+}
+
+.ink-site .header,
+.ink-site .site-footer {
+    border-radius: 0;
+    border-inline: 0;
+}
+
+.ink-site .header {
+    border-top: 0;
+}
+
+.ink-site .site-footer {
+    border-bottom: 0;
+}
+
+.ink-site .article-list-view .article-grid {
+    gap: 0.75rem;
+}
+
+.ink-site .article-card,
+.ink-site .topic-cloud {
+    padding: 1.25rem;
+}
+
+body.ink-site.article-detail .article {
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+.ink-site :is(.featured-card, .article-card):is(:hover, :focus-within) {
+    border-color: rgb(255 255 255 / 0.2);
+}
+
+@media print {
+    body.ink-site :is(.header, .site-footer, .toc, .featured-card, .article-card, .resume-callout, .article, .ink-archive, .topic-cloud) {
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    body.ink-site.article-detail .article {
+        padding: 0;
+    }
+}

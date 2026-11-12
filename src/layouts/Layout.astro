@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import GlassDodecahedron from "../components/GlassDodecahedron.astro";
+import PlasmaBackground from "../components/PlasmaBackground.astro";
 
 interface Props {
   title: string;
@@ -59,7 +59,7 @@ const resolvedHeaderVariant = Astro.props.headerVariant ??
   </head>
   <body class={`ink-site ${bodyClass ?? ""}`}>
     <div class="page-scene" aria-hidden="true">
-      <GlassDodecahedron />
+      <PlasmaBackground />
     </div>
 
     <!-- Mobile hamburger — hidden on desktop -->
