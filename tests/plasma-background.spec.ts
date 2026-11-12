@@ -6,6 +6,23 @@ test("a subtle plasma drifts behind frosted panels without blocking links", asyn
 
   const plasma = page.locator("#plasma-canvas");
   await expect(plasma).toBeVisible();
+  const pattern = await plasma.evaluate((canvas: HTMLCanvasElement) => {
+    const pixels = canvas.getContext("2d")!.getImageData(0, 0, canvas.width, canvas.height).data;
+    let colored = 0;
+    let marks = 0;
+    let gaps = 0;
+    for (let index = 0; index < pixels.length; index += 4) {
+      if (pixels[index + 3] === 0) gaps++;
+      else {
+        marks++;
+        if (pixels[index] !== pixels[index + 1] || pixels[index + 1] !== pixels[index + 2]) colored++;
+      }
+    }
+    return { colored, marks, gaps };
+  });
+  expect(pattern.colored).toBe(0);
+  expect(pattern.marks).toBeGreaterThan(0);
+  expect(pattern.gaps).toBeGreaterThan(0);
   const first = await plasma.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL());
   await page.clock.fastForward(10_000);
   expect(await plasma.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL()) !== first).toBe(true);

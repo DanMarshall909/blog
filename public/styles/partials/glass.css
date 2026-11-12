@@ -14,7 +14,7 @@ body.ink-site {
 }
 
 .ink-site .page-scene {
-    background: var(--ink-canvas);
+    background: #141414;
 }
 
 .ink-site #content {
