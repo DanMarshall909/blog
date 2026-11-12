@@ -14,7 +14,7 @@ body.ink-site {
 }
 
 .ink-site .page-scene {
-    background: #141414;
+    background: hsl(215 28% 8%);
 }
 
 .ink-site #content {

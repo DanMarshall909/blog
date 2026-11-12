@@ -51,7 +51,7 @@
 
     context.lineWidth = 0.7;
     layers.forEach((path, index) => {
-      context.strokeStyle = `rgba(210, 210, 210, ${0.18 + index * 0.22})`;
+      context.strokeStyle = `hsla(215, 65%, 72%, ${0.18 + index * 0.22})`;
       context.stroke(path);
     });
   }
