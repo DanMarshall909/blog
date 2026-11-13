@@ -11,7 +11,7 @@
     radii: new Float32Array(256),
   }));
   const palette = [
-    [30, 88, 205], [145, 50, 198], [232, 120, 30], [210, 45, 50], [30, 88, 205],
+    [38, 118, 245], [170, 65, 245], [255, 140, 30], [245, 45, 60], [38, 118, 245],
   ];
   let pixels, field, fieldWidth, fieldHeight, pitch;
   let elapsed = 0;
@@ -35,13 +35,13 @@
   function inkCoverage(screen, level, index) {
     const radius = screen.radii[level];
     if (radius === 0) return 0;
-    const edge = (radius - screen.distances[index]) * pitch + 0.5;
+    const edge = (radius - screen.distances[index]) * pitch * 1.5 + 0.5;
     return edge <= 0 ? 0 : edge >= 1 ? 1 : edge;
   }
 
   function paint() {
     const { width, height } = canvas;
-    const time = elapsed * 0.000055;
+    const time = elapsed * 0.000165;
     const orbit = Math.sin(time * 0.4);
     const amounts = inkAmounts();
     screens.forEach((screen, channel) => {
@@ -79,10 +79,10 @@
         const yellow = inkCoverage(screens[2], level, index);
         const keyTransmission = 1 - inkCoverage(screens[3], level, index);
         const offset = index * 4;
-        // Subtractive ink on warm paper; canvas opacity keeps it subdued.
-        pixels.data[offset] = 246 * (1 - cyan) * keyTransmission;
-        pixels.data[offset + 1] = 241 * (1 - magenta) * keyTransmission;
-        pixels.data[offset + 2] = 230 * (1 - yellow) * keyTransmission;
+        // Subtractive ink on neutral white paper; opacity keeps it subdued.
+        pixels.data[offset] = 255 * (1 - cyan) * keyTransmission;
+        pixels.data[offset + 1] = 255 * (1 - magenta) * keyTransmission;
+        pixels.data[offset + 2] = 255 * (1 - yellow) * keyTransmission;
         pixels.data[offset + 3] = 255;
       }
     }
@@ -90,7 +90,7 @@
   }
 
   function resize() {
-    const scale = Math.min(1, 768 / Math.max(window.innerWidth, window.innerHeight));
+    const scale = Math.min(1, 1024 / Math.max(window.innerWidth, window.innerHeight));
     const width = canvas.width = Math.max(1, Math.round(window.innerWidth * scale));
     const height = canvas.height = Math.max(1, Math.round(window.innerHeight * scale));
     pitch = Math.max(6, 10 * scale);
