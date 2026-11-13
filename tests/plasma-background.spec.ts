@@ -36,52 +36,57 @@ test("CMYK halftones drift through the requested colours behind frosted panels",
   await expect(plasma).toBeVisible();
   const readTone = () => plasma.evaluate((canvas: HTMLCanvasElement) => {
     const pixels = canvas.getContext("2d")!.getImageData(0, 0, canvas.width, canvas.height).data;
-    let red = 0, green = 0, blue = 0;
+    const regions = Array.from({ length: 24 }, () => ({ red: 0, blue: 0 }));
     let cyan = 0, magenta = 0, yellow = 0, key = 0, paper = 0, gaps = 0;
+    let nonProcessInk = 0, blueOverlap = 0, redOverlap = 0;
+    const isProcessChannel = (channel: number) => channel === 0 || channel === 255;
     for (let index = 0; index < pixels.length; index += 4) {
       const r = pixels[index], g = pixels[index + 1], b = pixels[index + 2];
       const alpha = pixels[index + 3] / 255;
-      red += r * alpha; green += g * alpha; blue += b * alpha;
+      const pixel = index / 4;
+      const x = pixel % canvas.width, y = Math.floor(pixel / canvas.width);
+      const region = regions[Math.floor(y * 4 / canvas.height) * 6 + Math.floor(x * 6 / canvas.width)];
+      region.red += r * alpha;
+      region.blue += b * alpha;
       if (r < 64 && g > 200 && b > 200) cyan++;
       if (r > 200 && g < 64 && b > 200) magenta++;
       if (r > 200 && g > 200 && b < 64) yellow++;
       if (r < 20 && g < 20 && b < 20 && pixels[index + 3] > 200) key++;
       if (r > 235 && g > 230 && b > 215 && pixels[index + 3] > 200) paper++;
       if (pixels[index + 3] === 0) gaps++;
+      else if (pixels[index + 3] !== 255 || !isProcessChannel(r) || !isProcessChannel(g) || !isProcessChannel(b)) nonProcessInk++;
+      if (r === 0 && g === 0 && b === 255) blueOverlap++;
+      if (r === 255 && g === 0 && b === 0) redOverlap++;
     }
-    return { red, green, blue, cyan, magenta, yellow, key, paper, gaps };
+    return {
+      cyan, magenta, yellow, key, paper, gaps, nonProcessInk, blueOverlap, redOverlap,
+      warmRegions: regions.filter(region => region.red > region.blue * 1.2).length,
+      coolRegions: regions.filter(region => region.blue > region.red * 1.2).length,
+    };
   });
   const initial = await readTone();
-  for (const ink of [initial.cyan, initial.magenta, initial.key]) expect(ink).toBeGreaterThan(0);
+  for (const ink of [initial.cyan, initial.magenta, initial.yellow, initial.key]) expect(ink).toBeGreaterThan(0);
+  expect(initial.nonProcessInk).toBe(0);
+  expect(initial.blueOverlap).toBeGreaterThan(0);
+  expect(initial.redOverlap).toBeGreaterThan(0);
   expect(initial.gaps).toBeGreaterThan(0);
   expect(initial.paper).toBe(0);
-  expect(initial.blue).toBeGreaterThan(initial.red);
-  expect(initial.blue).toBeGreaterThan(initial.green);
+  expect(initial.warmRegions).toBeGreaterThanOrEqual(2);
+  expect(initial.coolRegions).toBeGreaterThanOrEqual(2);
   const first = await plasma.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL());
   await page.clock.fastForward(10_000);
   expect(await plasma.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL()) !== first).toBe(true);
 
-  await page.clock.fastForward(30_000);
-  const purple = await readTone();
-  expect(purple.red).toBeGreaterThan(purple.green);
-  expect(purple.blue).toBeGreaterThan(purple.green);
-
-  await page.clock.fastForward(40_000);
-  const orange = await readTone();
-  expect(orange.red).toBeGreaterThan(orange.green);
-  expect(orange.green).toBeGreaterThan(orange.blue);
-  expect(orange.yellow).toBeGreaterThan(0);
-
-  await page.clock.fastForward(40_000);
-  const red = await readTone();
-  expect(red.red).toBeGreaterThan(red.green);
-  expect(red.red).toBeGreaterThan(red.blue);
-  expect(Math.abs(red.green - red.blue)).toBeLessThan((red.red - Math.min(red.green, red.blue)) * 0.25);
-
-  await page.clock.fastForward(40_000);
-  const blue = await readTone();
-  expect(blue.blue).toBeGreaterThan(blue.red);
-  expect(blue.blue).toBeGreaterThan(blue.green);
+  for (const duration of [30_000, 40_000, 40_000, 40_000]) {
+    await page.clock.fastForward(duration);
+    const tone = await readTone();
+    expect(tone.warmRegions).toBeGreaterThanOrEqual(2);
+    expect(tone.coolRegions).toBeGreaterThanOrEqual(2);
+    expect(tone.yellow).toBeGreaterThan(0);
+    expect(tone.gaps).toBeGreaterThan(0);
+    expect(tone.paper).toBe(0);
+    expect(tone.nonProcessInk).toBe(0);
+  }
 
   const surface = await page.locator(".featured-card").first().evaluate((panel) => {
     const style = getComputedStyle(panel);
