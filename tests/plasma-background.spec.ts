@@ -37,20 +37,24 @@ test("CMYK halftones drift through the requested colours behind frosted panels",
   const readTone = () => plasma.evaluate((canvas: HTMLCanvasElement) => {
     const pixels = canvas.getContext("2d")!.getImageData(0, 0, canvas.width, canvas.height).data;
     let red = 0, green = 0, blue = 0;
-    let cyan = 0, magenta = 0, yellow = 0, key = 0, paper = 0;
+    let cyan = 0, magenta = 0, yellow = 0, key = 0, paper = 0, gaps = 0;
     for (let index = 0; index < pixels.length; index += 4) {
       const r = pixels[index], g = pixels[index + 1], b = pixels[index + 2];
-      red += r; green += g; blue += b;
+      const alpha = pixels[index + 3] / 255;
+      red += r * alpha; green += g * alpha; blue += b * alpha;
       if (r < 64 && g > 200 && b > 200) cyan++;
       if (r > 200 && g < 64 && b > 200) magenta++;
       if (r > 200 && g > 200 && b < 64) yellow++;
       if (r < 20 && g < 20 && b < 20 && pixels[index + 3] > 200) key++;
       if (r > 235 && g > 230 && b > 215 && pixels[index + 3] > 200) paper++;
+      if (pixels[index + 3] === 0) gaps++;
     }
-    return { red, green, blue, cyan, magenta, yellow, key, paper };
+    return { red, green, blue, cyan, magenta, yellow, key, paper, gaps };
   });
   const initial = await readTone();
-  for (const ink of [initial.cyan, initial.magenta, initial.key, initial.paper]) expect(ink).toBeGreaterThan(0);
+  for (const ink of [initial.cyan, initial.magenta, initial.key]) expect(ink).toBeGreaterThan(0);
+  expect(initial.gaps).toBeGreaterThan(0);
+  expect(initial.paper).toBe(0);
   expect(initial.blue).toBeGreaterThan(initial.red);
   expect(initial.blue).toBeGreaterThan(initial.green);
   const first = await plasma.evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL());

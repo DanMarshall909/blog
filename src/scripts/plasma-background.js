@@ -79,11 +79,11 @@
         const yellow = inkCoverage(screens[2], level, index);
         const keyTransmission = 1 - inkCoverage(screens[3], level, index);
         const offset = index * 4;
-        // Subtractive ink on neutral white paper; opacity keeps it subdued.
+        // Subtractive CMYK inks; unprinted gaps reveal the dark page.
         pixels.data[offset] = 255 * (1 - cyan) * keyTransmission;
         pixels.data[offset + 1] = 255 * (1 - magenta) * keyTransmission;
         pixels.data[offset + 2] = 255 * (1 - yellow) * keyTransmission;
-        pixels.data[offset + 3] = 255;
+        pixels.data[offset + 3] = 255 * Math.max(cyan, magenta, yellow, 1 - keyTransmission);
       }
     }
     context.putImageData(pixels, 0, 0);
