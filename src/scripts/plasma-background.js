@@ -33,13 +33,13 @@ import { createHalftoneScreens, renderCmykHalftones, separateCmyk } from "./cmyk
           + Math.sin((px + py) * 1.5 + time * 0.6)
           + Math.sin(Math.hypot(px + orbit, py) * 2.8 - time);
         const brightness = (Math.cos(wave * 0.85 + time * 0.3) + 1) / 2;
-        const tone = Math.pow(Math.max(0, Math.min(1, (brightness - 0.01) / 0.9895)), 0.7);
+        const tone = Math.pow(Math.max(0, Math.min(1, (brightness - 0.01) / 0.9899)), 0.7);
         const localHue = palettePhase + px * 0.45 + py * 0.3
           + Math.sin(px * 0.65 + py * 0.8 + time * 0.12) * 0.6;
         const hue = ((localHue % 4) + 4) % 4;
         const segment = Math.floor(hue);
         const blend = (1 - Math.cos((hue - segment) * Math.PI)) / 2;
-        const gain = Math.min(1, tone / 0.8), white = Math.max(0, (tone - 0.8) / 0.2);
+        const gain = Math.min(1, tone / 0.95), white = Math.max(0, (tone - 0.95) / 0.05);
         const offset = (y * width + x) * 4;
         for (let channel = 0; channel < 3; channel++) {
           const colour = palette[segment][channel]
