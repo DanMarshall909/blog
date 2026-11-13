@@ -1,8 +1,7 @@
-/* Subtle plasma behind the Ink layout and its frosted reading surfaces. */
+/* Ink-paper background and frosted reading surfaces. */
 body.ink-site {
     --glass-surface: oklch(from var(--ink-canvas) l c h / 0.92);
     --glass-border: rgb(255 255 255 / 0.09);
-    --glass-texture: radial-gradient(circle, rgb(255 255 255 / 0.045) 0 0.7px, transparent 1px);
 }
 
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -19,18 +18,10 @@ body.ink-site {
     background: transparent;
 }
 
-@media screen {
-    .ink-site .section-heading {
-        text-shadow: 0 1px 2px #111214, 0 0 6px #111214;
-    }
-}
-
 .ink-site :is(.header, .site-footer, .toc, .featured-card, .article-card, .resume-callout, .article, .ink-archive, .topic-cloud) {
     border: 1px solid var(--glass-border);
     border-radius: 8px;
     background: var(--glass-surface);
-    background-image: var(--glass-texture);
-    background-size: 7px 7px;
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
 }

@@ -1,0 +1,45 @@
+<div class="ink-paper" aria-hidden="true"></div>
+
+<style>
+  .ink-paper {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #111214;
+  }
+
+  .ink-paper::before,
+  .ink-paper::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .ink-paper::before {
+    inset: -10%;
+    background:
+      radial-gradient(ellipse at 4% 12%, rgb(54 87 150 / 0.36), transparent 62%),
+      radial-gradient(ellipse at 96% 88%, rgb(105 59 145 / 0.32), transparent 58%);
+    animation: edge-drift 80s ease-in-out infinite alternate;
+  }
+
+  .ink-paper::after {
+    inset: 0;
+    opacity: 0.065;
+    background-size: 180px 180px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  }
+
+  @keyframes edge-drift {
+    from { transform: translate(-1.5%, -1%) scale(1); }
+    to { transform: translate(1.5%, 1%) scale(1.04); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ink-paper::before { animation: none; }
+  }
+
+  @media print {
+    .ink-paper { display: none; }
+  }
+</style>
