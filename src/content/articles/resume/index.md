@@ -56,7 +56,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 | :----- | :------ |
 | **AI Integration** | OpenAI Platform, Claude API, LangChain4j, AWS Bedrock, MCP, prompt engineering |
 | **Applications** | Automation, multimodal analysis, guardrails, agentic coding workflows, technical content pipelines |
-| **Platforms** | AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers, llama.cpp-compatible runtimes |
+| **Platforms** | Azure AI Foundry, AWS Bedrock, OpenAI, local LLMs, Hugging Face Transformers, llama.cpp-compatible runtimes |
 | **Developer Tooling** | Claude Code skills, MCP integration, Codex workflows, PRD backlog automation, prompt and workflow optimisation |
 | **Media Generation** | ComfyUI, Flux-based image generation, local AI asset pipelines |
 

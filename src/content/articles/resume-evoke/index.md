@@ -23,7 +23,7 @@ cardImageScale: 1.12
 
 ## Relevant skills
 
-- **AI engineering:** AWS Bedrock, OpenAI, Claude API, LangChain4j, retrieval-augmented generation (RAG), guardrails, model selection, local LLMs, prompt engineering and MCP.
+- **AI engineering:** Azure AI Foundry, AWS Bedrock, OpenAI, Claude API, LangChain4j, retrieval-augmented generation (RAG), guardrails, model selection, local LLMs, prompt engineering and MCP.
 - **Product engineering:** C#/.NET, Kotlin/Spring Boot, TypeScript, React, Angular, REST APIs, GraphQL, SQL and event-driven services.
 - **Cloud and delivery:** Azure, AWS, Docker, observability, CI/CD, TDD, integration testing, mutation testing and code review.
 

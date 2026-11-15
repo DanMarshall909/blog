@@ -29,7 +29,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 ## Strengths
 
 - C# development across .NET Framework and modern .NET, with Clean Architecture, DDD, CQRS, WebAPI, GraphQL, MassTransit, EF Core, Dapper, and SQL Server.
-- AI integration and developer tooling: AWS Bedrock, OpenAI, Claude API, LangChain4j, guardrails, local LLMs, MCP, Claude Code/Codex skills, prompt engineering, and automation.
+- AI integration and developer tooling: Azure AI Foundry, AWS Bedrock, OpenAI, Claude API, LangChain4j, guardrails, local LLMs, MCP, Claude Code/Codex skills, prompt engineering, and automation.
 - Delivery discipline: TDD, integration testing, mutation testing, code review, pair/mob programming, mentoring, and pragmatic refactoring.
 - Cloud and DevOps: Azure App Services, Functions, Service Bus, Azure SQL, Blob Storage, App Insights, Entra and Power Platform; AWS ECS/SQS/S3/Bedrock, Docker, PowerShell, Azure DevOps, TeamCity, Octopus Deploy, and GitHub Pages.
 - Front end: TypeScript, React, Angular, Astro, Vite, Vitest, Tailwind CSS, Material UI, Storybook, responsive UI, and browser automation.
