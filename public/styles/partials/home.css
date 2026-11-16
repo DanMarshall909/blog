@@ -89,26 +89,13 @@
     font-size: clamp(1.35rem, 2.6vw, 2rem);
 }
 
-.featured-summary {
+.article-card-description {
     margin: 0.75rem 0 0;
     font-size: 0.92rem;
     line-height: 1.45;
 }
 
-.topic-cloud ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.topic-cloud li {
-    margin: 0;
-}
-
-.topic-cloud a, .tag {
+.tag {
     display: inline-flex;
     padding: 0.25rem 0.55rem;
     border: 1px solid var(--color-border);
@@ -118,7 +105,7 @@
     text-decoration: none;
 }
 
-.topic-cloud a:is(:hover, :focus-visible), .tag:is(:hover, :focus-visible) {
+.tag:is(:hover, :focus-visible) {
     border-color: var(--color-accent);
     color: var(--color-accent);
 }

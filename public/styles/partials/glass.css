@@ -1,22 +1,23 @@
 /* Adjust panel opacity here. */
 
 body.ink-site {
-    --glass-opacity: 0.266;
+    --panel-opacity: 0.166;
+    --panel-blur: 18px;
     --glass-surface: oklch(from var(--ink-canvas) l c h / 0.92);
     --glass-border: rgb(255 255 255 / 0.09);
 }
 
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     body.ink-site {
-        --glass-surface: oklch(from var(--ink-canvas) l c h / var(--glass-opacity));
+        --glass-surface: oklch(from var(--ink-canvas) l c h / var(--panel-opacity));
     }
 }
 
 .page-pane, .header, .site-footer {
     border: 1px solid var(--glass-border);
     background: var(--glass-surface);
-    -webkit-backdrop-filter: blur(18px);
-    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(--panel-blur);
+    backdrop-filter: blur(--panel-blur);
 }
 
 .page-pane {

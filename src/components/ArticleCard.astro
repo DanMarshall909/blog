@@ -5,8 +5,9 @@ import { tagSlug } from '../utils/tags';
 interface Props {
   article: CollectionEntry<'articles'>;
   featured?: boolean;
+  showDescription?: boolean;
 }
-const { article, featured = false } = Astro.props;
+const { article, featured = false, showDescription = featured } = Astro.props;
 const { title, date, tags, description } = article.data;
 ---
 <article class:list={['article-card', { 'featured-card': featured }]} data-topic-tags={tags.map(tagSlug).join(' ')}>
@@ -16,6 +17,6 @@ const { title, date, tags, description } = article.data;
       <time datetime={date.toISOString()}>{formatDate(date)}</time>
       <span>{tags.slice(0, 3).join(' · ')}</span>
     </div>
-    {featured && <p class="featured-summary">{description}</p>}
+    {showDescription && <p class="article-card-description">{description}</p>}
   </a>
 </article>

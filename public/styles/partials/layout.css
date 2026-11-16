@@ -9,6 +9,18 @@
     padding-block: 2rem 3rem;
 }
 
+@media screen {
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh;
+    }
+
+    #content {
+        flex: 1 0 auto;
+    }
+}
+
 .page-pane {
     display: grid;
     grid-template-columns: var(--sidebar-width) minmax(0, 1fr);

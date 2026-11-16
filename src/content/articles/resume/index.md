@@ -13,7 +13,7 @@ cardImagePosition: "50% 15%"
 cardImageScale: 1.12
 ---
 
-# Dan Marshall
+## Dan Marshall
 
 Senior full-stack engineer with 11+ years of software engineering experience, specialising in .NET, with experience delivering Kotlin/Spring Boot systems and AI integrations. Work spans microservices, event-driven systems, cloud services, and developer tooling. Practices include TDD, pair programming, and code review.
 
@@ -27,9 +27,9 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-## Skills
+### Skills
 
-### Back-end Development
+#### Back-end Development
 
 | Area | Details |
 | :----- | :------ |
@@ -50,7 +50,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 | **Static Sites** | Astro, content collections, RSS, metadata validation, image optimisation |
 | **Developer Tooling** | Roslyn semantic analysis/refactoring, CLI design, backlog automation, scripted workflows |
 
-### AI/ML Integration
+#### AI/ML Integration
 
 | Area | Details |
 | :----- | :------ |
@@ -60,14 +60,14 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 | **Developer Tooling** | Claude Code skills, MCP integration, Codex workflows, PRD backlog automation, prompt and workflow optimisation |
 | **Media Generation** | ComfyUI, Flux-based image generation, local AI asset pipelines |
 
-### Front-end Development
+#### Front-end Development
 
 | Area | Details |
 | :----- | :------ |
 | **Frameworks** | TypeScript/JavaScript with React, Angular, Astro, Vite, Vitest, and ASP.NET MVC |
 | **UI Design** | CSS, Tailwind CSS, Material UI, Storybook |
 
-### General
+#### General
 
 | Area | Details |
 | :----- | :------ |
@@ -78,7 +78,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-## Recent Projects and Achievements
+### Recent Projects and Achievements
 
 - Completely rewrote a wage-claims management system for CFMEU, taking it from proof of concept to a completed system deployed in CFMEU's workspace; remediated security flaws, optimised resource utilisation, achieved 100% test coverage across the domain and application layers, and added extensive front-end end-to-end testing.
 - Built reusable Claude Code/Codex skills and scripts for project context, backlog management, TDD, mutation testing, code review, and workflow automation.
@@ -91,9 +91,9 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-## Employment
+### Employment
 
-### Rapid Circle — [rapidcircle.com](https://www.rapidcircle.com)
+#### Rapid Circle — [rapidcircle.com](https://www.rapidcircle.com)
 **Senior Consultant** | July 2026 – November 2026
 
 - Delivered client and internal engineering projects spanning application development, automation, and integration.
@@ -104,7 +104,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-### Reapit — [reapit.com](https://www.reapit.com)
+#### Reapit — [reapit.com](https://www.reapit.com)
 **Senior AI Engineer** | September 2025 – February 2026
 
 - Workshopped, built, and deployed an AI-driven property inspection system using AWS Bedrock, generating structured assessment reports constrained by business rules.
@@ -115,7 +115,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-### RACT (Royal Automobile Club of Tasmania) — [ract.com.au](https://www.ract.com.au)
+#### RACT (Royal Automobile Club of Tasmania) — [ract.com.au](https://www.ract.com.au)
 **Senior Software Engineer – Back-end** | June 2024 – July 2025
 
 - Applied Clean Architecture and DDD to back-end services.
@@ -126,7 +126,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-### National Grower Register — [ngr.com.au](https://www.ngr.com.au)
+#### National Grower Register — [ngr.com.au](https://www.ngr.com.au)
 **Senior Full-Stack Engineer** | November 2023 – May 2024
 
 - Co-developed a modular online form solution using Clean Architecture and DDD, replacing an outdated system.
@@ -139,7 +139,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-### CloudMonitor — [cloudmonitor.ai](https://www.cloudmonitor.ai)
+#### CloudMonitor — [cloudmonitor.ai](https://www.cloudmonitor.ai)
 **Lead Azure / Back-end Engineer** | June 2023 – November 2023
 
 - Conceptualised, developed, and maintained features running on a serverless platform.
@@ -151,7 +151,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-### VALD — [vald.com](https://www.vald.com)
+#### VALD — [vald.com](https://www.vald.com)
 **Software Engineer – Back-end** | January 2023 – May 2023
 
 - Maintained, refactored, and contributed to various legacy REST APIs and microservices.
@@ -161,7 +161,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-### Situ Systems — [situsystems.com](https://www.situsystems.com)
+#### Situ Systems — [situsystems.com](https://www.situsystems.com)
 **Senior Software Engineer – Full-Stack** | November 2021 – October 2022
 
 - Authored numerous front-end and back-end features.
@@ -173,7 +173,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-### HUB24 Limited — [hub24.com.au](https://www.hub24.com.au)
+#### HUB24 Limited — [hub24.com.au](https://www.hub24.com.au)
 **Data and Full-Stack Engineer** | December 2019 – November 2021
 
 - Built a system for cleaning, transforming, and validating fund transfers between superannuation funds.
@@ -185,7 +185,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-### Chandler Personalised Communications — [chandler.com.au](https://www.chandler.com.au)
+#### Chandler Personalised Communications — [chandler.com.au](https://www.chandler.com.au)
 **Data and Full-Stack Engineer** | March 2016 – December 2019
 
 - Worked within an ISO 27001 certified organisation meeting strict security standards.
@@ -197,7 +197,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-### WorldSmart POS Solutions — [worldsmart.com.au](https://www.worldsmart.com.au)
+#### WorldSmart POS Solutions — [worldsmart.com.au](https://www.worldsmart.com.au)
 **Software Engineer, QA and Support** | February 2011 – February 2016
 
 - Developed and maintained enterprise software for retail groups.
@@ -210,7 +210,7 @@ Senior full-stack engineer with 11+ years of software engineering experience, sp
 
 ---
 
-## References
+### References
 
 Available on request.
 

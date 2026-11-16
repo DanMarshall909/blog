@@ -2,9 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
-import { tagHref } from '../utils/tags';
 
-const topicGroups = ['AI', 'developer tools', 'Astro', 'C#', 'Python', 'Rust', 'CSS', 'productivity', 'career', 'testing'];
 const allArticles = await getCollection('articles', ({ data }) => !data.unlisted);
 const resumeArticle = allArticles.find(a => a.id.replace(/\/index$/, '') === 'resume');
 const articles = allArticles
@@ -14,8 +12,7 @@ const [featuredArticle, ...recentArticles] = articles;
 const toc = [{ items: [
   ...(featuredArticle ? [{ label: 'Featured article', href: '#featured-title' }] : []),
   ...(resumeArticle ? [{ label: 'Resume', href: '#resume-card' }] : []),
-  { label: 'Notes from the workbench', href: '#recent-title' },
-  { label: 'Topics', href: '#topics-title' },
+  { label: 'Articles', href: '#recent-title' },
 ] }];
 ---
 <Layout title="Technical Scratches" bodyClass="home-page" toc={toc}>
@@ -30,18 +27,8 @@ const toc = [{ items: [
   <section class="recent-writing" aria-labelledby="recent-title">
     <header class="section-heading">
       <p class="eyebrow">Recent writing</p>
-      <h2 id="recent-title">Notes from the workbench</h2>
+      <h2 id="recent-title">Articles</h2>
     </header>
-    <div class="article-list">{recentArticles.map(article => <ArticleCard article={article} />)}</div>
-  </section>
-  <section class="topic-cloud" aria-labelledby="topics-title">
-    <header class="section-heading">
-      <p class="eyebrow">Topics</p>
-      <h2 id="topics-title">What I keep coming back to</h2>
-    </header>
-    <ul>
-      {topicGroups.map(topic => <li><a href={tagHref(topic)}>{topic}</a></li>)}
-      <li><a href="/topics/">All topics</a></li>
-    </ul>
+    <div class="article-list">{recentArticles.map(article => <ArticleCard article={article} showDescription />)}</div>
   </section>
 </Layout>
