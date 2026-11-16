@@ -16,8 +16,8 @@ body.ink-site {
 .page-pane, .header, .site-footer {
     border: 1px solid var(--glass-border);
     background: var(--glass-surface);
-    -webkit-backdrop-filter: blur(--panel-blur);
-    backdrop-filter: blur(--panel-blur);
+    -webkit-backdrop-filter: blur(var(--panel-blur));
+    backdrop-filter: blur(var(--panel-blur));
 }
 
 .page-pane {
