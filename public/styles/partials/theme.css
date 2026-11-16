@@ -1,47 +1,29 @@
-/* ── Theme tokens ─────────────────────────────────────────────────────────── */
+/* One screen palette; print colours are defined in print.css. */
 
 :root {
-    /* Palette primitives — retheming starts here. */
-    --palette-neutral-hue: 245;
-    --palette-accent-hue: 75;
-    --palette-ink: oklch(0.24 0.014 var(--palette-neutral-hue));
-    --palette-ink-dark: oklch(0.93 0.007 var(--palette-neutral-hue));
-    --palette-canvas: oklch(0.975 0.005 var(--palette-neutral-hue));
-    --palette-canvas-dark: oklch(0.185 0.012 var(--palette-neutral-hue));
-    --palette-accent: oklch(0.5 0.11 var(--palette-accent-hue));
-    --palette-accent-dark: oklch(0.74 0.1 var(--palette-accent-hue));
-
-    /* Semantic colors derived from the palette primitives. */
-    --color-primary: var(--palette-ink);
-    --color-secondary: oklch(from var(--palette-ink) calc(l + 0.13) c h);
-    --color-primary-dark: var(--palette-ink-dark);
-    --color-secondary-dark: oklch(from var(--palette-ink-dark) calc(l - 0.13) c h);
-    --color-background-dark: oklch(from var(--palette-canvas-dark) l c h / 0.88);
-    --color-line-tint: oklch(from var(--palette-canvas) calc(l - 0.125) c h);
-    --color-line-tint-dark: oklch(from var(--palette-canvas-dark) calc(l + 0.155) c h);
-
-    /* Print */
+    --ink-red: oklch(67.063% 0.1797 40.492);
+    --ink-rule: oklch(0.35 0.008 75);
+    --ink-copy: oklch(77.248% 0.16016 75.484);
+    --ink-muted: oklch(0.65 0.008 75);
+    --ink-canvas: oklch(0.185 0.008 75);
+    --color-primary: var(--ink-copy);
+    --color-secondary: var(--ink-muted);
+    --color-muted: var(--ink-muted);
+    --color-background: var(--ink-canvas);
+    --color-surface: var(--ink-canvas);
+    --color-border: var(--ink-rule);
+    --color-accent: var(--ink-red);
+    --color-accent-hover: oklch(0.72 0.18 30);
     --color-print: black;
-
-    /* Derived palette */
-    --color-muted: oklch(from var(--color-secondary) calc(l + 0.17) calc(c + 0.005) h);
-    --color-accent: var(--palette-accent);
-    --color-accent-hover: oklch(from var(--palette-accent) calc(l - 0.08) c h);
-    --color-background: oklch(from var(--palette-canvas) l c h / 0.88);
-    --color-surface: oklch(from var(--palette-canvas) calc(l + 0.015) c h / 0.8);
-    --color-border: var(--color-line-tint);
-    --color-code-bg: oklch(from var(--palette-canvas) calc(l - 0.02) c h / 0.85);
-    --color-code-border: oklch(from var(--palette-canvas-dark) calc(l + 0.115) c h);
-    --color-code-surface: oklch(from var(--palette-canvas-dark) calc(l + 0.005) c h / 0.85);
-    --color-code-scrollbar: oklch(from var(--palette-canvas-dark) calc(l + 0.215) c h);
-    --color-code-control: oklch(from var(--palette-canvas-dark) calc(l + 0.435) c h);
-    --color-code-control-hover: var(--palette-ink-dark);
-
-    /* Typography */
-    --font-primary: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-heading: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --color-code-bg: rgb(255 255 255 / 0.1);
+    --color-code-surface: rgb(255 255 255 / 0.15);
+    --color-code-scrollbar: rgb(255 255 255 / 0.45);
+    --color-code-control: rgb(255 255 255 / 0.68);
+    --color-code-control-hover: white;
+    --heading-mute-step: 45%;
+    --font-primary: "Archivo", "DM Sans", Arial, sans-serif;
+    --font-heading: var(--font-primary);
     --font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
-
     /* Spacing */
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
@@ -50,8 +32,6 @@
     --space-xl: 2rem;
     --space-2xl: 3rem;
     --space-3xl: 4rem;
-    --space-4xl: 5rem;
-
     /* Typography scale */
     --text-xs: 0.75rem;
     --text-sm: 0.875rem;
@@ -61,84 +41,15 @@
     --text-2xl: 1.5rem;
     --text-3xl: 1.875rem;
     --text-4xl: 2.25rem;
-    --text-5xl: 3rem;
-
     /* Layout */
-    --site-max-width: 75rem;
-    --content-width: 50rem;
-    --content-max-width: 50rem;
-    --article-max-width: 51.25rem;
+    --site-max-width: 56.25rem;
     --sidebar-width: 13.75rem;
-    --page-gutter: clamp(1rem, 4vw, 4rem);
+    --page-gutter: 1.25rem;
     --border-radius: 3px;
-    --radius-md: 3px;
-    --space-card: clamp(1.25rem, 2.4vw, 2.25rem);
-
-    /* Shadows — kept minimal; hairline borders carry most separation */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
-    --shadow-md: 0 2px 8px 0 rgb(0 0 0 / 0.06);
-    --shadow-lg: 0 4px 16px 0 rgb(0 0 0 / 0.08);
-
     /* Shared interaction values */
     --interactive-hover-bg: rgb(from var(--color-accent) r g b / 0.06);
     --interactive-soft-bg: rgb(from var(--color-accent) r g b / 0.05);
-    --interactive-hover-border: rgb(from var(--color-accent) r g b / 0.5);
-
     /* Transitions */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-[data-theme="dark"] {
-    --color-primary: var(--color-primary-dark);
-    --color-secondary: var(--color-secondary-dark);
-    --color-background: var(--color-background-dark);
-    --color-muted: oklch(from var(--color-secondary) calc(l - 0.14) c h);
-    --color-accent: var(--palette-accent-dark);
-    --color-accent-hover: oklch(from var(--palette-accent-dark) calc(l + 0.08) c h);
-    --color-surface: oklch(from var(--color-background) calc(l + 0.035) c h / 0.8);
-    --color-border: var(--color-line-tint-dark);
-    --color-code-bg: oklch(from var(--color-background) calc(l + 0.02) c h / 0.85);
-}
-
-[data-theme="light"] {
-    --color-code-bg: oklch(0.95 0.015 245 / 0.94);
-    --color-code-surface: oklch(0.925 0.025 245 / 0.96);
-    --color-code-scrollbar: oklch(0.68 0.055 245);
-    --color-code-control: oklch(0.43 0.045 245);
-    --color-code-control-hover: var(--color-primary);
-}
-
-[data-theme="jetbrains"] {
-    --palette-neutral-hue: 265;
-    --palette-accent-hue: 305;
-    --palette-ink: oklch(0.94 0.018 265);
-    --palette-ink-dark: oklch(0.94 0.018 265);
-    --palette-canvas: oklch(0.19 0.025 265);
-    --palette-canvas-dark: oklch(0.19 0.025 265);
-    --palette-accent: oklch(0.68 0.14 45);
-    --palette-accent-dark: oklch(0.74 0.13 45);
-
-    --color-primary: var(--palette-ink);
-    --color-secondary: oklch(0.78 0.025 265);
-    --color-primary-dark: var(--palette-ink-dark);
-    --color-secondary-dark: var(--color-secondary);
-    --color-background-dark: oklch(0.15 0.025 265);
-    --color-line-tint: oklch(0.34 0.04 265);
-    --color-line-tint-dark: oklch(0.34 0.04 265);
-    --color-muted: oklch(0.68 0.025 265);
-    --color-accent: var(--palette-accent);
-    --color-accent-hover: oklch(0.8 0.18 305);
-    --color-background: oklch(0.15 0.025 265);
-    --color-surface: oklch(0.2 0.03 265 / 0.88);
-    --color-border: var(--color-line-tint);
-    --color-code-bg: oklch(0.13 0.025 265 / 0.92);
-    --color-code-border: oklch(0.34 0.04 265);
-    --color-code-surface: oklch(0.12 0.025 265 / 0.94);
-    --color-code-scrollbar: oklch(0.48 0.08 305);
-    --color-code-control: oklch(0.78 0.03 265);
-    --color-code-control-hover: oklch(0.95 0.02 265);
-    --jetbrains-violet: oklch(0.68 0.14 305);
-    --jetbrains-orange: oklch(0.8 0.12 45);
-    --jetbrains-cyan: oklch(0.75 0.09 195);
 }

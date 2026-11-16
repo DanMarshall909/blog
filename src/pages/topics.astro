@@ -1,195 +1,116 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ArticleListView from '../components/ArticleListView.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
-import { tagHref, tagSlug } from '../utils/tags';
+import { tagSlug } from '../utils/tags';
 
 const articles = (await getCollection('articles', ({ data }) => !data.unlisted)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 const tagMap = new Map<string, { label: string; count: number }>();
-
 for (const article of articles) {
   for (const tag of article.data.tags) {
     const slug = tagSlug(tag);
     const existing = tagMap.get(slug);
-    if (existing) {
-      existing.count += 1;
-    } else {
-      tagMap.set(slug, { label: tag, count: 1 });
-    }
+    if (existing) existing.count += 1;
+    else tagMap.set(slug, { label: tag, count: 1 });
   }
 }
-
-const topics = [...tagMap.values()].sort((a, b) => {
-  if (b.count !== a.count) return b.count - a.count;
-  return a.label.localeCompare(b.label);
-});
+const topics = [...tagMap.values()].sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+const options = [{ label: 'All topics', count: articles.length, slug: 'all' }, ...topics.map(topic => ({ ...topic, slug: tagSlug(topic.label) }))];
+const toc = [{ items: [{ label: 'Choose a topic', href: '#topic-filter-title' }, { label: 'Articles', href: '#topic-results' }] }];
 ---
-<Layout
-  title="Topics - Technical Scratches"
-  description="Browse Technical Scratches articles by topic and tag."
-  headerVariant="section"
->
+<Layout title="Topics - Technical Scratches" description="Browse Technical Scratches articles by topic and tag." toc={toc}>
   <section class="topics-page">
-    <div class="page-header-row">
-      <div class="section-heading">
-        <p class="eyebrow">Topics</p>
-        <h1>Browse by topic</h1>
-        <p class="section-description">Choose a tag to filter related articles and trace the threads running through the site.</p>
+    <header class="section-heading">
+      <p class="eyebrow">Topics</p>
+      <h1>Browse by topic</h1>
+      <p class="section-description">Choose a tag to filter related articles and trace the threads running through the site.</p>
+    </header>
+    <section aria-labelledby="topic-filter-title">
+      <h2 id="topic-filter-title">Choose a topic</h2>
+      <div class="topic-filter-wrap">
+        <label class="sr-only" for="topic-input">Search topics</label>
+        <input type="text" id="topic-input" placeholder="All topics" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="topic-options" aria-expanded="false" />
+        <ul class="topic-options" id="topic-options" role="listbox" aria-label="Topics" hidden>
+          {options.map(option => <li id={`topic-option-${option.slug}`} data-topic-filter={option.slug} data-label={option.label} role="option" aria-selected={option.slug === 'all' ? 'true' : 'false'}>{option.label} <strong>{option.count}</strong></li>)}
+        </ul>
       </div>
-
-    </div>
-
-    <div class="topic-filter-wrap">
-      <input type="text" id="topic-input" placeholder="All topics" autocomplete="off" />
-      <ul class="topic-options" id="topic-options">
-        <li data-topic-filter="all" role="option" aria-selected="true">All topics <strong>{articles.length}</strong></li>
-        {topics.map((topic) => (
-          <li data-topic-filter={tagSlug(topic.label)} role="option" aria-selected="false">{topic.label} <strong>{topic.count}</strong></li>
-        ))}
-      </ul>
-    </div>
-
-    <p class="topics-count" aria-live="polite">
-      Showing <span id="topics-visible-count">{articles.length}</span> {articles.length === 1 ? 'article' : 'articles'}.
-    </p>
-
-    <ArticleListView
-      articles={articles}
-      storageKey="view-mode-topics"
-      filterable={true}
-    />
+    </section>
+    <section class="topic-results" id="topic-results" aria-labelledby="topic-results-title">
+      <h2 id="topic-results-title">Articles</h2>
+      <p class="topics-count" aria-live="polite">Showing <span id="topics-visible-count">{articles.length}</span> articles.</p>
+      <div class="article-list">{articles.map(article => <ArticleCard article={article} />)}</div>
+    </section>
   </section>
-
-  <script is:inline>
-    (function() {
-      var input = document.getElementById('topic-input');
-      var list = document.getElementById('topic-options');
-      var options = Array.from(list.querySelectorAll('[data-topic-filter]'));
-      var visibleCount = document.getElementById('topics-visible-count');
-
-      var container = document.getElementById('view-container');
-      var gridItems = container ? Array.from(container.querySelectorAll('.article-list-frame > .article-grid > .article-card')) : [];
-      var listItems = container ? Array.from(container.querySelectorAll('.article-list-frame > .article-list > .list-item')) : [];
-
-      var currentFilter = 'all';
-      var isOpen = false;
-
-      function filterResults(filter) {
-        currentFilter = filter;
-        var visible = 0;
-
-        gridItems.forEach(function(card) {
-          var tags = (card.getAttribute('data-topic-tags') || '').split(' ');
-          var show = filter === 'all' || tags.indexOf(filter) !== -1;
-          if (show) visible += 1;
-
-          if (show) {
-            card.hidden = false;
-            card.removeAttribute('aria-hidden');
-            requestAnimationFrame(function() {
-              card.classList.remove('is-collapsed');
-            });
-          } else {
-            card.classList.add('is-collapsed');
-            card.setAttribute('aria-hidden', 'true');
-            window.setTimeout(function() {
-              if (card.classList.contains('is-collapsed')) card.hidden = true;
-            }, 320);
-          }
-        });
-
-        listItems.forEach(function(item) {
-          var tags = (item.getAttribute('data-topic-tags') || '').split(' ');
-          var show = filter === 'all' || tags.indexOf(filter) !== -1;
-          item.classList.toggle('is-filtered-out', !show);
-        });
-
-        if (visibleCount) visibleCount.textContent = String(visible);
-      }
-
-      function selectOption(option) {
-        var filter = option.getAttribute('data-topic-filter') || 'all';
-        var label = filter === 'all' ? 'All topics' : option.childNodes[0].textContent.trim();
-
-        options.forEach(function(o) { o.setAttribute('aria-selected', 'false'); });
-        option.setAttribute('aria-selected', 'true');
-        input.placeholder = label;
-        input.value = '';
-        filterOptions('');
-        closeDropdown();
-        filterResults(filter);
-      }
-
-      function filterOptions(query) {
-        var lower = query.toLowerCase();
-        options.forEach(function(o) {
-          var text = (o.childNodes[0].textContent || '').trim().toLowerCase();
-          o.classList.toggle('is-hidden', lower && text.indexOf(lower) === -1);
-        });
-      }
-
-      function openDropdown() {
-        isOpen = true;
-        list.classList.add('is-open');
-      }
-
-      function closeDropdown() {
-        isOpen = false;
-        list.classList.remove('is-open');
-      }
-
-      input.addEventListener('focus', function() {
-        openDropdown();
-        filterOptions(input.value);
-      });
-
-      input.addEventListener('click', function() {
-        openDropdown();
-        filterOptions(this.value);
-      });
-
-      input.addEventListener('input', function() {
-        openDropdown();
-        filterOptions(this.value);
-      });
-
-      input.addEventListener('blur', function() {
-        window.setTimeout(closeDropdown, 150);
-      });
-
-      list.addEventListener('mousedown', function(e) {
-        var li = e.target.closest('[data-topic-filter]');
-        if (li) {
-          e.preventDefault();
-          selectOption(li);
-        }
-      });
-
-      input.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeDropdown();
-        if (e.key === 'Enter' && isOpen) {
-          var visible = options.filter(function(o) { return !o.classList.contains('is-hidden'); });
-          if (visible.length === 1) selectOption(visible[0]);
-        }
-        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-          e.preventDefault();
-          var visible = options.filter(function(o) { return !o.classList.contains('is-hidden'); });
-          var idx = visible.indexOf(list.querySelector('.is-highlighted'));
-          if (e.key === 'ArrowDown') idx = Math.min(idx + 1, visible.length - 1);
-          else idx = Math.max(idx - 1, 0);
-          options.forEach(function(o) { o.classList.remove('is-highlighted'); });
-          if (visible[idx]) visible[idx].classList.add('is-highlighted');
-        }
-      });
-
-      var urlTag = (window.location.search || '').match(/[?&]tag=([^&]+)/);
-      var initialFilter = urlTag ? urlTag[1] : null;
-      if (initialFilter) {
-        var match = options.find(function(o) { return o.getAttribute('data-topic-filter') === initialFilter; });
-        if (match) selectOption(match);
-      }
-    })();
-  </script>
 </Layout>
+
+<script>
+  import { tagSlug } from '../utils/tags';
+  const input = document.getElementById('topic-input') as HTMLInputElement;
+  const list = document.getElementById('topic-options')!;
+  const options = Array.from(list.querySelectorAll<HTMLElement>('[data-topic-filter]'));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.article-card'));
+  const count = document.getElementById('topics-visible-count')!;
+  let highlighted: HTMLElement | undefined;
+
+  function highlight(option?: HTMLElement) {
+    highlighted?.classList.remove('is-highlighted');
+    highlighted = option;
+    option?.classList.add('is-highlighted');
+    if (option) input.setAttribute('aria-activedescendant', option.id);
+    else input.removeAttribute('aria-activedescendant');
+  }
+  function close() {
+    list.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+    highlight();
+  }
+  function search() {
+    const query = tagSlug(input.value);
+    options.forEach(option => { option.hidden = !tagSlug(option.dataset.label!).includes(query); });
+    highlight();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function select(option: HTMLElement) {
+    const filter = option.dataset.topicFilter!;
+    let visible = 0;
+    cards.forEach(card => {
+      card.hidden = filter !== 'all' && !card.dataset.topicTags!.split(' ').includes(filter);
+      if (!card.hidden) visible += 1;
+    });
+    count.textContent = String(visible);
+    options.forEach(item => item.setAttribute('aria-selected', String(item === option)));
+    input.placeholder = option.dataset.label!;
+    input.value = '';
+    close();
+  }
+  input.addEventListener('focus', search);
+  input.addEventListener('click', search);
+  input.addEventListener('input', search);
+  input.addEventListener('blur', close);
+  list.addEventListener('mousedown', event => {
+    const option = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-topic-filter]') : null;
+    if (option) { event.preventDefault(); select(option); }
+  });
+  input.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { close(); return; }
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (list.hidden) search();
+      const visible = options.filter(option => !option.hidden);
+      const index = visible.indexOf(highlighted!);
+      const next = event.key === 'ArrowDown' ? Math.min(index + 1, visible.length - 1) : Math.max(index - 1, 0);
+      highlight(visible[next]);
+      highlighted?.scrollIntoView({ block: 'nearest' });
+    }
+    if (event.key === 'Enter' && !list.hidden) {
+      const option = highlighted ?? options.find(item => !item.hidden);
+      if (option) { event.preventDefault(); select(option); }
+    }
+  });
+  const initial = new URLSearchParams(location.search).get('tag');
+  const match = options.find(option => option.dataset.topicFilter === initial);
+  if (match) select(match);
+</script>

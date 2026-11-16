@@ -1,19 +1,19 @@
 import { expect, test } from "@playwright/test";
 
-test("the archive uses the Ink rail and flattened article rows", async ({ page }) => {
+test("the archive shares the combined pane and article previews", async ({ page }) => {
   await page.goto("/archive/");
 
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await expect(page.locator(".ink-archive-rail")).toBeVisible();
-  await expect(page.locator(".ink-archive-row").first()).toBeVisible();
+  await expect(page.locator(".page-pane > .toc")).toBeVisible();
+  await expect(page.locator(".article-card").first()).toBeVisible();
 
-  const row = page.locator(".ink-archive-row").first();
-  await expect(row.locator(".ink-archive-title")).toHaveAttribute("href", /\/articles\//);
-  await expect(row.locator("time")).toHaveText(/\d{2} [A-Z]{3} \d{4}/);
+  const row = page.locator(".article-card").first();
+  await expect(row.locator(".article-card-link")).toHaveAttribute("href", /\/articles\//);
+  await expect(row.locator("time")).toHaveText(/\d{2} [A-Za-z]+ \d{4}/);
 
   const styles = await page.locator("body").evaluate((body) => {
     const bodyStyle = getComputedStyle(body);
-    const rowStyle = getComputedStyle(document.querySelector(".ink-archive-row")!);
+    const rowStyle = getComputedStyle(document.querySelector(".article-card + .article-card")!);
     return { background: bodyStyle.backgroundColor, rowBorder: rowStyle.borderTopWidth };
   });
 
@@ -28,7 +28,7 @@ test("archive and footer stay aligned without horizontal overflow", async ({ pag
 
     const layout = await page.evaluate(() => {
       const header = document.querySelector(".header .content-wrap")!.getBoundingClientRect();
-      const archive = document.querySelector(".ink-archive")!.getBoundingClientRect();
+      const archive = document.querySelector(".page-pane")!.getBoundingClientRect();
       const footer = document.querySelector(".site-footer .content-wrap")!.getBoundingClientRect();
       return {
         viewport: document.documentElement.clientWidth,

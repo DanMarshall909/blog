@@ -1,167 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
-import ArticleListView from '../components/ArticleListView.astro';
 import { getCollection } from 'astro:content';
 import { tagHref } from '../utils/tags';
-import { getArticleSlug, getArticleCardImage, formatDate, getIntroHtml } from '../utils/article';
 
-const topicGroups = [
-  'AI',
-  'developer tools',
-  'Astro',
-  'C#',
-  'Python',
-  'Rust',
-  'CSS',
-  'productivity',
-  'career',
-  'testing',
-];
-
-const excludedArticleIds = new Set([
-  'resume',
-  'resume/index',
-  'resume-brief',
-  'resume-brief/index',
-]);
-
+const topicGroups = ['AI', 'developer tools', 'Astro', 'C#', 'Python', 'Rust', 'CSS', 'productivity', 'career', 'testing'];
 const allArticles = await getCollection('articles', ({ data }) => !data.unlisted);
-
-const resumeArticle = allArticles.find(a => a.id === 'resume' || a.id === 'resume/index');
-
+const resumeArticle = allArticles.find(a => a.id.replace(/\/index$/, '') === 'resume');
 const articles = allArticles
-  .filter((article) => !excludedArticleIds.has(article.id))
+  .filter(a => !['resume', 'resume-brief'].includes(a.id.replace(/\/index$/, '')))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
 const [featuredArticle, ...recentArticles] = articles;
-
-
+const toc = [{ items: [
+  ...(featuredArticle ? [{ label: 'Featured article', href: '#featured-title' }] : []),
+  ...(resumeArticle ? [{ label: 'Resume', href: '#resume-card' }] : []),
+  { label: 'Notes from the workbench', href: '#recent-title' },
+  { label: 'Topics', href: '#topics-title' },
+] }];
 ---
-
-<Layout title="Technical Scratches" bodyClass="home-page">
-  <Fragment slot="footer-nav">
-    <div class="nav">
-      <a href="/archive/">&laquo; Archives</a>
+<Layout title="Technical Scratches" bodyClass="home-page" toc={toc}>
+  <section class="featured-writing" aria-labelledby="featured-title">
+    <h2 id="featured-title" class="sr-only">Featured writing</h2>
+    <p class="eyebrow">Featured article</p>
+    <div class="featured-card-row">
+      {featuredArticle && <ArticleCard article={featuredArticle} featured />}
+      {resumeArticle && <div id="resume-card"><ArticleCard article={resumeArticle} featured /></div>}
     </div>
-  </Fragment>
-
-  <div class="page-with-toc">
-    <nav class="toc home-toc" aria-label="Table of contents">
-      <div class="toc-socials">
-        <a href="mailto:danmarshall909@gmail.com" data-tooltip="Send me an email" aria-label="Email">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/developerdan/" data-tooltip="View my LinkedIn profile" aria-label="LinkedIn">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        <a href="https://github.com/DanMarshall909" data-tooltip="View my GitHub profile" aria-label="GitHub">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.5 2-5-2-7-2"/></svg>
-        </a>
-        <a href="/feed.xml" data-tooltip="Subscribe to the RSS feed" aria-label="RSS">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-        </a>
-      </div>
-      <div class="toc-title"><span>On this page</span></div>
-      <ul class="toc-list">
-        <li class="toc-item"><a class="toc-link toc-active" href="#featured-title">Featured article</a></li>
-        <li class="toc-item"><a class="toc-link" href="#resume-card">Resume</a></li>
-        <li class="toc-item"><a class="toc-link" href="#recent-title">Notes from the workbench</a></li>
-        <li class="toc-item"><a class="toc-link" href="#topics-title">Topics</a></li>
-      </ul>
-    </nav>
-
-    <div class="home-main-content">
-      {
-        featuredArticle && (() => {
-          const slug = getArticleSlug(featuredArticle.id);
-          const intro = getIntroHtml(featuredArticle.data.description, featuredArticle.body ?? '');
-          const primaryTag = featuredArticle.data.tags[0];
-          const image = getArticleCardImage(
-            featuredArticle.id,
-            featuredArticle.data.heroImage,
-          );
-
-          return (
-            <section class="featured-writing" aria-labelledby="featured-title">
-              <h2 id="featured-title" class="sr-only">Featured writing</h2>
-              <p class="eyebrow">Featured article</p>
-              <div class="featured-card-row">
-                <div class="featured-card-column">
-                  <ArticleCard
-                    variant="featured"
-                    title={featuredArticle.data.title}
-                    href={`/articles/${slug}/`}
-                    dateTime={featuredArticle.data.date.toISOString()}
-                    dateLabel={formatDate(featuredArticle.data.date)}
-                    cardImage={image}
-                    cardImagePosition={featuredArticle.data.cardImagePosition}
-                    cardImageScale={featuredArticle.data.cardImageScale}
-                    primaryTag={primaryTag}
-                    summary={intro}
-                  />
-                </div>
-
-                <div class="featured-card-column" id="resume-card">
-                  {resumeArticle && (() => {
-                    const resumeSlug = getArticleSlug(resumeArticle.id);
-                    const resumeIntro = getIntroHtml(resumeArticle.data.description, resumeArticle.body ?? '');
-                    const resumeImage = resumeArticle.data.heroImage ?? '/articles/resume/profile-alpha-trimmed.png';
-                    return (
-                      <ArticleCard
-                        variant="featured"
-                        title={resumeArticle.data.title}
-                        href={`/articles/${resumeSlug}/`}
-                        dateTime={resumeArticle.data.date.toISOString()}
-                        dateLabel={formatDate(resumeArticle.data.date)}
-                        cardImage={resumeImage}
-                        cardImagePosition={resumeArticle.data.cardImagePosition}
-                        cardImageScale={resumeArticle.data.cardImageScale}
-                        primaryTag={resumeArticle.data.tags[0]}
-                        tags={resumeArticle.data.tags}
-                        summary={resumeIntro}
-                      />
-                    );
-                  })()}
-                </div>
-              </div>
-            </section>
-          );
-        })()
-      }
-
-      <section class="recent-writing" aria-labelledby="recent-title">
-        <div class="page-header-row">
-          <div class="section-heading">
-            <p class="eyebrow">Recent writing</p>
-            <h2 id="recent-title">Notes from the workbench</h2>
-          </div>
-        </div>
-
-        <ArticleListView
-          articles={recentArticles}
-          storageKey="view-mode-home"
-        />
-      </section>
-    </div>
-  </div>
-
+  </section>
+  <section class="recent-writing" aria-labelledby="recent-title">
+    <header class="section-heading">
+      <p class="eyebrow">Recent writing</p>
+      <h2 id="recent-title">Notes from the workbench</h2>
+    </header>
+    <div class="article-list">{recentArticles.map(article => <ArticleCard article={article} />)}</div>
+  </section>
   <section class="topic-cloud" aria-labelledby="topics-title">
-    <div class="section-heading">
+    <header class="section-heading">
       <p class="eyebrow">Topics</p>
       <h2 id="topics-title">What I keep coming back to</h2>
-    </div>
-
+    </header>
     <ul>
-      {topicGroups.map((topic) => (
-        <li>
-          <a href={tagHref(topic)}>{topic}</a>
-        </li>
-      ))}
-      <li>
-        <a href="/topics/">All topics</a>
-      </li>
+      {topicGroups.map(topic => <li><a href={tagHref(topic)}>{topic}</a></li>)}
+      <li><a href="/topics/">All topics</a></li>
     </ul>
   </section>
-
 </Layout>

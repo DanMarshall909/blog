@@ -1,14 +1,9 @@
-/* ── Article detail styles ───────────────────────────────────────────────── */
-
-.header-article .header-copy {
-    max-width: 32rem;
-}
+/* Article headings and metadata. */
 
 body.article-detail .article .title-with-image {
     /* clear: both; */
     display: grid;
-    grid-template-areas:
-        "title"
+    grid-template-areas: "title"
         "meta";
     align-items: start;
     gap: var(--space-xs) var(--space-lg);
@@ -50,38 +45,6 @@ body.article-detail .article .title-with-image h1 {
     border-color: var(--color-accent);
     color: var(--color-accent);
     opacity: 1;
-    text-decoration: none;
-}
-
-body.article-detail .article {
-    margin-block: var(--space-xl) var(--space-3xl);
-    padding: 0;
-    border: 0;
-}
-
-.breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-sm);
-    color: var(--color-muted);
-    font-size: var(--text-sm);
-}
-
-.breadcrumb a,
-.breadcrumb span {
-    color: inherit;
-}
-
-.breadcrumb a {
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.breadcrumb a:hover,
-.breadcrumb a:focus-visible {
-    color: var(--color-accent);
     text-decoration: none;
 }
 

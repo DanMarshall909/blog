@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("the resume and featured article cards share a top edge", async ({ page }) => {
   await page.goto("/");
 
-  const cards = page.locator(".featured-card-row > .featured-card-column > .featured-card");
+  const cards = page.locator(".featured-card-row .featured-card");
   await expect(cards).toHaveCount(2);
 
   const [featuredBox, resumeBox] = await Promise.all([

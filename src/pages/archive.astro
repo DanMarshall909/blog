@@ -1,17 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import InkArchive from '../components/InkArchive.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
+import { tagHref } from '../utils/tags';
 
 const articles = (await getCollection('articles', ({ data }) => !data.unlisted)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+const years = [...new Set(articles.map(article => article.data.date.getUTCFullYear()))];
+const articlesByYear = years.map(year => ({ year, articles: articles.filter(article => article.data.date.getUTCFullYear() === year) }));
+const toc = [
+  { title: 'Years', items: articlesByYear.map(group => ({ label: String(group.year), href: `#year-${group.year}`, count: group.articles.length })) },
+  { title: 'Topics', items: ['AI', 'Developer tools', 'Testing', 'C#', 'Security'].map(label => ({ label, href: tagHref(label) })) },
+];
 ---
-<Layout
-  title="Archive - Technical Scratches"
-  headerVariant="section"
-  bodyClass="archive-ink"
-  theme="dark"
->
-  <InkArchive articles={articles} />
+<Layout title="Archive - Technical Scratches" toc={toc}>
+  <section aria-labelledby="archive-title">
+    <header class="section-heading">
+      <p class="eyebrow">Archive</p>
+      <h1 id="archive-title">All writing in one place</h1>
+      <p class="section-description">A full index of posts, sketches, and experiments from the workbench.</p>
+    </header>
+    {articlesByYear.map(group => (
+      <section class="archive-year" id={`year-${group.year}`} aria-labelledby={`year-heading-${group.year}`}>
+        <h2 id={`year-heading-${group.year}`}>{group.year}</h2>
+        <div class="article-list">{group.articles.map(article => <ArticleCard article={article} />)}</div>
+      </section>
+    ))}
+  </section>
 </Layout>

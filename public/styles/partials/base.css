@@ -61,8 +61,24 @@ h6 {
     margin-bottom: var(--space-md);
     color: var(--color-primary);
     font-family: var(--font-heading);
-    font-weight: 400;
+    font-weight: 700;
+    letter-spacing: -0.04em;
     line-height: 1.15;
+}
+
+/* H2 blends toward white; H3 and smaller share a near-white tone. */
+@media screen {
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: color-mix(
+            in oklch,
+            var(--color-primary),
+            white clamp(0%, calc(min(2, var(--heading-level) - 1) * var(--heading-mute-step)), 100%)
+        );
+    }
 }
 
 h1 {
@@ -71,22 +87,27 @@ h1 {
 }
 
 h2 {
+    --heading-level: 2;
     font-size: var(--text-3xl);
 }
 
 h3 {
+    --heading-level: 3;
     font-size: var(--text-2xl);
 }
 
 h4 {
+    --heading-level: 4;
     font-size: var(--text-xl);
 }
 
 h5 {
+    --heading-level: 5;
     font-size: var(--text-lg);
 }
 
 h6 {
+    --heading-level: 6;
     font-size: var(--text-base);
 }
 
@@ -165,3 +186,5 @@ blockquote {
 hr {
     display: none;
 }
+
+[id] { scroll-margin-top: 1.5rem; }
