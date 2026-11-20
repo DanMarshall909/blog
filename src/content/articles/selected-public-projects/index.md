@@ -2,10 +2,10 @@
 title: "Selected public projects"
 author: Dan Marshall
 date: "2026-06-24"
-tags: ["portfolio", "AI", "developer tools", "C#", "Python", "Rust", "frontend", "Godot", "VR"]
+tags: ["portfolio", "AI", "developer tools", "C#", "Roslyn", "MCP", "Python", "Rust", "frontend", "Godot", "VR"]
 heroImage: /articles/selected-public-projects/cartoon.png
 cardImagePosition: "50% 50%"
-description: "A short portfolio of public projects covering AI tooling, semantic search, C# engineering, frontend work, VR, Rust, and creative coding."
+description: "A portfolio of public projects covering Roslyn and C# tooling, AI integration, semantic search, frontend work, VR, Rust, and creative coding."
 ---
 
 This page is a concise reference for public projects I am comfortable sharing with recruiters, hiring managers, and technical reviewers. It covers a mix of AI tooling, C# engineering, frontend publishing and creative coding.
@@ -14,6 +14,7 @@ For more of my work see [github.com/DanMarshall909](https://github.com/DanMarsha
 
 | Project | Topics | Description |
 | --- | --- | --- |
+| [Roslyn Tools](https://github.com/DanMarshall909/roslyn-tools) | C#, Roslyn, MCP, developer tools, CI | Tools for inspecting C# solutions, tracing references, previewing refactorings, and enforcing architecture and complexity rules through a CLI, MCP server, and CI checks. |
 | [tome](https://github.com/DanMarshall909/tome) | AI tooling, Python, MCP, semantic search | Python MCP server for semantically searching books, long-form documents, and C# source files. |
 | [ai-rules](https://github.com/DanMarshall909/ai-rules) | AI tooling, tests, workflow | Personal AI coding ruleset covering tests, scope control, code quality, and delivery workflow. |
 | [DChess](https://github.com/DanMarshall909/DChess) | C# engineering, chess, rules modelling | Chess engine written in C#. |
